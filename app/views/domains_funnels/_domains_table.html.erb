@@ -1,0 +1,21 @@
+<table  class="table table-hover">
+      <thead>
+        <tr>
+          <th>Domain name</th>
+          <!-- Add more columns as needed -->
+        </tr>
+      </thead>
+      <tbody>
+<% if funnel.domains.present? %>
+  <% funnel.domains.each do |domain| %>
+          <tr>
+            <td><%= domain.name %></td>
+            <!-- Add more columns as needed -->
+          </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+
+

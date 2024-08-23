@@ -1,0 +1,206 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'editor', media: 'all', 'data-turbo-track': 'reload' %>
+  <% end %>
+
+
+
+  <div id="editorFormWrapper">
+
+  <%#= form_with(model: @step, local: true, url: step_path(@step), method: :patch) do |form| %>
+  <%= form_with(model: @step, url: step_path(encrypt_for_hidden_field(@step.id)), method: :patch, local: false, id: "editorForm") do |form| %>
+
+
+      <textarea class="full-height" name="step[large_html_blob_content]" rows="10" cols="40" style="display: none;"><%= @step.large_html_blob_content %></textarea>
+      <textarea class="full-height" name="step[popup_html_blob_content]" rows="10" cols="40" style="display: none;"><%= @step.popup_html_blob_content %></textarea>
+  <%#= form.file_field :popup_html_blob_content %>
+
+
+  <div class="fixed-top ">
+    <div class="d-flex justify-content-between no-gutters nav-btns px-2 align-items-center" style="background-color: #c9e9f0;">
+      <div class="d-flex flex-grow-1">
+        <!-- Button on the Left -->
+          <a draggable="false" href="<%= funnel_path(@funnel, step_id: @step.id) %>" class="btn back-btn" > <i class="fal fa-arrow-left text-black" style="font-weight: 700;"></i></a>
+
+        <a draggable="false"  class="btn back-btn smaller-font ml-1 popup-settings-edit-funnel " href="#editSettingsModal">
+           <i style="font-size: 14px; margin-top:3px ;margin-bottom:0px" class="fas fa-cog" ></i> <div class="d-none d-md-inline-block">Settings</div></a>
+
+        <a draggable="false" style="margin-top:1px !important" class="btn back-btn smaller-font ml-1"  href="#" id="open-popup">
+           <i style="font-size: 14px; margin-top:2px ;margin-bottom:0px" class="fas fa-external-link-alt" ></i>  <div class="d-none d-md-inline-block">Pop Up</div></a>
+      </div>
+
+
+      <div class="d-flex flex-grow-1 justify-content-end">
+
+
+            <div class="btn-group">
+                <a draggable="false" class="btn back-btn smaller-font" id="add-section-button">
+                <i style="font-size: 20px !important; margin-top:1px ;margin-bottom:1px !important" class="fa fa-plus"></i> Add Section</a>
+         <!--
+                  <a draggable="false" class="btn back-btn smaller-font" onclick="javascript:;">
+                  <i class="fal fa-tasks-alt"></i> Sections</a>
+                  <a draggable="false" class="btn back-btn smaller-font" onclick="javascript:;">
+                  <i class="fas fa-bars"></i> Rows</a>
+                  <a draggable="false" class="btn back-btn smaller-font" onclick="javascript:;">
+                  <i class="far fa-columns"></i> Columns</a>
+	      --->
+
+          </div>
+            <div class="btn-group pl-1">
+                <a draggable="false"  class="btn back-btn smaller-font ml-1" id="add-element-button">
+                <i style="font-size: 20px !important; margin-top:1px ;margin-bottom:1px !important" class="fa fa-plus"></i> Add Elements</a>
+            </div>
+
+
+        <div class="btn-group ml-2">
+
+
+      <a  draggable="false"  target="_blank"  style="margin-top:1px !important;" class="btn btn-secondary back-btn smaller-font light-bluegray-button mt-1" href=" <%= step_path(encrypt_for_hidden_field(@step.id)) %>">
+                 <i  style=" margin-top:2px ;margin-bottom:0px;font-size: 14px;" class="fas fa-eye" ></i>  <div class="d-none d-md-inline-block">Preview</div>
+      </a>
+
+             <button type="button" class="btn btn-primary save-button smaller-font text-orange bg-lightorange" style="color: #7a5900;" id="save-button" draggable="false">Save</button>
+
+          <%#= form.submit "Save", class: "btn btn-primary save-button smaller-font text-orange bg-lightorange ", style: "color: #7a5900;", draggable:"false" %>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <% end %>
+  </div>
+
+
+
+  <div class="container-fluid">
+      <div class="row" style="background-color:#eee;">
+        <!-- Sidebar with draggable elements -->
+        <div class="sidebar hidden" id="leftSlidingPopup">
+
+          <input value type="text" name="search" placeholder="Search Element..."
+            class="form-control my-3 input-panel search-panel">
+
+          <h4>Text</h4>
+          <div class="element-group">
+            <div class="draggable element-panel" id="headline" name="headline-field" draggable="true">
+              <i class="bi bi-type-h1 element-icon"></i>
+              Headline
+            </div>
+            <div class="draggable element-panel" id="subhead" name="subhead-field" draggable="true">
+              <i class="bi bi-fonts element-icon"></i>
+              Sub-Headline
+            </div>
+            <div class="draggable element-panel" id="paragraph" name="paragraph-field" draggable="true">
+              <!-- <i class="bi bi-paragraph element-icon"></i> -->
+              <i class="bi bi-textarea-t element-icon"></i>
+              Text
+            </div>
+            <div class="draggable element-panel" id="list" name="list-field" draggable="true">
+              <i class="bi bi-list-ul element-icon"></i>
+              Bullet List
+            </div>
+          </div>
+
+          <h4>Media</h4>
+          <div class="element-group">
+            <div class="draggable element-panel" id="image" name="image-field" draggable="true">
+              <i class="bi bi-card-image element-icon"></i>
+              Image
+            </div>
+            <div class="draggable element-panel" id="video" name="video-field" draggable="true">
+              <i class="bi bi-youtube element-icon"></i>
+              Video
+            </div>
+          </div>
+
+          <h4>Button</h4>
+          <div class="element-group">
+            <div class="draggable element-panel" id="button" name="button-field" draggable="true">
+              <i class="bi bi-menu-button-wide element-icon"></i>
+              Button
+            </div>
+            <div class="draggable element-panel" id="countdown" name="countdown-field" draggable="true">
+              <i class="bi bi-clock-history element-icon"></i>
+              CountDown
+            </div>
+          </div>
+
+          <h4>Form</h4>
+          <div class="element-group">
+            <div class="draggable element-panel" id="input" name="2step-combo" draggable="true">
+              <i class="bi bi-input-cursor element-icon"></i>
+              2 Step Combo
+            </div>
+            <div class="draggable element-panel" id="input" name="input-field" draggable="true">
+              <i class="bi bi-input-cursor-text element-icon"></i>
+              Text Field
+            </div>
+            <div class="draggable element-panel" id="email" name="email-field" draggable="true">
+              <h1 class="element-icon">@</h1>
+              Email Field
+            </div>
+            <div class="draggable element-panel" id="phone" name="phone-field" draggable="true">
+              <i class="bi bi-phone element-icon"></i>
+              Phone Field
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Main content container -->
+        <div class="col-md-12 big-editor-container p-0" id="basic-container">
+
+                  <div id="da-main-container"><%= @step.large_html_blob_content.html_safe if @step.large_html_blob_content.present? %></div>
+
+          <div class="popup-container col-md-6" style="display: none;">
+            <div class="popup py-3">
+              <div class>
+
+                <div class="modal-dialog " role="document">
+                  <div class="modal-content p-1" style="border-color:white">
+
+                    <div id="da-popup-container" class="modal-body p-0" style="max-height: 65vh; overflow-y: auto;"><%= @step.popup_html_blob_content.html_safe if @step.popup_html_blob_content.present? %></div>
+                  </div>
+                </div>
+              </div>
+              <a href="#" id="close-popup"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+<%= render "editor_sidebars" %>
+
+
+
+  <div data-turbo="false" class="white-popup mfp-hide text-center" id="editSettingsModal" aria-labelledby="editSettingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editSettingsModalLabel">Settings</h5>
+        </div>
+        <div class="modal-body">
+          <!-- Add step form goes here -->
+           <%= render 'steps/step_settings_form', step: Step.new %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <%#= link_to "Remove Large Data Blob", remove_large_html_blob_step_path(@step), method: :delete, data: { confirm: 'Are you sure you want to remove the large data blob?' }, class: 'btn btn-danger' %>
+
+
+
+
+
+<!--//here -->
+
+    <%= javascript_include_tag 'custom_dragn_drop.js' %>
+

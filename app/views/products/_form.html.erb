@@ -1,0 +1,222 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="col-md-12 float-right pb-5" >
+  <div class="d-flex justify-content-between align-items-center float-right">
+
+
+    <div class="float-right" >
+<%= link_to 'Cancel', products_path, class: "btn btn-md btn-white" %>
+
+       <%= form.submit class:"btn btn-md border-orange text-black bg-orange px-4 py-2" %>
+    </div>
+  </div>
+</div>
+
+
+
+
+          <div class="card shadow p-6">
+<h3>Product Information</h3>
+<br>
+<div class="row py-2 ">
+  <div class="col-3 align-self-center"><%= form.label "Is this product in live mode?" %></div>
+  <div class="col-9">
+    <div class="custom-control custom-switch">
+      <%= form.check_box :live, class: "custom-control-input", id: "#{form.object_name}_live" %>
+      <%= form.label "live", class: "custom-control-label text-gray", for: "#{form.object_name}_live", "data-on" => "", "data-off" => "" %>
+    </div>
+  </div>
+</div>
+
+
+
+ <div class="row py-2 ">
+    <div class="col-3  align-self-center"><%= form.label :title %></div>
+    <div class="col-9"><%= form.text_field :title, class:"form-control" %></div>
+</div>
+
+  <div class="row py-2 ">
+    <div class="col-3  align-self-center"><%= form.label :description %></div>
+    <div class="col-9"><%= form.text_field :description, class:"form-control" %></div>
+  </div>
+
+
+
+  <div class="row py-2">
+    <div class="col-3  align-self-center"><%= form.label :product_image %></div>
+    <div class="col-9"><%= form.file_field :product_image %></div>
+  </div>
+
+
+  </div>
+
+
+
+
+<br>
+
+
+
+<div class="card shadow ">
+          <div class="card-body p-6">
+<h5>Prices</h5>
+<br>
+
+  <div class="row">
+  <div class="col-md-6">
+  <div class="form-group">
+    <%= form.label :price_type, class: "control-label" %>
+<%= form.select :price_type, options_for_select([ ["One time", "onetime"],["Recurring", "recurring"] ], @product.price_type), {}, { class: "form-control dropdown-toggle" } %>
+
+  </div>
+</div>
+  <div class="col-md-6">
+    <div class="form-group">
+  <%= form.label :price %>
+  <%= form.text_field :price, class: "form-control", value: (form.object.price.present? && form.object.price.nonzero? ? number_with_precision(form.object.price, precision: 2) : nil), required: true %>
+</div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <%= form.label :billing_period %>
+    <%= form.select :billing_period, options_for_select([["Daily", "day"], ["Weekly", "week"], ["Monthly", "month"]], @product.billing_period), {}, { class: "form-control" } %>
+
+
+  </div>
+</div>
+
+
+
+
+    <div class="col-md-6">
+      <%= form.label :trial_period %>
+      <%= form.text_field :trial_period, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.label :number_of_payments %>
+      <%= form.text_field :number_of_payments, class: "form-control" %>
+    </div>
+    <%
+=begin%>
+ <div class="col-md-6">
+      <%= form.label :setup_fee %>
+      <%= form.text_field :setup_fee, class: "form-control" %>
+    </div>
+<%
+=end%>
+  </div>
+
+
+</div>
+</div>
+
+<br>
+
+<div class="card shadow ">
+          <div class="card-body p-6">
+
+<h5>Additional Information</h5>
+
+<div class="container mt-3">
+
+
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Integration</th>
+        <th scope="col">Product Id</th>
+        <th scope="col">Last Synced At</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% if product.test_product_id.present? %>
+  <tr>
+    <td scope="row">Stripe <span class="badge bg-warning">Test</span></td>
+    <td><%= product.test_product_id %></td>
+    <td><%= product.updated_at %></td>
+  </tr>
+<% end %>
+     <% if product.test_product_id.present? %>
+      <tr>
+    <td scope="row">Stripe <span class="badge bg-success">Live</span></td>
+    <td><%= product.live_product_id %></td>
+    <td><%= product.updated_at %></td>
+  </tr>
+<% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+</div>
+</div>
+
+
+
+  <%
+=begin%>
+ <div class="row py-2">
+    <div class="col-3  align-self-center"><%= form.label :url, "Thank you URL" %></div>
+    <div class="col-9"><%= form.text_field :url, class:"form-control" %></div>
+  </div>
+
+  <div class="row py-2">
+    <div class="col-3  align-self-center"><%= form.label :from_url, "Sales page URL(if they cancel)" %></div>
+    <div class="col-9"><%= form.text_field :from_url, class:"form-control" %></div>
+  </div>
+<%
+=end%>
+
+
+
+<script>
+   <%
+=begin%>
+ document.addEventListener("turbolinks:load", function () {
+<%
+=end%>
+    document.addEventListener("DOMContentLoaded", function(e) {
+    var liveSwitch = document.getElementById("<%= "#{form.object_name}_live" %>");
+    var liveLabel = document.querySelector("label[for='<%= "#{form.object_name}_live" %>']");
+
+    liveSwitch.addEventListener("change", function () {
+      if (liveSwitch.checked) {
+        liveLabel.textContent = liveLabel.getAttribute("data-on");
+      } else {
+        liveLabel.textContent = liveLabel.getAttribute("data-off");
+      }
+    });
+
+    // Initialize label text based on the initial state
+    if (liveSwitch.checked) {
+      liveLabel.textContent = liveLabel.getAttribute("data-on");
+    } else {
+      liveLabel.textContent = liveLabel.getAttribute("data-off");
+    }
+  });
+</script>
+
+
+
+<% end %>

@@ -1,0 +1,31 @@
+<%= form_with(model: workflow, url: workflows_path, remote: true) do |form| %>
+  <!-- Step form fields go here -->
+  <div class="form-group">
+    <%= form.label :name %>
+<%= form.text_field :name, class: 'form-control', required: true %>
+    <br>
+
+    <%= form.label "Select a trigger. What will trigger the workflow?" %>
+    <%
+=begin%>
+ <%= select_tag 'kind', options_for_select(['Form', 'Instagram']), prompt: 'Select a trigger', class: "form-select js-choice" %>
+<%
+=end%>
+<%= select_tag 'workflow[kind]', options_for_select(['form', 'instagram'], 'form'), class: "form-select js-choice" %>
+
+
+     <%# <%= form.hidden_field :funnel, value: @funnel.id %>
+  </div>
+
+
+
+
+<br>
+<br>
+
+  <!-- Add other workflow form fields as needed -->
+
+  <div class="form-group">
+    <%= form.submit 'Create Workflow', class: 'btn btn-primary' %>
+  </div>
+<% end %>

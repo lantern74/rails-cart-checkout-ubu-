@@ -1,0 +1,64 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'eu-added', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <!-- Add any additional CSS or JavaScript includes as needed -->
+<% end %>
+
+
+<div class="col-md-10 bg-light p-4">
+  <div>
+      <h3 class="card-title mt-3">Payment Integration</h3>
+
+<div class="container mt-4">
+  <div class="row">
+
+<br>
+<br>
+    <div class="col-md-4">
+  <div class="card p-2">
+    <div class="card-body text-center">
+
+
+
+      <%= image_tag 'stripe-logo-blue.png', class: 'img-fluid rounded-circle', style: 'max-width: 80px;' %>
+      <!-- Adjust the max-width and other styles as needed -->
+
+  <div class="flex justify-center pb-2 mt-4">
+
+
+      <p class="card-text">
+        <% if current_user.stripe_account_id.present? %>
+          <%= link_to 'Disconnect', disconnect_payment_integration_index_path, method: :get, data: { confirm: 'Are you sure you want to disconnect from Stripe?' }, class: 'btn bg-red-500 text-red  inline-flex items-center px-4 py-2 border-transparent  rounded ' %>
+          <p>Connected Stripe Account ID: <%= current_user.stripe_account_id %></p>
+        <% else %>
+          <p>You haven't connected a Stripe account yet.</p>
+          <%= link_to 'Connect with Stripe', connect_payment_integration_index_path, class: 'btn btn-success inline-flex items-center px-4 py-2 border-transparent text-sm font-medium rounded ' %>
+        <% end %>
+
+      </p>
+    </div>
+
+  <hr>
+
+  <div class="flex items-center py-2 pt-1 ">
+    <i class="fas fa-check-circle text-apple-500"></i> Stripe live mode is enabled
+  </div>
+
+  <div class="flex items-center py-2">
+    <i class="fas fa-check-circle text-apple-500"></i> Stripe test mode is enabled
+  </div>
+</div>
+
+
+
+
+  </div>
+</div>
+
+
+
+  </div>
+</div>
+
+<br><br>
+
+<%= render "shared/footer" %>

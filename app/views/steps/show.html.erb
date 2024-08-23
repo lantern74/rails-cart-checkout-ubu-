@@ -1,0 +1,274 @@
+
+<% content_for :head do %>
+
+<style>
+.elButton {
+    padding: 13px 35px;
+    text-decoration: none; /* Remove underline by default */
+}
+
+.elButton:hover {
+    text-decoration: none; /* Remove underline on hover */
+}
+
+
+.elInput.elInputBR5 {
+    border-radius: 5px !important;
+}
+
+.elInputIRight {
+    background-position: 97%;
+}
+.elInputBR5 {
+    border-radius: 5px;
+}
+.elInputBG1 {
+    background-color: #fff;
+}
+.elInputStyl0 {
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.elInput100 {
+    width: 100%;
+}
+.elInputMid {
+    font-size: 16px;
+    padding: 12px 18px;
+}
+.elInput {
+    outline: none !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.ceoinput, .ceoinput>* {
+    border: 1px solid #b4becd;
+    border-top-color: #b0baca;
+    border-bottom-color: #d3d9e2;
+    box-shadow: inset 0 1px 2px rgba(130,137,150,0.23), 0 1px 0 rgba(255,255,255,0.95) !important;
+    border-radius: 3px !important;
+}
+.elAlign_left {
+    text-align: left;
+}
+
+
+    .realcountdown {
+      font-size: 24px;
+      padding-top: 16px;
+      padding-bottom: 6px;
+      border-radius: 5px;
+    }
+
+
+      .timer {
+          text-align: right;
+          padding-right:10px;
+      }
+
+      .timer-number {
+          font-size: 24px;
+            text-align: left;
+      }
+
+      .timer-word {
+          font-size: 12px;
+          text-align: left;
+      }
+
+/* popup */
+
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.popup-content {
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+  font-size: 22px;
+  color: #000; /* Change the color to your preference */
+}
+
+.popup-close:hover {
+  color: #ff0000; /* Change the hover color to your preference */
+}
+
+#new_contact {
+    opacity: 0.1;
+  /*display: none;*/
+
+}
+
+.row-section {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.col-div {
+    min-height: 210px;
+    position: relative;
+    padding: 20px;
+}
+
+/*   not sure if I will use this padding but it seems as a good minimum padding between elements 	*/
+.draggable {
+    padding: 1rem;
+}
+
+    </style>
+
+<% end %>
+
+
+
+<body>
+
+
+  <% if @step.large_html_blob_content.present? %>
+    <form id="dynamic"> <!-- this is the main form -->
+        <% sanitized_html_content = @step.large_html_blob_content.gsub('draggable="true"', 'draggable="false"').gsub('contenteditable="true"', 'contenteditable="false"').html_safe%>
+        <%= raw sanitized_html_content %>
+    </form>
+
+    <form id="dynamic-popup"> <!-- this is the popup form -->
+      <div id="popup-container" class="popup-container">
+        <div class="popup-content">
+         <div class="popup-close">
+            <i id="close-popup" class="fas fa-times popup-close"></i>
+          </div>
+            <!-- Your popup content goes here -->
+              <% if @step.popup_html_blob_content.present? %>
+              <% sanitized_popup_content = @step.popup_html_blob_content.gsub('draggable="true"', 'draggable="false"').gsub('contenteditable="true"', 'contenteditable="false"').html_safe%>
+              <%= raw sanitized_popup_content %>
+              <% end %>
+        </div>
+      </div>
+    </form>
+
+
+<% else %>
+  <p>No HTML content available for this step.</p>
+<% end %>
+
+<hr>
+-- EOF --
+<br>
+<br>
+<%= link_to 'View Current Version', version_step_path(encrypt_for_hidden_field(@step.id), version: 1) %><br>
+<%= link_to 'View Previous Version', version_step_path(encrypt_for_hidden_field(@step.id), version: 2) %><br>
+<%= link_to 'View Oldest Version', version_step_path(encrypt_for_hidden_field(@step.id), version: 3) %><br>
+
+-- FOR TESTING ONLY -- this form will be hidden later --
+<%#THIS IS THE MAIN FORM WHERE EVERYTHING IS COPIED from popup.js#%>
+<%= form_with scope: :contact, url: dynamic_form_path, local: true, id: "new_contact" do |form|  %>
+
+<input type="hidden" name="userevents[tricky_field]" value="">
+<%= hidden_field_tag 'userevents[user_id]', encrypt_for_hidden_field(@funnel.user_id.to_s) %>
+<%= hidden_field_tag 'userevents[funnel_id]', encrypt_for_hidden_field(@funnel.id.to_s) %>
+<%= hidden_field_tag 'userevents[step_id]', encrypt_for_hidden_field(@step.id.to_s) %>
+
+
+
+      <div class="bigform-pricing p-3 rounded mt-4">
+        <div class="row justify-content-between align-items-center" style="margin:0px;">
+          <div class="col-6 p-0">
+            <label for="price" class="fs-5">Enter amount:</label>
+          </div>
+          <div class="col-6 p-0" style="text-align:right"> <span class="dollar d-inline"
+              style="font-size:20px;">$</span>
+            <%= text_field_tag 'customer_transaction[price]', nil, id: "price", placeholder: "0.00", value:"10", onkeyup: "updateText()", oninput: "updateText()", class: "form-control-lg bigform-amount col-10" %>
+
+          </div>
+        </div>
+      </div>
+
+      <%#= form.hidden_field :stripe_payment_id, id:"payment", value:"" %>
+      <%#= form.hidden_field :custompay_userid,  value:@user.id  %>
+
+
+      <div class="form-group  my-3">
+        <%= form.text_field :email, id: "contact_email", placeholder: "Email", class: "form-control" , value:"way2new@gmail.com" %>
+      </div>
+
+      <div class="form-group  my-3">
+        <%= form.text_field :name, id: "contact_name", placeholder: "Name on Card", class: "form-control", value:"E"  %>
+      </div>
+
+
+
+      <div class="">
+        <div class="" id="card-number"> </div><!-- A Stripe Element will be inserted here. -->
+        <div class="row  justify-content-between" style="margin:0px;">
+          <div class="col-6" id="card-expiry"> </div><!-- A Stripe Element will be inserted here. -->
+          <div class="col-6" id="card-cvc"> </div><!-- A Stripe Element will be inserted here. -->
+        </div>
+      </div>
+      <div id="card-errors" role="alert"></div>
+
+      <div class="pt-3 text-center">
+        <%= image_tag "credit-only.png", width: "100%", style:" opacity: 0.9;max-width:300px" %>
+      </div>
+
+
+      <div class="pt-4 pb-2  d-flex justify-content-between" style="font-size: 30px">&nbsp;Total:
+        <div class="d-flex justify-content-between">
+          <span class="dollar" style="font-size:30px;">$</span>
+          <span id="result">0.00</span>
+          <div>&nbsp;&nbsp;</div>
+        </div>
+      </div>
+
+
+
+
+      <div class="form-group  pt-3 text-center">
+        <%#= form.hidden_field :plan, value: "small-monthly" %>
+        <%= form.submit "Make payment",id:"payment-button", class: "btn-lg btn-primary payment-button p-2 px-4 " %>
+      </div>
+
+
+
+      <div class="field">
+        <%# form.hidden_field :plan, value: "plan_Gt18rqWiUvG1JL" %>
+        <!-- btn btn-block btn-primary btn-lg  mb-4 -->
+      </div>
+
+      <% end -%>
+
+
+
+<%= javascript_include_tag 'timer.js' =%>
+<%= javascript_include_tag 'popup.js' =%>
+
+</body>
+</html>
+
+
+
+
+
+ <script src="https://js.stripe.com/v3/"></script>
+
+

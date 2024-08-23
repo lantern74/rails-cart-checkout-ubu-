@@ -1,0 +1,64 @@
+<% content_for :head do %>
+<% end %>
+
+<style>
+.v-align{
+  vertical-align: middle !important;
+}
+</style>
+
+<div class="col-md-10 bg-light p-4">
+<div class="">
+
+
+<h1>Contacts</h1>
+
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>User</th>
+      <th>Funnel</th>
+      <th>Step</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contacts.each do |contact| %>
+       <tr style="height: 60px;">
+        <td class="clickable-column v-align"><%= contact.name %></td>
+        <td class="clickable-column v-align"><%= contact.email %></td>
+        <td class="clickable-column v-align"><%= contact.status %></td>
+        <td class="clickable-column v-align text-center"><%= contact.user_id %></td>
+        <td class="clickable-column v-align text-center"><%= contact.funnel_id %></td>
+        <td class="clickable-column v-align text-center"><%= contact.step_id %></td>
+        <%
+=begin%>
+ <td class="clickable-column v-align text-center"><%= link_to 'Show', contact %></td>
+<%
+=end%>
+        <td class="clickable-column v-align text-center"><%= link_to 'Edit', edit_contact_path(contact) %></td>
+        <td class="clickable-column v-align text-center"><%= link_to 'Remove', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class=" v-align"> <!-- Non-clickable column -->
+          <a href="your_destination_url" class="circle-link">
+            <div class="vertical-dots">
+              <i class="far fa-ellipsis-v"></i>
+            </div>
+          </a>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+ </div>
+</div>
+
+
+<%#= link_to 'New Contact', new_contact_path %>

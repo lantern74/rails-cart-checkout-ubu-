@@ -1,0 +1,14 @@
+<!-- app/views/beta_updates/new.html.erb -->
+<h2>Create Beta Update</h2>
+
+<%= form_with(model: @beta_update, url: beta_updates_path, method: :post) do |form| %>
+  <!-- Add form fields and submit button based on your requirements -->
+  <div class="field">
+    <%= form.label :enabled %>
+    <%= form.check_box :enabled %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create Beta Update' %>
+  </div>
+<% end %>

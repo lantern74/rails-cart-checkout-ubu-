@@ -1,0 +1,90 @@
+<% content_for :head do %>
+<% end %>
+
+
+<div class="col-md-10 bg-light p-4">
+  <div>
+
+    <h2>Workflows</h2>
+
+
+<div class="col-md-10 bg-light float-right">
+  <div class="d-flex justify-content-between align-items-center float-right">
+    <!-- Search box (aligned to the left) -->
+    <%= form_tag(workflows_path, method: :get, class: "form-inline float-right") do %>
+      <div class="form-group">
+        <%= text_field_tag :search, params[:search], class: "form-control p-2 m-2", placeholder: "Search Workflows" %>
+      </div>
+      <%= submit_tag("Search", class: "btn btn-primary mx-2") %>
+    <% end %>
+
+    <!-- Wrapper for the Orange button (floated to the right) -->
+    <div class="float-right" >
+      <a  href="#createWorkflowModal" class="btn popup-modal-button border-orange text-black bg-orange ">Create New</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <table class="table table-hover">
+  <thead>
+    <tr >
+      <th>Name</th>
+      <th>Last Updated</th>
+      <th class="text-center">Items</th>
+      <th class="text-center">Action</th> <!-- Non-clickable column -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @workflows.each do |workflow| %>
+      <tr style="height: 60px;">
+        <td class="clickable-column v-align">
+          <%= link_to workflow.name, workflow_path(workflow), data: { turbo: false } %>
+        </td>
+        <td class="clickable-column v-align">
+          <%= workflow.updated_at.strftime('%d %b, %Y %I:%M %p') %>
+        </td>
+        <td class="clickable-column v-align text-center">
+          <%= workflow.worktasks.count %>
+        </td>
+        <td class="v-align"> <!-- Non-clickable column -->
+          <a href="your_destination_url" class="circle-link" style="margin:0 auto;">
+            <div class="vertical-dots">
+              <i class="far fa-ellipsis-v"></i>
+            </div>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+  </div>
+</div>
+
+
+
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center rounded-4 " id="createWorkflowModal" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createModalLabel">Create Workflow</h5>
+      </div>
+      <div class="modal-body">
+
+        <!-- Add workflow form goes here -->
+        <%= render 'workflows/form', workflow: Workflow.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render "shared/footer" %>

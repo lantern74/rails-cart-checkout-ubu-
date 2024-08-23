@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Bootstrap Form</title>
+</head>
+<style>
+    .separator-vertical {
+        border: none;
+        border-left: 4px solid #ccc;
+        /* Choose your desired color for the separator */
+        height: 100%;
+        /* Adjust the height as needed */
+    }
+
+    .form-step .active {
+        color: #1571a8;
+    }
+
+    .form-heading {
+        font-size: 14px;
+        font-weight: 700;
+        word-break: break-word;
+    }
+
+    .form-sub-heading {
+        font-size: 12px;
+        color: #607179;
+        word-break: break-word;
+    }
+
+    .order-form-footer {
+        text-align: center;
+        margin-top: 10px;
+        color: #9c9c9c;
+        font-size: 12px;
+        word-break: break-word;
+    }
+
+    .main-text {
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .address-title,
+    .payment-title {
+        position: absolute;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #626262;
+        font-size: 12px;
+        background-color: #fff;
+        padding-right: 10px;
+        z-index: 1;
+        margin-top: -9px;
+    }
+
+    .shipping-title-wrapp,
+    .payment-title-wrapp {
+        width: 100%;
+        position: relative;
+        margin-top: 15px;
+        padding: 8px 0;
+    }
+
+    .shipping-bar,
+    .payment-bar {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #e5e7eb;
+        top: 7px;
+    }
+
+/* <!-- this is the style for the form #2 --> */
+
+    .product-description {
+        display: grid;
+        grid-template-columns: 8fr 1fr 1fr;
+        margin-bottom: 10px;
+    }
+
+    .product-description .item {
+        font-size: 13px;
+    }
+
+    .item-description {
+        color: gray;
+        font-size: 12px;
+        margin-left: 5px;
+    }
+
+    .radioBtn {
+        display: block;
+        margin-top: 4px;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+
+    .product-title {
+        display: grid;
+        grid-template-columns: 8fr 1fr 1fr;
+    }
+
+    .product-title .item {
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .divider-form {
+        background: #1571a8;
+        height: 5px;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .container-order-form-two-step .form-title {
+        padding: 7px;
+    }
+
+    .divider-form i,
+    .step2 i {
+        color: #1571a8;
+        font-size: 30px;
+        position: absolute;
+        top: -18px;
+    }
+
+    .caret-up:before {
+        content: "";
+    }
+
+    .divider-form i {
+        left: 75%;
+    }
+
+    svg:not(:root).svg-inline--fa {
+        overflow: visible;
+    }
+
+    .svg-inline--fa.fa-w-10 {
+        width: 0.625em;
+    }
+
+    .svg-inline--fa {
+        display: inline-block;
+        font-size: inherit;
+        height: 1em;
+        overflow: visible;
+        vertical-align: -0.125em;
+    }
+
+    .order-bump-container {
+        background-color: #fbf8e3;
+        border: 2px dashed #c7c7c7;
+        border-radius: 5px;
+        padding: 8px;
+    }
+
+    .product-bump-divider {
+        margin-bottom: 10px;
+    }
+
+    .bp-container {
+        padding: 5px 0;
+    }
+
+    .product-detail {
+        margin-top: 20px;
+    }
+
+    .forward-shopping-details {
+        color: #888 !important;
+        display: block;
+        font-size: 12px;
+    }
+
+    .order-bump-container .headline {
+        word-wrap: break-word;
+        color: #090;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 30px;
+        margin-left: 2px;
+    }
+
+    .oto-headline {
+        color: #c30;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    .radioBtn {
+        display: block;
+        margin-top: 4px;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+
+    .order-bump-container .main-section {
+        background-color: #fefcbf;
+        border-radius: 5px;
+        padding: 2px;
+        text-align: left;
+    }
+
+    .bump--flashing-arrow {
+        margin-top: -5px;
+        padding: 0 9px;
+        width: 40px;
+    }
+
+    .divider-product {
+        background-color: #888;
+        height: 2px;
+        margin: 6px 0;
+        opacity: .3;
+        width: 100%;
+    }
+
+    .item-price {
+        color: #1571a8;
+        font-weight: 700;
+    }
+
+    .order-total {
+        color: #333;
+        display: flex;
+        font-size: 13px;
+        font-weight: 700;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .card-input-label {
+        display: block;
+        margin-bottom: 5px;
+        /* Adjust as needed for spacing */
+    }
+
+    .separator {
+        align-items: center;
+        display: flex;
+        font-size: 13px;
+        font-weight: 500;
+        margin: 10px 0;
+        padding: 1px 0;
+        text-align: center;
+    }
+
+    .product-description .item:last-child {
+        text-align: right;
+    }
+
+    .product-title .item:last-child {
+        text-align: right;
+    }
+
+.ghl-payment-element .card-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-position: 97%;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    box-shadow: 0 0 #0000,#0000!important;
+    -moz-box-shadow: 0 0 0 0 transparent,transparent!important;
+    -webkit-box-shadow: 0 0 0 0 transparent,transparent!important;
+    font-size: 12px;
+    line-height: 24px;
+    outline: none!important;
+    padding: 8px 12px;
+    text-align: left;
+    width: 100%;
+}
+
+body{
+    /* background: #000; */
+}
+</style>
+
+
+<body>
+
+    <div class="container-fluid">
+        <div class="card px-5 pb-5 col-12 mx-auto">
+            <div class="container mt-3">
+                <form id="two-setp-order" class="container-order-form-two-step">
+                    <div class="form-title">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="form-step text-center col-md-11 p-0">
+                                        <span class="form-heading active">Your profile</span> <br>
+                                        <span class="form-sub-heading">Contact details</span>
+                                    </div>
+                                    <div class="col-md-1 p-0">
+                                        <hr class="separator-vertical m-0" >
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-0 m-0">
+                                        <div class="form-step text-center">
+                                            <span class="form-heading active">Normally $297. Use coupon code FAP to get
+                                                90% OFF</span> <br>
+                                            <span class="form-sub-heading">Billing details</span>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="divider-form"><i class="fas fa-caret-up caret-up"></i></div>
+
+                    <div class="form-body pt-4" id="div-ctwo-setp-order">
+
+                        <section class="summary">
+                            <span class="1-step-details">
+                                <span>
+                                    <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10">
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="icon-shape">
+                                                <polygon fill="#000" id="Combined-Shape-Copy"
+                                                    points="3.82842712 9 9.89949494 2.92893219 8.48528137 1.51471863 0 10 0.707106781 10.7071068 8.48528137 18.4852814 9.89949494 17.0710678 3.82842712 11 20 11 20 9 3.82842712 9">
+                                                </polygon>
+                                            </g>
+                                        </g>
+                                    </svg> <div class=" d-inline text-muted small ">Edit Contact Details</div>
+                                </span>
+                            </span>
+
+                            <section class="product-detail" id="ctwo-setp-order">
+                                <div class="product-title">
+                                    <span class="item">Item</span>
+                                    <span class="item text-center">Quantity</span>
+                                    <span class="item">Price</span>
+                                </div>
+                                <div class="divider-product"></div>
+                                <div>
+                                    <div>
+                                        <div id="659d9244637b7ce094361944" class="product-description">
+                                            <div class="d-flex">
+                                                <div class="d-flex radioBtn">
+                                                    <input
+                                                        id="checkbox-ctwo-setp-order-659d9244637b7ce094361944"
+                                                        type="checkbox" value="659d9244637b7ce094361944">
+                                                </div>
+                                                <div>
+                                                    <span class="item product-name"  style="margin-left:7px;"><strong>FAP Airtable
+                                                            System</strong></span>
+                                                    <div class="item-description"><strong></strong></div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center item">1</div>
+                                            <span class="item item-price">$29.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <div class="bp-container">
+                                <div class="product-bump-divider">
+                                    <section class="order-bump-container">
+                                        <div class="main-section">
+                                            <img src="data:image/webp;base64,UklGRsYBAABXRUJQVlA4WAoAAAASAAAAGwAAEAAAQU5JTQYAAAAAAAAAAABBTk1GsgAAAAAAAAAAABsAABAAAA4BAANWUDhMmgAAAC8bAAQQH8GgbSRHx59rL/8/ys/gmH/FbSQ19F8pvxwHBs1/FIG/ppDrB1yyELIAuslyFqb4AEKWNQHOIiSbiaij+ADg3QGyESEADttIUqQ+Zmaeu84/y/v/mY8gov8TgH+eYwt5et+AvCoLck3eJuoOgQWlcQzIPbMgJ4uz0Ls7D2pLBKAefnxejhyqQlJaF2pjCG3ZUuiX+BpBTk1GJgAAAAAAAAAAAAAAAAAAAOYAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcAQU5NRrIAAAAAAAAAAAAbAAAQAABGAAAAVlA4TJoAAAAvGwAEEB/BoG0kR8efay//P8rP4Jh/xW0kNfRfKb8cBwbNfxSBv6aQ6wdcshCyALrJcham+ABCljUBziIkm4moo/gA4N0BshEhAA7bSFKkPmZmnrvOP8v7/5mPIKL/E4B/nmMLeXrfgLwqC3JN3ibqDoEFpXEMyD2zICeLs9C7Ow9qSwSgHn58Xo4cqkJSWhdqYwht2VLol/ga"
+                                                class="bump--flashing-arrow">
+                                            <input type="checkbox" name="order-bump" class="bump--checkbox">
+                                            <span class="headline bump-headline">YES! Add the "Advanced Ads Scaling
+                                                Q&amp;A" for just
+                                                $29!</span>
+                                        </div>
+                                        <p>
+                                            <span class="oto-headline">Advanced Ads Scaling Q&amp;A Session</span>
+                                            <span> Get a recording of one of our live monthly calls! Our media buyer who
+                                                has run ads for Frank
+                                                Kern, Agora, Dean Graziosi, Jeff Lerner (and more!) not only shows how
+                                                to launch and SCALE
+                                                campaigns but also answers the TOP questions most people when trying to
+                                                scale ads! This is
+                                                "Behind Closed Doors" information for pennies!</span>
+                                        </p>
+                                    </section>
+                                </div>
+
+                                <div>
+                                    <div class="separator">Order Summary</div>
+                                    <section class="product-cost-total">
+                                        <div class="product-title">
+                                            <span class="item">item</span>
+                                            <span class="item text-center">Quantity</span>
+                                            <span class="item">amount</span>
+                                        </div>
+                                        <div class="divider-product"></div>
+                                        <div class="product-description">
+                                            <span class="item"><span class="coupon-item">FAP Airtable
+                                                    System</span><!----></span>
+                                            <span class="item text-center">1</span>
+                                            <span class="item item-price">$ 29.00</span>
+                                        </div>
+                                        <div class="divider-product"></div>
+                                        <div class="order-total">
+                                            <span class="item"><strong>Order Total</strong></span>
+                                            <span class="item text-right">
+                                                <div class="item-price">$29.00</div>
+                                                <!---->
+                                            </span>
+                                        </div>
+                                    </section>
+                                </div>
+
+
+                        </section>
+
+                        <section class="billing ">
+
+
+                            <div class="ghl-payment-element pb-4">
+                                <div class="inline-credit-card-container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="cardNumber" class="card-input-label d-block">Card Number</label>
+                                            <input type="text" name="cc"
+                                                id="cc-ctwo-setp-order-payment-element"
+                                                placeholder="1234 1234 1234 1234" class="card-input">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="credit-card-sub-container">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="cardExpiration"
+                                                            class="card-input-label">Expiration</label>
+                                                        <input type="text" name="card-expiration"
+                                                            id="card-expiration-ctwo-setp-order-payment-element"
+                                                            maxlength="5" placeholder="MM / YY" class="card-input">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="cardExpiration" class="card-input-label">CVC</label>
+                                                        <input type="text" name="card-cvc"
+                                                            id="card-cvc-ctwo-setp-order-payment-element"
+                                                            maxlength="3" placeholder="CVC" class="card-input">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <button class="btn btn-success w-100 p-2">
+                                <i class="fas fa-arrow-right fs-5"></i>
+                                <span class="main-text fs-4" style="font-weight: 600;"> &nbsp; Complete Order</span><br>
+                                <span class="sub-text"></span>
+                            </button>
+
+                        </section>
+                        <section class="order-form-footer">
+                            <span>* 100% Secure & Safe Payments *</span>
+                        </section>
+
+                    </div>
+                </form>
+
+
+
+
+
+
+
+
+                <form class="form-payment order-form-v2">
+
+                    <div>
+                        <div class="payment-content">
+                            <!---->
+                            <!---->
+                            <!---->
+                            <!---->
+                            <div>
+                                <section>
+                                    <div id="ctwo-setp-order-payment-form" class="payment-form">
+                                        <div class="v-spinner loaderClass" style="display: none;">
+                                            <div class="v-moon v-moon1"
+                                                style="height: 30px; width: 30px; border-radius: 100%;">
+                                                <div class="v-moon v-moon2"
+                                                    style="height: 4.28571px; width: 4.28571px; border-radius: 100%; top: 12.8571px; background-color: rgb(24, 139, 246);">
+                                                </div>
+                                                <div class="v-moon v-moon3"
+                                                    style="height: 30px; width: 30px; border-radius: 100%; border: 4.28571px solid rgb(24, 139, 246);">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            </form>
+
+
+
+
+
+
+
+        </div>
+    </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha384-GLhlTQ8iK4E5PCr0Mq3/uxUqF5L4/txI97a8KI1eZLlEyA6j8iN7E6dSSfiRY7xj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-lZfv/1KIStU9DHys9fL4huw5wsY4s/XC86Be5W9fOoRYRYZGj2n9+q8hB9d6jzx"
+        crossorigin="anonymous"></script>
+    <!-- Font Awesome JS -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script> -->
+
+</body>
+
+</html>

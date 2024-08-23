@@ -1,0 +1,119 @@
+<%
+=begin%>
+ <div class="container">
+  <div class="row">
+    <div class="col col-sm-2 col-md-4 col-lg-7">
+    </div>
+    <div class="col text-end nowrap">
+    <a target="_blank" href="/payment/<%= current_user.id %>" class="no-wrap">Pay Me Form</a>
+    </div>
+    <div class="col text-end">
+    <a href="/customers">Customers</a>
+    </div>
+    <div class="col text-end">
+    <a href="/users">Settings</a>
+    </div>
+    <div class="col text-end">
+    <a href="/logout">Logout</a>
+    </div>
+  </div>
+</div>
+<%
+=end%>
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'eu-added', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  <!-- Add any additional CSS or JavaScript includes as needed -->
+<% end %>
+
+
+
+<div class="col-md-10 bg-light p-4">
+  <div>
+
+            <h2>Products</h2>
+
+
+<div class="col-md-10 bg-light float-right">
+  <div class="d-flex justify-content-between align-items-center float-right">
+    <!-- Search box (aligned to the left) -->
+    <%= form_tag(workflows_path, method: :get, class: "form-inline float-right") do %>
+      <div class="form-group">
+        <%= text_field_tag :search, params[:search], class: "form-control p-2 m-2", placeholder: "Search Products" %>
+      </div>
+      <%= submit_tag("Search", class: "btn btn-primary mx-2") %>
+    <% end %>
+
+    <!-- Wrapper for the Orange button (floated to the right) -->
+    <div class="float-right mr-2" >
+    <%= link_to import_products_path, class: "btn text-black bg-white border-lightgray", title: "Import from Stripe" do %>
+  <i class="fas fa-download fa-sm text-gray"></i> Import from Stripe
+<% end %>
+    </div>
+<div class="float-right">
+  <%= link_to new_product_path, class: "btn border-orange text-black bg-orange", title: "Create a New Product" do %>
+    <i class="fas fa-plus fa-sm"></i> Create a New Product
+  <% end %>
+</div>
+
+  </div>
+</div>
+
+
+<style>
+
+.table thead th {
+  padding-left:7px;
+}
+
+
+</style>
+
+
+
+   <table class="table">
+  <thead>
+    <tr class="text-left">
+      <th> </th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Live</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+
+<td><%= link_to(image_tag(product.product_image.presence || product.stripe_image_url, width: "100"), edit_product_path(product)) if product.product_image.present? || product.stripe_image_url.present? %></td>
+        <td><%= link_to product.title, edit_product_path(product) %></td>
+        <td><%= link_to '%.2f' % product.price, edit_product_path(product) %></td>
+        <td><%= link_to product.description, edit_product_path(product) if product.description.present? %></td>
+        <td><%= (product.live) ? "Yes" : "No" %></td>
+        <td><%= product.updated_at.strftime("%b %d at %I:%M %p") %></td>
+
+        <td><%= link_to 'Preview', product, target:"_blank" %></td>
+        <td><%= link_to 'Remove', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+<%= render  "shared/footer" %>

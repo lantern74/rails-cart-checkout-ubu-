@@ -1,0 +1,1823 @@
+<!-- new code -- POPUPS, Sliding Panels -->
+ <!-- All siderbars --->
+
+<div id="setSectionWidthPopup">
+  <div class="row">
+    <div class="col-11 mb-1">
+      <h3>Add Section</h3>
+    </div>
+    <div class="col-1 mb-1">
+      <a type="button" id="add-section-close"><i class="bi bi-x-lg"></i></a>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-6">
+      <div type="button" class="settingWidthIcon" id="setting-full-width">
+        <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-fullwidth.svg") %>
+        </div>
+        <div class="settingWidthIcon2">FULL WIDTH</div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div type="button" class="settingWidthIcon" id="setting-wide">
+        <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-wide.svg") %>
+        </div>
+        <div class="settingWidthIcon2">WIDE</div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-6">
+      <div type="button" class="settingWidthIcon" id="setting-medium">
+        <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-medium.svg") %>
+        </div>
+        <div class="settingWidthIcon2">MEDIUM</div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div type="button" class="settingWidthIcon" id="setting-small">
+        <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-small.svg") %>
+        </div>
+        <div class="settingWidthIcon2">SMALL</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="setColumnNumberPopup">
+      <div class="row">
+        <div class="col-11 mb-1">
+          <h3>Add Row</h3>
+        </div>
+        <div class="col-1 mb-1">
+          <a type="button" id="add-row-close"><i class="bi bi-x-lg"></i></a>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-6">
+          <div type="button" class="settingWidthIcon" id="setting-row1">
+            <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-column-1.svg") %>
+            </div>
+            <div class="settingWidthIcon2">1 COLUMN</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div type="button" class="settingWidthIcon" id="setting-row2">
+            <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-column-2.svg") %>
+            </div>
+            <div class="settingWidthIcon2">2 COLUMNS</div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-6">
+          <div type="button" class="settingWidthIcon" id="setting-row3">
+            <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-column-3.svg") %>
+            </div>
+            <div class="settingWidthIcon2">3 COLUMNS</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div type="button" class="settingWidthIcon" id="setting-row4">
+            <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-column-4.svg") %>
+            </div>
+            <div class="settingWidthIcon2">4 COLUMNS</div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-6">
+          <div type="button" class="settingWidthIcon" id="setting-row5">
+            <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-column-5.svg") %>
+            </div>
+            <div class="settingWidthIcon2">5 COLUMNS</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div type="button" class="settingWidthIcon" id="setting-row6">
+            <div class="settingWidthIcon1">
+           <%= image_tag("editor/artwork-column-6.svg") %>
+            </div>
+            <div class="settingWidthIcon2">6 COLUMNS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="setSectionPopup">
+      <div class="row">
+        <div class="col-11 mb-1">
+          <h3>Section</h3>
+        </div>
+        <div class="col-1 mb-1">
+          <a type="button" id="popup4-close"><i class="bi bi-x-lg"></i></a>
+        </div>
+      </div>
+
+      <ul class="nav nav-tabs nav-justified" style="margin-top: 20px;">
+        <li class="nav-item">
+          <p class="nav-link active" id="green-general-tab" data-toggle="tab">General</p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link" id="green-advanced-tab" data-toggle="tab">Advanced</p>
+        </li>
+      </ul>
+
+      <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="green-general-content">
+          <div>Element name</div>
+          <input type="text" name="element-name" class="form-control my-2 input-panel" value="Section">
+
+          <div class="border-options">
+            <div class="py-2 pl-2 subtitle-panel">
+              <strong>Margin & Padding</strong>
+            </div>
+
+            <div class="p-3">
+              <div class="margin-padding settingMarginPaddingValue">
+                <div>
+                  <div style="font-size:12px; position:absolute;">MARGIN</div>
+                  <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                      id="setGreenMarginTop" onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+                <div class="padding-border margin-padding">
+                  <div>
+                    <div style="font-size:12px; position:absolute;">PADDING</div>
+                    <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                        id="setGreenPaddingTop" onClick="openMarginPaddingPopup(this)"></button></div>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setGreenPaddingLeft"
+                          onClick="openMarginPaddingPopup(this)"></button></div>
+                      <div class="col-4 element-border"></div>
+                      <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setGreenPaddingRight"
+                          onClick="openMarginPaddingPopup(this)"></button></div>
+                    </div>
+                  </div>
+                  <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                      id="setGreenPaddingBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setGreenMarginBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row my-3 align-items-center">
+            <div class="col-10">Background Color</div>
+            <div class="col-2 align-items-center">
+              <label for="green-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                  id="green-back-color-icon"></i></label>
+              <input type="color" class="form-control form-control-color" id="green-back-color" value="#FFFFFF">
+            </div>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>Box Shadow</div>
+            <select class="form-select py-2 input-panel" id="set-green-box-shadow">
+              <option value="No Shadow">No Shadow</option>
+              <option value="5% Drop Shadow">5% Drop Shadow</option>
+              <option value="10% Drop Shadow">10% Drop Shadow</option>
+              <option value="20% Drop Shadow">20% Drop Shadow</option>
+              <option value="30% Drop Shadow">30% Drop Shadow</option>
+              <option value="40% Drop Shadow">40% Drop Shadow</option>
+              <option value="5% Inner Shadow">5% Inner Shadow</option>
+              <option value="10% Inner Shadow">10% Inner Shadow</option>
+              <option value="20% Inner Shadow">20% Inner Shadow</option>
+              <option value="30% Inner Shadow">30% Inner Shadow</option>
+              <option value="40% Inner Shadow">40% Inner Shadow</option>
+            </select>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>BG Media Type</div>
+            <div class="row">
+              <div class="col-5 ml-3 form-check">
+                <input type="radio" class="form-check-input" id="radio-image-1" name="optradio-1" value="image"
+                  checked>Image
+                <label class="form-check-label" for="radio-image-1"></label>
+              </div>
+              <div class="col-5 form-check">
+                <input type="radio" class="form-check-input" id="radio-video-1" name="optradio-1" value="video">Video
+                <label class="form-check-label" for="radio-video-1"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>BG Media</div>
+            <div class="input-group">
+              <input type="text" class="form-control input-panel" placeholder="Media URL" id="input-green-image">
+              <span class="input-group-text"><i class="bi bi-image setting-icon"></i></span>
+            </div>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>Iamge Repeat Options</div>
+            <div class="input-group">
+              <select class="form-select py-2 mt-2 input-panel" id="select-green-image-repeat-options">
+                <option value="Repeat">Repeat</option>
+                <option value="No Repeat">No Repeat</option>
+                <option value="Repeat Horizontally">Repeat Horizontally</option>
+                <option value="Repeat Vertically">Repeat Vertically</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>Iamge size Options</div>
+            <div class="input-group">
+              <select class="form-select py-2 mt-2 input-panel" id="select-green-image-size-options">
+                <option value="Full Center">Full Center</option>
+                <option value="Full 100% Width">Full 100% Width</option>
+                <option value="Full 100% Width & Height">Full 100% Width & Height</option>
+                <option value="Contain">Contain</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade show" id="green-advanced-content">
+          <div class="border-options">
+            <div class="py-2 pl-2 subtitle-panel">
+              <strong>Border Options</strong>
+            </div>
+
+            <div class="p-3">
+              <div>Border</div>
+              <select class="form-select py-2 mt-2 input-panel" id="setting-section-border-select">
+                <option value="No Border">No Border</option>
+                <option value="full">Full Border</option>
+                <option value="bottom">Bottom Border</option>
+                <option value="top">Top Border</option>
+                <option value="top&bototm">Top & Bottom Border</option>
+              </select>
+
+              <div class="hidden" id="green-border-setting">
+                <div class="my-2">Border Style</div>
+                <select class="form-select py-2 input-panel" id="setting-section-border-style">
+                  <option value="solid">Solid</option>
+                  <option value="dashed">Dashed</option>
+                  <option value="dotted">Dotted</option>
+                </select>
+
+                <div class="my-2">Border Width</div>
+                <select class="form-select py-2 input-panel" id="setting-section-border-width">
+                  <option value="1px">1px</option>
+                  <option value="2px">2px</option>
+                  <option value="3px">3px</option>
+                  <option value="5px">5px</option>
+                  <option value="10px">10px</option>
+                </select>
+
+                <div class="row my-3 align-items-center">
+                  <div class="col-10">Border Color</div>
+                  <div class="col-2 align-items-center">
+                    <label for="section-border-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                        id="section-border-color-icon"></i></label>
+                    <input type="color" class="form-control form-control-color" id="section-border-color" value="#000000">
+                  </div>
+                </div>
+
+                <div class="my-2">Border Radius</div>
+                <select class="form-select py-2 input-panel" id="setting-section-border-radius">
+                  <option value="0px">0px</option>
+                  <option value="1px">1px</option>
+                  <option value="2px">2px</option>
+                  <option value="3px">3px</option>
+                  <option value="4px">4px</option>
+                  <option value="5px">5px</option>
+                  <option value="10px">10px</option>
+                  <option value="15px">15px</option>
+                  <option value="20px">20px</option>
+                  <option value="30px">30px</option>
+                  <option value="40px">40px</option>
+                  <option value="50px">50px</option>
+                  <option value="75px">75px</option>
+                  <option value="100px">100px</option>
+                </select>
+
+                <div class="my-2">Radius Edge</div>
+                <select class="form-select py-2 input-panel" id="setting-section-edge">
+                  <option value="All Edges">All Edges</option>
+                  <option value="Top Only Edges">Top Only Edges</option>
+                  <option value="Bottom Only Edges">Bottom Only Edges</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-2">Width</div>
+          <select class="form-select py-2 input-panel" id="setting-section-width">
+            <option value="full">Full</option>
+            <option value="wide">Wide</option>
+            <option value="mid-wide">Mid Wide</option>
+            <option value="small">Small</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div id="marginPaddingPopup">
+      <div class="border-bottom" style="display: flex;">
+        <div style="width: 60%; display:flex;">
+          <input type="range" id="setValueWithRange" name="vol" min="-100" max="100" oninput="updateNumber()">
+        </div>
+        <div style="width: 40%;">
+          <div class="inputs">
+            <input class="input-number" type="text" id="setValueWithNumber" oninput="setMarginPaddingWithInput()" value="0">
+            <!-- <button class="set-unit-button" style="width: 40%;">px</button> -->
+            <select name="select-unit" id="select-unit">
+              <option value="px">px</option>
+              <option value="%">%</option>
+              <option value="rem">rem</option>
+              <option value="em">em</option>
+              <option value="vw">vw</option>
+              <option value="vh">vh</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="grid-container border-bottom">
+        <div class="grid-item set-px-button" type="button" onClick="setValue(this)">AUTO</div>
+        <div class="grid-item set-px-button" type="button" onClick="setValue(this)">10</div>
+        <div class="grid-item set-px-button" type="button" onClick="setValue(this)">20</div>
+        <div class="grid-item set-px-button" type="button" onClick="setValue(this)">40</div>
+        <div class="grid-item set-px-button" type="button" onClick="setValue(this)">60</div>
+        <div class="grid-item set-px-button" type="button" onClick="setValue(this)">80</div>
+        <div class="grid-item set-px-button" type="button" onClick="setValue(this)">100</div>
+      </div>
+      <div>
+        <div>
+          <button class="set-px-button" onclick="setValueReset()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="setColumnPopup">
+      <div class="row">
+        <div class="col-11 mb-1">
+          <h3>1 Column Row</h3>
+        </div>
+        <div class="col-1 mb-1">
+          <a type="button" id="popup5-close"><i class="bi bi-x-lg"></i></a>
+        </div>
+      </div>
+
+      <ul class="nav nav-tabs nav-justified" style="margin-top: 20px;">
+        <li class="nav-item">
+          <p class="nav-link active" id="blue-general-tab" data-toggle="tab">General</p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link" id="blue-advanced-tab" data-toggle="tab">Advanced</p>
+        </li>
+      </ul>
+
+      <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="blue-general-content">
+          <div>Element name</div>
+          <input type="text" name="element-name" class="form-control my-2 input-panel" value="1 Column Row">
+
+          <div class="border-options">
+            <div class="py-2 pl-2 subtitle-panel">
+              <strong>Margin & Padding</strong>
+            </div>
+
+            <div class="p-3">
+              <div class="margin-padding settingMarginPaddingValue">
+                <div>
+                  <div style="font-size:12px; position:absolute;">MARGIN</div>
+                  <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                      id="setBlueMarginTop" onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+                <div class="padding-border margin-padding">
+                  <div>
+                    <div style="font-size:12px; position:absolute;">PADDING</div>
+                    <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                        id="setBluePaddingTop" onClick="openMarginPaddingPopup(this)"></button></div>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setBluePaddingLeft"
+                          onClick="openMarginPaddingPopup(this)"></button></div>
+                      <div class="col-4 element-border"></div>
+                      <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setBluePaddingRight"
+                          onClick="openMarginPaddingPopup(this)"></button></div>
+                    </div>
+                  </div>
+                  <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                      id="setBluePaddingBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setBlueMarginBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row my-3 align-items-center">
+            <div class="col-10">BACKGROUND<br> COLOR</div>
+            <div class="col-2 align-items-center">
+              <label for="blue-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                  id="blue-back-color-icon"></i></label>
+              <input type="color" class="form-control form-control-color" id="blue-back-color" value="#FFFFFF">
+            </div>
+          </div>
+
+          <div>Align</div>
+          <select class="form-select my-3 py-2 input-panel" id="blue-align-select">
+            <option value="center">Center</option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+          </select>
+
+          <div class="my-3 align-items-center">
+            <div>Box Shadow</div>
+            <select class="form-select py-2 input-panel" id="set-blue-box-shadow">
+              <option value="No Shadow">No Shadow</option>
+              <option value="5% Drop Shadow">5% Drop Shadow</option>
+              <option value="10% Drop Shadow">10% Drop Shadow</option>
+              <option value="20% Drop Shadow">20% Drop Shadow</option>
+              <option value="30% Drop Shadow">30% Drop Shadow</option>
+              <option value="40% Drop Shadow">40% Drop Shadow</option>
+              <option value="5% Inner Shadow">5% Inner Shadow</option>
+              <option value="10% Inner Shadow">10% Inner Shadow</option>
+              <option value="20% Inner Shadow">20% Inner Shadow</option>
+              <option value="30% Inner Shadow">30% Inner Shadow</option>
+              <option value="40% Inner Shadow">40% Inner Shadow</option>
+            </select>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>BG Media Type</div>
+            <div class="row">
+              <div class="col-5 ml-3 form-check">
+                <input type="radio" class="form-check-input" id="radio-image-1" name="optradio-1" value="image"
+                  checked>Image
+                <label class="form-check-label" for="radio-image-1"></label>
+              </div>
+              <div class="col-5 form-check">
+                <input type="radio" class="form-check-input" id="radio-video-1" name="optradio-1" value="video">Video
+                <label class="form-check-label" for="radio-video-1"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>BG Media</div>
+            <div class="input-group">
+              <input type="text" class="form-control input-panel" placeholder="Media URL" id="input-blue-image">
+              <span class="input-group-text"><i class="bi bi-image setting-icon"></i></span>
+            </div>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>Iamge Repeat Options</div>
+            <div class="input-group">
+              <select class="form-select py-2 mt-2 input-panel" id="select-blue-image-repeat-options">
+                <option value="Repeat">Repeat</option>
+                <option value="No Repeat">No Repeat</option>
+                <option value="Repeat Horizontally">Repeat Horizontally</option>
+                <option value="Repeat Vertically">Repeat Vertically</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="my-3 align-items-center">
+            <div>Iamge size Options</div>
+            <div class="input-group">
+              <select class="form-select py-2 mt-2 input-panel" id="select-blue-image-size-options">
+                <option value="Full Center">Full Center</option>
+                <option value="Full 100% Width">Full 100% Width</option>
+                <option value="Full 100% Width & Height">Full 100% Width & Height</option>
+                <option value="Contain">Contain</option>
+              </select>
+            </div>
+          </div>
+
+          <div>Width</div>
+          <div class="input-group" style="display: flex; align-items:center;">
+            <input class="form-input width-slider mr-2" type="range" id="blue-width-slider" min="10" max="100" step="1"
+              value="100" style="width: 70%;">
+            <input type="number" min="10" max="100" name="element-name" id="blue-width-value"
+              class="form-control my-2 input-panel" value="100">
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade show" id="blue-advanced-content">
+          <div class="border-options">
+            <div class="py-2 pl-2 subtitle-panel">
+              <strong>Border Options</strong>
+            </div>
+
+            <div class="p-3">
+              <div>Border</div>
+              <select class="form-select py-2 mt-2 input-panel" id="setting-column-border-select">
+                <option value="No Border">No Border</option>
+                <option value="full">Full Border</option>
+                <option value="bottom">Bottom Border</option>
+                <option value="top">Top Border</option>
+                <option value="top&bototm">Top & Bottom Border</option>
+              </select>
+
+              <div class="hidden" id="blue-border-setting">
+                <div class="my-2">Border Style</div>
+                <select class="form-select py-2 input-panel" id="setting-column-border-style">
+                  <option value="solid">Solid</option>
+                  <option value="dashed">Dashed</option>
+                  <option value="dotted">Dotted</option>
+                </select>
+
+                <div class="my-2">Border Width</div>
+                <select class="form-select py-2 input-panel" id="setting-column-border-width">
+                  <option value="1px">1px</option>
+                  <option value="2px">2px</option>
+                  <option value="3px">3px</option>
+                  <option value="5px">5px</option>
+                  <option value="10px">10px</option>
+                </select>
+
+                <div class="row my-3 align-items-center">
+                  <div class="col-10">Border Color</div>
+                  <div class="col-2 align-items-center">
+                    <label for="column-border-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                        id="column-border-color-icon"></i></label>
+                    <input type="color" class="form-control form-control-color" id="column-border-color" value="#000000">
+                  </div>
+                </div>
+
+                <div class="my-2">Border Radius</div>
+                <select class="form-select py-2 input-panel" id="setting-column-border-radius">
+                  <option value="0px">0px</option>
+                  <option value="1px">1px</option>
+                  <option value="2px">2px</option>
+                  <option value="3px">3px</option>
+                  <option value="4px">4px</option>
+                  <option value="5px">5px</option>
+                  <option value="10px">10px</option>
+                  <option value="15px">15px</option>
+                  <option value="20px">20px</option>
+                  <option value="30px">30px</option>
+                  <option value="40px">40px</option>
+                  <option value="50px">50px</option>
+                  <option value="75px">75px</option>
+                  <option value="100px">100px</option>
+                </select>
+
+                <div class="my-2">Radius Edge</div>
+                <select class="form-select py-2 input-panel" id="setting-column-edge">
+                  <option value="All Edges">All Edges</option>
+                  <option value="Top Only Edges">Top Only Edges</option>
+                  <option value="Bottom Only Edges">Bottom Only Edges</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+<div id="setHeadlinePopup">
+  <div class="row">
+    <div class="col-11 mb-1">
+      <h3 id="orange-title">Headline</h3>
+    </div>
+    <div class="col-1 mb-1">
+      <a type="button" id="headline-close"><i class="bi bi-x-lg"></i></a>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified" style="margin-top: 20px;">
+    <li class="nav-item">
+      <p class="nav-link active" id="orange-general-tab" data-toggle="tab">General</p>
+    </li>
+    <li class="nav-item">
+      <p class="nav-link" id="orange-advanced-tab" data-toggle="tab">Advanced</p>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="orange-general-content">
+      <div>Element name</div>
+      <input type="text" name="element-name" class="form-control my-2 input-panel" value="Headline">
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Margin & Padding</strong>
+        </div>
+
+        <div class="p-3">
+          <div class="margin-padding settingMarginPaddingValue">
+            <div>
+              <div style="font-size:12px; position:absolute;">MARGIN</div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setOrangeMarginTop" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div class="padding-border margin-padding">
+              <div>
+                <div style="font-size:12px; position:absolute;">PADDING</div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setOrangePaddingTop" onClick="openMarginPaddingPopup(this)"></button></div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setOrangePaddingLeft"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                  <div class="col-4 element-border"></div>
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setOrangePaddingRight"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+              </div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setOrangePaddingBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                id="setOrangeMarginBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3 align-items-center">
+        <div class="col-10">Background Color</div>
+        <div class="col-2 align-items-center">
+          <label for="headline-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+              id="headline-back-color-icon"></i></label>
+          <input type="color" class="form-control form-control-color" id="headline-back-color" value="#FFFFFF">
+        </div>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Opacity</div>
+        <select class="form-select py-2 input-panel" id="headline-opacity-select">
+          <option value="1.0">None</option>
+          <option value="1.0">1</option>
+          <option value="0.8">0.8</option>
+          <option value="0.5">0.5</option>
+          <option value="0.3">0.3</option>
+          <option value="0.0">0</option>
+        </select>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Text Shadow</div>
+        <select class="form-select py-2 input-panel" id="set-headline-text-shadow">
+          <option value="No Shadow">No Shadow</option>
+          <option value="Light Fade">Light Fade</option>
+          <option value="Mid Shadow">Mid Shadow</option>
+          <option value="Strong Shadow">Strong Shadow</option>
+        </select>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Letter Spacing</div>
+        <select class="form-select py-2 input-panel" id="set-headline-letter-spacing">
+          <option value="Normal">Normal</option>
+          <option value="1px">1px</option>
+          <option value="2px">2px</option>
+          <option value="3px">3px</option>
+          <option value="-1px">-1px</option>
+        </select>
+      </div>
+
+      <div class="mt-3">Text Align</div>
+      <div class="row my-2">
+        <div class="col-3">
+          <button class="align-button"><i class="bi bi-text-left align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button selected-button"><i class="bi bi-text-center align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button"><i class="bi bi-text-right align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button"><i class="bi bi-justify align-button-icon"></i></button>
+        </div>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Box Shadow</div>
+        <select class="form-select py-2 input-panel" id="set-headline-box-shadow">
+          <option value="No Shadow">No Shadow</option>
+          <option value="5% Drop Shadow">5% Drop Shadow</option>
+          <option value="10% Drop Shadow">10% Drop Shadow</option>
+          <option value="20% Drop Shadow">20% Drop Shadow</option>
+          <option value="30% Drop Shadow">30% Drop Shadow</option>
+          <option value="40% Drop Shadow">40% Drop Shadow</option>
+          <option value="5% Inner Shadow">5% Inner Shadow</option>
+          <option value="10% Inner Shadow">10% Inner Shadow</option>
+          <option value="20% Inner Shadow">20% Inner Shadow</option>
+          <option value="30% Inner Shadow">30% Inner Shadow</option>
+          <option value="40% Inner Shadow">40% Inner Shadow</option>
+        </select>
+      </div>
+
+      <div>Font size</div>
+      <div class="input-group" style="display: flex; align-items:center;">
+        <input class="form-input width-slider mr-2" type="range" id="headline-font-slider" min="8" max="100" step="2"
+          value="32" style="width: 70%;">
+        <input type="number" min="8" max="100" name="element-name" id="headline-font-value"
+          class="form-control my-2 input-panel" value="32">
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Typography Type</div>
+        <select class="form-select py-2 input-panel" id="set-headline-typography-type">
+          <option value="Headline Font">Headline Font</option>
+          <option value="Content Font">Content Font</option>
+        </select>
+      </div>
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Color Options</strong>
+        </div>
+
+        <div class="p-3">
+          <div class="row align-items-center">
+            <div class="col-10">Color</div>
+            <div class="col-2 align-items-center">
+              <label for="headline-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                  id="headline-color-icon"></i></label>
+              <input type="color" class="form-control form-control-color" id="headline-color" value="#000000">
+            </div>
+          </div>
+
+          <div class="row align-items-center">
+            <div class="col-10">Bold Text Color</div>
+            <div class="col-2 align-items-center">
+              <label for="headline-bold-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                  id="headline-bold-color-icon"></i></label>
+              <input type="color" class="form-control form-control-color" id="headline-bold-color" value="#FFFFFF">
+            </div>
+          </div>
+
+          <div class="row align-items-center">
+            <div class="col-10">Italic Text Color</div>
+            <div class="col-2 align-items-center">
+              <label for="headline-italic-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                  id="headline-italic-color-icon"></i></label>
+              <input type="color" class="form-control form-control-color" id="headline-italic-color" value="#FFFFFF">
+            </div>
+          </div>
+
+          <div class="row align-items-center">
+            <div class="col-10">Underline Text Color</div>
+            <div class="col-2 align-items-center">
+              <label for="headline-underline-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                  id="headline-underline-color-icon"></i></label>
+              <input type="color" class="form-control form-control-color" id="headline-underline-color" value="#FFFFFF">
+            </div>
+          </div>
+
+          <div class="row align-items-center">
+            <div class="col-10">Link Text Color</div>
+            <div class="col-2 align-items-center">
+              <label for="headline-link-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                  id="headline-link-color-icon"></i></label>
+              <input type="color" class="form-control form-control-color" id="headline-link-color" value="#FFFFFF">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade show" id="orange-advanced-content">
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Border Options</strong>
+        </div>
+
+        <div class="p-3">
+          <div>Border</div>
+          <select class="form-select py-2 mt-2 input-panel" id="setting-headline-border-select">
+            <option value="No Border">No Border</option>
+            <option value="full">Full Border</option>
+            <option value="bottom">Bottom Border</option>
+            <option value="top">Top Border</option>
+            <option value="top&bototm">Top & Bottom Border</option>
+          </select>
+
+          <div class="hidden" id="headline-border-setting">
+            <div class="my-2">Border Style</div>
+            <select class="form-select py-2 input-panel" id="setting-headline-border-style">
+              <option value="solid">Solid</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+            </select>
+
+            <div class="my-2">Border Width</div>
+            <select class="form-select py-2 input-panel" id="setting-headline-border-width">
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="5px">5px</option>
+              <option value="10px">10px</option>
+            </select>
+
+            <div class="row my-3 align-items-center">
+              <div class="col-10">Border Color</div>
+              <div class="col-2 align-items-center">
+                <label for="headline-border-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                    id="headline-border-color-icon"></i></label>
+                <input type="color" class="form-control form-control-color" id="headline-border-color" value="#000000">
+              </div>
+            </div>
+
+            <div class="my-2">Border Radius</div>
+            <select class="form-select py-2 input-panel" id="setting-headline-border-radius">
+              <option value="0px">0px</option>
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="4px">4px</option>
+              <option value="5px">5px</option>
+              <option value="10px">10px</option>
+              <option value="15px">15px</option>
+              <option value="20px">20px</option>
+              <option value="30px">30px</option>
+              <option value="40px">40px</option>
+              <option value="50px">50px</option>
+              <option value="75px">75px</option>
+              <option value="100px">100px</option>
+            </select>
+
+            <div class="my-2">Radius Edge</div>
+            <select class="form-select py-2 input-panel" id="setting-headline-edge">
+              <option value="All Edges">All Edges</option>
+              <option value="Top Only Edges">Top Only Edges</option>
+              <option value="Bottom Only Edges">Bottom Only Edges</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="setTwoStepOrderPopup">
+  <div class="row">
+    <div class="col-11 mb-1">
+      <h3>Two Step Order</h3>
+    </div>
+    <div class="col-1 mb-1">
+      <a type="button" id="combo-close"><i class="bi bi-x-lg"></i></a>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified" style="margin-top: 20px;">
+    <li class="nav-item">
+      <p class="nav-link active" id="general-tab" data-toggle="tab">General</p>
+    </li>
+    <li class="nav-item">
+      <p class="nav-link" id="advanced-tab" data-toggle="tab">Advanced</p>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="general-content">
+      <div>Element name</div>
+      <input type="text" name="element-name" class="form-control my-2 input-panel" value="Two Step Order">
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Margin & Padding</strong>
+        </div>
+
+        <div class="p-3">
+          <div class="margin-padding settingMarginPaddingValue">
+            <div>
+              <div style="font-size:12px; position:absolute;">MARGIN</div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setCombMarginTop" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div class="padding-border margin-padding">
+              <div>
+                <div style="font-size:12px; position:absolute;">PADDING</div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setCombPaddingTop" onClick="openMarginPaddingPopup(this)"></button></div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setCombPaddingLeft"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                  <div class="col-4 element-border"></div>
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setCombPaddingRight"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+              </div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setCombPaddingBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                id="setCombMarginBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3">Text Align</div>
+      <div class="row my-2">
+        <div class="col-3">
+          <button class="align-button"><i class="bi bi-text-left align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button"><i class="bi bi-text-center align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button"><i class="bi bi-text-right align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button"><i class="bi bi-justify align-button-icon"></i></button>
+        </div>
+      </div>
+
+      <div class="row mt-3 align-items-center">
+        <div class="col-10">Button Color</div>
+        <div class="col-2">
+          <label for="btn-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+              id="btn-color-icon"></i></label>
+          <input type="color" class="form-control form-control-color" id="btn-color" value="#CCCCCC">
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-10">Button Text Color</div>
+        <div class="col-2 align-items-center">
+          <label for="btn-txt-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+              id="btn-txt-color-icon"></i></label>
+          <input type="color" class="form-control form-control-color" id="btn-txt-color" value="#CCCCCC">
+        </div>
+      </div>
+
+      <div>Button Size</div>
+      <select class="form-select my-3 py-2 input-panel">
+        <option>Extra Small</option>
+        <option>Small</option>
+        <option>Medium</option>
+        <option>Large</option>
+      </select>
+
+      <div>Button Style</div>
+      <select class="form-select my-3 py-2 input-panel">
+        <option>Flat Color</option>
+      </select>
+
+      <div class="row my-3 align-items-center">
+        <div class="col-10">Input Background Color</div>
+        <div class="col-2 align-items-center">
+          <label for="btn-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+              id="btn-back-color-icon"></i></label>
+          <input type="color" class="form-control form-control-color" id="btn-back-color" value="#FFFFFF">
+        </div>
+      </div>
+
+      <div>Form Corners</div>
+      <select class="form-select my-3 py-2 input-panel">
+        <option>5px</option>
+      </select>
+
+      <div>Typography Type</div>
+      <select class="form-select my-3 py-2 input-panel">
+        <option>Headline Font</option>
+      </select>
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Button Actions</strong>
+        </div>
+
+        <div class="p-3">
+          <div>Sale Actions</div>
+          <select class="form-select my-3 py-2 input-panel">
+            <option>Go to Next step</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tab-pane fade show" id="advanced-content">
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Form Options</strong>
+        </div>
+
+        <div class="p-3">
+          <div class="row my-3">
+            <div class="col-6 step-button">
+              <button class="p-2 step-tab step-active" id="step1-tab" data-toggle="tab"><i class="bi bi-eye mr-1"
+                  id="eye-icon1"></i> Step #1</button>
+            </div>
+            <div class="col-6 step-button">
+              <button class="p-2 step-tab" id="step2-tab" data-toggle="tab"><i class="bi bi-eye-slash mr-1"
+                  id="eye-icon2"></i> Step #2</button>
+            </div>
+          </div>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="step1-content">
+              <div>Step #1 Headline</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Your profile">
+              <div>Step #1 Sub Headline</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Contact details">
+              <div>Toggle Company Name</div>
+              <select class="form-select py-2 input-panel">
+                <option>Show Company Name</option>
+              </select>
+              <div>Company Name</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Company Name...">
+              <div>Full Name</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Full Name...">
+              <div>Email Address</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Email Address...">
+              <div>Toggle Phone</div>
+              <select class="form-select my-3 py-2 input-panel">
+                <option>Show Phone Number</option>
+              </select>
+              <div>Phone Number</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Phone Number...">
+            </div>
+
+            <div class="tab-pane fade show" id="step2-content">
+              <div>Step #2 Headline</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel"
+                value="Normally $297. Use coupon code FAP to get 90% OFF">
+              <div>Step #2 Sub Headline</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Billing details">
+              <div>Back to shipping Text</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Edit Contact Details">
+              <div>Select Item Text</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Item">
+              <div>Select Price Text</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Price">
+              <div>Summary Item Text</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="item">
+              <div>Summary Price Text</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="amount">
+              <div>Step #2 Btn Text</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel" value="Complete Order">
+              <div>Step #2 Sub Btn Text</div>
+              <input type="text" name="element-name" class="form-control my-2 input-panel"
+                value="* 100% Secure & Safe Payments *">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Border Options</strong>
+        </div>
+
+        <div class="p-3">
+          <div>Border</div>
+          <select class="form-select py-2 mt-2 input-panel" id="setting-comb-border-select">
+            <option value="No Border">No Border</option>
+            <option value="full">Full Border</option>
+            <option value="bottom">Bottom Border</option>
+            <option value="top">Top Border</option>
+            <option value="top&bototm">Top & Bottom Border</option>
+          </select>
+
+          <div class="hidden" id="comb-border-setting">
+            <div class="my-2">Border Style</div>
+            <select class="form-select py-2 input-panel" id="setting-comb-border-style">
+              <option value="solid">Solid</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+            </select>
+
+            <div class="my-2">Border Width</div>
+            <select class="form-select py-2 input-panel" id="setting-comb-border-width">
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="5px">5px</option>
+              <option value="10px">10px</option>
+            </select>
+
+            <div class="row my-3 align-items-center">
+              <div class="col-10">Border Color</div>
+              <div class="col-2 align-items-center">
+                <label for="comb-border-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                    id="comb-border-color-icon"></i></label>
+                <input type="color" class="form-control form-control-color" id="comb-border-color" value="#000000">
+              </div>
+            </div>
+
+            <div class="my-2">Border Radius</div>
+            <select class="form-select py-2 input-panel" id="setting-comb-border-radius">
+              <option value="0px">0px</option>
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="4px">4px</option>
+              <option value="5px">5px</option>
+              <option value="10px">10px</option>
+              <option value="15px">15px</option>
+              <option value="20px">20px</option>
+              <option value="30px">30px</option>
+              <option value="40px">40px</option>
+              <option value="50px">50px</option>
+              <option value="75px">75px</option>
+              <option value="100px">100px</option>
+            </select>
+
+            <div class="my-2">Radius Edge</div>
+            <select class="form-select py-2 input-panel" id="setting-comb-edge">
+              <option value="All Edges">All Edges</option>
+              <option value="Top Only Edges">Top Only Edges</option>
+              <option value="Bottom Only Edges">Bottom Only Edges</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="setImagePopup" class="settingsSidebar col-12p-3" style="background-color: #fff;">
+  <div class="row">
+    <div class="col-11 mb-1">
+      <h3 id="orange-title">Image Settings</h3>
+    </div>
+    <div class="col-1 mb-1">
+      <a type="button" id="image-setting-close"><i class="bi bi-x-lg"></i></a>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified" style="margin-top: 20px;">
+    <li class="nav-item">
+      <p class="nav-link active" id="image-general-tab" data-toggle="tab">General</p>
+    </li>
+    <li class="nav-item">
+      <p class="nav-link" id="image-advanced-tab" data-toggle="tab">Advanced</p>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="image-general-content">
+      <div style="margin-top: 20px;">Element name</div>
+      <input type="text" name="element-name" class="form-control my-2 input-panel" value="Image">
+
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Margin & Padding</strong>
+        </div>
+
+        <div class="p-3">
+          <div class="margin-padding settingMarginPaddingValue">
+            <div>
+              <div style="font-size:12px; position:absolute;">MARGIN</div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setImageMarginTop" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div class="padding-border margin-padding">
+              <div>
+                <div style="font-size:12px; position:absolute;">PADDING</div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setImagePaddingTop" onClick="openMarginPaddingPopup(this)"></button></div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setImagePaddingLeft"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                  <div class="col-4 element-border"></div>
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setImagePaddingRight"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+              </div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setImagePaddingBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                id="setImageMarginBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3 align-items-center">
+        <div class="col-10">Background Color</div>
+        <div class="col-2 align-items-center">
+          <label for="image-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+              id="image-back-color-icon"></i></label>
+          <input type="color" class="form-control form-control-color" id="image-back-color" value="#FFFFFF">
+        </div>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Opacity</div>
+        <select class="form-select py-2 input-panel" id="image-opacity-select">
+          <option value="1.0">None</option>
+          <option value="1.0">1</option>
+          <option value="0.8">0.8</option>
+          <option value="0.5">0.5</option>
+          <option value="0.3">0.3</option>
+          <option value="0.0">0</option>
+        </select>
+      </div>
+
+      <div class="mt-3">Text Align</div>
+      <div class="row my-2">
+        <div class="col-3">
+          <button class="align-button" id="image-align-left"><i class="bi bi-text-left align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button selected-button" id="image-align-center"><i
+              class="bi bi-text-center align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button" id="image-align-right"><i
+              class="bi bi-text-right align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button" id="image-align-full"><i class="bi bi-justify align-button-icon"></i></button>
+        </div>
+      </div>
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Image Option</strong>
+        </div>
+
+        <div class="p-3">
+          <div class="my-3 align-items-center">
+            <div>Image URL</div>
+            <div class="input-group">
+              <input type="text" class="form-control input-panel" placeholder="Media URL" id="input-image-path">
+            </div>
+          </div>
+          <div class="my-3 align-items-center">
+            <div>Width(PX)</div>
+            <input type="number" class="form-control input-panel" id="set-image-width" value="">
+          </div>
+          <div class="my-3 align-items-center">
+            <div>Height(PX)</div>
+            <input type="number" class="form-control input-panel" id="set-image-height" value="">
+          </div>
+          <div class="my-3 align-items-center">
+            <div>Alt Text(For SEO!)</div>
+            <input type="text" class="form-control input-panel" value="Image" id="set-image-alt">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade show" id="image-advanced-content">
+      <div class="my-3 align-items-center">
+        <div>Image Raius</div>
+        <select class="form-select py-2 input-panel" id="set-image-radius">
+          <option value="None">None</option>
+          <option value="Circle">Circle</option>
+          <option value="Round Corners">Round Corners</option>
+        </select>
+      </div>
+      <div class="my-3 align-items-center">
+        <div>Image Border</div>
+        <select class="form-select py-2 input-panel" id="set-image-border">
+          <option value="None">None</option>
+          <option value="White Thumbnail Border">White Thumbnail Border</option>
+          <option value="Dark Thumbnail Border">Dark Thumbnail Border</option>
+          <option value="2px Dark Thumbnail Border">2px Dark Thumbnail Border</option>
+          <option value="5px Transparent Thumbnail Border">5px Transparent Thumbnail Border</option>
+          <option value="2px Bottom Thumbnail Border">2px Bottom Thumbnail Border</option>
+        </select>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Image Shadow</div>
+        <select class="form-select py-2 input-panel" id="set-image-shadow">
+          <option value="None">None</option>
+          <option value="Light Shadow">Light Shadow</option>
+          <option value="Full Shadow">Full Shadow</option>
+          <option value="Dark Shadow">Dark Shadow</option>
+          <option value="Buttom Medium Dark Shadow">Buttom Medium Dark Shadow</option>
+          <option value="Bottom Light Shadow">Bottom Light Shadow</option>
+          <option value="Bottom Right Dark Shadow">Bottom Right Dark Shadow</option>
+          <option value="Bottom Dark Shadow">Bottom Dark Shadow</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="setVideoPopup" class="settingsSidebar col-12p-3" style="background-color: #fff;">
+  <div class="row">
+    <div class="col-11 mb-1">
+      <h3 id="orange-title">Video Settings</h3>
+    </div>
+    <div class="col-1 mb-1">
+      <a type="button" id="video-setting-close"><i class="bi bi-x-lg"></i></a>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified" style="margin-top: 20px;">
+    <li class="nav-item">
+      <p class="nav-link active" id="video-general-tab" data-toggle="tab">General</p>
+    </li>
+    <li class="nav-item">
+      <p class="nav-link" id="video-advanced-tab" data-toggle="tab">Advanced</p>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="video-general-content">
+      <div style="margin-top: 20px;">Element name</div>
+      <input type="text" name="element-name" class="form-control my-2 input-panel" value="Video">
+
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Margin & Padding</strong>
+        </div>
+        <div class="p-3">
+          <div class="margin-padding settingMarginPaddingValue">
+            <div>
+              <div style="font-size:12px; position:absolute;">MARGIN</div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setVideoMarginTop" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div class="padding-border margin-padding">
+              <div>
+                <div style="font-size:12px; position:absolute;">PADDING</div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setVideoPaddingTop" onClick="openMarginPaddingPopup(this)"></button></div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setVideoPaddingLeft"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                  <div class="col-4 element-border"></div>
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setVideoPaddingRight"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+              </div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setVideoPaddingBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                id="setVideoMarginBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3 align-items-center">
+        <div class="col-10">Background Color</div>
+        <div class="col-2 align-items-center">
+          <label for="video-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+              id="video-back-color-icon"></i></label>
+          <input type="color" class="form-control form-control-color" id="video-back-color" value="#FFFFFF">
+        </div>
+      </div>
+      <div class="my-3 align-items-center">
+        <div>Box Shadow</div>
+        <select class="form-select py-2 input-panel" id="set-video-box-shadow">
+          <option value="No Shadow">No Shadow</option>
+          <option value="5% Drop Shadow">5% Drop Shadow</option>
+          <option value="10% Drop Shadow">10% Drop Shadow</option>
+          <option value="20% Drop Shadow">20% Drop Shadow</option>
+          <option value="30% Drop Shadow">30% Drop Shadow</option>
+          <option value="40% Drop Shadow">40% Drop Shadow</option>
+          <option value="5% Inner Shadow">5% Inner Shadow</option>
+          <option value="10% Inner Shadow">10% Inner Shadow</option>
+          <option value="20% Inner Shadow">20% Inner Shadow</option>
+          <option value="30% Inner Shadow">30% Inner Shadow</option>
+          <option value="40% Inner Shadow">40% Inner Shadow</option>
+        </select>
+      </div>
+      <div class="my-3 align-items-center">
+        <div>Video Type</div>
+        <select class="form-select py-2 input-panel" id="set-video-type">
+          <option value="Youtube">Youtube</option>
+          <option value="Vimeo">Vimeo</option>
+          <option value="Wistia">Wistia</option>
+          <option value="Custom Embed">Custom Embed</option>
+          <option value="HTML 5">HTML 5</option>
+          <option value="Hosted Vido">Hosted Vido</option>
+        </select>
+      </div>
+      <div class="my-3 align-items-center">
+        <div>Video URL</div>
+        <div class="input-group">
+          <input type="text" class="form-control input-panel" id="input-video-path">
+        </div>
+      </div>
+      <div class="my-3 align-items-center">
+        <div>Width</div>
+        <select class="form-select py-2 input-panel" id="set-video-width">
+          <option value="Full Width">Full Width</option>
+          <option value="3/4 Width">3/4 Width</option>
+          <option value="Half Width">Half Width</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="tab-pane fade show" id="video-advanced-content">
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Border Options</strong>
+        </div>
+
+        <div class="p-3">
+          <div>Border</div>
+          <select class="form-select py-2 mt-2 input-panel" id="setting-video-border-select">
+            <option value="No Border">No Border</option>
+            <option value="full">Full Border</option>
+            <option value="bottom">Bottom Border</option>
+            <option value="top">Top Border</option>
+            <option value="top&bototm">Top & Bottom Border</option>
+          </select>
+
+          <div class="hidden" id="video-border-setting">
+            <div class="my-2">Border Style</div>
+            <select class="form-select py-2 input-panel" id="setting-video-border-style">
+              <option value="solid">Solid</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+            </select>
+
+            <div class="my-2">Border Width</div>
+            <select class="form-select py-2 input-panel" id="setting-video-border-width">
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="5px">5px</option>
+              <option value="10px">10px</option>
+            </select>
+
+            <div class="row my-3 align-items-center">
+              <div class="col-10">Border Color</div>
+              <div class="col-2 align-items-center">
+                <label for="video-border-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                    id="video-border-color-icon"></i></label>
+                <input type="color" class="form-control form-control-color" id="video-border-color" value="#000000">
+              </div>
+            </div>
+
+            <div class="my-2">Border Radius</div>
+            <select class="form-select py-2 input-panel" id="setting-video-border-radius">
+              <option value="0px">0px</option>
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="4px">4px</option>
+              <option value="5px">5px</option>
+              <option value="10px">10px</option>
+              <option value="15px">15px</option>
+              <option value="20px">20px</option>
+              <option value="30px">30px</option>
+              <option value="40px">40px</option>
+              <option value="50px">50px</option>
+              <option value="75px">75px</option>
+              <option value="100px">100px</option>
+            </select>
+
+            <div class="my-2">Radius Edge</div>
+            <select class="form-select py-2 input-panel" id="setting-video-edge">
+              <option value="All Edges">All Edges</option>
+              <option value="Top Only Edges">Top Only Edges</option>
+              <option value="Bottom Only Edges">Bottom Only Edges</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="settingsSidebar" class="settingsSidebar col-12p-3" style="background-color: #fff;">
+  <div class="row">
+    <div class="col-11 mb-1">
+      <h3 id="orange-title">Button Settings</h3>
+    </div>
+    <div class="col-1 mb-1">
+      <a type="button" id="button-setting-close"><i class="bi bi-x-lg"></i></a>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified" style="margin-top: 20px;">
+    <li class="nav-item">
+      <p class="nav-link active" id="button-general-tab" data-toggle="tab">General</p>
+    </li>
+    <li class="nav-item">
+      <p class="nav-link" id="button-advanced-tab" data-toggle="tab">Advanced</p>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="button-general-content">
+      <div style="margin-top: 20px;">Element name</div>
+      <input type="text" name="element-name" class="form-control my-2 input-panel" value="Button">
+
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Margin & Padding</strong>
+        </div>
+
+        <div class="p-3">
+          <div class="margin-padding settingMarginPaddingValue">
+            <div>
+              <div style="font-size:12px; position:absolute;">MARGIN</div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setButtonMarginTop" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div class="padding-border margin-padding">
+              <div>
+                <div style="font-size:12px; position:absolute;">PADDING</div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setButtonPaddingTop" onClick="openMarginPaddingPopup(this)"></button></div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setButtonPaddingLeft"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                  <div class="col-4 element-border"></div>
+                  <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setButtonPaddingRight"
+                      onClick="openMarginPaddingPopup(this)"></button></div>
+                </div>
+              </div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setButtonPaddingBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+            </div>
+            <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                id="setButtonMarginBottom" onClick="openMarginPaddingPopup(this)"></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3 align-items-center">
+        <div class="col-5">
+          <label for="action-select">Action</label>
+        </div>
+        <div class="col-7 align-items-center">
+          <div class="form-element">
+            <select class="form-select" id="action-select">
+              <option value="#open-popup">Open the Popup</option>
+              <option value="#submit-form">Submit Form</option>
+              <option value="#">Go to URL</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3 align-items-center">
+        <div class="col-5">
+          <div class="url-input-container" style="display:none">
+            <label for="url-input">URL Path</label>
+          </div>
+        </div>
+        <div class="col-7 align-items-center">
+          <div class="form-element url-input-container" style="display:none">
+            <input class="form-input" type="text" id="url-input">
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3 align-items-center">
+        <div class="col-5">
+          <div>
+            <label for="button-text-input">Button Text</label>
+          </div>
+        </div>
+        <div class="col-7 align-items-center">
+          <div class="form-element">
+            <input class="form-input" type="text" id="button-text-input">
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3 align-items-center">
+        <div class="col-5">
+          <div>
+            <label for="font-family-select">Font Family</label>
+          </div>
+        </div>
+        <div class="col-7 align-items-center">
+          <div class="form-element">
+            <select class="form-select" id="font-family-select">
+              <option value="Fira Sans">Fira Sans</option>
+              <option value="Fjalla One">Fjalla One</option>
+              <option value="Open Sans">Open Sans</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Roboto Slab">Roboto Slab</option>
+              <option value="Montserrat" selected="">Montserrat</option>
+              <option value="Merriweather">Merriweather</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3 align-items-center">
+        <div class="col-5">
+          <div>
+            <label for="font-size-slider">Font Size</label>
+          </div>
+        </div>
+        <div class="col-7 align-items-center">
+          <div class="form-element">
+            <input class="form-input" type="range" id="font-size-slider" min="12" max="100" step="2">
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-3 align-items-center">
+        <div class="col-10">Text Color</div>
+        <div class="col-2 align-items-center">
+          <label for="button-text-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+              id="button-text-color-icon"></i></label>
+          <input type="color" class="form-control form-control-color" id="button-text-color" value="#FFFFFF">
+        </div>
+      </div>
+      <div class="row my-3 align-items-center">
+        <div class="col-10">Background Color</div>
+        <div class="col-2 align-items-center">
+          <label for="button-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+              id="button-back-color-icon"></i></label>
+          <input type="color" class="form-control form-control-color" id="button-back-color" value="#FFFFFF">
+        </div>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Opacity</div>
+        <select class="form-select py-2 input-panel" id="button-opacity-select">
+          <option value="1.0">None</option>
+          <option value="1.0">1</option>
+          <option value="0.8">0.8</option>
+          <option value="0.5">0.5</option>
+          <option value="0.3">0.3</option>
+          <option value="0.0">0</option>
+        </select>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Text Shadow</div>
+        <select class="form-select py-2 input-panel" id="set-button-text-shadow">
+          <option value="No Shadow">No Shadow</option>
+          <option value="Light Fade">Light Fade</option>
+          <option value="Mid Shadow">Mid Shadow</option>
+          <option value="Strong Shadow">Strong Shadow</option>
+        </select>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Letter Spacing</div>
+        <select class="form-select py-2 input-panel" id="set-button-letter-spacing">
+          <option value="Normal">Normal</option>
+          <option value="1px">1px</option>
+          <option value="2px">2px</option>
+          <option value="3px">3px</option>
+          <option value="-1px">-1px</option>
+        </select>
+      </div>
+
+      <div class="mt-3">Text Align</div>
+      <div class="row my-2">
+        <div class="col-3">
+          <button class="align-button" id="button-align-left"><i class="bi bi-text-left align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button selected-button" id="button-align-center"><i
+              class="bi bi-text-center align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button" id="button-align-right"><i
+              class="bi bi-text-right align-button-icon"></i></button>
+        </div>
+        <div class="col-3">
+          <button class="align-button" id="button-align-full"><i class="bi bi-justify align-button-icon"></i></button>
+        </div>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Box Shadow</div>
+        <select class="form-select py-2 input-panel" id="set-button-box-shadow">
+          <option value="No Shadow">No Shadow</option>
+          <option value="5% Drop Shadow">5% Drop Shadow</option>
+          <option value="10% Drop Shadow">10% Drop Shadow</option>
+          <option value="20% Drop Shadow">20% Drop Shadow</option>
+          <option value="30% Drop Shadow">30% Drop Shadow</option>
+          <option value="40% Drop Shadow">40% Drop Shadow</option>
+          <option value="5% Inner Shadow">5% Inner Shadow</option>
+          <option value="10% Inner Shadow">10% Inner Shadow</option>
+          <option value="20% Inner Shadow">20% Inner Shadow</option>
+          <option value="30% Inner Shadow">30% Inner Shadow</option>
+          <option value="40% Inner Shadow">40% Inner Shadow</option>
+        </select>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Typography Type</div>
+        <select class="form-select py-2 input-panel" id="set-button-typography-type">
+          <option value="Headline Font">Headline Font</option>
+          <option value="Content Font">Content Font</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="tab-pane fade show" id="button-advanced-content">
+      <div class="my-3 align-items-center">
+        <div>Text Transform</div>
+        <select class="form-select py-2 input-panel" id="set-button-text-transform">
+          <option value="Normal">Normal</option>
+          <option value="Uppercase">Uppercase</option>
+          <option value="Lowercase">Lowercase</option>
+          <option value="Capitalize">Capitalize</option>
+        </select>
+      </div>
+
+      <div class="my-3 align-items-center">
+        <div>Text Width</div>
+        <select class="form-select py-2 input-panel" id="set-button-text-width">
+          <option value="Fluid">Fluid</option>
+          <option value="Full Width">Full Width</option>
+        </select>
+      </div>
+
+      <div class="border-options">
+        <div class="py-2 pl-2 subtitle-panel">
+          <strong>Border Options</strong>
+        </div>
+
+        <div class="p-3">
+          <div>Border</div>
+          <select class="form-select py-2 mt-2 input-panel" id="setting-button-border-select">
+            <option value="No Border">No Border</option>
+            <option value="full">Full Border</option>
+            <option value="bottom">Bottom Border</option>
+            <option value="top">Top Border</option>
+            <option value="top&bototm">Top & Bottom Border</option>
+          </select>
+
+          <div class="hidden" id="button-border-setting">
+            <div class="my-2">Border Style</div>
+            <select class="form-select py-2 input-panel" id="setting-button-border-style">
+              <option value="solid">Solid</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+            </select>
+
+            <div class="my-2">Border Width</div>
+            <select class="form-select py-2 input-panel" id="setting-button-border-width">
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="5px">5px</option>
+              <option value="10px">10px</option>
+            </select>
+
+            <div class="row my-3 align-items-center">
+              <div class="col-10">Border Color</div>
+              <div class="col-2 align-items-center">
+                <label for="button-border-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                    id="button-border-color-icon"></i></label>
+                <input type="color" class="form-control form-control-color" id="button-border-color" value="#000000">
+              </div>
+            </div>
+
+            <div class="my-2">Border Radius</div>
+            <select class="form-select py-2 input-panel" id="setting-button-border-radius">
+              <option value="0px">0px</option>
+              <option value="1px">1px</option>
+              <option value="2px">2px</option>
+              <option value="3px">3px</option>
+              <option value="4px">4px</option>
+              <option value="5px">5px</option>
+              <option value="10px">10px</option>
+              <option value="15px">15px</option>
+              <option value="20px">20px</option>
+              <option value="30px">30px</option>
+              <option value="40px">40px</option>
+              <option value="50px">50px</option>
+              <option value="75px">75px</option>
+              <option value="100px">100px</option>
+            </select>
+
+            <div class="my-2">Radius Edge</div>
+            <select class="form-select py-2 input-panel" id="setting-button-edge">
+              <option value="All Edges">All Edges</option>
+              <option value="Top Only Edges">Top Only Edges</option>
+              <option value="Bottom Only Edges">Bottom Only Edges</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ <!-- All siderbars --->
+<!--   end of -- POPUPS, Sliding Panels                           	 --->

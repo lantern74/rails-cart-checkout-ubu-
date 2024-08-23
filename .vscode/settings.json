@@ -1,0 +1,59 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.stylelint": "always"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "css.lint.unknownAtRules": "ignore",
+  "tailwindCSS.experimental.classRegex": [
+    ["tv\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "cSpell.words": [
+    "anychat",
+    "anydigital",
+    "anylogi",
+    "anymanager",
+    "anymindgroup",
+    "anyshop",
+    "anytag",
+    "anyx",
+    "codegen",
+    "cssmodule",
+    "datasource",
+    "datetime",
+    "dropzone",
+    "fieldset",
+    "hookform",
+    "immer",
+    "LAZADA",
+    "logiless",
+    "magaseek",
+    "makeshop",
+    "mantine",
+    "messageformat",
+    "momo",
+    "nrwl",
+    "rakuten",
+    "semibold",
+    "shopee",
+    "sidenav",
+    "stylelint",
+    "svgr",
+    "szhsin",
+    "tailwindcss",
+    "tannerhodges",
+    "tanstack",
+    "tiptap",
+    "tokopedia",
+    "unlisten",
+    "unresolve",
+    "usehooks",
+    "zozotown",
+    "zustand"
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
+}

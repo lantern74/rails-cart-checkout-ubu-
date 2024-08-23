@@ -1,0 +1,45 @@
+<!-- app/views/password_setup/new.html.erb -->
+
+<!-- Page content -->
+<div class="container d-flex flex-column">
+  <div class="row align-items-center justify-content-center g-0 min-vh-100">
+    <div class="col-lg-5 col-md-8 py-8 py-xl-0">
+      <!-- Card -->
+      <div class="card shadow">
+        <!-- Card body -->
+        <div class="card-body mx-4">
+          <div class="mb-4">
+            <h1 class="mb-2 fw-bold">Password Setup</h1>
+            <!-- Add any additional content for the password setup page -->
+          </div>
+
+          <!-- Form -->
+          <%= form_for(resource, as: resource_name, url: password_setup_path(resource_name)) do |f| %>
+
+          <%= f.hidden_field :token, value: @token %>
+
+
+            <div class="field py-2">
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "New Password" %>
+            </div>
+
+            <div class="field py-2">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Confirm Password" %>
+            </div>
+
+            <div class="d-grid pt-4 pb-1">
+              <%= f.submit "Set Password", class: "btn btn-lg btn-primary" %>
+            </div>
+          <% end %>
+
+        </div>
+
+        <div class="line my-3">
+          <hr class="line">
+          <p class="line text-center"><%= render "devise/shared/links" %></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

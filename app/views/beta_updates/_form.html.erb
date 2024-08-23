@@ -1,0 +1,20 @@
+<%= form_with(model: beta_update, url: beta_updates_path, remote: true) do |form| %>
+  <!-- Step form fields go here -->
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+     <%# <%= form.hidden_field :funnel, value: @funnel.id %>
+  </div>
+
+
+
+
+<br>
+<br>
+
+  <!-- Add other beta_update form fields as needed -->
+
+  <div class="form-group">
+    <%= form.submit 'Create Beta Update', class: 'btn btn-primary' %>
+  </div>
+<% end %>

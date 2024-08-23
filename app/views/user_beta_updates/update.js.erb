@@ -1,0 +1,3 @@
+  const toggleSwitch = document.getElementById('toggleSwitch_<%= @beta_update.id %>');
+  toggleSwitch.checked = <%= @user_beta_update&.enabled || 'false' %>;
+

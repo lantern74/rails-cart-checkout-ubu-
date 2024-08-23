@@ -1,0 +1,383 @@
+    <!-- app/views/steps/_step_details.html.erb -->
+<style>
+  nav.nav .nav-tabs .nav-item {
+    border: none !important;
+  }
+
+  .nav .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #5181ad;
+    border: none !important;
+    border-bottom: 1px solid #5181ad !important; /* Add border to the active tab */
+  }
+
+  .nav .nav-link, .nav-tabs .nav-link.active {
+    border: none !important;
+  }
+  .nav .nav-link.active {
+        border-bottom: 3px solid #5181ad !important;
+
+  }
+    .nav .nav-link:hover{
+      color: #5181ad;
+    }
+</style>
+
+
+<style>
+.container {
+  /* Add a specific height for the container */
+  /* height: 400px; Adjust this value as needed */
+}
+
+.square-card {
+  width: 100%;
+  padding: 34px 0;
+  position: relative;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #7eb3fe;
+}
+
+.square-card2 {
+  width: 100%;
+  padding: 34px 0;
+  position: relative;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #eee;
+}
+
+.square-card img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.square-card2 div {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Add "Control" text at the top-right corner */
+.square-card::before {
+  content: "Control";
+  position: absolute;
+  top: -34px; /* Update this value */
+  left: 0; /* Updated to 0 */
+  background: #7eb3fe;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #333;
+  font-weight: bold;
+  color:white;
+}
+
+.square-card2::before {
+  content: "Variation";
+  position: absolute;
+  top: -34px; /* Update this value */
+  left: 0; /* Updated to 0 */
+  background: #bbb;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #333;
+  font-weight: bold;
+  color:white;
+}
+
+.image-container {
+  width: 270px; /* Set the width */
+  height: 200px; /* Set the height */
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust how the image fits within the container */
+}
+
+.center-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+.center-text .image-container {
+  margin-left: auto;
+}
+
+.overlay-text{
+  position: absolute;
+}
+
+.overlay-text a{
+  text-decoration: none;
+  color: rgb(58, 143, 255);
+  font-weight:bold;
+}
+.overlay-text a:hover{
+  text-decoration: none;
+  color: rgb(78, 163, 255);
+}
+
+</style>
+
+
+<div class="mt-4 pl-2" >
+
+
+  <div style="display: flex; align-items: center;">
+    <div style="flex: 1;">
+      <% if @step %>
+        <%= @step.title %>
+      <% else %>
+        No step found
+      <% end %>
+    </div>
+    <ul class="nav nav-tabs justify-content-end" id="myTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="tab11-tab" data-bs-toggle="tab" href="#tab11" role of="tab" aria-controls="tab11" aria-selected="true">Overview</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="tab22-tab" data-bs-toggle="tab" href="#tab22" role="tab" aria-controls="tab22" aria-selected="false">Products</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="tab33-tab" data-bs-toggle="tab" href="#tab33" role="tab" aria-controls="tab33" aria-selected="false">Publishing</a>
+      </li>
+    </ul>
+  </div>
+
+
+
+  <div class="tab-content" id="myTabsContent">
+    <div class="tab-pane fade show active" id="tab11" role="tabpanel" aria-labelledby="tab11-tab">
+
+
+<div class="pt-3">Please add a domain in the settings to see your Funnel live!</div>
+
+<!-- _step_details.html.erb -->
+<div class="container pt-5">
+  <div class="row pb-4 pt-2">
+    <div class="col-md-4">
+      <!-- 1st Column with step.thumb -->
+      <% if @step.present? %>
+        <% if @step.thumb.present? %>
+          <div class="square-card">
+            <img src="<%= url_for(@step.thumb) %>" alt="Step Thumbnail">
+          </div>
+        <% else %>
+          <div class="square-card">
+
+<div class="image-container">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mJ89wAAAQEBP5HJuhQAAAAASUVORK5CYII=" alt="Example Image">
+</div>
+ <img src="https://placehold.co/270x200" alt="Placeholder Image">
+
+
+
+          </div>
+        <% end %>
+<div class="d-flex justify-content-between align-items-center">
+  <div>
+  <%
+=begin%>
+
+this turbolinks has to be solved somehow because the script doesn't load if I  go from funnels page.
+
+<%
+=end%>
+
+
+
+  <%= link_to edit_step_path(encrypt_for_hidden_field(@step.id)), style: "color: black; text-decoration: none;",class:"btn btn-primary edit-button text-orange bg-lightorange mt-1" do %>
+  Edit &nbsp; <i class="fas fa-chevron-down"></i>
+<% end %>
+
+
+
+
+  </div>
+  <div data-turbo="false">
+    <a target="_blank"  class="btn btn-secondary light-bluegray-button mt-1" href=" <%= step_path(encrypt_for_hidden_field(@step.id)) %>">
+      <i style="font-size: 14px;" class="fas fa-external-link-alt"></i>
+    </a>
+    <a class="popup-modal-button btn btn-secondary light-gray-button mt-1" href="#editStepModal">
+      <i style="font-size: 14px;" class="fas fa-cog"></i>
+    </a>
+  </div>
+</div>
+
+      <% end %>
+    </div>
+
+    <div class="col-md-4">
+  <!-- 2nd Column with centered text and image on top -->
+  <div class="d-flex flex-column align-items-center justify-content-center" style="height: 100%; text-align: center;">
+    <img src="<%= asset_path('test-tube.png') %>" alt="" style="width: 100px;">
+    <img src="<%= asset_path('arrow-long-right.png') %>" alt="" style="width: 100px;">
+
+    <p>Start Split Test</p>
+  </div>
+</div>
+
+
+    <div class="col-md-4">
+  <!-- 3rd Column with step.thumb -->
+  <% if @step.present? %>
+    <% if @step.thumb.present? %>
+      <div class="square-card2 center-text" style="background-color:red; text-align: center;">
+        <img src="<%= url_for(@step.thumb) %>" alt="Step Thumbnail">
+      </div>
+    <% else %>
+      <div class="square-card2" style="text-align: center;">
+        <div class="image-container">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mJ89wAAAQEBP5HJuhQAAAAASUVORK5CYII=" alt="Example Image">
+        </div>
+         <div class="overlay-text"><a href="#"><i class="fas fa-plus"></i> Create Variation</a></div>
+
+      </div>
+    <% end %>
+    <!-- No "EDIT" button in the 3rd column -->
+  <% end %>
+</div>
+
+  </div>
+  <hr style="border-color: lightgray">
+</div>
+
+    </div>
+    <div class="tab-pane fade" id="tab22" role="tabpanel" aria-labelledby="tab22-tab">
+    <br>
+      <h3>Products</h3>
+  <p>These are the products connected to this step</p>
+    <div class="alert bg-lightblue py-1 pl-4" role="alert">
+      Multiple recurring products cannot be purchased in a single checkout.
+    </div>
+    <div class="alert bg-lightblue py-1 pl-4" role="alert">
+      Funnel products are set to Test mode if you wish to switch go to the Funnel's Settings
+    </div>
+
+
+<div class="col-md-12  float-right">
+  <div class="d-flex justify-content-between align-items-center float-right">
+
+    <!-- Wrapper for the Orange button (floated to the right) -->
+    <div class="float-right" >
+      <a  href="#connectProductsModal" class="btn popup-modal-button border-orange text-black bg-orange ">Connect a Product</a>
+    </div>
+  </div>
+</div>
+<br>
+<div class=" mt-4">
+
+
+<% if @products.present? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.title %></td>
+          <td><%= product.description %></td>
+          <!-- Add more columns as needed -->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No products available for this step.</p>
+<% end %>
+
+</div>
+
+<%
+=begin%>
+ <%= form_with(model: [@funnel, @step], url: @step ? update_products_only_funnel_step_path(@funnel, @step) : '#', method: :patch) do |form| %>
+
+  <div class="row row-cols-2 py-2">
+    <div class="col-3"><%= form.label :product_ids, "Select Product" %></div>
+    <div class="col-9">
+      <%= form.collection_select(:product_ids, current_user.products, :id, :title, { prompt: "Select a Product" }, { multiple: true, class: "form-control" }) %>
+    </div>
+  </div>
+
+  <div class="col-md-12 float-right pb-2" style="">
+    <div class="d-flex justify-content-between align-items-center float-right">
+      <!-- Wrapper for the Orange button (floated to the right) -->
+      <div class="float-right">
+        <%= link_to 'Cancel', products_path, class: "btn btn-white" %>
+        <%= form.submit class:"btn btn-md border-orange text-black bg-orange" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%
+=end%>
+
+
+
+    </div>
+    <div class="tab-pane fade" id="tab33" role="tabpanel" aria-labelledby="tab33-tab">
+      <h3>Publishing</h3>
+      <p>Publishing</p>
+    </div>
+  </div>
+</div>
+
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center rounded-4" id="editStepModal" aria-labelledby="editStepModalLabel" aria-hidden="true">
+  <div class="modal-title text-left pl-4 text-gray fs-5" id="editStepModalLabel">Edit Step in Funnel</div>
+  <div class="" role="document">
+      <div class="modal-body text-left">
+      <% #byebug  %>
+        <%= render 'steps/step_form', step: encrypt_for_hidden_field(@step.id) %>
+      </div>
+  </div>
+</div>
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center" id="connectProductsModal" aria-labelledby="connectProductsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="connectProductsModalLabel">Add New Step</h5>
+      </div>
+      <div class="modal-body"><h5>Connect Product</h5>
+        <!-- Add step form goes here -->
+        <%= render 'steps/connect_products_form', step: Step.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $(".popup-modal-button").length &&
+    $(".popup-modal-button").magnificPopup({
+      type: "inline",
+      mainClass: "mfp-fade",
+      removalDelay: 160,
+      preloader: !1,
+      fixedContentPos: !0,
+    });
+
+
+</script>
+
+<%= javascript_include_tag 'connect_products_popup.js' =%>
+

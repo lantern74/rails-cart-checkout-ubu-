@@ -1,0 +1,75 @@
+<h1>Payment#new</h1>
+<p>Find me in app/views/payment/new.html.erb</p>
+
+<section class="section">
+  <div class="container mt-1 mb-1 col-sm-12 col-md-7 col-lg-5 justify-content-center">
+    <div>
+      <div>
+        <div class="card p-5">
+          <div>
+            <h4 class="heading">Make a payment to Gene Adam</h4>
+            <p class="text">Fill out the form below</p>
+          </div>
+
+          <%= form_with url: payment_new_path, local: true, id: "payment-form" do |form|  %>
+          <div class="pricing p-3 rounded mt-4 d-flex justify-content-between">
+            <div class="images d-flex flex-row align-items-center col-6">
+              <div class=""> <label for="amount" class="business">Pay amount:</label> </div>
+            </div>
+            <div class="d-flex flex-row align-items-center  col-7  ">
+              <div class="form-group  "><span class="dollar " style="font-size:20px;">$</span>
+                <%#= form.label :amount  %>
+                <%= form.text_field :amount, id: "amount", placeholder: "0.00",onchange:"updateText(this.value);"  , class: "amount form-control-lg col-9 " %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group  pt-3">
+            <%= form.label :email  %>
+            <%= form.text_field :email, id: "email", placeholder: "Email", class: "form-control" %>
+          </div>
+
+          <div class="form-group  pt-3">
+            <%= form.label :name_on_card  %>
+            <%= form.text_field :name, id: "name_on_card", placeholder: "Full name", class: "form-control" %>
+          </div>
+
+          <div class="form-group  pt-3">
+            <label for="card-element">Credit or Debit Card</label>
+
+            <div id="card-element" class="form-control" style='height: 2.8em; padding-top: .7em; '>
+              <!-- A Stripe Element will be inserted here. -->
+            </div>
+
+            <div id="card-errors" role="alert"></div>
+          </div>
+          <div style="height:20px;clear:both"> </div>
+
+          <div style="font-size: 30px">Total: <span class="dollar" style="font-size:30px;">$</span><span
+              id="result">0.00</span></div>
+
+          <div class="form-group  pt-3">
+            <%#= form.hidden_field :plan, value: "small-monthly" %>
+            <%= form.submit "Make payment",id:"payment-button", class: "btn-lg btn-primary payment-button p-2 px-4 " %>
+          </div>
+
+
+          <div class="field">
+            <%# form.hidden_field :plan, value: "plan_Gt18rqWiUvG1JL" %>
+            <!-- btn btn-block btn-primary btn-lg  mb-4 -->
+          </div>
+
+          <% end -%>
+
+        </div>
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</section>

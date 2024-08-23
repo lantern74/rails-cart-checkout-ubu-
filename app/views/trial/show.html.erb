@@ -1,0 +1,100 @@
+<!-- app/views/trial/show.html.erb -->
+<style>
+  .green {
+    color: green;
+  }
+  .white{
+    color: white;
+  }
+
+  .bg-blue{
+background-color:#54a0da;
+  }
+
+  .progress {height: 10px !important;}
+
+
+
+  body{
+    font-weight: normal;
+    background-color:white;
+  }
+</style>
+
+<div class="section">
+  <div class="container-fluid py-1 bg-orange">
+  <div class="text-center pt-2">
+  <h4><strong>Upsell Cart:</strong> Enabling People To Grow Their
+    Companies Through Marketing Automation and Lead Management
+  </h4>
+  </div>
+  </div>
+</div>
+
+<div class="section my-5 bg-white">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-7">
+
+
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/w5Rvbbx3Mao?autoplay=1&modestbranding=1&controls=1&showinfo=0&rel=0&hd=1&wmode=transparent" title="YouTube video" allowfullscreen></iframe>
+          </div>
+
+
+        </div>
+        <div class="col-lg-5">
+
+
+          <div class="card shadow px-4 py-2  text-center">
+            <div class="card-body">
+              <div class="card-heading">
+                <h2 class="eufont fw-bold" style="font-size: 40px !important;">Get Your 30-Day <br> Free Trial Now!</h2>
+                <p>Create Your Account: Step 1 of 2</p>
+                <div class="progress">
+                <div class="progress-bar progress-bar-striped  bg-blue" style="width:40%"></div>
+                </div>
+              </div>
+
+<form action="/trial/submit_email" method="post" data-turbo="false" >
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+
+            <div class="mb-3">
+              <input type="text" name="name" placeholder="Your Name" value="" class="form-control">
+            </div>
+            <div class="mb-3">
+              <input type="email" name="email" placeholder="Email Address" value="" class="form-control" id="visible_email_field">
+            </div>
+
+  <% if flash[:error] %>
+    <div class="mb-3 text-danger">
+      <%= raw flash[:error] %>
+    </div>
+  <% end %>
+
+              <div class="container-fluid text-center">
+              <div class="row">
+                <button type="submit" class="btn btn-primary white py-2">
+                    <h4 class="eufont white fs-3 my-1">Continue <i class="fa-fw fa_apended id-IconNode fas fa-arrow-right fs-5"></i></h4>
+                </button>
+
+
+              </div>
+              </div>
+</form>
+  <br>
+
+              <div class="text-center pt-1"><a href="/login" class="already-user">I already have an account &gt;&gt;</a></div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+

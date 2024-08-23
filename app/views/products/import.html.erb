@@ -1,0 +1,47 @@
+<!-- app/views/products/import.html.erb -->
+
+
+
+<div class="col-md-10 bg-light p-4">
+ <div class="card shadow ">
+          <div class="card-body p-6">
+<h5>Import products from Stripe</h5>
+<br>
+
+    <h4></h4>
+
+<%= form_for @product, url: create_from_import_products_path, method: :post do |f| %>
+  <!-- Your form fields go here -->
+  <div class="form-group">
+    <%= label_tag 'stripe_product', 'Select a Stripe Product' %>
+
+    <%= select_tag 'stripe_product', options_for_select(@formatted_products.compact.map { |p| [p[:name_with_price], p[:id]] }), class: 'form-control' %>
+
+  </div>
+<br>
+  <%= f.submit 'Import This Product', class: 'btn btn-primary float-right py-2 px-4' %>
+<% end %>
+
+
+
+
+<%
+=begin%>
+
+<div class="form-group">
+  <%= label_tag 'stripe_product', 'Select a Stripe Product' %>
+  <%= select_tag 'stripe_product', options_from_collection_for_select(@stripe_products.data, 'id', ->(product) { "$#{product.price} - #{product.name}" }), class: 'form-control' %>
+</div>
+<%
+=end%>
+
+
+
+  </div>
+  </div>
+</div>
+
+
+
+
+

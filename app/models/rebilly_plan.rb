@@ -1,0 +1,2 @@
+class RebillyPlan < ApplicationRecord
+end

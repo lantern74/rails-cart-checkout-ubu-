@@ -1,0 +1,71 @@
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+//? The general order of loading @import is:
+//? Bootstrap variables
+//? Bootstrap mixins
+//? Bootstrap reset and dependencies
+//? Bootstrap components and utilities
+
+// Variables
+@import "variables";
+
+// Bootstrap reset and dependencies
+@import "reboot";
+
+// Utilities
+@import "utilities";
+@import "root";
+@import "grid";
+
+// Components
+@import "buttons";
+@import "button-group";
+@import "images";
+@import "list-group";
+@import "close";
+@import "modal";
+@import "containers";
+@import "dropdown";
+@import "type";
+@import "card";
+@import "nav";
+
+// Mixins
+@import "mixins/buttons";
+@import "mixins/backdrop";
+@import "mixins/color-mode";
+@import "mixins/gradients";
+@import "mixins/lists";
+@import "mixins/table-variants";
+@import "mixins/utilities";
+@import "mixins/border-radius";
+@import "mixins/caret";
+@import "mixins/container";
+@import "mixins/grid";
+@import "mixins/pagination";
+@import "mixins/text-truncate";
+@import "mixins/visually-hidden";
+@import "mixins/breakpoints";
+@import "mixins/clearfix";
+@import "mixins/forms";
+@import "mixins/image";
+@import "mixins/reset-text";
+@import "mixins/transition";
+// @import "form-select";
+
+@import "magnific-popup/dist/magnific-popup";
+
+@import "flatpickr/dist/flatpickr.min";
+@import "tippy.js/dist/tippy";
+
+@import "animate.css/animate";
+@import "choices.js/public/assets/styles/choices";
+
+//React CSS
+@import "reactflow/dist/style";
+@import "overview";
+@import "react-modern-drawer/dist/index";
+@import "./workflows";
+@import "quill/dist/quill.snow"; // Import Quill styles
+@import "react-toastify/dist/ReactToastify"; // Import Toastify styles

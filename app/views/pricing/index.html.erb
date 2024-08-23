@@ -1,0 +1,447 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'pricing', media: 'all', 'data-turbo-track': 'reload' %>
+  <% end %>
+
+
+<div class="py-lg-10 py-8" style="background: linear-gradient(to right, #ffecd2 0%, #ffe2d9 100%)">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-12">
+        <div class="text-center mb-6 px-md-8">
+          <h1 class="gray-800 display-3 azr fw-bold">
+            Choose Your Plan And Start Your Free 14-Day Trial
+          </h1>
+          <p class="gray-600 lead mb-4">
+            Save up to $3,468/year with the Premium plan
+          </p>
+          <main>
+            <div class="container packet-section">
+              <div class="fieldset row">
+                <div class="labels" style="padding:0">
+                  <label data-ats-pricing-billing-period="1">
+                    <input id="pricing-switch" type="radio" value="1" name="billing_period" checked>
+                    <div class="col-12">
+                      Monthly Plans
+                    </div>
+                  </label>
+                  <label data-ats-pricing-billing-period="12">
+                    <input id="pricing-switch-second" type="radio" value="2" name="billing_period">
+                    <div class="col-12">
+                      Annual Discount <span class="discount">10-20% off</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Content -->
+
+
+
+
+
+
+
+
+<div class="mt-n8 pb-8">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-12 col-12">
+        <!-- Card -->
+        <div class="card border-0 mb-3">
+          <!-- Card body -->
+          <div class="p-5 text-center">
+            <%# <img src="../assets/images/svg/price-icon-1.svg" alt="" class="mb-5" /> %>
+            <div class="mb-5">
+              <h1 class="azr fw-normal">Basic</h1>
+              <p class="mb-0">
+                Normally $97/mo
+
+
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-center mb-4">
+              <span class="h3 mb-0 fw-bold"></span>
+              <div class="display-6 fw-400">
+                <div class="d-inline">$</div><div class="price-card--price-number toggle-price-content odometer d-inline" data-price-monthly="47"
+                  data-price-yearly="37">
+                  47
+                </div><div class="d-inline fs-5">/mo</div>
+              </div>
+
+            </div>
+            <div class="d-grid">
+              <% if current_user.nil? %>
+                <a class="btn btn-outline-white w-100 me-2 bg-light open-popup-box readvar" data-var1="1" href="#" onclick="redirectToTrialPage('basic')" tabindex="-1">Start Free Trial</a>
+              <% else %>
+                <a href="#" onclick="redirectToTrialPage('basic')" class="btn btn-outline-white w-100 me-2  bg-light"> Start Free Trial </a>
+              <% end %>
+            </div>
+          </div>
+          <hr class="m-0" />
+          <div class="p-5">
+
+            <!-- List -->
+            <ul class="list-unstyled mb-0">
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>1 Website</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>20 Funnels</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>3 Users</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>1 Domain</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>10,000 Contacts</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Courses</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Workflows</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Pages</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Products</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Email Sequences</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>ShareFunnels</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Analytics</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>CF1 Maintenance Mode Plan</span>
+  </li>
+</ul>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 col-12">
+        <!-- Card -->
+        <div class="card border-0 mb-3 mb-lg-0">
+          <!-- Card body -->
+          <div class="p-5 text-center">
+            <%# <img src="../assets/images/svg/price-icon-2.svg" alt="" class="mb-5" /> %>
+            <div class="mb-5">
+              <h1 class="azr fw-normal">Pro</h1>
+              <p class="mb-0">
+
+
+<strike>Normally $197/mo</strike>
+
+
+                <span class="">Most popular</span>
+
+              </p>
+            </div>
+
+            <div class="change-the-price-before">
+            </div>
+
+            <div class="d-flex justify-content-center mb-4">
+              <span class="h3 mb-0 fw-bold"></span>
+              <div class="display-6 fw-400">
+                <div class="d-inline">$</div><div class="price-card--price-number toggle-price-content odometer d-inline" data-price-monthly="97"
+                  data-price-yearly="77">
+                  97
+                </div><div class="d-inline fs-5">/mo</div>
+              </div>
+            </div>
+
+            <div class="d-grid">
+              <% if current_user.nil? %>
+                <a class="btn btn-outline-white w-100 me-2 bg-light open-popup-box readvar" data-var1="2" href="#" onclick="redirectToTrialPage('pro')" tabindex="-1">Start Free Trial</a>
+              <% else %>
+                <a href="#" onclick="redirectToTrialPage('pro')" class="btn btn-primary change-the-link">Start Free Trial </a>
+              <% end %>
+            </div>
+          </div>
+          <hr class="m-0" />
+          <div class="p-5">
+
+            <!-- List -->
+            <ul class="list-unstyled mb-0">
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>1 Website</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>100 Funnels</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>5 Users</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>3 Domains</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>25,000 Contacts</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Courses</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Workflows</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Pages</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Products</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Email Sequences</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>ShareFunnels</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Analytics</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>CF1 Maintenance Mode Plan</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>API Access</span>
+  </li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 col-12">
+        <!-- Card -->
+        <div class="card border-0 mb-3 mb-lg-0">
+          <!-- Card body -->
+          <div class="p-5 text-center">
+            <%# <img src="../assets/images/svg/price-icon-3.svg" alt="" class="mb-5" /> %>
+            <div class="mb-5">
+              <h1 class="azr fw-normal">Premium</h1>
+              <p class="mb-0">
+                <strike>Normally $297/mo</strike>
+                <span class="">Most popular</span>
+              </p>
+            </div>
+            <div class="d-flex justify-content-center mb-4">
+              <span class="h3 mb-0 fw-bold"></span>
+
+              <div class="display-6 fw-400">
+                <%
+=begin%>
+ <span style="font-size:20px"><strike style="color:#c00">$297/mo</strike> </span><br>
+<%
+=end%>
+                <div class="d-inline">$</div><div class="price-card--price-number toggle-price-content odometer d-inline" data-price-monthly="177"
+                  data-price-yearly="147">177</div><div class="d-inline fs-5">/mo</div>
+              </div>
+
+            </div>
+            <div class="d-grid">
+              <% if current_user.nil? %>
+                <a class="btn btn-outline-white w-100 me-2 bg-light open-popup-box readvar" data-var1="3" href="#" onclick="redirectToTrialPage('premium')" tabindex="-1">Start Free Trial</a>
+              <% else %>
+                <a href="#" onclick="redirectToTrialPage('premium')" class="btn btn-outline-white w-100 me-2 bg-light"> Start Free Trial </a>
+              <% end %>
+            </div>
+          </div>
+          <hr class="m-0" />
+          <div class="p-5">
+
+            <!-- List -->
+            <ul class="list-unstyled mb-0">
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>3 Websites</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Funnels</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>15 Users</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>9 Domains</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>100,000 - 200,000 Contacts</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Courses</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Workflows</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Pages</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Products</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Unlimited Email Sequences</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>ShareFunnels</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>Analytics</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>CF1 Maintenance Mode Plan</span>
+  </li>
+  <li class="mb-1">
+    <span class="text-success me-2"><i class="far fa-check-circle"></i></span>
+    <span>API Access</span>
+  </li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Client logo -->
+
+
+<!-- FAQ -->
+<div class="py-lg-10 py-5">
+  <div class="container">
+    <div class="row">
+      <!-- Row -->
+      <div class="col-md-12 col-12">
+        <div class="mb-8 text-center">
+          <h2 class="h1">Upsell Will Give You Everything You Need To Sell Your Digital Products Online…</h2>
+        </div>
+      </div>
+    </div>
+    <!-- Row -->
+    <div class="row">
+      <!-- Col -->
+      <div class="col-md-6 col-lg-4 col-12 mb-3">
+        <h4>Sales Funnels</h4>
+        <p>Convert your online visitors into actual paying customers</p>
+      </div>
+      <!-- Col -->
+      <div class="col-md-6 col-lg-4 col-12 mb-3">
+        <h4>Email Marketing</h4>
+        <p>Follow up and engage with your audience </p>
+      </div>
+      <!-- Col -->
+      <div class="col-md-6 col-lg-4 col-12 mb-3">
+        <h4>Workflows</h4>
+        <p>Create  workflows and automate your marketing</p>
+      </div>
+      <!-- Col -->
+      <div class="col-md-6 col-lg-4 col-12 mb-3">
+        <h4>Checkout & Payments </h4>
+        <p>Create a checkout page</p>
+      </div>
+      <!-- Col -->
+      <div class="col-md-6 col-lg-4 col-12 mb-3">
+        <h4>Courses </h4>
+        <p>Coming soon...</p>
+      </div>
+      <!-- Col -->
+      <div class="col-md-6 col-lg-4 col-12 mb-3">
+        <h4>Memberships </h4>
+        <p>Coming soon...</p>
+      </div>
+
+
+      <div class="col-md-12 col-12 mt-lg-10 mt-4">
+        <!-- Card-->
+        <div class="card">
+          <!-- Card body -->
+          <div class="card-body">
+            <div class="d-lg-flex justify-content-between align-items-center">
+              <h4 class="mb-0"></h4>
+              <span>Questions? Send us an e-mail:
+                <a href="" target="_blank">support @ geneadam.com</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  function redirectToTrialPage(planTier) {
+    var trialPath = "<%= trial_path %>";
+    trialPath = trialPath.replace(/\/$/, '');
+
+    // get value of radio button to check if annual or not
+    const pricingSwitchRadioBtn = document.getElementById("pricing-switch");
+    var recurringPeriod = '';
+    if (pricingSwitchRadioBtn.checked) {
+      recurringPeriod = 'monthly';
+    }
+    else {
+      recurringPeriod = 'annual';
+    }
+
+    const url = `${trialPath}?plan_tier=${planTier}&recurring_period=${recurringPeriod}`;
+    window.location.href = url;
+  }
+</script>
+<%= javascript_include_tag 'pricing.js' %>

@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "nrwl.angular-console",
+    "esbenp.prettier-vscode",
+    "firsttris.vscode-jest-runner",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "apollographql.vscode-apollo",
+    "streetsidesoftware.code-spell-checker",
+    "graphql.vscode-graphql",
+    "dsznajder.es7-react-js-snippets",
+    "eamodio.gitlens",
+    "austenc.tailwind-docs"
+  ]
+}

@@ -1,0 +1,145 @@
+
+<%  if user_signed_in?  %>
+
+    <style>
+        /* Add your custom CSS styles here */
+        .custom-sidebar {
+            height: 100vh;
+            font-family: Roboto,system,-apple-system,BlinkMacSystemFont,\.SFNSDisplay-Regular,Helvetica Neue,Helvetica,Arial,sans-serif;
+            /* max-width:200px; */
+        }
+        .custom-sidebar button.btn, .custom-sidebar a.link-dark {
+            color:#444 !important;
+        }
+        .nav-link {
+            color: #333;
+        }
+    </style>
+
+   <nav class="col-md-2 d-none d-md-block custom-sidebar g-0" style=" ">
+
+    <!-- Bootstrap Sidebar -->
+    <div class="flex flex-col flex-grow pt-3 pb-2 overflow-hidden lead-connector" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-white" id="sidebar-wrapper">
+            <div class="" >
+                <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+                    <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+                    <span class="fs-5 fw-semibold">Upsell Cart</span>
+                </a>
+                <ul class="list-unstyled ps-0 ">
+                            <div class="btn-toggle-nav list-unstyled fw-bold text-dark-secondary ">
+
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                            <i style="text-align: center;position: relative;top: 2px;" class="fas fa-file-invoice-dollar md:mr-0 h-5 w-5 mr-2 lg:mr-2 xl:mr-2"></i> Funnels & Marketing
+                        </button>
+                        <div class="collapse show" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pt-2 pb-1 small">
+                                <li><a href="/funnels" class="link-dark rounded">Funnels</a></li>
+                                    <!-- Automated Emails, Texts, And Bots -->
+
+
+
+<% @updates.each do |beta_update| %>
+  <% next unless beta_update.name == "Email Broadcasts" && beta_update.user_beta_updates.exists?(user: current_user, enabled: true) %>
+  <li><a href="#" class="link-dark rounded">Email Broadcasts</a></li>
+<% end %>
+
+<%
+=begin%>
+ <li><a href="#" class="link-dark rounded">Social Media Planner</a></li>
+<%
+=end%>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li class="border-top my-3"></li>
+
+
+
+
+
+
+
+<% @updates.each do |beta_update| %>
+  <% next unless beta_update.name == "Dashboards" && beta_update.user_beta_updates.exists?(user: current_user, enabled: true) %>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                            <i class="fas fa-chart-line md:mr-2 mt-1 h-2 w-5 mr-2 lg:mr-2 xl:mr-2" style="text-align: center"></i>Dashboards
+                        </button>
+                        <div class="collapse" id="account-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal  pt-2 pb-1 small">
+                                <li><a href="#" class="link-dark rounded">Pipelines</a></li>
+                                <li><a href="#" class="link-dark rounded">Dashboard</a></li>
+                                <li><a href="#" class="link-dark rounded">Orders</a></li>
+                                <li><a href="#" class="link-dark rounded">Reporting</a></li>
+                            </ul>
+                        </div>
+                    </li>
+<% end %>
+
+
+
+
+<% @updates.each do |beta_update| %>
+  <% next unless beta_update.name == "Memberships & Courses" && beta_update.user_beta_updates.exists?(user: current_user, enabled: true) %>
+                              <li><a href="#" class="link-dark rounded text-dark-secondary fs-8 py-1" style="margin-left:0px"><i class="fas fa-shield-check md:mr-2 mt-1 h-2 w-5 mr-2 lg:mr-2 xl:mr-2" style="text-align: center"></i>Memberships, Courses</a></li>
+<% end %>
+
+
+
+<% @updates.each do |beta_update| %>
+  <% next unless beta_update.name == "Weekly Calls" && beta_update.user_beta_updates.exists?(user: current_user, enabled: true) %>
+                              <li><a href="#" class="link-dark rounded text-dark-secondary fs-8 py-1" style="margin-left:0px"><i class="fas fa-clock md:mr-2 mt-1 h-2 w-5 mr-2 lg:mr-2 xl:mr-2" style="text-align: center"></i>Weekly Calls With Gene</a></li>
+<% end %>
+
+<% @updates.each do |beta_update| %>
+  <% next unless beta_update.name == "Daily Live Office Hours" && beta_update.user_beta_updates.exists?(user: current_user, enabled: true) %>
+                              <li><a href="#" class="link-dark rounded text-dark-secondary fs-8 py-1" style="margin-left:0px"><i class="fas fa-clock md:mr-2 mt-1 h-2 w-5 mr-2 lg:mr-2 xl:mr-2" style="text-align: center"></i>Daily Live Office Hours</a></li>
+<% end %>
+
+<% @updates.each do |beta_update| %>
+  <% next unless beta_update.name == "Facebook Fridays" && beta_update.user_beta_updates.exists?(user: current_user, enabled: true) %>
+                              <li><a href="#" class="link-dark rounded text-dark-secondary fs-8 py-1" style="margin-left:0px"><i class="fab fa-facebook md:mr-2 mt-1 h-2 w-5 mr-2 lg:mr-2 xl:mr-2" style="text-align: center"></i>Facebook Fridays</a></li>
+<% end %>
+
+
+<% @updates.each do |beta_update| %>
+  <% next unless beta_update.name == "AI Bot 2.0" && beta_update.user_beta_updates.exists?(user: current_user, enabled: true) %>
+                              <li><a href="#" class="link-dark rounded text-dark-secondary fs-8 py-1" style="margin-left:0px"><i class="fas fa-robot md:mr-2 mt-1 h-2 w-5 mr-2 lg:mr-2 xl:mr-2" style="text-align: center"></i>AI Bot 2.0</a></li>
+<% end %>
+
+
+
+
+<li style="margin-left: 0px;padding-left: 0px;">
+  <%= link_to "/logout", method: :delete, class: "link-dark rounded text-dark-secondary fs-8 py-1", style: "margin:0;padding-left:30px" do %>
+    Logout
+  <% end %>
+</li>
+
+                            </div>
+
+
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- Page content -->
+        <%# <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <!-- Your page content goes here -->
+            </div>
+        </div> %>
+    </div>
+
+  </nav>
+
+
+
+
+<% end %>

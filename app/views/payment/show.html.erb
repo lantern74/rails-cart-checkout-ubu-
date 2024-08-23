@@ -1,0 +1,221 @@
+  <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <div class="card p-5 big-form rounded">
+      <div>
+        <div class="bigform-heading pb-1 text-center">Make a Payment to <%= @user.name %></div>
+        <p class="text text-secondary text-center">Fill out the form below</p>
+      </div>
+
+      <%= form_with scope: :customer, url: customers_path, local: true, id: "new_customer" do |form|  %>
+
+      <input type="hidden" name="tricky_field" value="">
+
+
+      <div class="bigform-pricing p-3 rounded mt-4">
+        <div class="row justify-content-between align-items-center" style="margin:0px;">
+          <div class="col-6 p-0">
+            <label for="price" class="fs-5">Enter amount:</label>
+          </div>
+          <div class="col-6 p-0" style="text-align:right"> <span class="dollar d-inline"
+              style="font-size:20px;">$</span>
+            <%= form.text_field :price, id: "price", placeholder: "0.00",onkeyup:"javascript: updateText()",oninput:"javascript: updateText()"  , class: " form-control-lg bigform-amount col-10" %>
+          </div>
+        </div>
+      </div>
+
+      <%= form.hidden_field :stripe_payment_id, id:"payment", value:"" %>
+      <%= form.hidden_field :custompay_userid,  value:@user.id  %>
+
+      <div class="form-group  my-3">
+        <%= form.text_field :email, id: "customer_email", placeholder: "Email", class: "form-control" %>
+      </div>
+
+      <div class="form-group  my-3">
+        <%= form.text_field :name, id: "customer_name", placeholder: "Name on Card", class: "form-control" %>
+      </div>
+
+
+
+      <div class="">
+        <div class="" id="card-number"> </div><!-- A Stripe Element will be inserted here. -->
+        <div class="row  justify-content-between" style="margin:0px;">
+          <div class="col-6" id="card-expiry"> </div><!-- A Stripe Element will be inserted here. -->
+          <div class="col-6" id="card-cvc"> </div><!-- A Stripe Element will be inserted here. -->
+        </div>
+      </div>
+      <div id="card-errors" role="alert"></div>
+
+      <div class="pt-3 text-center">
+        <%= image_tag "credit-only.png", width: "100%", style:" opacity: 0.9;max-width:300px" %>
+      </div>
+
+
+      <div class="pt-4 pb-2  d-flex justify-content-between" style="font-size: 30px">&nbsp;Total:
+        <div class="d-flex justify-content-between">
+          <span class="dollar" style="font-size:30px;">$</span>
+          <span id="result">0.00</span>
+          <div>&nbsp;&nbsp;</div>
+        </div>
+      </div>
+
+
+
+
+      <div class="form-group  pt-3 text-center">
+        <%#= form.hidden_field :plan, value: "small-monthly" %>
+        <%= form.submit "Make payment",id:"payment-button", class: "btn-lg btn-primary payment-button p-2 px-4 " %>
+      </div>
+
+
+
+      <div class="field">
+        <%# form.hidden_field :plan, value: "plan_Gt18rqWiUvG1JL" %>
+        <!-- btn btn-block btn-primary btn-lg  mb-4 -->
+      </div>
+
+      <% end -%>
+    </div>
+
+  </div>
+
+ <script src="https://js.stripe.com/v3/"></script>
+
+
+  <script>
+    function updateText(x) {
+      if (document.getElementById('price').value != 0) {
+        document.getElementById('result').innerText = document.getElementById('price').value
+      } else {
+        document.getElementById('result').innerText = "0.00"
+      }
+
+    }
+
+    function validateForm() {
+      var xprice = document.forms["new_customer"]["customer[price]"];
+      var xname = document.forms["new_customer"]["customer[name]"];
+      var xemail = document.forms["new_customer"]["customer[email]"];
+      if (xname.value != "" && xemail.value != "" && xprice.value != "" && xprice.value != 0) {
+        return true;
+      } else {
+
+
+        if (xprice.value == "" || xprice.value == 0) {
+          alert("The price can't be $0.00 and must be filled out");
+          xprice.focus();
+          return false;
+        }
+        if (xemail.value == "") {
+          alert("Your email must be filled out");
+          xemail.focus();
+          return false;
+        }
+        if (xname.value == "") {
+          alert("Your name must be filled out");
+          xname.focus();
+          return false;
+        }
+
+      }
+    }
+    // pk_test_zfu5fee1jfZnfOBDXg8IozT9
+    var stripe = Stripe("<%=(@payment_live) ? @user.pk_live : @user.pk_test %>");
+
+    var elements = stripe.elements();
+
+
+    var styles = {
+      base: {
+        iconColor: '#000',
+        color: '#111',
+        fontWeight: '600',
+        fontFamily: 'Roboto Slab, Open Sans, Segoe UI, sans-serif',
+        fontSize: '15px',
+        fontSmoothing: 'antialiased',
+        ':-webkit-autofill': {
+          color: '#fce883',
+        },
+        '::placeholder': {
+          color: '#666',
+        },
+      },
+      invalid: {
+        iconColor: '#ff0018',
+        color: '#ff0018',
+      },
+    }
+
+    var cardNumberElement = elements.create('cardNumber', {
+      style: styles
+    });
+    var cardExpiryElement = elements.create('cardExpiry', {
+      style: styles
+    });
+    var cardCvcElement = elements.create('cardCvc', {
+      style: styles
+    });
+
+    cardNumberElement.mount('#card-number');
+    cardExpiryElement.mount('#card-expiry');
+    cardCvcElement.mount('#card-cvc');
+
+    const form = document.querySelector('#new_customer');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      //turn off button for 5 seconds
+      document.querySelector("#payment-button").disabled = true;
+      setTimeout(function () {
+        document.querySelector("#payment-button").disabled = false;
+      }, 5000);
+
+
+      // check if the name and email are entered before fetching.
+      if (validateForm() == true) { //validation for name and email start
+        // Step #1 Post request to create payment intent fetch
+        fetch('/payment_intents', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              authenticity_token: '<%= form_authenticity_token %>',
+              user_id: '<%=  @user.id %>',
+              price: document.querySelector('#price').value,
+              name: document.querySelector('#customer_name').value,
+              email: document.querySelector('#customer_email').value,
+
+            }),
+          }) //fetch
+
+          .then((response) => response.json())
+          .then((paymentIntent) => {
+            // Step #2 Create payment method and confirm payment intent
+            stripe.confirmCardPayment(
+              paymentIntent.client_secret, {
+                payment_method: {
+                  card: cardNumberElement
+                  //it's enough to pass cardNumberElement - you don't have to pass exp.date nor cvc
+                }
+              }
+            ).then((resp) => {
+              if (resp.error) {
+                // alert("recover things here")
+
+                document.querySelector('#card-errors').innerHTML = resp.error.message;
+                // alert(resp.error.message);
+              } else {
+                // Step 3: Embed payment id in form
+                const paymentIdInput = document.querySelector('#payment')
+                paymentIdInput.value = paymentIntent.id;
+                form.submit();
+              }
+            })
+
+            console.log("Success:", paymentIntent);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      } else {} //validation end
+    });
+  </script>

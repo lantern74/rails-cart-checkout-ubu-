@@ -1,0 +1,5 @@
+  <%= form_tag connect_products_steps_path, method: :post, remote: true, id: 'connectProductForm' do %>
+    <%= select_tag 'product_id', options_from_collection_for_select(current_user.products, 'id', 'title'), prompt: 'Select a Product' %>
+    <%= hidden_field_tag 'step_id', @step.id %>
+    <%= submit_tag 'Connect', class: 'btn btn-primary' %>
+  <% end %>

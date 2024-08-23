@@ -1,0 +1,8 @@
+  <%= form_tag connect_domains_funnels_path, method: :post, remote: true, id: 'connectDomainForm' do %>
+    <%= select_tag 'domain_id', options_from_collection_for_select(current_user.domains, 'id', 'name'), prompt: 'Select a Domain',class:"form-select js-choice" %>
+    <%= hidden_field_tag 'funnel_id', @funnel.id %>
+    <br>
+    <%= submit_tag 'Connect', class: 'btn btn-primary' %>
+    <button type="button" class="btn btn-secondary" onclick="$.magnificPopup.close();">Cancel</button>
+
+  <% end %>

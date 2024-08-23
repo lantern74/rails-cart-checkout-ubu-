@@ -1,0 +1,51 @@
+<!-- disable Turbo for now so it doesn't interfere -->
+
+<script type="module"> Turbo.session.drive = false </script>
+
+
+
+<%= form_with(model: domain, url: domains_path, class: 'needs-validation', id: 'add_domain_popup', data: { remote: true }, html: { onsubmit: "remote(event)" }) do |form| %>
+  <!-- Domain Name Field -->
+  <div class="form-group py-2">
+    <%= form.label :name, "Domain Name" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Domain Name" %>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="form-group">
+    <%= form.submit 'Add Domain', class: 'btn btn-primary' %>
+
+  </div>
+<% end %>
+
+<style>
+  .choices__list--dropdown {
+      text-align: left;
+  }
+  .choices__inner{
+      background-color:white;
+  }
+  label{
+    color:#555;
+    font-weight:100;
+    margin:0;
+    margin-bottom:3px;
+    padding:0;
+    font-size:14px;
+  }
+  input::placeholder {
+    color:#999 !important;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.querySelector('.js-choice');
+    var choices1 = new window.choices(selectElement, {
+        delimiter: ',',
+        editItems: true,
+        maxItems: 5,
+        removeButton: true,
+    });
+});
+</script>

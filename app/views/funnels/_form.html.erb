@@ -1,0 +1,70 @@
+<%= form_with(model: funnel, class: 'needs-validation', data: { 'was-validated': 'true' }) do |form| %>
+  <% if funnel.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(funnel.errors.count, "error") %> prohibited this funnel from being saved:</h2>
+
+      <ul>
+        <% funnel.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Title -->
+  <div class="mb-3">
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control', required: true %>
+  </div>
+<%
+=begin%>
+
+  <!-- Path -->
+  <div class="mb-3">
+    <%= form.label :path, class: 'form-label' %>
+    <%= form.text_field :path, class: 'form-control', required: true %>
+  </div>
+
+  <!-- Head Tracking -->
+  <div class="mb-3">
+    <%= form.label :head_tracking, class: 'form-label' %>
+    <%= form.text_field :head_tracking, class: 'form-control', required: true %>
+  </div>
+
+  <!-- Body Tracking -->
+  <div class="mb-3">
+    <%= form.label :body_tracking, class: 'form-label' %>
+    <%= form.text_field :body_tracking, class: 'form-control', required: true %>
+  </div>
+
+  <!-- Payment Mode -->
+  <div class="mb-3">
+    <%= form.label :payment_mode, class: 'form-label' %>
+    <%= form.text_field :payment_mode, class: 'form-control', required: true %>
+  </div>
+
+  <!-- Domain -->
+  <div class="mb-3">
+    <%= form.label :domain, class: 'form-label' %>
+    <%= form.text_field :domain, class: 'form-control', required: true %>
+  </div>
+
+  <!-- GDPR -->
+  <div class="mb-3">
+    <%= form.label :gdpr, class: 'form-label' %>
+    <%= form.text_field :gdpr, class: 'form-control', required: true %>
+  </div>
+
+  <!-- Image Optimization -->
+  <div class="mb-3">
+    <%= form.label :image_optimization, class: 'form-label' %>
+    <%= form.text_field :image_optimization, class: 'form-control', required: true %>
+  </div>
+<%
+=end%>
+
+  <!-- Submit Button -->
+  <div class="mb-3">
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>

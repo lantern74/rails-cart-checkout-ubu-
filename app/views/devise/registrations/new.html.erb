@@ -1,0 +1,513 @@
+
+
+<!-- app/views/devise/registrations/new.html.erb -->
+<%
+country_options='<option value="US"> United States </option><option value="CA"> Canada </option><option value="GB"> United Kingdom </option><option value="IE"> Ireland </option><option value="AU"> Australia </option><option value="NZ"> New Zealand </option><option value="AF"> Afghanistan </option><option value="AX"> Aland Islands </option><option value="AL"> Albania </option><option value="DZ"> Algeria </option><option value="AS"> American Samoa </option><option value="AD"> Andorra </option><option value="AO"> Angola </option><option value="AI"> Anguilla </option><option value="AQ"> Antarctica </option><option value="AG"> Antigua And Barbuda </option><option value="AR"> Argentina </option><option value="AM"> Armenia </option><option value="AW"> Aruba </option><option value="AT"> Austria </option><option value="AZ"> Azerbaijan </option><option value="BH"> Bahrain </option><option value="BD"> Bangladesh </option><option value="BB"> Barbados </option><option value="BY"> Belarus </option><option value="BE"> Belgium </option><option value="BZ"> Belize </option><option value="BJ"> Benin </option><option value="BM"> Bermuda </option><option value="BT"> Bhutan </option><option value="BO"> Bolivia </option><option value="BQ"> Bonaire, Sint Eustatius and Saba </option><option value="BA"> Bosnia and Herzegovina </option><option value="BW"> Botswana </option><option value="BV"> Bouvet Island </option><option value="BR"> Brazil </option><option value="IO"> British Indian Ocean Territory </option><option value="BN"> Brunei </option><option value="BG"> Bulgaria </option><option value="BF"> Burkina Faso </option><option value="BI"> Burundi </option><option value="KH"> Cambodia </option><option value="CM"> Cameroon </option><option value="CV"> Cape Verde </option><option value="KY"> Cayman Islands </option><option value="CF"> Central African Republic </option><option value="TD"> Chad </option><option value="CL"> Chile </option><option value="CN"> China </option><option value="CX"> Christmas Island </option><option value="CC"> Cocos (Keeling) Islands </option><option value="CO"> Colombia </option><option value="KM"> Comoros </option><option value="CG"> Congo </option><option value="CK"> Cook Islands </option><option value="CR"> Costa Rica </option><option value="CI"> Cote D\'Ivoire (Ivory Coast) </option><option value="HR"> Croatia </option><option value="CU"> Cuba </option><option value="CW"> Curaçao </option><option value="CY"> Cyprus </option><option value="CZ"> Czech Republic </option><option value="CD"> Democratic Republic of the Congo </option><option value="DK"> Denmark </option><option value="DJ"> Djibouti </option><option value="DM"> Dominica </option><option value="DO"> Dominican Republic </option><option value="TL"> East Timor </option><option value="EC"> Ecuador </option><option value="EG"> Egypt </option><option value="SV"> El Salvador </option><option value="GQ"> Equatorial Guinea </option><option value="ER"> Eritrea </option><option value="EE"> Estonia </option><option value="ET"> Ethiopia </option><option value="FK"> Falkland Islands </option><option value="FO"> Faroe Islands </option><option value="FJ"> Fiji Islands </option><option value="FI"> Finland </option><option value="FR"> France </option><option value="GF"> French Guiana </option><option value="PF"> French Polynesia </option><option value="TF"> French Southern Territories </option><option value="GA"> Gabon </option><option value="GM"> Gambia The </option><option value="GE"> Georgia </option><option value="DE"> Germany </option><option value="GH"> Ghana </option><option value="GI"> Gibraltar </option><option value="GR"> Greece </option><option value="GL"> Greenland </option><option value="GD"> Grenada </option><option value="GP"> Guadeloupe </option><option value="GU"> Guam </option><option value="GT"> Guatemala </option><option value="GG"> Guernsey and Alderney </option><option value="GN"> Guinea </option><option value="GW"> Guinea-Bissau </option><option value="GY"> Guyana </option><option value="HT"> Haiti </option><option value="HM"> Heard Island and McDonald Islands </option><option value="HN"> Honduras </option><option value="HK"> Hong Kong S.A.R. </option><option value="HU"> Hungary </option><option value="IS"> Iceland </option><option value="IN"> India </option><option value="ID"> Indonesia </option><option value="IR"> Iran </option><option value="IQ"> Iraq </option><option value="IL"> Israel </option><option value="IT"> Italy </option><option value="JM"> Jamaica </option><option value="JP"> Japan </option><option value="JE"> Jersey </option><option value="JO"> Jordan </option><option value="KZ"> Kazakhstan </option><option value="KE"> Kenya </option><option value="KI"> Kiribati </option><option value="XK"> Kosovo </option><option value="KW"> Kuwait </option><option value="KG"> Kyrgyzstan </option><option value="LA"> Laos </option><option value="LV"> Latvia </option><option value="LB"> Lebanon </option><option value="LS"> Lesotho </option><option value="LR"> Liberia </option><option value="LY"> Libya </option><option value="LI"> Liechtenstein </option><option value="LT"> Lithuania </option><option value="LU"> Luxembourg </option><option value="MO"> Macau S.A.R. </option><option value="MK"> Macedonia </option><option value="MG"> Madagascar </option><option value="MW"> Malawi </option><option value="MY"> Malaysia </option><option value="MV"> Maldives </option><option value="ML"> Mali </option><option value="MT"> Malta </option><option value="IM"> Man (Isle of) </option><option value="MH"> Marshall Islands </option><option value="MQ"> Martinique </option><option value="MR"> Mauritania </option><option value="MU"> Mauritius </option><option value="YT"> Mayotte </option><option value="MX"> Mexico </option><option value="FM"> Micronesia </option><option value="MD"> Moldova </option><option value="MC"> Monaco </option><option value="MN"> Mongolia </option><option value="ME"> Montenegro </option><option value="MS"> Montserrat </option><option value="MA"> Morocco </option><option value="MZ"> Mozambique </option><option value="MM"> Myanmar </option><option value="NA"> Namibia </option><option value="NR"> Nauru </option><option value="NP"> Nepal </option><option value="NL"> Netherlands </option><option value="NC"> New Caledonia </option><option value="NI"> Nicaragua </option><option value="NE"> Niger </option><option value="NG"> Nigeria </option><option value="NU"> Niue </option><option value="NF"> Norfolk Island </option><option value="KP"> North Korea </option><option value="MP"> Northern Mariana Islands </option><option value="NO"> Norway </option><option value="OM"> Oman </option><option value="PK"> Pakistan </option><option value="PW"> Palau </option><option value="PS"> Palestinian Territory Occupied </option><option value="PA"> Panama </option><option value="PG"> Papua new Guinea </option><option value="PY"> Paraguay </option><option value="PE"> Peru </option><option value="PH"> Philippines </option><option value="PN"> Pitcairn Island </option><option value="PL"> Poland </option><option value="PT"> Portugal </option><option value="PR"> Puerto Rico </option><option value="QA"> Qatar </option><option value="RE"> Reunion </option><option value="RO"> Romania </option><option value="RU"> Russia </option><option value="RW"> Rwanda </option><option value="SH"> Saint Helena </option><option value="KN"> Saint Kitts And Nevis </option><option value="LC"> Saint Lucia </option><option value="PM"> Saint Pierre and Miquelon </option><option value="VC"> Saint Vincent And The Grenadines </option><option value="BL"> Saint-Barthelemy </option><option value="MF"> Saint-Martin (French part) </option><option value="WS"> Samoa </option><option value="SM"> San Marino </option><option value="ST"> Sao Tome and Principe </option><option value="SA"> Saudi Arabia </option><option value="SN"> Senegal </option><option value="RS"> Serbia </option><option value="SC"> Seychelles </option><option value="SL"> Sierra Leone </option><option value="SG"> Singapore </option><option value="SX"> Sint Maarten (Dutch part) </option><option value="SK"> Slovakia </option><option value="SI"> Slovenia </option><option value="SB"> Solomon Islands </option><option value="SO"> Somalia </option><option value="ZA"> South Africa </option><option value="GS"> South Georgia </option><option value="KR"> South Korea </option><option value="SS"> South Sudan </option><option value="ES"> Spain </option><option value="LK"> Sri Lanka </option><option value="SD"> Sudan </option><option value="SR"> Suriname </option><option value="SJ"> Svalbard And Jan Mayen Islands </option><option value="SZ"> Swaziland </option><option value="SE"> Sweden </option><option value="CH"> Switzerland </option><option value="SY"> Syria </option><option value="TW"> Taiwan </option><option value="TJ"> Tajikistan </option><option value="TZ"> Tanzania </option><option value="TH"> Thailand </option><option value="BS"> The Bahamas </option><option value="TG"> Togo </option><option value="TK"> Tokelau </option><option value="TO"> Tonga </option><option value="TT"> Trinidad And Tobago </option><option value="TN"> Tunisia </option><option value="TR"> Turkey </option><option value="TM"> Turkmenistan </option><option value="TC"> Turks And Caicos Islands </option><option value="TV"> Tuvalu </option><option value="UG"> Uganda </option><option value="UA"> Ukraine </option><option value="AE"> United Arab Emirates </option><option value="UM"> United States Minor Outlying Islands </option><option value="UY"> Uruguay </option><option value="UZ"> Uzbekistan </option><option value="VU"> Vanuatu </option><option value="VA"> Vatican City State (Holy See) </option><option value="VE"> Venezuela </option><option value="VN"> Vietnam </option><option value="VG"> Virgin Islands (British) </option><option value="VI"> Virgin Islands (US) </option><option value="WF"> Wallis And Futuna Islands </option><option value="EH"> Western Sahara </option><option value="YE"> Yemen </option><option value="ZM"> Zambia </option><option value="ZW"> Zimbabwe </option>' %>
+
+<script src="https://framepay.rebilly.com/framepay.js"></script>
+<link href="https://framepay.rebilly.com/framepay.css" rel="stylesheet">
+
+<style>
+
+html {
+  scroll-behavior: smooth;
+}
+  .error{
+    border: 2px solid red;
+    background-color: #ffe6e6;
+  }
+
+    .success {
+    border: 2px solid green;
+    background-color: #e6ffe6;
+  }
+
+  .green { color: rgb(65, 216, 43); }
+  .white { color: white; }
+  .bg-blue { background-color: #54a0da; }
+  .progress { height: 10px !important; }
+  body { background-color: #fcfcfc !important; }
+  .form-control { height: 40px; font-size:15px; }
+  .form-control::placeholder { color: #333; }
+  .form-select{
+    color:#333;
+    height:40px;
+    font-size:15px;
+    margin:0;
+    padding: 0;
+    padding-left: 20px;
+  }
+</style>
+
+<div class="container d-flex flex-column">
+  <div class="row align-items-center justify-content-center g-0 min-vh-100">
+    <div class="col-12 col-lg-6 py-8 py-xl-0">
+      <div class="card shadow" style="box-shadow: 0px 10px 40px 0px rgba(29, 46, 59, 0.15) !important;">
+        <div class="card-body mx-4 py-3">
+          <div class="mb-4">
+            <h1 class="mb-2 fw-bold text-center eufont fs-2" style="letter-spacing: -1px; line-height:1.1 ">Create Your Account In <br> 60 Seconds or Less</h1>
+            <div class="card-heading text-center">
+              <p>Create Your Account: Step 2 of 2</p>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-blue" style="width:90%"></div>
+              </div>
+            </div>
+          </div>
+
+
+  <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), local: false ) do |f| %>
+<%#= form_with(model: resource, url: registration_path(resource_name), id: 'new_user', local: false) do |f| %>
+<%= form_with(model: resource, url: registration_path(resource_name), id: 'new_user', local: false, class: 'new_user') do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+
+                <div class="row">
+  <% ['first_name', 'last_name', 'email', 'phone', 'company_name', 'address', 'apartment', 'city', 'postalCode',  'country', 'region', 'promo_code'].each do |field| %>
+    <div class="col-sm-<%= (field == 'address' || field == 'apartment' || field == 'promo_code' || field == 'company_name') ? '12' : (field == 'city' ? '8' : (field == 'postalCode' ? '4' : '6')) %>">
+      <div class="field py-2">
+        <% if field == 'country' %>
+          <select class="form-select" name="country" autocomplete="billing country">
+            <%= raw country_options %>
+          </select>
+        <% else
+          newfield = case field
+                       when 'first_name' then 'First Name'
+                       when 'last_name' then 'Last Name'
+                       when 'company_name' then 'Company Name'
+                       when 'apartment' then 'Apartment, building, floor'
+                       when 'city' then 'City name'
+                       when 'postalCode' then 'Postal Code'
+                       when 'region' then 'State / Region'
+                       when 'promo_code' then 'Promo Code'
+                       else field.capitalize
+                     end
+          default_value = if field == 'first_name' && flash[:name]
+                            flash[:name].include?(' ') ? flash[:name].split(' ')[0...-1].join(' ') : flash[:name]
+                          elsif field == 'last_name' && flash[:name] && flash[:name].include?(' ')
+                            flash[:name].split(' ').last
+                          else
+                            flash[field.to_sym]
+                          end
+        %>
+        <%
+=begin%>
+ name: field,
+<%
+=end%>
+          <%#= f.text_field field.to_sym, value: default_value, autocomplete: newfield.capitalize, class: "form-control", placeholder: newfield, name: field,
+                           data: { rebilly: field.camelize(:lower) } %>
+
+<%= f.text_field field.to_sym, value: default_value, autocomplete: newfield.capitalize, class: "form-control", placeholder: newfield, name: "user[#{field}]", data: { rebilly: field.camelize(:lower) } %>
+
+
+        <% end %>
+
+      </div>
+    </div>
+  <% end %>
+
+   <input type="hidden" data-rebilly="token" name="rebilly_token">
+   <input type="hidden" data-rebilly="payment-instrument" name="rebilly-payment-instrument" />
+   <input type="hidden" name="product_id" value="upsell-cart-47-basic">
+
+</div>
+
+ <%
+=begin%>
+ upsell-cart-47-basic
+<%
+=end%>
+
+
+
+            <div class="border border-2 p-4 mt-4 rounded" style="background-color:#fafafa">
+                  <div id="card-errors" class="alert alert-warning d-none" role="alert"></div>
+                  <div id="mounting-point"></div>
+            </div>
+
+            <div class="col-12 text-center">
+              <div class="pt-4">
+                <button id="card-button" class="btn btn-primary white py-2 btn-block">
+                  <h4 class="eufont white fs-3 my-1"> Start My Free Trial <i class="fa-fw fa_apended id-IconNode fas fa-arrow-right fs-5"></i></h4>
+                   <div id="spinner" class="spinner" style="display: none;"></div>
+                </button>
+              </div>
+            </div>
+
+          <% end %>
+
+        </div>
+        <div class="col-12 px-6">
+          <p class="line text-left eu-font" style="font-size:12px; color:gray">
+            14 days free from today, then just $47/month (plus applicable taxes). Cancel through your dashboard or by e-mail (support @ geneadam.com). I also agree to the Terms of Service, Privacy Policy and Affiliate Agreement.
+          </p>
+        </div>
+        <div class="line mt-3 mb-2">
+          <hr class="line">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6 py-8 py-xl-0 p-5">
+      <h1 class="mb-2 text-left fs-2 inter fw-bold" style="letter-spacing: -1px; line-height:1.2;"> Join 100+ Entrepreneurs Like You Who Want to Quickly and Easily Create Funnels, Capture Leads and Sell Digital Products</h1>
+      <h1 class="mb-2 text-left fs-4 pt-5 eufont" style="letter-spacing: -1px; line-height:1.2; font-weight:700">100% NO–RISK FREE TRIAL</h1>
+
+      <ul class="list-unstyled mt-4" style="line-height: 2;">
+        <% ['Get access to all features', 'Pay NOTHING for the first 30-days', 'Cancel anytime, hassle-free', '30-day money back GUARANTEE after your trial ends'].each do |feature| %>
+          <li><i class="fas fa-check green"></i> &nbsp;&nbsp; <%= feature %></li>
+        <% end %>
+      </ul>
+
+      <div class="border border-4 p-4 mt-4">
+        Plan<br>
+        <div class="row inter lh-2">
+          <div class="col-6 fs-5"><b>Basic Monthly</b></div>
+          <div class="col-6 fs-5"><b>$0 due today</b></div>
+        </div>
+        <span class="fw-normal">$47/month (plus applicable taxes) after your trial</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-left-color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Optional: Style to disable the button */
+.button-disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  (function () {
+    var config = {
+      publishableKey: "pk_sandbox_EmhPawFO3ccls3cJwsEiagrCQEnYWGAt0hXb1Q3",
+      style: { base: { fontSize: "15px", fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif", "::placeholder": { color: "#8a97a0" } } },
+    };
+    var form = document.querySelector("#new_user");
+    Framepay.initialize(config);
+    Framepay.on("ready", function () {
+      var card = Framepay.card.mount("#mounting-point");
+    });
+
+
+
+
+    Framepay.on("error", function (err) {
+      console.log(JSON.stringify(err, null, 2));
+    });
+
+
+
+    form.onsubmit = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Find the button and spinner by ID
+        var payButton = document.getElementById('card-button');
+        var spinner = document.getElementById('spinner');
+
+        // Disable the button and show the spinner
+        payButton.disabled = true;
+        payButton.classList.add('button-disabled'); // Optionally add a class to style the disabled button
+        spinner.style.display = 'inline-block'; // Show the spinner
+
+
+       // Reset previous error styles
+      resetErrorStyles();
+      markSuccessStyles();
+      // Check for blank fields and add error styles
+      var emptyFields = checkForEmptyFields(form);
+      if (emptyFields.length > 0) {
+        markEmptyFields(emptyFields);
+        scrollToErrors();
+        payButton.disabled = false;
+        payButton.classList.remove('button-disabled'); // Optionally add a class to style the disabled button
+        spinner.style.display = 'none'; // Show the spinner
+
+
+        return;
+      }
+
+      Framepay.createToken(form)
+        .then((result) => {
+          let errorContainer = document.getElementById('card-errors');
+          errorContainer.classList.add('d-none');
+          console.log("FramePay success:", result);
+          window.parent.postMessage("success", "*");
+          console.log("FramePay success");
+
+              // Correctly placed fetch call for AJAX submission
+              return fetch(form.action, {
+                  method: 'POST',
+                  body: new FormData(form),
+                  headers: {
+                    'Accept': 'application/json',
+                  },
+                });
+              })
+              .then(response => {
+                  if (!response.ok && response.status === 422) { // Specifically handle validation errors
+                      return response.json().then(data => {
+                          throw new Error(data.errors.join('<br>')); // Use your server's error messages
+                      });
+                  } else if (!response.ok) {
+                      throw new Error('Network response was not ok'); // Handle other types of errors
+                  }
+                  return response.json(); // Handle success
+              })
+              .then(data => {
+                  if (data.success) {
+                    window.location.href = data.redirect_url;
+                  } else {
+                    displayErrors(data.errors);
+                  }
+              })
+              .catch(error => {
+                console.error('Error:', error);
+                  // On error, re-enable the button and hide the spinner
+                  payButton.disabled = false;
+                  payButton.classList.remove('button-disabled');
+                  spinner.style.display = 'none'; // Hide the spinner
+
+                let errorContainer = document.getElementById('card-errors');
+
+                  if (error.code === "invalid-payment-card" && error.details.length > 0) {
+                    const errorMessage = error.details.map(detail => `- ${detail}`).join('<br>');
+                    errorContainer.innerHTML = errorMessage;
+                    errorContainer.classList.remove('d-none');
+                  } else {
+                    errorContainer.textContent = "An error occurred. Please try again.";
+                    errorContainer.textContent = error;
+                    errorContainer.classList.remove('d-none');
+
+                  }
+                    //console.log("FramePay error", error);
+                    window.parent.postMessage("error", "*");
+
+              });
+
+
+      };
+
+
+
+          /*form.submit(); */
+
+/*
+        .catch((error) => {
+          let errorContainer = document.getElementById('card-errors');
+
+        if (error.code === "invalid-payment-card" && error.details.length > 0) {
+          const errorMessage = error.details.map(detail => `- ${detail}`).join('<br>');
+          errorContainer.innerHTML = errorMessage;
+           errorContainer.classList.remove('d-none');
+        } else {
+          errorContainer.textContent = "An error occurred. Please try again.";
+          errorContainer.textContent = error;
+        }
+          //console.log("FramePay error", error);
+          window.parent.postMessage("error", "*");
+        });
+*/
+
+
+
+function displayErrors(errors) {
+  let errorContainer = document.getElementById('card-errors');
+  errorContainer.innerHTML = errors.join('<br>'); // Join the errors array into a single string with line breaks
+  errorContainer.classList.remove('d-none');
+}
+
+
+
+function scrollToErrors() {
+  const inputElementsWithErrors = Array.from(document.querySelectorAll('.error'));
+  if (inputElementsWithErrors.length) {
+    const targetPosition = inputElementsWithErrors[0].offsetTop - 50;
+    const currentPosition = window.scrollY;
+    const distance = targetPosition - currentPosition;
+    const duration = 300; // Set the duration in milliseconds (adjust as needed)
+    const startTime = performance.now();
+
+    function scrollStep(timestamp) {
+      const timeElapsed = timestamp - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const newPosition = currentPosition + distance * progress;
+
+      window.scrollTo(0, newPosition);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(scrollStep);
+      } else {
+        // Focus on the element at the end of the scrolling animation
+        inputElementsWithErrors[0].focus();
+      }
+    }
+
+    requestAnimationFrame(scrollStep);
+  }
+}
+
+
+function checkForEmptyFields(form) {
+  const allowedElementTypes = ['input', 'select', 'textarea']; // Add other types if needed
+
+  const flatFormElements = Array.from(form.elements).filter(element => {
+    return allowedElementTypes.includes(element.tagName.toLowerCase());
+  }).flat();
+
+  return flatFormElements.filter(element => {
+    const isRequiredField = element.required || ['firstname', 'lastname', 'email', 'phone', 'address', 'city', 'postalCode', 'country', 'region'].includes((element.getAttribute('data-rebilly') || '').toLowerCase());
+    return isRequiredField && element.value.trim() === '';
+  });
+}
+
+    function markEmptyFields(fields) {
+      fields.forEach((field) => {
+        field.classList.add('error');
+        field.classList.remove('success');
+      });
+    }
+
+    function resetErrorStyles() {
+      Array.from(form.elements).forEach((element) => {
+        element.classList.remove('error');
+      });
+    }
+
+
+    function markSuccessStyles() {
+      const allowedElementTypes = ['input', 'select', 'textarea']; // Add other types if needed
+      Array.from(form.elements).forEach((element) => {
+        if (allowedElementTypes.includes(element.tagName.toLowerCase())) {
+          element.classList.add('success');
+        }
+
+      });
+    }
+
+  })();
+
+
+  //storing
+    document.addEventListener('DOMContentLoaded', function () {
+      // Retrieve form data from localStorage if available
+      var formData = JSON.parse(localStorage.getItem('formData')) || {};
+
+      // Populate form fields with saved data
+      Object.keys(formData).forEach(function (field) {
+        var element = document.querySelector('[name="' + field + '"]');
+        if (element) {
+          element.value = formData[field];
+        }
+      });
+
+      // Listen for form changes and update localStorage
+      var form = document.querySelector('.new_user');
+      form.addEventListener('input', function () {
+        var formData = {};
+
+        // Collect form data
+        Array.from(form.elements).forEach(function (element) {
+          if (element.name) {
+            formData[element.name] = element.value;
+          }
+        });
+
+        // Save form data to localStorage
+        localStorage.setItem('formData', JSON.stringify(formData));
+      });
+
+      // Clear localStorage when the form is submitted
+      form.addEventListener('submit', function () {
+        localStorage.removeItem('formData');
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+<%
+=begin%>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe('your_stripe_publishable_key');
+  var elements = stripe.elements();
+
+  // Create an instance of the card Element.
+  var card = elements.create('card');
+
+  // Add an instance of the card Element into the `card-element` div.
+  card.mount('#card-element');
+
+  // Handle real-time validation errors from the card Element.
+  card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = '';
+    }
+  });
+
+  // Handle form submission.
+  var form = document.getElementById('payment-form');
+  var cardButton = document.getElementById('card-button');
+
+  cardButton.addEventListener('click', function(ev) {
+    ev.preventDefault();
+
+    stripe.createPaymentMethod({
+      type: 'card',
+      card: card,
+    }).then(function(result) {
+      if (result.error) {
+        // Inform the user if there was an error.
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server.
+        stripeTokenHandler(result.paymentMethod);
+      }
+    });
+  });
+
+  function stripeTokenHandler(paymentMethod) {
+    // Insert the token ID into the form so it gets submitted to the server.
+    var form = document.getElementById('payment-form');
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripe_payment_method_id');
+    hiddenInput.setAttribute('value', paymentMethod.id);
+    form.appendChild(hiddenInput);
+
+    // Submit the form.
+    form.submit();
+  }
+</script>
+
+
+<%
+=end%>

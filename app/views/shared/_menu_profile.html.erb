@@ -1,0 +1,164 @@
+
+<li class="dropdown ms-2 menubutton">
+
+
+					<a class="rounded-circle text-black" style="vertical-align: middle" href="#" role="button" data-bs-toggle="dropdown">
+
+<div class=" d-flex h-100 p-1">
+    	<div style="display:inline-block">
+						<svg class="d-inline-block svg-menu-button" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+							focusable="false">
+							<%# ; %>
+							<g fill="none" fill-rule="nonzero">
+									<path d="m2 16h28"></path>
+									<path d="m2 24h28"></path>
+									<path d="m2 8h28"></path>
+							</g>
+						</svg>
+				</div>
+
+			<div class="avatar avatar-md avatar-indicators avatar-online" style="display:inline-block"    >
+						<%#=image_tag "avatar/avatar-1.jpg",class:"rounded-circle"%>
+						<%#= image_tag @avatar_img,class:"rounded-circle" if @avatar_img!='' %>
+						<%# if @avatar_img=='' %>
+						<div class="w42" style="">
+								<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+									role="presentation" focusable="false"
+									style="display: block; height: 100%; width: 100%; fill: #aaa;">
+									<path
+											d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z">
+									</path>
+								</svg>
+						</div>
+						<%# end %>
+				</div>
+
+</div>
+
+
+
+
+
+
+					</a>
+
+
+
+					<%# was: dropdown-menu dropdown-menu-end shadow %>
+					<div class="dropdown-menu dropdown-menu-right shadow">
+						<div class="dropdown-item">
+							<div class="d-flex">
+								<div class="avatar avatar-md avatar-indicators avatar-online">
+									<%#=image_tag "avatar/avatar-1.jpg",class:"rounded-circle"%>
+									<%#= image_tag @avatar_img,class:"rounded-circle" if @avatar_img!='' %>
+									<%# if @avatar_img=='' %>
+									<div class="">
+											<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+												role="presentation" focusable="false"
+												style="display: block; height: 100%; width: 100%; fill: #aaa;">
+												<path
+														d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z">
+												</path>
+											</svg>
+									</div>
+									<%# end %>
+								</div>
+								<div class="ms-3 lh-1">
+									<h5 class="mb-1"><%=user_signed_in? ? current_user.first_name  : "Your name" %></h5>
+									<p class="mb-0 text-muted"><%=user_signed_in? ? current_user.email : "Your email" %></p>
+								</div>
+							</div>
+						</div>
+<% if user_signed_in? %>
+						<div class="dropdown-divider"></div>
+						<ul class="list-unstyled">
+							<%# <li class="dropdown-submenu">
+								<a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
+									<i class="fe fe-circle me-2"></i>Status
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="#">
+											<span class="badge-dot bg-success me-2"></span>Online
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">
+											<span class="badge-dot bg-secondary me-2"></span>Offline
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">
+											<span class="badge-dot bg-warning me-2"></span>Away
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">
+											<span class="badge-dot bg-danger me-2"></span>Busy
+										</a>
+									</li>
+								</ul>
+							</li> %>
+							<li>
+									<a class="dropdown-item" href="/funnels">
+										<i class="fe fe-settings me-2"></i>Funnels
+									</a>
+							</li>
+
+							<li>
+									<a class="dropdown-item" href="/products">
+										<i class="fe fe-settings me-2"></i>Products
+									</a>
+							</li>
+
+								<li>
+										<a class="dropdown-item" href="/users">
+											<i class="fe fe-user me-2"></i>Settings
+										</a>
+								</li>
+
+
+
+
+						</ul>
+<% end %>
+						<div class="dropdown-divider"></div>
+						<ul class="list-unstyled">
+
+<% if user_signed_in? %>
+							<li>
+								<a class="dropdown-item" href="/logout">
+                      <i class="fe fe-power me-2 text-black-50"></i>Sign out
+               </a>
+							</li>
+<% else %>
+							<li>
+
+
+									<a  class="dropdown-item w-100 mr-2 " href="/login" >
+										<i class="fe fe-power me-2 text-black-50"></i>Log in
+									</a>
+							</li>
+
+<%#
+	<div class="dropdown-divider"></div>
+							<li>
+									<a class="dropdown-item w-100 mr-2 " href="/pages/jak-to-funguje-pomocniki" >
+										<i class="far fa-search-location me-2 text-black-50"></i>link
+									</a>
+							</li>
+							<li>
+									<a class="dropdown-item w-100 mr-2 " href="/pages/jak-to-funguje-dom" >
+										<i class="far fa-house-leave me-1 text-black-50"></i>link
+									</a>
+							</li> %>
+
+
+
+<% end %>
+
+
+						</ul>
+					</div>
+				</li>
+

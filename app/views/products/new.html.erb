@@ -1,0 +1,21 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'eu-added', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <!-- Add any additional CSS or JavaScript includes as needed -->
+<% end %>
+
+
+<div class="col-md-10 bg-light p-4">
+
+<div class="text-left pb-4">
+  <img style="width:15px"
+    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQEAAADECAMAAACoYGR8AAAAdVBMVEX///8AAADKysqJiYl3d3eAgICOjo6CgoKGhoZxcXF6enqWlpaZmZlfX199fX1iYmJHR0fd3d00NDRycnJsbGxVVVVPT0/R0dEPDw/x8fGgoKBERETj4+Orq6s7OzsaGhonJye6urq/v7/t7e2vr6+lpaUuLi4V7UVvAAADZ0lEQVR4nO3dC1YaURCE4WoRRVFARNEIImjc/xITojGRx9D35PRU7Fv/ApLyO4A4MDNAZLP58HFhT6PuKvS/+W9bLexPwxl7Tutdje1z5+xFLbe0rV7v2aParL8N8LOKngknOwHMqnkU7AOwEXtZS+0FMJuzt7VSA4AZe1wbNQLYN/a8+JoBbMzeF16nGcDsmb0wuIMAtmRPjO0wgL2wN4bmALA+e2RkHgA7Za8MrOcBsO/smXH5ABK/EjoB7Ig9NCovQNq3xW6ACXtpUKdeAJuyp8bkB7hkT43JD5D0OFkBQM63xF0/QI+9NaQCgDP21pCqBxj4Aa7ZW0MSgADcHbO3hnQuAAHUDXDsB8j51QkBCMDdgL01pOoBrgXgrsveGlL1AGcCcJfzI1IB1A4w8QPkPCosAAEIwFuHvTUkAQigcoChANydsLeGJAABCEAAVQNcCsBdzvMmBCAAAQigaoAbAbi7YG8NSQACEIAAqga49QPkvJ6GAAQgAAE4y3kVhZEfYDI9+sJd/TvA1+/2ZfsieVUBrDu+rxzANl7MHthrKE3qfgSs+7heZMFZY8l6Pwluyd5B7O3iSOwV1NYAF+wR1Pq1PwTWD4IpewK5aeVPgvXToOC4YMpusHmF+doa4449gdydBPQs0CuhfhvqHZHeFesvo9r/NNIREh0l05FSHS2v+nj5xse/1RFsfmpWGcGuT0716Tn0DQroWzQQAUQAEaCIIOfXivXNaogAIoAIIALodEOIADrrFiKACCACiAC6FA1EAF2RCSKACCAC6BqdEAFEAF2tFyKArtsOEUAEEAGKCHLex0UE0N18oHt6QQQoIsh5c0Pd3xEiQBFBzhvd6l6/EAGKCHLe9FwEEAGKzlATgV2ztwYlAgxEUEBwxt4alAhEAHT9BJPD/9qXTAQlBFkPnJ36CV7YW4MqIJixtwblJ7hkT43KTzBlT42q5xXI+vuggIA9NC4vwRF7aFxOgiV7Z2A+gjl7ZmQdj0DWj9Xf8hBkPR3lPQdB1jfGvztMkPmV8FcHCZ7ZC8M7aQYYs/e1UDNB1suXfKqRgD2unRoIsl7NarO9BA/sZa21j2DXJeGS1t8JkPUY2c6W2z//a0WPgHVXm1fFz/qNooZWT3/9/MOqngEfzebDx4U9jQYr9pL9/QDfFlIBc4PTrAAAAABJRU5ErkJggg=="
+    alt="">
+  <a class="text-secondary" href="/products">Back to the products page</a>
+</div>
+
+
+  <div class="">
+              <%= render 'form', product: @product %>
+            </div>
+
+</div>

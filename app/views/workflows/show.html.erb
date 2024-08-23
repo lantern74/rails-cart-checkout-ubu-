@@ -1,0 +1,62 @@
+
+<div class="col-md-10" style="background-color:#f1f7fa">
+<div class="">
+
+<div class="p-3">
+  <%= link_to workflows_path, style: "color: black; text-decoration: none;" do %>
+    <i class="fas fa-arrow-left"></i> <%= @workflow.name %>
+  <% end %>
+</div>
+
+
+
+
+
+<div class="row no-gutters"  style="margin-left: 1px;margin-right: 1px;padding:2px;border: 1px solid #fafafa;">
+  <div class="col-lg-12 bg-white pt-3"> <%#was 9%>
+    <div id="workflow-show-root"></div>
+  </div>
+
+
+
+  <%
+=begin%>
+ <div class="col-lg-3 bg-lightblue p-0"></div>
+<%
+=end%>
+  <%# col-3 %>
+
+
+
+</div>
+
+ </div>
+</div>
+
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center" id="addStepModal" aria-labelledby="addStepModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addStepModalLabel">Add New Step</h5>
+      </div>
+      <div class="modal-body">
+
+        <!-- Add step form goes here -->
+        <%= render 'worktasks/form', worktask: Worktask.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- footer -->
+
+<%= render  "shared/footer" %>
+
+
+
+
+<%#= link_to 'Edit', edit_funnel_path(@workflow) %> |
+<%#= link_to 'Back', workflows_path %>

@@ -1,0 +1,2 @@
+module FunnelsHelper
+end

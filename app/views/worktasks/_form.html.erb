@@ -1,0 +1,21 @@
+<%= form_with(model: worktask, url: workflow_worktasks_path(@workflow), remote: true) do |form| %>
+  <!-- Step form fields go here -->
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+
+   <div class="field">
+    <%= form.label :worktask_type_id %>
+    <%= form.select :worktask_type_id, options_for_select(@worktask_types.map { |type| [type.name, type.id] }), {}, { class: 'form-control' } %>
+  </div>
+
+<br>
+<br>
+
+
+  <div class="form-group">
+    <%= form.submit 'Create Step', class: 'btn btn-primary' %>
+  </div>
+<% end %>

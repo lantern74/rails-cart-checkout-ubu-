@@ -1,0 +1,236 @@
+<% content_for :head do %>
+<%#= stylesheet_link_tag "users/or_something" %>
+<%#= javascript_pack_tag 'javascript/js/theme.min.js' %>
+
+<%# <link rel="stylesheet" href="../../assets/css/theme.min.css"> %>
+<%#= stylesheet_link_tag 'feather', media: "all", 'data-turbolinks-track': 'reload' %>
+
+
+
+<% end %>
+
+<div class="col-md-10" style="background-color:#f1f7fa">
+<div class="">
+
+<div class="p-3">
+
+
+
+  <%= link_to funnels_path, style: "color: black; text-decoration: none;" do %>
+    <i class="fas fa-arrow-left"></i> <%= @funnel.title %>
+  <% end %>
+
+</div>
+
+
+
+    <div class=" mt-4">
+      <ul class="nav nav-tabs" id="myTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Steps</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Stats</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="tab3-tab" data-bs-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Sales</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="tab4-tab" data-bs-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Funnel Settings</a>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="myTabsContent" >
+        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+
+
+
+
+              <div class="row no-gutters"  style="margin-left: 1px;margin-right: 1px;padding:2px;border: 1px solid #fafafa;">
+                <div class="col-lg-3 bg-lightblue p-0">
+
+        <div class="item p-3">
+          <div class="circle">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="launch-checklist fs-5">Launch Checklist</div>
+        </div>
+
+
+          <div class="p-3">Funnel Steps</div>
+
+
+
+
+
+<ul  class="links list-group step-list">
+  <% @steps.each_with_index do |step, index| %>
+
+        <li class="list-group-item step-list-item" data-step-id="<%= step.id %>">
+      <div class="left-block g-0 ">
+        <span style="font-size: 20px; "><i class="far fa-envelope"></i></span>
+      </div>
+      <div class="right-block">
+      <% p "step:" %>
+      <% p step %>
+        <a href="<%=step_path(encrypt_for_hidden_field(step.id)) %>">
+        <%
+=begin%>
+ #step_path(step)
+<%
+=end%>
+          <% if step %>
+            <div>
+             <%#= index + 1 %>
+
+            <%= step.title %></div>
+          <% else %>
+            <p>No page found</p>
+          <% end %>
+        </a>
+        <span class="cross-icon"><i class="fas fa-times"></i></span>
+      </div>
+    </li>
+
+  <% end %>
+</ul>
+
+
+
+
+<div class="add-new-step d-flex justify-content-center align-items-center">
+
+<a
+class="btn btn-primary rounded popup-modal-button px-4 py-2 mt-4 w-100 border text-white bg-apple-500"  href="#addStepModal"> <i class="far fa-plus "></i> &nbsp; Add New Step </a>
+
+</div>
+
+</div>  <%# col-3 %>
+    <div class="col-lg-9 bg-white pt-3">
+      <div class="info" id="step-details">
+
+    <% unless @steps.empty? %>
+
+          <%= render partial: "steps/step_details" %>
+          <%#= render partial: "steps/step_details", locals: { funnel: @funnel, step: @step } %>
+
+
+    <% end %>
+
+
+      </div>
+    </div>
+              </div>
+
+        </div>
+        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+          <h3>Stats</h3>
+          <p>Stats </p>
+        </div>
+        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+          <h3>Sales</h3>
+          <p>Sales </p>
+        </div>
+        <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+
+	<div class="card border mt-4">
+
+          <div class="card-header d-lg-flex justify-content-between align-items-center">
+                  <div class="mb-3 mb-lg-0">
+                    <h3 class="mb-0 pt-2">Funnel Settings</h3>
+                    <p class="mb-0 text-gray fw-light" style="font-size:15px;">Here you can add your domain to this funnel</p>
+                  </div>
+          </div>
+
+	<div class="card-body">
+<div class="col-md-12  float-right">
+
+<div class="d-flex justify-content-between align-items-center float-right">
+    <div class="float-right">
+      <a href="#connectDomainsModal" class="btn popup-modal-button border-orange text-black bg-orange">Connect a Domain</a>
+
+    </div>
+      </div>
+
+  <div class=" container-fluid">
+  <div class=" mt-4">
+
+    To connect your domain you can add your domains here 👉 <a class="" href="/users/domains">Domains Settings</a>
+  <div id="domains-table">
+    <% if @domains.present? %>
+      <%=  render partial: "domains_funnels/domains_table", locals: { funnel: @funnel } %>
+    <% else %>
+      <p>No domains available for this step.</p>
+    <% end %>
+
+  </div>
+
+
+
+  </div>
+</div>
+</div>
+</div>
+</div>
+<br>
+
+        </div>
+      </div>
+    </div>
+
+ </div>
+</div>
+
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center  rounded-4" id="addStepModal" aria-labelledby="addStepModalLabel" aria-hidden="true">
+  <div class="modal-title text-left pl-4 text-gray fs-5" id="addStepModalLabel">Create a New Step</div>
+  <div class="" role="document">
+      <div class="modal-body text-left">
+        <%= render 'steps/form', step: Step.new %>
+      </div>
+  </div>
+</div>
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center rounded-4 " id="connectDomainsModal" aria-labelledby="connectDomainsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="connectDomainsModalLabel">Connect Domain</h5>
+      </div>
+      <div class="modal-body">
+        <%= render 'steps/connect_domains_form', domain: Domain.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- footer -->
+
+<%= render  "shared/footer" %>
+
+
+
+
+<%#= link_to 'Edit', edit_funnel_path(@funnel) %> |
+<%#= link_to 'Back', funnels_path %>
+
+<script>
+
+  $(".popup-modal-button").length &&
+    $(".popup-modal-button").magnificPopup({
+      type: "inline",
+      mainClass: "mfp-fade",
+      removalDelay: 160,
+      preloader: !1,
+      fixedContentPos: !0,
+    });
+
+
+</script>
+
+<%= javascript_include_tag 'connect_domains_popup.js' =%>
+

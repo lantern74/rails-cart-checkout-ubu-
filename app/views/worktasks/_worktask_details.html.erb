@@ -1,0 +1,340 @@
+    <!-- app/views/steps/_worktask_details.html.erb -->
+<style>
+  nav.nav .nav-tabs .nav-item {
+    border: none !important;
+  }
+
+  .nav .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #5181ad;
+    border: none !important;
+    border-bottom: 1px solid #5181ad !important; /* Add border to the active tab */
+  }
+
+  .nav .nav-link, .nav-tabs .nav-link.active {
+    border: none !important;
+  }
+  .nav .nav-link.active {
+        border-bottom: 3px solid #5181ad !important;
+
+  }
+    .nav .nav-link:hover{
+      color: #5181ad;
+    }
+</style>
+
+
+<style>
+.leftSide .form-group .form-element {
+  display: flex;
+  max-height: 36px; /* Set the maximum height to 26px */
+  height: 35px;    /* Set the height to 26px */
+  overflow: hidden;
+}
+
+
+
+.leftSide .form-element input[type=text],select {
+
+    border:none !important;
+    border-top: 0px !important;
+    border-bottom: 1px solid #ccc !important;
+    box-shadow: none  !important;
+    padding: 5px 10px !important;
+    outline: none !important;
+    border-radius:0px;
+
+    height:auto !important;
+
+}
+
+
+
+.leftSide .form-element [placeholder]:focus::-webkit-input-placeholder {
+    transition: text-indent 0.4s 0.4s ease !important;
+    text-indent: -100% !important;
+    opacity: 1 !important;
+ }
+
+
+  .leftSide .col-2 .form-element label {
+    margin-top: 7px;
+    font-size: 13px;
+    margin-left: 7px;
+    margin-right: 0;
+  @media (min-width: 768px) {
+      margin-left: 15px;
+      font-size: 14px;
+  }
+  }
+
+
+
+
+.leftSide select,
+.leftSide input[type=text],
+.leftSide textarea {
+
+
+  /*font-family: Montserrat;*/
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  padding: 0 6px;
+  width:95%;
+}
+.leftSide select{
+ width:150px;
+}
+
+.leftSide input[type=submit] {
+  border-radius: 4px;
+  font-size:15px !important;
+  padding: 0 20px;
+}
+
+.leftSide textarea {
+  height: 200px !important; /* Adjust the height as needed */
+  /*font-family: Montserrat;*/
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  padding: 8px 8px;
+}
+
+.leftSide textarea:focus {
+  box-shadow: none !important;
+}
+
+</style>
+
+
+<div class="mt-4 pl-2" >
+
+
+  <div style="display: flex; align-items: center;">
+    <div style="flex: 1;">
+      <% if @worktask %>
+        <%= @worktask.name %>
+      <% else %>
+        No step found
+      <% end %>
+    </div>
+    <ul class="nav nav-tabs justify-content-end" id="myTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="tab11-tab" data-bs-toggle="tab" href="#tab11" role of="tab" aria-controls="tab11" aria-selected="true">Overview</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="tab22-tab" data-bs-toggle="tab" href="#tab22" role="tab" aria-controls="tab22" aria-selected="false">A/B Test</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="tab33-tab" data-bs-toggle="tab" href="#tab33" role="tab" aria-controls="tab33" aria-selected="false">Publishing</a>
+      </li>
+    </ul>
+  </div>
+
+
+
+  <div class="tab-content" id="myTabsContent"    >
+    <div class="tab-pane fade show active" id="tab11" role="tabpanel" aria-labelledby="tab11-tab">
+    <div class="leftSide">
+
+        <%
+=begin%>
+ <p>Edit Step</p>
+<%
+=end%>
+
+      <% if @worktask.present? %>
+        <%= form_with(model: [@workflow, @worktask], url: workflow_worktask_path(@workflow, @worktask), method: :patch, class: 'my-4') do |form| %>
+
+
+
+
+
+<div class="card p-2 m-2 border-0" style="background-color:#F2F6FB">
+  <div class="row no-gutters">
+          <div class="col-2" style="margin-bottom:0 !important">
+            <div class="form-group mb-0" >
+              <div class="form-element">
+                <%= form.label "Name", class: 'form-label' %>
+              </div>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="form-group mb-0" >
+              <div class="form-element">
+                <%= form.text_field :name, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+  </div>
+</div>
+
+
+<div class="card p-2 m-2 border-0" style="background-color:#F2F6FB">
+        <div class="row no-gutters">
+          <div class="col-2 col-md-2 ">
+            <div class="form-group">
+              <% if @worktask.worktask_type_id == WorktaskType::EMAIL %>
+                <div class="form-element">
+                  <%= form.label "Subject", class: 'form-label' %>
+                </div>
+                <div class="form-element">
+                  <%= form.label :from_name, class: 'form-label' %>
+                </div>
+                <div class="form-element">
+                  <%= form.label :from_email, class: 'form-label' %>
+                </div>
+                <div class="form-element">
+                  <%= form.label :message, class: 'form-label' %>
+                </div>
+              <% elsif @worktask.worktask_type_id == WorktaskType::DELAY %>
+                <div class="form-element">
+                  <%= form.label :delay, class: 'form-label' %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-10 ">
+            <div class="form-group">
+              <% if @worktask.worktask_type_id == WorktaskType::EMAIL %>
+                <div class="form-element">
+                  <%= form.text_field :subject_line, class: 'form-control' %>
+                </div>
+                <div class="form-element">
+                  <%= form.text_field :from_name, class: 'form-control' %>
+                </div>
+                <div class="form-element">
+                  <%= form.text_field :from_email, class: 'form-control' %>
+                </div>
+                <div class="form-element mt-2" style="max-height:200px;height:200px; overflow:auto">
+                  <%= form.text_area :message, class: 'form-control', rows: 5 %>
+                </div>
+              <% elsif @worktask.worktask_type_id == WorktaskType::DELAY %>
+
+                <div class="form-element">
+                  <%= form.text_field :delay, class: 'form-control', style:"max-width:50px; margin-right: 5px;" %>
+                  <%=
+form.select :unit_of_time, Worktask.unit_of_times.map { |unit| [unit[0], unit[0]] }, class: 'form-control' %>
+<%
+=begin%>
+ form.select :unit_of_time, Worktask.units_of_time.map {|unit| [unit[0], unit[0]] }, class: 'form-control'
+<%
+=end%>
+
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-10">
+          <div class="form-group">
+            <div class="form-element">
+              <%= form.submit "Update Worktask", class: 'btn btn-primary fs-6' %>
+            </div>
+          </div>
+        </div>
+      </div>
+        <% end %>
+      <% else %>
+        <p class="my-4">Worktask not found or message is not available.</p>
+      <% end %>
+
+    </div>
+    </div>
+    <div class="tab-pane fade" id="tab22" role="tabpanel" aria-labelledby="tab22-tab">
+
+
+
+      <div class="pt-3">Please add a domain in the settings to send emails with your own domain!</div>
+
+      <!-- _step_details.html.erb -->
+      <div class="container pt-5">
+        <div class="row pb-4 pt-2">
+          <div class="col-md-4">
+            <!-- 1st Column with step.thumb -->
+            <% if @worktask.present? %>
+              <% if 1==2 %>
+                <div class="square-card">
+                  <img src="<%#= url_for(@worktask.thumb) %>" alt="Step Thumbnail">
+                </div>
+              <% else %>
+                <div class="square-card">
+
+      <div class="image-container">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mJ89wAAAQEBP5HJuhQAAAAASUVORK5CYII=" alt="Example Image">
+      </div>
+      <img src="https://placehold.co/270x200" alt="Placeholder Image">
+
+
+
+                </div>
+              <% end %>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+
+          <a class="btn btn-primary edit-button text-orange bg-orange mt-1" href="<%= edit_step_path(@worktask) %>" data-turbolinks="false" >
+            Edit &nbsp; <i class="fas fa-chevron-down"></i>
+          </a>
+        </div>
+        <div>
+          <a target="_blank"  class="btn btn-secondary light-bluegray-button mt-1" href=" <%= workflow_worktask_path(@workflow, @worktask) %>">
+            <i style="font-size: 14px;" class="fas fa-external-link-alt"></i>
+          </a>
+          <a class="btn btn-secondary light-gray-button mt-1" href="#">
+            <i style="font-size: 14px;" class="fas fa-cog"></i>
+          </a>
+        </div>
+      </div>
+
+            <% end %>
+          </div>
+
+          <div class="col-md-4">
+        <!-- 2nd Column with centered text and image on top -->
+        <div class="d-flex flex-column align-items-center justify-content-center" style="height: 100%; text-align: center;">
+          <img src="<%= asset_path('test-tube.png') %>" alt="" style="width: 100px;">
+          <img src="<%= asset_path('arrow-long-right.png') %>" alt="" style="width: 100px;">
+
+          <p>Start Split Test</p>
+        </div>
+      </div>
+
+
+          <div class="col-md-4">
+        <!-- 3rd Column with step.thumb -->
+        <% if @worktask.present? %>
+          <% if 1==2 %>
+            <div class="square-card2 center-text" style="background-color:red; text-align: center;">
+              <img src="<%#= url_for(@worktask.thumb) %>" alt="Step Thumbnail">
+            </div>
+          <% else %>
+            <div class="square-card2" style="text-align: center;">
+              <div class="image-container">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mJ89wAAAQEBP5HJuhQAAAAASUVORK5CYII=" alt="Example Image">
+              </div>
+              <div class="overlay-text"><a href="#"><i class="fas fa-plus"></i> Create Variation</a></div>
+
+            </div>
+          <% end %>
+          <!-- No "EDIT" button in the 3rd column -->
+        <% end %>
+      </div>
+
+        </div>
+        <hr style="border-color: lightgray">
+      </div>
+
+
+    </div>
+    <div class="tab-pane fade" id="tab33" role="tabpanel" aria-labelledby="tab33-tab">
+      <h3>Publishing</h3>
+      <p>Publishing</p>
+    </div>
+  </div>
+</div>
+

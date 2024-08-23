@@ -1,0 +1,27 @@
+<!-- app/views/insta_integration/handle_instagram_token.html.erb -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+
+    if (code) {
+      fetch(`/insta_integration/save_token?code=${code}`, { method: 'GET' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            window.location.href = '/start';
+          } else {
+            window.location.href = '/insta_integration/failure';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          window.location.href = '/insta_integration/failure';
+        });
+    } else {
+      window.location.href = '/insta_integration/failure';
+    }
+  });
+</script>
+

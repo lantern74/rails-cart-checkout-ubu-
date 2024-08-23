@@ -1,0 +1,76 @@
+
+<div class="col-md-10 bg-light p-4 mx-auto text-center p-4">
+    <h3>List of Beta Updates</h3>
+
+<div class="container pt-2">
+  <div class="row">
+
+   <div class="container  justify-content-center align-items-center px-4 " style="max-width:700px">
+
+    <div class="col-md-10 bg-light float-right">
+      <div class="d-flex justify-content-between align-items-center float-right">
+        <!-- Search box (aligned to the left) -->
+        <%= form_tag(beta_updates_path, method: :get, class: "form-inline float-right") do %>
+          <div class="form-group">
+            <%= text_field_tag :search, params[:search], class: "form-control p-2 m-2", placeholder: "Search Updates" %>
+
+          </div>
+          <%= submit_tag("Search", class: "btn btn-primary mx-2") %>
+        <% end %>
+
+        <!-- Wrapper for the Orange button (floated to the right) -->
+        <div class="float-right" >
+          <a  href="#createModal"  class="btn popup-modal-button border-orange text-black bg-orange ">Create New</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container toggleSwitchContainer justify-content-center align-items-center p-4 " style="max-width:700px">
+
+
+<% @beta_updates.each do |beta_update| %>
+  <%= render partial: 'beta_update', locals: { beta_update: beta_update } %>
+<% end %>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center"  id="createModal" aria-labelledby="createModalLabel" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createModalLabel">Add a Beta Update</h5>
+      </div>
+      <div class="modal-body">
+
+        <!-- Add beta_update form goes here -->
+        <%= render 'beta_updates/form', beta_update: BetaUpdate.new %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+   <%= javascript_include_tag 'beta.js' , "data-turbo-track": "reload", defer: true %>
+
+
+<%= render "shared/footer" %>
+
+
+

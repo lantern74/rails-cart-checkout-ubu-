@@ -1,0 +1,107 @@
+<% content_for :head do %>
+<%#= stylesheet_link_tag "users/or_something" %>
+<%#= javascript_pack_tag 'javascript/js/theme.min.js' %>
+
+<%# <link rel="stylesheet" href="../../assets/css/theme.min.css"> %>
+<%#= stylesheet_link_tag 'feather', media: "all", 'data-turbolinks-track': 'reload' %>
+<%#= stylesheet_link_tag 'eu-added', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<style>
+.v-align{
+  vertical-align: middle !important;
+}
+</style>
+
+<div class="col-md-10 bg-light p-4">
+<div class="">
+
+
+
+
+<!-- app/views/funnels/index.html.erb -->
+<h2>Funnels</h2>
+
+<div class="col-md-10 bg-light float-right">
+  <div class="d-flex justify-content-between align-items-center float-right">
+
+    <!-- Search box (aligned to the left) -->
+    <%= form_tag(funnels_path, method: :get, class: "form-inline float-right", autocomplete: "off" )  do %>
+      <div class="form-group">
+        <%= text_field_tag :find, params[:find], class: "form-control p-2 m-2", autocomplete: 'off' , placeholder: "Search Funnels" %>
+      </div>
+      <%= submit_tag("Find", class: "btn btn-primary mx-2") %>
+    <% end %>
+
+    <!-- Wrapper for the Orange button (floated to the right) -->
+    <div class="float-right">
+      <a href="#createModal" class="btn popup-modal-button border-orange text-black bg-orange">Create New</a>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Last Updated</th>
+      <th >Items</th>
+      <th>Action</th> <!-- Non-clickable column -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @funnels.each do |funnel| %>
+      <tr style="height: 60px;">
+        <td class="clickable-column v-align">
+          <%= link_to funnel.title, funnel_path(funnel), data: { turbo: false } %>
+        </td>
+         <td class="clickable-column v-align">
+          <%= link_to funnel.updated_at.strftime('%d %b, %Y %I:M %p'), funnel_path(funnel), data: { turbo: false } %>
+        </td>
+         <td class="clickable-column v-align text-center">
+          <%= link_to funnel.steps.count, funnel_path(funnel), data: { turbo: false } %>
+        </td>
+         <td class=" v-align" > <!-- Non-clickable column -->
+          <a href="your_destination_url" class="circle-link" style="margin:0 auto;">
+            <div class="vertical-dots  ">
+              <i class="far fa-ellipsis-v"></i>
+            </div>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+
+ </div>
+</div>
+
+
+
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center" id="createModal" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createModalLabel">Create a Funnel</h5>
+      </div>
+      <div class="modal-body">
+
+        <%= render 'funnels/form', funnel: Funnel.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- footer -->
+
+<%= render  "shared/footer" %>
+
+

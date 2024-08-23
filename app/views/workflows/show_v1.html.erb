@@ -1,0 +1,139 @@
+
+<div class="col-md-10" style="background-color:#f1f7fa">
+<div class="">
+
+<div class="p-3">
+  <%= link_to workflows_path, style: "color: black; text-decoration: none;" do %>
+    <i class="fas fa-arrow-left"></i> <%= @workflow.name %>
+  <% end %>
+</div>
+
+
+
+
+    <div class=" mt-1">
+      <ul class="nav nav-tabs" id="myTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Steps</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Stats</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="tab3-tab" data-bs-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Sales</a>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="myTabsContent" >
+        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+
+
+
+
+              <div class="row no-gutters"  style="margin-left: 1px;margin-right: 1px;padding:2px;border: 1px solid #fafafa;">
+                <div class="col-lg-3 bg-lightblue p-0">
+
+        <div class="item p-3">
+          <div class="circle">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="launch-checklist fs-5">Your Workflows</div>
+        </div>
+
+
+          <div class="p-3">Workflow Steps</div>
+
+
+
+
+
+<ul  class="links list-group step-list">
+  <% @worktasks.each_with_index do |worktask, index| %>
+
+        <li class="list-group-item step-list-item" data-worktask-id="<%= worktask.id %>">
+      <div class="left-block g-0 ">
+        <span style="font-size: 20px; "><i class="far fa-envelope"></i></span>
+      </div>
+      <div class="right-block">
+        <a href="<%#= worktask_path(worktask) %>">
+          <% if worktask %>
+            <div>
+             <%#= index + 1 %>
+
+            <%= worktask.name %></div>
+          <% else %>
+            <p>No page found</p>
+          <% end %>
+        </a>
+        <span class="cross-icon"><i class="fas fa-times"></i></span>
+      </div>
+    </li>
+
+  <% end %>
+</ul>
+
+
+
+
+<div class="add-new-step d-flex justify-content-center align-items-center">
+
+<a
+class="btn btn-primary rounded popup-modal-button px-4 py-2 mt-4 w-100 border text-white bg-apple-500"  href="#addStepModal"> <i class="far fa-plus "></i> &nbsp; Add New Step </a>
+
+</div>
+
+</div>  <%# col-3 %>
+    <div class="col-lg-9 bg-white pt-3">
+      <div class="info" id="worktask-details">
+
+    <% unless @worktasks.empty? %>
+          <%= render partial: "worktasks/worktask_details" %>
+    <% end %>
+
+
+      </div>
+    </div>
+              </div>
+
+        </div>
+        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+          <h3>Stats</h3>
+          <p>Stats </p>
+        </div>
+        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+          <h3>Sales</h3>
+          <p>Sales </p>
+        </div>
+      </div>
+    </div>
+
+ </div>
+</div>
+
+
+
+<div data-turbo="false" class="white-popup mfp-hide text-center" id="addStepModal" aria-labelledby="addStepModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addStepModalLabel">Add New Step</h5>
+      </div>
+      <div class="modal-body">
+
+        <!-- Add step form goes here -->
+        <%= render 'worktasks/form', worktask: Worktask.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- footer -->
+
+<%= render  "shared/footer" %>
+
+
+
+
+<%#= link_to 'Edit', edit_funnel_path(@workflow) %> |
+<%#= link_to 'Back', workflows_path %>

@@ -1,0 +1,1260 @@
+
+<% # Extract hash value from URL %>
+<%
+
+   fragment = params[:section]
+
+    # Map fragment values to corresponding tab numbers
+    tab_id = case fragment
+             when "profile" then 1
+             when "billing" then 2
+             when "website-settings" then 3
+             when "general-settings" then 4
+             when "notification-settings" then 5
+             when "account-settings" then 6
+             when "social-settings" then 7
+             when "email-settings" then 8
+             else 1
+             end
+%>
+
+
+
+
+<style>
+.sidenav.navbar .navbar-nav .nav-link.active {
+    background-color: #c3deff;
+    border-radius: 0.5rem;
+    color: #333 !important;
+}
+.navbar-nav .nav-link.active::before{
+	display:none;
+}
+
+</style>
+
+
+					<div class="text-left px-4 p-3">
+        <img style="width:15px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQEAAADECAMAAACoYGR8AAAAdVBMVEX///8AAADKysqJiYl3d3eAgICOjo6CgoKGhoZxcXF6enqWlpaZmZlfX199fX1iYmJHR0fd3d00NDRycnJsbGxVVVVPT0/R0dEPDw/x8fGgoKBERETj4+Orq6s7OzsaGhonJye6urq/v7/t7e2vr6+lpaUuLi4V7UVvAAADZ0lEQVR4nO3dC1YaURCE4WoRRVFARNEIImjc/xITojGRx9D35PRU7Fv/ApLyO4A4MDNAZLP58HFhT6PuKvS/+W9bLexPwxl7Tutdje1z5+xFLbe0rV7v2aParL8N8LOKngknOwHMqnkU7AOwEXtZS+0FMJuzt7VSA4AZe1wbNQLYN/a8+JoBbMzeF16nGcDsmb0wuIMAtmRPjO0wgL2wN4bmALA+e2RkHgA7Za8MrOcBsO/smXH5ABK/EjoB7Ig9NCovQNq3xW6ACXtpUKdeAJuyp8bkB7hkT43JD5D0OFkBQM63xF0/QI+9NaQCgDP21pCqBxj4Aa7ZW0MSgADcHbO3hnQuAAHUDXDsB8j51QkBCMDdgL01pOoBrgXgrsveGlL1AGcCcJfzI1IB1A4w8QPkPCosAAEIwFuHvTUkAQigcoChANydsLeGJAABCEAAVQNcCsBdzvMmBCAAAQigaoAbAbi7YG8NSQACEIAAqga49QPkvJ6GAAQgAAE4y3kVhZEfYDI9+sJd/TvA1+/2ZfsieVUBrDu+rxzANl7MHthrKE3qfgSs+7heZMFZY8l6Pwluyd5B7O3iSOwV1NYAF+wR1Pq1PwTWD4IpewK5aeVPgvXToOC4YMpusHmF+doa4449gdydBPQs0CuhfhvqHZHeFesvo9r/NNIREh0l05FSHS2v+nj5xse/1RFsfmpWGcGuT0716Tn0DQroWzQQAUQAEaCIIOfXivXNaogAIoAIIALodEOIADrrFiKACCACiAC6FA1EAF2RCSKACCAC6BqdEAFEAF2tFyKArtsOEUAEEAGKCHLex0UE0N18oHt6QQQoIsh5c0Pd3xEiQBFBzhvd6l6/EAGKCHLe9FwEEAGKzlATgV2ztwYlAgxEUEBwxt4alAhEAHT9BJPD/9qXTAQlBFkPnJ36CV7YW4MqIJixtwblJ7hkT43KTzBlT42q5xXI+vuggIA9NC4vwRF7aFxOgiV7Z2A+gjl7ZmQdj0DWj9Xf8hBkPR3lPQdB1jfGvztMkPmV8FcHCZ7ZC8M7aQYYs/e1UDNB1suXfKqRgD2unRoIsl7NarO9BA/sZa21j2DXJeGS1t8JkPUY2c6W2z//a0WPgHVXm1fFz/qNooZWT3/9/MOqngEfzebDx4U9jQYr9pL9/QDfFlIBc4PTrAAAAABJRU5ErkJggg==" alt="">
+          <a class="text-secondary" href="/funnels">Back to the main page</a>
+        </div>
+	  <!-- Page content -->
+
+
+
+<div class="container ">
+
+<div class="row mt-0 mt-md-2">
+            <div class="col-lg-3 col-md-4 col-12">
+              <!-- Side navbar -->
+              <nav class="navbar navbar-expand-md shadow-sm mb-4 mb-lg-0 sidenav border rounded-3 p-3 w-100">
+
+                <!-- Menu -->
+                <a class="d-xl-none d-lg-none d-md-none text-inherit fw-bold" href="#">Menu</a>
+                <!-- Button -->
+                <button class="navbar-toggler d-md-none icon-shape icon-sm rounded bg-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#sidenav" aria-controls="sidenav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="fe fe-menu"></span>
+                </button>
+                <!-- Collapse navbar -->
+
+
+
+                <div class="collapse navbar-collapse" id="sidenav">
+                  <div class="navbar-nav flex-column">
+                    <span class="navbar-header">Subscription</span>
+
+                    <ul class="nav nav-pills nav-tabs-bg-dark flex-column " role="tablist">
+
+                      <!-- Tab item -->
+
+					<li class="nav-item" role="presentation"> <a class="nav-link  <%= 'active' if tab_id == 1 %>" data-bs-toggle="tab" href="#tab-1" aria-selected="<%= tab_id == 1 %>" role="tab"><i class="fas fa-globe fa-fw me-2"></i>Domain Settings</a> </li>
+					<li class="nav-item" role="presentation"> <a class="nav-link  <%= 'active' if tab_id == 2 %>" data-bs-toggle="tab" href="#tab-2" aria-selected="<%= tab_id == 2 %>" role="tab"><i class="fas fa-user-circle fa-fw me-2"></i>Edit Profile</a> </li>
+					<li class="nav-item" role="presentation"> <a class="nav-link  <%= 'active' if tab_id == 3 %>" data-bs-toggle="tab" href="#tab-3" aria-selected="<%= tab_id == 3 %>" role="tab"><i class="fas fa-calendar fa-fw me-2"></i>Billing Info</a> </li>
+					<li class="nav-item" role="presentation"> <a class="nav-link  <%= 'active' if tab_id == 4 %>" data-bs-toggle="tab" href="#tab-4" aria-selected="<%= tab_id == 4 %>" role="tab"><i class="fas fa-cog fa-fw me-2"></i>General Settings</a> </li>
+					<li class="nav-item" role="presentation"> <a class="nav-link  <%= 'active' if tab_id == 6 %>" data-bs-toggle="tab" href="#tab-6" aria-selected="<%= tab_id == 6 %>" role="tab"><i class="fas fa-user-circle fa-fw me-2"></i>Account Settings</a> </li>
+					<li class="nav-item" role="presentation"> <a class="nav-link  <%= 'active' if tab_id == 7 %>" data-bs-toggle="tab" href="#tab-7" aria-selected="<%= tab_id == 7 %>" role="tab"><i class="fas fa-sliders-h fa-fw me-2"></i>Social Settings</a> </li>
+					<li class="nav-item" role="presentation"> <a class="nav-link  <%= 'active' if tab_id == 8 %> mb-0" data-bs-toggle="tab" href="#tab-8" aria-selected="<%= tab_id == 8 %>" role="tab"><i class="fas fa-envelope-open-text fa-fw me-2"></i>Email Settings</a> </li>
+
+<li class="nav-item"><a class="nav-link <%= 'active' if tab_id == 9 %> mb-0" data-bs-toggle="tab" href="#tab-9" aria-selected="<%= tab_id == 9 %>" role="tab"><i class="fe fe-calendar nav-icon"></i>My Subscriptions</a></li>
+<li class="nav-item"><a class="nav-link <%= 'active' if tab_id == 10 %> mb-0" data-bs-toggle="tab" href="#tab-10" aria-selected="<%= tab_id == 10 %>" role="tab"><i class="fe fe-calendar nav-icon"></i>Billing Info</a></li>
+
+<span class="navbar-header">Account Settings</span>
+<ul class="list-unstyled ms-n2 mb-0">
+  <li class="nav-item"><a class="nav-link <%= 'active' if tab_id == 11 %>" data-bs-toggle="tab" href="#tab-11" aria-selected="<%= tab_id == 11 %>"><i class="fe fe-settings nav-icon"></i>Edit Profile</a></li>
+  <li class="nav-item"><a class="nav-link <%= 'active' if tab_id == 12 %>" data-bs-toggle="tab" href="#tab-12" aria-selected="<%= tab_id == 12 %>"><i class="fe fe-refresh-cw nav-icon"></i>Social Profiles</a></li>
+  <li class="nav-item"><a class="nav-link <%= 'active' if tab_id == 13 %>" data-bs-toggle="tab" href="#tab-13" aria-selected="<%= tab_id == 13 %>"><i class="fe fe-user nav-icon"></i>Linked Accounts</a></li>
+  <li class="nav-item"><a class="nav-link <%= 'active' if tab_id == 14 %>" data-bs-toggle="tab" href="#tab-14" aria-selected="<%= tab_id == 14 %>"><i class="fe fe-power nav-icon"></i>Sign Out</a></li>
+
+</ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+
+
+
+
+<div class="tab-content">
+
+
+
+<!-- Account setting content START -->
+<div class="tab-pane <%= 'show active' if tab_id == 1 %>" id="tab-1" role="tabpanel">
+
+<div class="card-header d-lg-flex justify-content-between align-items-center">
+                  <div class="mb-3 mb-lg-0">
+                    <h3 class="mb-0 pt-2">Domain Settings</h3>
+                    <p class="mb-0 text-gray fw-light" style="font-size:15px;">Here you can add and remove domains</p>
+                  </div>
+
+                </div>
+
+
+
+	<!-- Change password -->
+	<div class="bg-light rounded-3 p-4 mb-3">
+		<div class="d-md-flex justify-content-between align-items-center">
+			<!-- Content -->
+			<div>
+				<h6 class="h5">Add your domain</h6>
+				<p class="mb-1 mb-md-0">Once you add your domain here, you can connect it to your page or your funnel</p>
+			</div>
+			<!-- Button to trigger the popup modal -->
+			<div>
+					<a class="popup-modal-button btn btn-primary mt-1" href="#addDomainModal">
+						<i style="font-size: 14px;" class="fas fa-plus"></i> Add a New Domain
+					</a>
+				<p class="mb-0 small h6"></p>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Active Logs START -->
+	<div class="card border mt-4">
+
+		<!-- Card header -->
+		<div class="card-header border-bottom">
+			<h5 class="card-header-title">Added domains</h5>
+		</div>
+
+		<!-- Card body START -->
+		<div class="card-body">
+			<!-- Table START -->
+			<div class="table-responsive border-0">
+				<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+
+					<!-- Table head -->
+					<thead>
+						<tr>
+							<th scope="col" class="border-0 rounded-start">Domain</th>
+							<th scope="col" class="border-0">IP</th>
+							<th scope="col" class="border-0">Time added</th>
+							<th scope="col" class="border-0 rounded-end">Status</th>
+							<th scope="col" class="border-0 rounded-end">Action</th>
+						</tr>
+					</thead>
+
+					<!-- Table body START -->
+					    <tbody>
+        <!-- Iterate over domain records -->
+        <% current_user.domains.each do |domain| %>
+        <!-- Table row -->
+        <tr id="domain-<%= domain.id %>">
+						<td><%= domain.name %></td>
+						<td> <%#= domain.ip %></td>
+						<td><%= domain.created_at.strftime("%d %b %Y") %></td>
+						<td>
+								<span class="verification-status badge <% if domain.verified? %>text-bg-success<% else %>bg-light border-1 rounded-3 text-dark<% end %>" style="padding:8px; font-size:14px">
+										<% if domain.verified? %>
+												Verified
+										<% else %>
+												Not Verified
+										<% end %>
+								</span>
+								<% unless domain.verified? %>
+										<%= link_to "Verify", verify_domain_path(domain), class: "btn btn-sm btn-success text-white me-1 mb-1 mb-md-0" %>
+
+
+								<% end %>
+
+  <% if flash[:alert] %>
+								<br>
+								<br>
+    <div class="mb-3 text-danger" style="font-size:14px;">
+      <%= raw flash[:alert] %>
+    </div>
+  <% end %>
+
+						</td>
+						<td>
+								<%= button_to "Remove", domain_path(domain), method: :delete, data: { confirm: "Are you sure you want to delete this domain?" }, class: "btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" %>
+						</td>
+				</tr>
+        <% end %>
+    </tbody>
+					<!-- Table body END -->
+				</table>
+			</div>
+			<!-- Table END -->
+		</div>
+		<!-- Card body END -->
+	</div>
+
+
+
+
+
+	<!-- Active Logs END -->
+</div>
+<!-- Account setting content END -->
+
+
+
+	            <%
+=begin%>
+ <div class="field py-2">
+							<label for="user_pk_test">Stripe pk_test key</label>
+	              <%= f.text_field :pk_test, autocomplete: "pk_test", class:"form-control",placeholder:"Stripe pk_test key"  %>
+	            </div>
+
+	            <div class="field py-2">
+							<label for="user_sk_test">Stripe sk_test key</label>
+	              <%= f.text_field :sk_test, autocomplete: "sk_test", class:"form-control",placeholder:"Stripe sk_test key"  %>
+	            </div>
+
+	            <div class="field py-2">
+							<label for="user_pk_live">Stripe pk_live key</label>
+	              <%= f.text_field :pk_live, autocomplete: "pk_live", class:"form-control",placeholder:"Stripe pk_live key"  %>
+	            </div>
+
+	            <div class="field py-2">
+							<label for="user_sk_live">Stripe sk_live key</label>
+	              <%= f.text_field :sk_live, autocomplete: "sk_live", class:"form-control",placeholder:"Stripe sk_live key"  %>
+	            </div>
+<%
+=end%>
+
+
+
+<div class="tab-pane <%= 'show ' if tab_id == 2 %>" id="tab-2" role="tabpanel">
+						<div class="card shadow">
+
+
+							<!-- Card header -->
+								<div class="card-header d-lg-flex justify-content-between align-items-center">
+                  <div class="mb-3 mb-lg-0">
+                    <h3 class="mb-0 pt-2">User Details</h3>
+                    <p class="mb-0 text-gray fw-light" style="font-size:15px;">Change name, email, etc</p>
+                  </div>
+
+                </div>
+
+
+							<!-- Card body START -->
+							<div class="card-body shadow">
+
+					<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+					<%= render "devise/shared/error_messages", resource: resource %>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="field py-2">
+								<%= f.text_field :first_name, autofocus: false, autocomplete: "First name", class: "form-control", placeholder: "First name", data: { rebilly: 'firstName' }  %>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="field py-2">
+								<%= f.text_field :last_name, autocomplete: "Last name", class: "form-control", placeholder: "Last name", data: { rebilly: 'lastName' }  %>
+							</div>
+						</div>
+					</div>
+
+            <div class="field py-2">
+              <%= f.text_field :phone, autocomplete: "phone", class: "form-control", placeholder: "Phone", data: { rebilly: 'phoneNumbers' } %>
+            </div>
+
+
+            <div class="field py-2">
+              <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "Email", data: { rebilly: 'emails' } %>
+            </div>
+
+          <div class="field py-2">
+              <%= f.text_field :address, autocomplete: "address", class: "form-control", placeholder: "Address", data: { rebilly: 'address' } %>
+            </div>
+
+          <div class="field py-2">
+              <%= f.text_field :apartment, autocomplete: "apartment", class: "form-control", placeholder: "Apartment, building, floor", data: { rebilly: 'address2' } %>
+            </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field py-2">
+        <%= f.text_field :city, autocomplete: "City", class: "form-control", placeholder: "City", data: { rebilly: 'city' }  %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="field py-2">
+        <%= f.text_field :postalCode, autocomplete: "Postal code", class: "form-control", placeholder: "Postal code", data: { rebilly: 'postalCode' }  %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field py-2">
+        <%= f.text_field :country,  autocomplete: "Country", class: "form-control", placeholder: "Country", data: { rebilly: 'country' }  %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="field py-2">
+        <%= f.text_field :region,  autocomplete: "State", class: "form-control", placeholder: "Region/State", data: { rebilly: 'region' }  %>
+      </div>
+    </div>
+  </div>
+
+
+
+ <div class="field py-2">
+	              <%= f.label :website %>
+	              <%= f.text_field :website, autocomplete: "website", class:"form-control",placeholder:"Website"  %>
+	            </div>
+
+
+
+
+      				<div class="text-center pt-4 pb-1">
+	              <%= f.submit "Update Details", class:"btn btn-lg btn-primary" %>
+	            </div>
+
+
+
+
+
+	            <hr class="line my-5">
+<div class="line mt-3 mb-2 ">
+
+
+	            <h4>Change password</h4>
+
+	                  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+	            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+	            <% end %>
+
+	            <div class="row">
+
+
+
+	              <div class="col-6 py-2">
+										<label class="form-label">Password</label>
+	                <%= f.password_field :password, autocomplete: "new-password", class:"form-control",placeholder:"Password" %>
+
+	              </div>
+	              <div class="col-6 py-2">
+									<label class="form-label">Password Confirmation</label>
+
+	                <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control",placeholder:"Confirm password" %>
+	              </div>
+	              <div class="col-12 py-2">
+	                <i>(leave blank if you don't want to change it)</i><br>
+	                <%
+									 if @minimum_password_length %>
+										<em>The password should be at least <%= @minimum_password_length %> characters minimum</em>
+	                <% end %>
+	              </div>
+	            </div>
+
+<div class="field py-2">
+							<label class="form-label">Current Password</label>
+
+	              <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control",placeholder:"Current Password" %>
+	            </div>
+<i>(you need your current password to change your password)</i><br />
+
+
+	            <div class="text-center pt-4 pb-1">
+	              <%= f.submit "Update Password", class:"btn btn-lg btn-primary" %>
+	            </div>
+
+	          </div>
+
+
+
+
+	            <% end %>
+
+
+							</div>
+							<!-- Card body END -->
+
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<div class="tab-pane  <%= 'show ' if tab_id == 3 %>" id="tab-3" role="tabpanel">
+
+
+
+				<div class="card-header d-lg-flex justify-content-between align-items-center">
+                  <div class="mb-3 mb-lg-0">
+                    <h3 class="mb-0 pt-2">My Subscriptions</h3>
+                    <p class="mb-0 text-gray fw-light" style="font-size:15px;">Here is list of package/product that you have subscribed.</p>
+                  </div>
+                  <div>
+                    <a href="pricing.html" class="btn btn-md bg-success text-white btn border-0">Upgrade Now — Go Pro $97.00</a>
+                  </div>
+         </div>
+
+
+
+<div class="card card-body  border rounded-3">
+
+					<!-- Update plan START -->
+					<div class="row g-4">
+						<!-- Update plan item -->
+						<div class="col-6 col-lg-3">
+							<span>Active Plan</span>
+							<h4>Basic</h4>
+						</div>
+						<!-- Update plan item -->
+						<div class="col-6 col-lg-3">
+							<span>Monthly limit</span>
+							<h4>Unlimited</h4>
+						</div>
+						<!-- Update plan item -->
+						<div class="col-6 col-lg-3">
+							<span>Cost</span>
+							<h4>$47/Month</h4>
+						</div>
+
+						<!-- Update plan item -->
+						<div class="col-6 col-lg-3">
+							<span>Renewal Date</span>
+							<h4>Feb 17, 2023</h4>
+						</div>
+					</div>
+					<!-- Update plan END -->
+
+					<!-- Progress bar -->
+					<div class="overflow-hidden my-4">
+						<h6 class="mb-0">85%</h6>
+						<div class="progress progress-sm bg-primary bg-opacity-10">
+							<div class="progress-bar bg-primary aos aos-init aos-animate" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+							</div>
+						</div>
+					</div>
+
+					<!-- Button -->
+					<div>
+						<div class="row">
+							<div class="col-6">
+							<!-- Switch Content -->
+							<p class="mb-0 small" style=' font-family: "Inter", sans-serif;
+									font-weight: 400;
+									letter-spacing: 0;
+									font-size: 0.875rem;
+									color: rgb(29, 46, 59);'>Your plan will automatically renew on: 02/17/2023. <br> Payment Amount: $47</p>
+							</div>
+							<!-- Buttons -->
+							<div class="col-6 text-right">
+									<button type="button" class="btn btn-sm btn-danger-soft mb-0">Cancel plan</button>
+									<a href="#" class="btn btn-sm btn-primary mb-0">Change plan</a>
+							</div>
+						</div>
+
+
+					</div>
+					<!-- Divider -->
+					<hr>
+
+					<!-- Plan Benefits -->
+					<div class="row">
+						<h6 class="mb-3">The plan includes</h6>
+						<div class="col-md-6">
+							<ul class="list-unstyled">
+								<li class="mb-3 h6 fw-light"><i class="bi bi-patch-check-fill text-success me-2"></i>Up to 05 users monthly</li>
+								<li class="mb-3 h6 fw-light"><i class="bi bi-patch-check-fill text-success me-2"></i>Free 5 host &amp; domain</li>
+								<li class="mb-3 h6 fw-light"><i class="bi bi-patch-check-fill text-success me-2"></i>Custom infrastructure</li>
+								<li class="mb-3 h6 fw-light"><i class="bi bi-patch-check-fill text-success me-2"></i>Access to all our room</li>
+							</ul>
+						</div>
+
+						<div class="col-md-6">
+							<ul class="list-unstyled">
+								<li class="mb-3 h6 fw-light"><i class="bi bi-patch-check-fill text-success me-2"></i>24/7 dedicated Support</li>
+								<li class="mb-3 h6 fw-light"><i class="bi bi-patch-check-fill text-success me-2"></i>Unlimited updates</li>
+								<li class="h6 fw-light"><i class="bi bi-patch-check-fill text-success me-2"></i>Landing pages &amp; Web widgets</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+
+<div class="card shadow">
+									<div class="card-body">
+                   <div class="row">
+	            <h5>Cancel my account</h5>
+	            <p>Unhappy?
+	              <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+	            </p>
+							</div> </div>
+						</div>
+
+						<div class="card shadow">
+							<!-- Card header -->
+							<!-- Card body START -->
+							<div class="card-body">
+                  <div class="border-bottom pt-0 pb-5">
+                    <div class="row mb-4">
+                      <div class="col-lg-6 col-md-8 col-7 mb-2 mb-lg-0">
+                        <span class="d-block">
+                          <span class="h4">Monthly</span>
+                          <span class="badge bg-success ms-2">Active</span>
+                        </span>
+                        <p class="mb-0 fs-6">Subscription ID: #100010002</p>
+                      </div>
+                      <div class="col-lg-3 col-md-4 col-5 mb-2 mb-lg-0">
+                        <!-- Custom Switch -->
+                        <span>Auto Renewal</span>
+                        <div class="form-check form-switch">
+                          <input type="checkbox" class="form-check-input" id="customSwitch1" checked="">
+                          <label class="form-check-label" for="customSwitch1"></label>
+                        </div>
+                      </div>
+
+                    </div>
+                    <!-- Pricing data -->
+                    <div class="row">
+                      <div class="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
+                        <span class="fs-6">Started On</span>
+                        <h6 class="mb-0">Oct 1, 2023</h6>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
+                        <span class="fs-6">Price</span>
+                        <h6 class="mb-0">Monthly</h6>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
+                        <span class="fs-6">Access</span>
+                        <h6 class="mb-0">Access All Courses</h6>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
+                        <span class="fs-6">Billing Date</span>
+                        <h6 class="mb-0">Next Billing on Nov 1, 2020</h6>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                </div>
+							<!-- Card body END -->
+
+						</div>
+					</div>
+
+
+
+
+
+     <%
+=begin%>
+ <div class="pt-5">
+                    <div class="row mb-4">
+                      <div class="col mb-2 mb-lg-0">
+                        <span class="d-block">
+                          <span class="h4">Free Plan</span>
+                          <span class="badge bg-danger ms-2">Expired</span>
+                        </span>
+                        <p class="mb-0 fs-6">Subscription ID: #100010001</p>
+                      </div>
+                      <div class="col-auto">
+                        <a href="#" class="btn btn-light btn-sm disabled">Disabled</a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
+                        <span class="fs-6">Started On</span>
+                        <h6 class="mb-0">Sept 1, 2020</h6>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
+                        <span class="fs-6">Price</span>
+                        <h6 class="mb-0">Free - Trial a Month</h6>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
+                        <span class="fs-6">Access</span>
+                        <h6 class="mb-0">Access All Courses</h6>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
+                        <span class="fs-6">Billing Date</span>
+                        <h6 class="mb-0">Next Billing on Oct 1, 2020</h6>
+                      </div>
+                    </div>
+                  </div>
+<%
+=end%>
+
+<!-- General Settings content START -->
+<div class="tab-pane <%= 'show ' if tab_id == 5 %>" id="tab-5" role="tabpanel">
+
+	<div class="card shadow">
+
+		<!-- Card header -->
+		<div class="card-header border-bottom">
+			<h5 class="card-header-title">General Settings</h5>
+		</div>
+
+		<!-- Card body START -->
+		<div class="card-body">
+			<form class="row g-4">
+
+				<!-- Input item -->
+				<div class="col-12">
+					<label class="form-label">Main Site URL</label>
+					<input type="text" class="form-control" placeholder="Site URL">
+					<div class="form-text">Set your main website url.</div>
+				</div>
+
+				<!-- Choice item -->
+				<div class="col-lg-6">
+					<label class="form-label">Select Currency</label>
+					<div class="choices" data-type="select-one" tabindex="0" role="combobox" aria-autocomplete="list"
+						aria-haspopup="true" aria-expanded="false">
+						<div class="choices__inner"><select class="form-select js-choice z-index-9 border-0 bg-light choices__input"
+								aria-label=".form-select-sm" hidden="" tabindex="-1" data-choice="active">
+								<option value="" data-custom-properties="[object Object]">Select Currency</option>
+							</select>
+							<div class="choices__list choices__list--single">
+								<div class="choices__item choices__placeholder choices__item--selectable" data-item="" data-id="1"
+									data-value="" data-custom-properties="[object Object]" aria-selected="true">Select Currency</div>
+							</div>
+						</div>
+						<div class="choices__list choices__list--dropdown" aria-expanded="false"><input type="search"
+								name="search_terms" class="choices__input choices__input--cloned" autocomplete="off"
+								autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list"
+								aria-label="Select Currency" placeholder="">
+							<div class="choices__list" role="listbox">
+								<div id="choices--c0ci-item-choice-4"
+									class="choices__item choices__item--choice is-selected choices__placeholder choices__item--selectable is-highlighted"
+									role="option" data-choice="" data-id="4" data-value="" data-select-text="Press to select"
+									data-choice-selectable="" aria-selected="true">Select Currency</div>
+								<div id="choices--c0ci-item-choice-1"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="1" data-value="British Pound" data-select-text="Press to select" data-choice-selectable="">
+									British Pound</div>
+								<div id="choices--c0ci-item-choice-2"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="2" data-value="Euro" data-select-text="Press to select" data-choice-selectable="">Euro</div>
+								<div id="choices--c0ci-item-choice-3"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="3" data-value="Indian Rupee" data-select-text="Press to select" data-choice-selectable="">
+									Indian Rupee</div>
+								<div id="choices--c0ci-item-choice-5"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="5" data-value="USD" data-select-text="Press to select" data-choice-selectable="">USD</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-text">Select currency as per Country</div>
+				</div>
+
+				<!-- Choice item -->
+				<div class="col-lg-6">
+					<label class="form-label">Select Language</label>
+					<div class="choices" data-type="select-one" tabindex="0" role="combobox" aria-autocomplete="list"
+						aria-haspopup="true" aria-expanded="false">
+						<div class="choices__inner"><select class="form-select js-choice z-index-9 border-0 bg-light choices__input"
+								aria-label=".form-select-sm" hidden="" tabindex="-1" data-choice="active">
+								<option value="" data-custom-properties="[object Object]">Select Language</option>
+							</select>
+							<div class="choices__list choices__list--single">
+								<div class="choices__item choices__placeholder choices__item--selectable" data-item="" data-id="1"
+									data-value="" data-custom-properties="[object Object]" aria-selected="true">Select Language</div>
+							</div>
+						</div>
+						<div class="choices__list choices__list--dropdown" aria-expanded="false"><input type="search"
+								name="search_terms" class="choices__input choices__input--cloned" autocomplete="off"
+								autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list"
+								aria-label="Select Language" placeholder="">
+							<div class="choices__list" role="listbox">
+								<div id="choices--tzpj-item-choice-4"
+									class="choices__item choices__item--choice is-selected choices__placeholder choices__item--selectable is-highlighted"
+									role="option" data-choice="" data-id="4" data-value="" data-select-text="Press to select"
+									data-choice-selectable="" aria-selected="true">Select Language</div>
+								<div id="choices--tzpj-item-choice-1"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="1" data-value="English" data-select-text="Press to select" data-choice-selectable="">English
+								</div>
+								<div id="choices--tzpj-item-choice-2"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="2" data-value="German" data-select-text="Press to select" data-choice-selectable="">German
+								</div>
+								<div id="choices--tzpj-item-choice-3"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="3" data-value="Hindi" data-select-text="Press to select" data-choice-selectable="">Hindi
+								</div>
+								<div id="choices--tzpj-item-choice-5"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="5" data-value="Spanish" data-select-text="Press to select" data-choice-selectable="">Spanish
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-text">Select language as per Country</div>
+				</div>
+
+				<!-- Switch item -->
+				<div class="col-lg-3">
+					<label class="form-label">Maintainance mode</label>
+					<div class="form-check form-switch form-check-lg mb-0">
+						<input class="form-check-input mt-0 price-toggle me-2" type="checkbox" id="flexSwitchCheckDefault">
+						<label class="form-check-label mt-1" for="flexSwitchCheckDefault">Make Site Offline</label>
+					</div>
+				</div>
+
+				<!-- Textarea item -->
+				<div class="col-lg-9">
+					<label class="form-label">Maintainance Text</label>
+					<textarea class="form-control" rows="3"></textarea>
+					<div class="form-text">Admin login on maintenance mode:<a href="#"
+							class="ms-2">http://example.xyz/admin/login</a></div>
+				</div>
+
+				<!-- Save button -->
+				<div class="d-sm-flex justify-content-end">
+					<button type="button" class="btn btn-primary mb-0">Update</button>
+				</div>
+			</form>
+		</div>
+		<!-- Card body END -->
+
+	</div>
+</div>
+<!-- General Settings content END -->
+
+
+<!-- Account setting content START -->
+<div class="tab-pane <%= 'show ' if tab_id == 6 %>" id="tab-6" role="tabpanel">
+	<!-- Activity logs -->
+	<div class="bg-light rounded-3 p-4 mb-3">
+		<div class="d-md-flex justify-content-between align-items-center">
+			<!-- Content -->
+			<div>
+				<h6 class="h5">Activity Logs</h6>
+				<p class="mb-1 mb-md-0">You can save your all activity logs including unusual activity detected.</p>
+			</div>
+			<!-- Switch -->
+			<div class="form-check form-switch form-check-md mb-0">
+				<input class="form-check-input" type="checkbox" id="checkPrivacy1" checked="">
+			</div>
+		</div>
+	</div>
+
+	<!-- Change password -->
+	<div class="bg-light rounded-3 p-4 mb-3">
+		<div class="d-md-flex justify-content-between align-items-center">
+			<!-- Content -->
+			<div>
+				<h6 class="h5">Change Password</h6>
+				<p class="mb-1 mb-md-0">Set a unique password to protect your account.</p>
+			</div>
+			<!-- Button -->
+			<div>
+				<a href="#" class="btn btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#changePassword">Change
+					Password</a>
+				<p class="mb-0 small h6">Last change 10 Aug 2020</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- 2 Step Verification -->
+	<div class="bg-light rounded-3 p-4">
+		<div class="d-md-flex justify-content-between align-items-center">
+			<!-- Content -->
+			<div>
+				<h6 class="h5">2 Step Verification</h6>
+				<p class="mb-1 mb-md-0">Secure your account with 2 Step security. When it is activated you will need to enter
+					not only your password, but also a special code using app. You can receive this code by in mobile app.</p>
+			</div>
+			<!-- Switch -->
+			<div class="form-check form-switch form-check-md mb-0">
+				<input class="form-check-input" type="checkbox" id="checkPrivacy13" checked="">
+			</div>
+		</div>
+	</div>
+
+	<!-- Active Logs START -->
+	<div class="card border mt-4">
+
+		<!-- Card header -->
+		<div class="card-header border-bottom">
+			<h5 class="card-header-title">Active Logs</h5>
+		</div>
+
+		<!-- Card body START -->
+		<div class="card-body">
+			<!-- Table START -->
+			<div class="table-responsive border-0">
+				<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+
+					<!-- Table head -->
+					<thead>
+						<tr>
+							<th scope="col" class="border-0 rounded-start">Browser</th>
+							<th scope="col" class="border-0">IP</th>
+							<th scope="col" class="border-0">Time</th>
+							<th scope="col" class="border-0 rounded-end">Action</th>
+						</tr>
+					</thead>
+
+					<!-- Table body START -->
+					<tbody>
+
+						<!-- Table row -->
+						<tr>
+							<!-- Table data -->
+							<td>Chrome On Window</td>
+
+							<!-- Table data -->
+							<td>173.238.198.108</td>
+
+							<!-- Table data -->
+							<td>12 Nov 2021</td>
+
+							<!-- Table data -->
+							<td>
+								<a href="logout" class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0">Sign out</a>
+							</td>
+						</tr>
+
+						<!-- Table row -->
+						<tr>
+							<!-- Table data -->
+							<td>Mozilla On Window</td>
+
+							<!-- Table data -->
+							<td>107.222.146.90</td>
+
+							<!-- Table data -->
+							<td>08 Nov 2021</td>
+
+							<!-- Table data -->
+							<td>
+								<button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0">Sign out</button>
+							</td>
+						</tr>
+
+						<!-- Table row -->
+						<tr>
+							<!-- Table data -->
+							<td>Chrome On iMac</td>
+
+							<!-- Table data -->
+							<td>231.213.125.55</td>
+
+							<!-- Table data -->
+							<td>06 Nov 2021</td>
+
+							<!-- Table data -->
+							<td>
+								<button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0">Sign out</button>
+							</td>
+						</tr>
+
+						<!-- Table row -->
+						<tr>
+							<!-- Table data -->
+							<td>Mozilla On Window</td>
+
+							<!-- Table data -->
+							<td>37.242.105.138</td>
+
+							<!-- Table data -->
+							<td>02 Nov 2021</td>
+
+							<!-- Table data -->
+							<td>
+								<button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0">Sign out</button>
+							</td>
+						</tr>
+
+
+					</tbody>
+					<!-- Table body END -->
+				</table>
+			</div>
+			<!-- Table END -->
+		</div>
+		<!-- Card body END -->
+	</div>
+	<!-- Active Logs END -->
+</div>
+<!-- Account setting content END -->
+
+<!-- Social Settings content START -->
+<div class="tab-pane <%= 'show ' if tab_id == 7 %>" id="tab-7" role="tabpanel">
+	<div class="card shadow">
+		<!-- Card header -->
+		<div class="card-header border-bottom d-sm-flex justify-content-between align-items-center">
+			<h5 class="card-header-title mb-0">Social Media Settings</h5>
+			<a href="#" class="btn btn-sm btn-primary mb-0">Add new</a>
+		</div>
+		<!-- Card body START -->
+		<div class="card-body">
+			<form class="row g-4">
+				<!-- Input item -->
+				<div class="col-sm-6">
+					<label class="form-label"><i class="fab fa-google text-google-icon me-2"></i>Enter google client ID</label>
+					<input class="form-control" type="text">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-sm-6">
+					<label class="form-label"><i class="fab fa-google text-google-icon me-2"></i>Enter google API</label>
+					<input class="form-control" type="text">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-sm-6">
+					<label class="form-label"><i class="fab fa-facebook text-facebook me-2"></i>Enter facebook client ID</label>
+					<input class="form-control" type="text">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-sm-6">
+					<label class="form-label"><i class="fab fa-facebook text-facebook me-2"></i>Enter facebook API</label>
+					<input class="form-control" type="text">
+				</div>
+
+				<!-- Note -->
+				<p class="mb-0"><b>In your app set all redirect URL like:</b> <u
+						class="text-primary">https://app.eduport.abc/google/callback</u></p>
+
+				<!-- Button -->
+				<div class="d-flex justify-content-end">
+					<button type="button" class="btn btn-primary mb-0">Update</button>
+				</div>
+			</form>
+		</div>
+		<!-- Card body END -->
+	</div>
+</div>
+<!-- Social Settings content END -->
+
+<!-- Email Settings content START -->
+<div class="tab-pane <%= 'show ' if tab_id == 8 %>" id="tab-8" role="tabpanel">
+	<div class="card shadow">
+
+		<!-- Card header -->
+		<div class="card-header border-bottom">
+			<h5 class="card-header-title mb-0">Email Settings</h5>
+		</div>
+
+		<!-- Card body START -->
+		<div class="card-body">
+			<div class="row g-4">
+
+				<!-- Radio group items -->
+				<div class="col-xl-8">
+					<label class="form-label">Choose Email Drive</label>
+					<div class="d-sm-flex justify-content-sm-between align-items-center">
+						<!-- Radio -->
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="flexRadioEmail" id="flexRadioEmail1">
+							<label class="form-check-label" for="flexRadioEmail1">Send Mail</label>
+						</div>
+
+						<!-- Radio -->
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="flexRadioEmail" id="flexRadioEmail2" checked="">
+							<label class="form-check-label" for="flexRadioEmail2">SMTP</label>
+						</div>
+
+						<!-- Radio -->
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="flexRadioEmail" id="flexRadioEmail3">
+							<label class="form-check-label" for="flexRadioEmail3">Mail</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Input item -->
+				<div class="col-md-6">
+					<label class="form-label">SMTP HOST</label>
+					<input type="text" class="form-control">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-md-6 col-xl-3">
+					<label class="form-label">SMTP Port</label>
+					<input type="text" class="form-control">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-md-6 col-xl-3">
+					<label class="form-label">SMTP Secure</label>
+					<input type="text" class="form-control">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-md-6">
+					<label class="form-label">SMTP Username</label>
+					<input type="text" class="form-control">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-md-6">
+					<label class="form-label">SMTP Passwod</label>
+					<input type="password" class="form-control">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-md-6">
+					<label class="form-label">Email From Address</label>
+					<input type="email" class="form-control">
+				</div>
+
+				<!-- Input item -->
+				<div class="col-md-6">
+					<label class="form-label">Email From Name</label>
+					<input type="email" class="form-control">
+				</div>
+
+				<!-- Choice item -->
+				<div class="col-lg-6">
+					<label class="form-label">Email Send To</label>
+					<div class="choices" data-type="select-one" tabindex="0" role="combobox" aria-autocomplete="list"
+						aria-haspopup="true" aria-expanded="false">
+						<div class="choices__inner"><select class="form-select js-choice z-index-9 border-0 bg-light choices__input"
+								aria-label=".form-select-sm" hidden="" tabindex="-1" data-choice="active">
+								<option value="" data-custom-properties="[object Object]">Email Send to</option>
+							</select>
+							<div class="choices__list choices__list--single">
+								<div class="choices__item choices__placeholder choices__item--selectable" data-item="" data-id="1"
+									data-value="" data-custom-properties="[object Object]" aria-selected="true">Email Send to</div>
+							</div>
+						</div>
+						<div class="choices__list choices__list--dropdown" aria-expanded="false"><input type="search"
+								name="search_terms" class="choices__input choices__input--cloned" autocomplete="off"
+								autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list"
+								aria-label="Email Send to" placeholder="">
+							<div class="choices__list" role="listbox">
+								<div id="choices--8i2d-item-choice-2"
+									class="choices__item choices__item--choice is-selected choices__placeholder choices__item--selectable is-highlighted"
+									role="option" data-choice="" data-id="2" data-value="" data-select-text="Press to select"
+									data-choice-selectable="" aria-selected="true">Email Send to</div>
+								<div id="choices--8i2d-item-choice-1"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="1" data-value="All Admin" data-select-text="Press to select" data-choice-selectable="">All
+									Admin</div>
+								<div id="choices--8i2d-item-choice-3"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="3" data-value="Instructors" data-select-text="Press to select" data-choice-selectable="">
+									Instructors</div>
+								<div id="choices--8i2d-item-choice-4"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="4" data-value="Students" data-select-text="Press to select" data-choice-selectable="">
+									Students</div>
+								<div id="choices--8i2d-item-choice-5"
+									class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice=""
+									data-id="5" data-value="Visitors" data-select-text="Press to select" data-choice-selectable="">
+									Visitors</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Input item -->
+				<div class="col-md-6">
+					<label class="form-label">Email External Email</label>
+					<input type="email" class="form-control">
+				</div>
+			</div>
+
+			<!-- Email Template -->
+			<div class="row g-4 mt-4">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h5 class="mb-0">Edit Email Template</h5>
+					<a href="#" class="btn btn-sm btn-primary mb-0">Add Template</a>
+				</div>
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">Welcome Email</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">Send Email to User</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">Password Change</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">Unusual Login Email</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">Password Reset Email by Admin</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">KYC Approve Email</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">KYC Reject Email</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">KYC Missing Email</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">KYC Submitted Email</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">Token Purchase - Cancel by User</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">Token Purchase - Order Placed</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Template Item -->
+				<div class="col-md-6 col-xxl-4">
+					<div class="bg-light rounded-3 d-flex justify-content-between align-items-center p-2">
+						<h6 class="mb-0"><a href="#">Token Purchase - Order Successfully</a></h6>
+						<a href="#" class="btn btn-sm btn-round btn-dark flex-shrink-0 mb-0"><i class="far fa-edit fa-fw"></i></a>
+					</div>
+				</div>
+
+				<!-- Button -->
+				<div class="d-flex justify-content-end">
+					<button type="button" class="btn btn-primary mb-0">Update</button>
+				</div>
+			</div>
+		</div>
+		<!-- Card body END -->
+	</div>
+</div>
+<!-- Email Settings content END -->
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+              <!-- Card -->
+
+            </div>
+          </div>
+
+<!-- Popup modal -->
+<div  class="white-popup mfp-hide text-center rounded-4" id="addDomainModal" aria-labelledby="addDomainModalLabel" aria-hidden="true">
+  <div data-turbo="false" class="modal-title text-left pl-4 text-gray fs-5" id="addDomainModalLabel">Add Domain</div>
+  <div class="" role="document">
+    <div class="modal-body text-left">
+      <%= render 'domains/domain_form', domain: Domain.new %>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Any initialization scripts can go here
+		  $(".popup-modal-button").length &&
+    $(".popup-modal-button").magnificPopup({
+      type: "inline",
+      mainClass: "mfp-fade",
+      removalDelay: 160,
+      preloader: !1,
+      fixedContentPos: !0,
+    });
+
+  });
+
+
+</script>
+
+
+
+
+
+
+

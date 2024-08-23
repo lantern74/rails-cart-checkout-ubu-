@@ -1,0 +1,93 @@
+
+<section>
+<div class="container ">
+<div class="col-md-6">
+
+<form action="/customers" method="post" id="new_customer">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+
+<input value="1" type="hidden" name="customer[product_id]" id="customer_product_id" />
+      <input id="payment" type="hidden" name="customer[stripe_payment_id]" />
+
+      <div class="field">
+        <label for="customer_name">Name</label>
+        <input type="text" name="customer[name]" id="customer_name" />
+      </div>
+      <div class="field">
+        <label for="customer_email">Email</label>
+        <input type="text" name="customer[email]" id="customer_email" />
+      </div>
+      <div class="field">
+        <label for="customer_price">Price</label>
+        <input type="text" name="customer[price]" id="customer_price" />
+      </div>
+      <div class="field">
+        <div id="card" ></div>
+      </div>
+
+      <div class="actions">
+        <input type="submit" name="commit" value="Create Customer Test 1" data-disable-with="Create Customer" />
+      </div>
+
+</form>
+
+</div>
+</div>
+
+</section>
+
+
+
+<script>
+
+   var stripe = Stripe("pk_test_zfu5fee1jfZnfOBDXg8IozT9");
+   var elements = stripe.elements();
+   var cardElement = elements.create('card');
+   cardElement.mount('#card');
+
+  const form =  document.querySelector('#new_customer');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Step #1 Post request to create payment intent fetch
+    fetch('/payment_intents', {
+      method: 'POST',
+      headers: {
+        'Content-TYpe': 'application/json',
+      },
+      body: JSON.stringify({
+        authenticity_token: '<%= form_authenticity_token %>',
+      }),
+    }) //fetch
+
+  .then((response) => response.json())
+  .then((paymentIntent) => {
+        // Step #2 Create payment method and confirm payment intent
+    stripe.confirmCardPayment(
+      paymentIntent.client_secret, {
+        payment_method: {
+          card: cardElement
+        }
+      }
+    ).then((resp) => {
+      if (resp.error) {
+        alert(resp.error.message);
+      } else{
+        // Step 3: Embed payment id in form
+        const paymentIdInput = document.querySelector('#payment')
+        paymentIdInput.value = paymentIntent.id;
+        form.submit();
+      }
+    })
+
+    console.log ("Success:", paymentIntent);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+
+});
+
+
+
+</script>

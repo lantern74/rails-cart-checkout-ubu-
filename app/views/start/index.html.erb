@@ -1,0 +1,79 @@
+
+<div class="col-md-10 bg-light p-4 mx-auto text-center p-5">
+    <h3>Do this first!</h3>
+
+
+
+<div class="container justify-content-center align-items-center p-4" style="max-width:700px">
+  <div class="row"  >
+    <div class="col-md-12">
+      <div class="card w-100 px-4" style="max-width:700px">
+        <div class="card-body row align-items-center">
+          <div class="col-md-3 p-2"> <%= image_tag("instagram-logo.png",  alt: "Image", class: "img-fluid", style: "max-width: 100px;") %></div>
+          <div class="col-md-7 p-2 text-left">Connect your Instagram account to start accepting payments.</div>
+          <div class="col-md-2 p-2">
+            <% if !current_user.instagram_token.present? %>
+              <a href="<%= @instagram_login_url %>" class="btn bg-orange text-black p-1 px-2">Connect</a>
+
+            <% else %>
+
+              <i class="fas fa-check-circle fs-1" style="color: #8DB600;"></i>
+              <br>
+              <br>
+                        <%= link_to 'Unlink', disconnect_insta_integration_index_path, method: :get, data: { confirm: 'Are you sure you want to disconnect from Stripe?' }, class: 'btn bg-red-500 text-red  inline-flex items-center text-black p-1 px-2 border-transparent  rounded ' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row  mt-3">
+    <div class="col-md-12">
+      <div class="card w-100 px-4" style="max-width:700px">
+        <div class="card-body row align-items-center">
+          <div class="col-md-3 p-2"> <%= image_tag("stripe-logo-blue.png", alt: "Image", class: "img-fluid") %></div>
+          <div class="col-md-7 p-2 text-left">Connect your Stripe account to start accepting payments. (Existing stripe API integration will continue to work, but it is advised to use Stripe Connect for more security)</div>
+          <div class="col-md-2 p-2">
+            <% if !current_user.stripe_account_id.present? %>
+              <a href="/payment_integration" class="btn bg-orange text-black p-1 px-2">Connect</a>
+            <% else %>
+              <i class="fas fa-check-circle fs-1" style="color: #8DB600;"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row  mt-3">
+    <div class="col-md-12">
+
+      <div class="card w-100 px-4" >
+        <div class="card-body row align-items-center">
+          <div class="col-md-3 p-2"><i class="fal fs-1 fa-globe"></i></div>
+          <div class="col-md-7 p-2 text-left">Connect your domains to Upsell Cart
+(Only necessary if you plan on using our web pages, order forms, or funnels.)</div>
+          <div class="col-md-2 p-2">
+            <% if 1==1 %>
+              <%= link_to "Connect", user_section_path(section: 'domains'), class: "btn bg-orange text-black p-1 px-2", id: "connect-button" %>
+
+            <% else %>
+              <i class="fas fa-check-circle fs-1" style="color: #8DB600;"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+  </div>
+</div>
+
+
+
+
+</div>
+
+<%= render "shared/footer" %>

@@ -1,0 +1,45 @@
+<!-- app/views/steps/_step_settings_form.html.erb -->
+
+<!-- disable Turbo for now so it doesn't interfere -->
+<script type="module"> Turbo.session.drive = false </script>
+
+
+<%= form_with(model: @step, url: update_settings_only_step_path(encrypt_for_hidden_field(@step.id)), class: 'needs-validation',  id: 'edit_settings_popup', data: { remote: true },   html: {onsubmit: "remote(event)"} ) do |form| %>
+
+
+  <div class="form-group">
+
+  <div class="pb-3">When a user submits the form on the page, it will start the email/bot workflow below.</div>
+  <br>
+    <div class="text-left pl-1" style="color:#888; font-size:15px;"><%= form.label "Choose the workflow sequence"  %></div>
+
+    <%#= form.collection_select(:workflow_id, current_user.workflows, :id, :name, { prompt: "Select a Workflow" }, { class: 'form-select' }) %>
+
+<%= form.select :workflow_id,
+                options_for_select(current_user.workflows.map{ |workflow| [workflow.name, workflow.id] }, form.object.workflow_id),
+                { include_blank: 'None' },
+                { class: 'form-select' } %>
+
+  </div>
+
+  <%= form.submit 'Save Changes', class: 'btn btn-primary' %>
+<% end %>
+
+<script>
+function remote(event) {
+  event.preventDefault();
+  const form = event.target;
+  fetch(form.action, {
+    headers: { Accept: "application/json" },
+    method: form.method,
+    body: new FormData(form),
+  })
+    .then((response) => response.text())
+    .then((text) => {
+      document.querySelector("#remote_response").innerHTML = text;
+    });
+  $(".popup-settings-edit-funnel").magnificPopup("close");
+}
+
+</script>
+
