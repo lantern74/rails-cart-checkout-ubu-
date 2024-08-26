@@ -133,61 +133,24 @@ function loadPresetHeadlineSettings(parentWrapper) {
     });
   });
 
-  // Font size setting for Headline Element
-  const headlineFontSlider = document.getElementById("headline-font-slider");
-  const headlineFontValue = document.getElementById("headline-font-value");
-  headlineFontSlider.value = parseInt(headlineComponent.style.fontSize);
-  headlineFontValue.value = parseInt(headlineComponent.style.fontSize);
-  headlineFontSlider.addEventListener("input", function () {
-    headlineFontValue.value = headlineFontSlider.value;
-    const hc = document.getElementById(selectedHeadlineElement);
-    headlineFontValue.value = this.value; // 'this' refers to the slider itself.
-    hc.style.fontSize = `${this.value}px`;
-    hc.querySelectorAll("*").forEach((child) => {
-      child.style.fontSize = `${this.value}px`;
-    });
-  });
-  // var allContainers = headlineComponent.querySelectorAll("*");
-  headlineFontValue.addEventListener("change", function () {
-    let parsedValue = parseInt(headlineFontValue.value);
-    if (parsedValue >= 0 && parsedValue <= 100) {
-      headlineFontSlider.value = parsedValue;
-      const hc = document.getElementById(selectedHeadlineElement);
-      hc.style.fontSize = `${parsedValue}px`;
-      hc.querySelectorAll("*").forEach((child) => {
-        child.style.fontSize = `${parsedValue}px`;
-      });
+  // fontSizeSlider -----------------------------------------
+  const fontSizeSlider = document.getElementById("headline-font-slider");
+  // Get the initial font size from the selected element
+  const initialFontSize = window.getComputedStyle(
+    parentWrapper.childNodes[0]
+  ).fontSize;
+  // Set the slider value to the initial font size
+  fontSizeSlider.value = parseFloat(initialFontSize);
+  // Listen for changes in the slider value
+  fontSizeSlider.addEventListener("input", function () {
+    if (selectedHeadlineElement) {
+      // Apply the font size to the selected .elSettings element
+      const targetElement = document.getElementById(selectedHeadlineElement);
+      const fontSize = this.value;
+      targetElement.style.fontSize = fontSize + "px";
     }
   });
 
-  // Text color setting for Headline Element
-  const headlineColor = document.getElementById("headline-color");
-  const headlineColorIcon = document.getElementById("headline-color-icon");
-
-  headlineColor.style.color = headlineComponent.style.color;
-  headlineColorIcon.style.color = headlineComponent.style.color;
-  headlineColor.addEventListener("input", function () {
-    const hc = document.getElementById(selectedHeadlineElement);
-    headlineColor.style.color = hc.style.color;
-    headlineColorIcon.style.color = hc.style.color;
-    headlineColorIcon.style.color = headlineColor.value;
-    // Apply the new color to <span> elements or create them for text nodes
-    Array.from(hc.childNodes).forEach((node) => {
-      if (
-        node.nodeType === Node.TEXT_NODE &&
-        node.textContent.trim().length > 0
-      ) {
-        // Wrap text nodes in a span and apply the color
-        const span = document.createElement("span");
-        span.textContent = node.textContent;
-        span.style.color = headlineColor.value; // Apply the chosen color
-        hc.replaceChild(span, node);
-      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== "B") {
-        // Apply the color to existing non-<b> elements (like <span>)
-        node.style.color = headlineColor.value;
-      }
-    });
-  });
   // Text Shadow
   const headlineTextShadow = document.getElementById(
     "set-headline-text-shadow"
@@ -259,10 +222,50 @@ function loadPresetHeadlineSettings(parentWrapper) {
   const fontFamilySelect = document.getElementById(
     "headline-font-family-select"
   );
-
+  console.log(
+    getComputedStyle(headlineComponent).fontFamily,
+    "headlinecomponents-fontfamily"
+  );
+  fontFamilySelect.value = getComputedStyle(
+    headlineComponent
+  ).fontFamily.replace(/['"]/g, "");
   fontFamilySelect.addEventListener("change", function () {
     const headlineComponent = document.getElementById(selectedHeadlineElement);
     headlineComponent.style.fontFamily = fontFamilySelect.value;
+  });
+
+  // Text color setting for Headline Element
+  const headlineColor = document.getElementById("headline-color");
+  const headlineColorIcon = document.getElementById("headline-color-icon");
+
+  headlineColor.addEventListener("input", function () {
+    const hc = document.getElementById(selectedHeadlineElement);
+    headlineColor.style.color = hc.style.color;
+    headlineColorIcon.style.color = hc.style.color;
+    headlineColorIcon.style.color = headlineColor.value;
+
+    // Update the color icon if <b> exists in hc
+    const hcBoldElement = hc.querySelector("span");
+    if (hcBoldElement) {
+      headlineColorIcon.style.color = getComputedStyle(hcBoldElement).color;
+    }
+
+    // Apply the new color to <span> elements or create them for text nodes
+    Array.from(hc.childNodes).forEach((node) => {
+      if (
+        node.nodeType === Node.TEXT_NODE &&
+        node.textContent.trim().length > 0
+      ) {
+        // Wrap text nodes in a span and apply the color
+        const span = document.createElement("span");
+        span.textContent = node.textContent;
+        span.style.color = headlineColor.value; // Apply the chosen color
+        hc.replaceChild(span, node);
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== "B") {
+        // Apply the color to existing non-<b> elements (like <span>)
+        node.style.color = headlineColor.value;
+      }
+    });
   });
 
   // Bold Text Color
@@ -428,13 +431,18 @@ function loadPresetHeadlineSettings(parentWrapper) {
   //icon setting
   if (headlineContainer.getAttribute("data-de-type") == "Bullet List") {
     const iconButtons = document.querySelectorAll(".icon-button");
-    Array.from(iconButtons).some((button) => {
+    Array.from(iconButtons).forEach((button) => {
       button.addEventListener("click", function () {
         const headlineComponent = document.getElementById(
           selectedHeadlineElement
         );
-        const bulletListIcon = headlineComponent.querySelector("i");
-        bulletListIcon.className = button.childNodes[0].className;
+
+        // Select the specific <i> element you want to change
+        const bulletListIcons = headlineComponent.querySelectorAll("i");
+
+        Array.from(bulletListIcons).forEach((bulletListIcon) => {
+          bulletListIcon.className = button.childNodes[0].className;
+        });
       });
     });
   }

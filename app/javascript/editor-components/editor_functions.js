@@ -57,6 +57,7 @@ function traverseAndSetUniqueId(sourceElement) {
       idMap.set(prefix, idMap.get(prefix) + 1); // Update the unique number for the next element with the same prefix
     }
   });
+
 }
 
 

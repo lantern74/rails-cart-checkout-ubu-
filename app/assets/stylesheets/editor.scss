@@ -655,7 +655,8 @@
 .de-rollover-left,
 .de-rollover-center,
 .de-rollover-right,
-.de-rollover-link {
+.de-rollover-link,
+.de-rollover-romovelink {
   background-color: #777;
   color: white;
   padding: 4px 12px;
@@ -1172,11 +1173,15 @@ input[type="color"] {
   left: 0;
   width: 100%;
   height: 100%;
-  background: transparent; /* Ensure overlay is invisible */
+  opacity: 0.5;
 }
 
 .fixed-top {
   z-index: 10;
+}
+
+u {
+  padding-left: 0 !important;
 }
 
 @media (max-width: 930px) {

@@ -467,6 +467,10 @@ function setLink() {
   document.execCommand("createLink", false, url);
 }
 
+function removeLink() {
+  document.execCommand("unlink", false, null);
+}
+
 function editTextControl(element) {
   console.log("edit text works");
   var editTextRolloverTools = document.createElement("div");
@@ -535,6 +539,14 @@ function editTextControl(element) {
     setLink();
   });
 
+  var editRemoveLinkButton = document.createElement("div");
+  editRemoveLinkButton.classList.add("de-rollover-romovelink");
+  editRemoveLinkButton.style.display = "none";
+  editRemoveLinkButton.innerHTML = '<i class="fa fa-unlink"></i>';
+  editRemoveLinkButton.addEventListener("click", function () {
+    removeLink();
+  });
+
   editTextRolloverTools.appendChild(editBoldButton);
   editTextRolloverTools.appendChild(editItalicButton);
   editTextRolloverTools.appendChild(editUnderlineButton);
@@ -543,10 +555,14 @@ function editTextControl(element) {
   editTextRolloverTools.appendChild(editCenterButton);
   editTextRolloverTools.appendChild(editRightButton);
   editTextRolloverTools.appendChild(editLinkButton);
+  editTextRolloverTools.appendChild(editRemoveLinkButton);
 
   element.appendChild(editTextRolloverTools);
 
   element.addEventListener("click", () => {
+    for (let i = 0; i < 9; i++) {
+      editTextRolloverTools.childNodes[i].style.display = "none";
+    }
     const selectedText = window.getSelection().toString().trim();
     if (selectedText) {
       closeAllTextEditPopups();
@@ -589,12 +605,28 @@ function editTextControl(element) {
         }
         element.childNodes[3].childNodes[0].style.display = "none";
         editTextRolloverTools.style.display = "block";
-        for (let i = 0; i < 8; i++) {
-          editTextRolloverTools.childNodes[i].style.display = "block";
+
+        // Check if selected text is a link
+        const anchorNode =
+          range.startContainer.nodeType === Node.ELEMENT_NODE
+            ? range.startContainer
+            : range.startContainer.parentNode;
+        const isLink = anchorNode.nodeName === "A";
+
+        if (isLink) {
+          for (let i = 0; i < 7; i++) {
+            editTextRolloverTools.childNodes[i].style.display = "block";
+          }
+          editTextRolloverTools.childNodes[7].style.display = "none";
+          editTextRolloverTools.childNodes[8].style.display = "block";
+        } else {
+          for (let i = 0; i < 8; i++) {
+            editTextRolloverTools.childNodes[i].style.display = "block";
+          }
         }
       } else {
         editTextRolloverTools.style.display = "none";
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 9; i++) {
           editTextRolloverTools.childNodes[i].style.display = "none";
         }
       }
@@ -604,11 +636,8 @@ function editTextControl(element) {
   document.addEventListener("click", function (event) {
     if (!element.contains(event.target)) {
       var editTextRolloverTools = element.childNodes[4];
-
-      //? ***   close all text-de-rollover-tools
-      // If the click is outside of the paragraphelement, hide the editTextRolloverTools
       editTextRolloverTools.style.display = "none";
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 9; i++) {
         editTextRolloverTools.childNodes[i].style.display = "none";
       }
     }

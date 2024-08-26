@@ -36,6 +36,7 @@ function createRowSection() {
 
 function addBlueTools(rowSection) {
   var rowId = rowSection.getAttribute("id");
+  console.log(rowId, "addBluetools");
   var blueRolloverTools = document.createElement("div");
   blueRolloverTools.classList.add(
     "de-rollover-tools",
@@ -287,9 +288,11 @@ function rowControl(rowSection) {
 function blueClone(element) {
   const copyRow = element.parentNode.parentNode;
   const pasteRow = copyRow.cloneNode(true);
+  console.log(pasteRow, "paseRow");
   var key = new Date().getTime();
   pasteRow.setAttribute("id", "row-" + key);
-  traverseAndSetUniqueId(pasteRow);
+  pasteRow.childNodes[2].setAttribute("id", `plus-row-${key}`);
+  // traverseAndSetUniqueId(pasteRow);
   copyRow.insertAdjacentElement("afterend", pasteRow);
 
   rowControl(pasteRow);

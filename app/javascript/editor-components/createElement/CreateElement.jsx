@@ -136,18 +136,13 @@ function createVideoElement() {
   videoWrapper.setAttribute("data-delay", "500");
   videoWrapper.style.outline = "none";
   videoWrapper.style.cursor = "upset";
+  videoWrapper.style.margin = "auto";
   videoWrapper.setAttribute("aria-disabled", "false");
   videoWrapper.setAttribute("draggable", true);
 
-  // videoWrapper.innerHTML = `
-  // <iframe class="video-frame" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  // <div class="video-overlay"></div>
-
-  // `;
-
   videoWrapper.innerHTML = `
   <div class="video-container">
-  <iframe class="video-frame" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe class="video-frame" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
   <div class="video-overlay"></div>
   </div>
   `;
@@ -182,6 +177,8 @@ function createListElement() {
   listWrapperElement.setAttribute("id", `listUL-${Date.now()}`);
   listWrapperElement.classList.add("elBullet");
   listWrapperElement.style.listStyleType = "none";
+  listWrapperElement.style.paddingLeft = "0";
+  listWrapperElement.style.fontSize = "20px";
 
   // Create and append the initial list item
   const listWrapperElementLi = createListItem("Bullet List");
@@ -196,10 +193,11 @@ function createListElement() {
       // Create and insert a new list item after the currently focused one
       const activeElement = document.activeElement;
       if (activeElement.tagName === "LI") {
-        const newItem = createListItem("");
+        const iconClass = activeElement.querySelector("i").className; // Get the icon class
+        const newItem = createListItem("", iconClass); // Pass the icon class to createListItem
         listWrapperElement.insertBefore(newItem, activeElement.nextSibling);
 
-        // Move the cursor to the position after the check icon in the new item
+        // Move the cursor to the position after the icon in the new item
         moveCursorAfterIcon(newItem);
 
         // Focus on the new item
@@ -229,7 +227,8 @@ function createListElement() {
 }
 
 // Helper function to create a list item
-function createListItem(text) {
+function createListItem(text, iconClass = "bi bi-check") {
+  // Default icon class
   const listItem = document.createElement("li");
   listItem.classList.add(
     "ne",
@@ -240,11 +239,11 @@ function createListItem(text) {
     "elBGStyle0",
     "hsTextShadow0"
   );
-  listItem.style.fontSize = "20px";
   listItem.dataset.bold = "inherit";
   listItem.dataset.gramm = "false";
-  listItem.innerHTML = `<i class='bi bi-check'></i>${text} &nbsp;`;
+  listItem.innerHTML = `<i class='${iconClass}' style="padding-right: 10px"></i>${text} &nbsp;`; // Use the passed icon class
   listItem.setAttribute("contenteditable", "true");
+  listItem.style.display = "flex";
 
   return listItem;
 }
