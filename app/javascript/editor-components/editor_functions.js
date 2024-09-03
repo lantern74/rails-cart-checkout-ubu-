@@ -13,7 +13,7 @@ function closeAllTextEditPopups() {
   editTextRolloverToolsList.forEach((editTextRolloverTool) => {
     editTextRolloverTool.style.display = 'none';
 
-    for (let i = 0; i < editTextRolloverTool.childNodes.length && i < 8; i++) {
+    for (let i = 0; i < editTextRolloverTool.childNodes.length && i < 10; i++) {
       let child = editTextRolloverTool.childNodes[i];
       if (child.style) {
         child.style.display = 'none';

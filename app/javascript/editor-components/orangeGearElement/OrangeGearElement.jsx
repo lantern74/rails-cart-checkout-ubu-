@@ -1,75 +1,71 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  closeAllSidebars,
-  closeAllTextEditPopups,
-  anyOfTheSidebarsOpen,
-  getRandomColor,
-  updateTextareaFromContainer,
-} from "../editor_functions";
+import { closeAllSidebars, closeAllTextEditPopups, anyOfTheSidebarsOpen, getRandomColor, updateTextareaFromContainer } from "../editor_functions";
 import { ImageGearElement } from "../imageGearElement/ImageGearElement";
 import { VideoGearElement } from "../videoGearElement/VideoGearElement";
 import { HeadlineGearElement } from "../headlineGearElement/HeadlineGearElement";
 import { TwoStepGearElement } from "../twoStepGearElement/TwoStepGearElement";
 import { ButtonGearElement } from "../buttonGearElement/ButtonGearElement";
-import {
-  createTextElement,
-  createImageElement,
-  createVideoElement,
-  createListElement,
-  createButtonElement,
-  createCountdownElement,
-  createInputField,
-  createInputElement,
-  createEmailElement,
-  createPhoneElement,
-  createCombElement,
-} from "../createElement/CreateElement";
+import { createTextElement, createImageElement, createVideoElement, createListElement, createButtonElement, createCountdownElement, createInputField, createInputElement, createEmailElement, createPhoneElement, createCombElement } from "../createElement/CreateElement";
 
 // Settings for Orange Section Container
 let selectedOrangeSection = null;
 let afterElement = undefined;
 let placeholder = undefined;
 var existingElement = undefined;
+const container = document.querySelector(".deviceview");
 
 function OrangeGearElement(element) {
   event.stopPropagation();
+
   var parentWrapper = element;
   var firstChild = parentWrapper.firstChild;
   var parentType = element.getAttribute("data-de-type");
 
-  if (parentType === "headline-field") {
+  if (parentType === "headline-field" || parentType === "subhead-field" || parentType === "paragraph-field") {
     document.getElementById("icon-field").style.display = "none";
     HeadlineGearElement(parentWrapper, parentType);
-    setHeadlinePopup.classList.contains("open")
-      ? closeAllSidebars()
-      : setHeadlinePopup.classList.add("open");
+
+    if (setHeadlinePopup.classList.contains("open")) {
+      closeAllSidebars();
+      document.getElementById("marginPaddingPopup").style.display = "none";
+    } else {
+      setHeadlinePopup.classList.add("open");
+    }
   } else if (parentType === "Bullet List") {
     document.getElementById("icon-field").style.display = "block";
     HeadlineGearElement(parentWrapper, parentType);
-    setHeadlinePopup.classList.contains("open")
-      ? closeAllSidebars()
-      : setHeadlinePopup.classList.add("open");
+
+    if (setHeadlinePopup.classList.contains("open")) {
+      closeAllSidebars();
+      document.getElementById("marginPaddingPopup").style.display = "none";
+    } else {
+      setHeadlinePopup.classList.add("open");
+    }
   } else if (parentType === "button") {
     ButtonGearElement(firstChild);
   } else if (parentType === "combo") {
     console.log("open the bar dude");
     TwoStepGearElement(parentWrapper);
-    setTwoStepOrderPopup.classList.contains("open")
-      ? closeAllSidebars()
-      : setTwoStepOrderPopup.classList.add("open");
+    if (setTwoStepOrderPopup.classList.contains("open")) {
+      closeAllSidebars();
+      document.getElementById("marginPaddingPopup").style.display = "none";
+    } else {
+      setTwoStepOrderPopup.classList.add("open");
+    }
   } else if (parentType === "image") {
-    console.log("calling image");
     ImageGearElement(parentWrapper);
   } else if (parentType === "video") {
-    console.log("calling video");
     VideoGearElement(parentWrapper);
   } else {
     document.getElementById("icon-field").style.display = "none";
     HeadlineGearElement(parentWrapper, parentType);
-    setHeadlinePopup.classList.contains("open")
-      ? closeAllSidebars()
-      : setHeadlinePopup.classList.add("open");
+    if (setHeadlinePopup.classList.contains("open")) {
+      closeAllSidebars();
+      document.getElementById("marginPaddingPopup").style.display = "none";
+    } else {
+      setHeadlinePopup.classList.add("open");
+    }
   }
 }
 
@@ -93,9 +89,7 @@ function addOrangeDraggingPoints(contId) {
 }
 
 function addEventListenersForContainer(container) {
-  container.addEventListener("dragover", (e) =>
-    onDragHover(e, container, false)
-  );
+  container.addEventListener("dragover", (e) => onDragHover(e, container, false));
   container.addEventListener("drop", (e) => onDragDrop(e), false);
   container.addEventListener("dragleave", (e) => onDragLeave(e), false);
   container.addEventListener("dragenter", (e) => onDragEnter(e), false);
@@ -131,14 +125,24 @@ function onDragHover(e, container) {
 }
 
 function onDragEnter(e) {
+  console.log("onDragEnter");
   e.preventDefault();
 }
 
 function onDragLeave(e) {
+  console.log("onDragLeave");
+
+  // var dragPlaceholder = document.querySelector('[id*="placeholder-"]');
+  // if (dragPlaceholder) {
+  //   dragPlaceholder.remove();
+  // }
+
   e.preventDefault();
 }
 
 function onDragDrop(e) {
+  console.log("onDragDrop");
+
   e.preventDefault();
   placeholder.replaceWith(elementToInsert);
 }
@@ -159,24 +163,14 @@ updateDraggables = function () {
 addEventListeners = function () {
   if (draggables) {
     draggables.forEach((draggable) => {
-      draggable.addEventListener(
-        "dragstart",
-        (e) => onDragStart(e, draggable),
-        false
-      );
-      draggable.addEventListener(
-        "dragend",
-        (e) => onDragEnd(e, draggable),
-        false
-      );
+      draggable.addEventListener("dragstart", (e) => onDragStart(e, draggable), false);
+      draggable.addEventListener("dragend", (e) => onDragEnd(e, draggable), false);
     });
   }
 };
 
 getDragAfterElement = function (container, y) {
-  const draggableElements = [
-    ...container.querySelectorAll(".draggable:not(.dragging)"),
-  ];
+  const draggableElements = [...container.querySelectorAll(".draggable:not(.dragging)")];
   return draggableElements.reduce(
     (closest, child) => {
       const box = child.getBoundingClientRect();
@@ -216,6 +210,7 @@ function insertEl(e, draggable, interactionType, currentChosenField = null) {
   let existingElement = true;
   if (draggable && draggable.getAttribute("name")) {
     let element = draggable.getAttribute("name");
+    console.log(element, "dragelement");
 
     let wrapperFunction = creationFunctions[element];
     if (wrapperFunction) {
@@ -244,12 +239,13 @@ function insertEl(e, draggable, interactionType, currentChosenField = null) {
     }
 
     if (currentChosenField) {
-      currentChosenField.appendChild(elementToInsert); // Now we are just appending to it
+      currentChosenField.appendChild(elementToInsert);
     }
   }
 }
 
 addElementWithClick = function (e, draggable, currentChosenField) {
+  console.log("click element");
   insertEl(e, draggable, "click", currentChosenField);
   if (!existingElement) {
     addEventListenerForDraggableItem(elementToInsert);
@@ -260,19 +256,15 @@ addElementWithClick = function (e, draggable, currentChosenField) {
 };
 
 onDragStart = function (e, draggable) {
+  console.log("ondragstart");
   insertEl(e, draggable, "drag");
 };
 
 function onDragEnd(e, draggable) {
+  console.log("ondragend");
   draggable.classList.remove("dragging");
-  updateTextareaFromContainer(
-    "da-main-container",
-    "step[large_html_blob_content]"
-  );
-  updateTextareaFromContainer(
-    "da-popup-container",
-    "step[popup_html_blob_content]"
-  );
+  updateTextareaFromContainer("da-main-container", "step[large_html_blob_content]");
+  updateTextareaFromContainer("da-popup-container", "step[popup_html_blob_content]");
 
   var setButtonPopup = document.getElementById("setButtonPopup");
 
@@ -281,9 +273,7 @@ function onDragEnd(e, draggable) {
   if (anchor) {
     anchor.addEventListener("click", function (event) {
       event.preventDefault();
-      setButtonPopup.classList.contains("open")
-        ? closeAllSidebars()
-        : ButtonGearElement(anchor);
+      setButtonPopup.classList.contains("open") ? closeAllSidebars() : ButtonGearElement(anchor);
       event.stopPropagation();
     });
   }
@@ -294,15 +284,17 @@ function onDragEnd(e, draggable) {
   } else {
     elementToInsert.classList.remove("dragging");
   }
+  var dragPlaceholder = document.querySelector('[id*="placeholder-"]');
+  if (dragPlaceholder) {
+    dragPlaceholder.remove();
+  }
 }
 
 function addEventListenerForDraggableItem(element) {
   element.addEventListener("dragstart", (e) => onDragStart(e, element));
   element.addEventListener("dragend", (e) => onDragEnd(e, element));
 
-  const elHeadlineElements = element.querySelectorAll(
-    ".elHeadline, .elText, .elSubHeadline"
-  ); // Select .elHeadline elements inside the div
+  const elHeadlineElements = element.querySelectorAll(".elHeadline, .elText, .elSubHeadline"); // Select .elHeadline elements inside the div
 
   // Add click event listener for content editing to each .elHeadline element
   elHeadlineElements.forEach((elHeadlineElement) => {
@@ -317,9 +309,7 @@ function addEventListenerForDraggableItem(element) {
 const orangeGeneralTab = document.getElementById("orange-general-tab");
 const orangeGeneralContent = document.getElementById("orange-general-content");
 const orangeAdvancedTab = document.getElementById("orange-advanced-tab");
-const orangeAdvancedContent = document.getElementById(
-  "orange-advanced-content"
-);
+const orangeAdvancedContent = document.getElementById("orange-advanced-content");
 orangeGeneralTab.addEventListener("click", function () {
   orangeGeneralContent.classList.add("active");
   orangeGeneralTab.classList.add("active");
@@ -350,10 +340,4 @@ const currentSelectedOrangeElement = (args) => {
   return selectedOrangeSection;
 };
 
-export {
-  OrangeGearElement,
-  addOrangeDraggingPoints,
-  selectedOrangeSection,
-  currentSelectedOrangeElement,
-  addEventListenersForContainer,
-};
+export { OrangeGearElement, addOrangeDraggingPoints, selectedOrangeSection, currentSelectedOrangeElement, addEventListenersForContainer };

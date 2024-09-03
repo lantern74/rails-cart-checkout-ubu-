@@ -1,13 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  closeAllSidebars,
-  closeAllTextEditPopups,
-  traverseAndSetUniqueId,
-  moveUp,
-  moveDown,
-  removeElement,
-} from "../editor_functions";
+import { closeAllSidebars, closeAllTextEditPopups, traverseAndSetUniqueId, moveUp, moveDown, removeElement } from "../editor_functions";
 import { GreenGearElement } from "../greenGearElement/GreenGearElement";
 import { rowControl } from "../createRow/CreateRow";
 import { elementControl, editTextControl } from "../addElement/AddElement";
@@ -21,17 +14,38 @@ function createContainer(width, containerId) {
   var key = new Date().getTime();
   container.setAttribute("id", key);
   container.classList.add("editor-container", "new-section", "new-container");
+  const desktopBtn = document.getElementById("desktopBtn");
+  const mobileBtn = document.getElementById("mobileBtn");
+  if (desktopBtn.classList.contains("active")) {
+    container.classList.add("mp-desktop-view");
+  } else {
+    container.classList.add("mp-mobile-view");
+  }
   container.style.width = width;
+  container.style.margin = "auto";
+  container.style.setProperty("--desktop-margin-top", "0px");
+  container.style.setProperty("--desktop-margin-left", "0px");
+  container.style.setProperty("--desktop-margin-right", "0px");
+  container.style.setProperty("--desktop-margin-bottom", "0px");
+  container.style.setProperty("--desktop-padding-top", "20px");
+  container.style.setProperty("--desktop-padding-left", "0px");
+  container.style.setProperty("--desktop-padding-right", "0px");
+  container.style.setProperty("--desktop-padding-bottom", "20px");
+  container.style.setProperty("--mobile-margin-top", "0px");
+  container.style.setProperty("--mobile-margin-left", "0px");
+  container.style.setProperty("--mobile-margin-right", "0px");
+  container.style.setProperty("--mobile-margin-bottom", "0px");
+  container.style.setProperty("--mobile-padding-top", "20px");
+  container.style.setProperty("--mobile-padding-left", "0px");
+  container.style.setProperty("--mobile-padding-right", "0px");
+  container.style.setProperty("--mobile-padding-bottom", "20px");
   setSectionWidthPopup.classList.remove("open");
 
   addGreenTools(container);
 
   if (isPopupOpen()) {
     if (popupContainerSection.childNodes[0]) {
-      popupContainerSection.insertBefore(
-        container,
-        originContainer.nextSibling
-      );
+      popupContainerSection.insertBefore(container, originContainer.nextSibling);
     } else {
       popupContainerSection.appendChild(container);
     }
@@ -47,113 +61,35 @@ function createContainer(width, containerId) {
 function addGreenTools(container) {
   var containerId = container.getAttribute("id");
   var greenRolloverTools = document.createElement("div");
-  greenRolloverTools.classList.add(
-    "de-rollover-tools",
-    "green",
-    "smallWidthElementHover",
-    "d-flex",
-    "flex-column"
-  );
+  greenRolloverTools.classList.add("de-rollover-tools", "green", "smallWidthElementHover", "d-flex", "flex-column");
   greenRolloverTools.style.display = "none";
 
   var greenArrowRolloverTools = document.createElement("div");
-  greenArrowRolloverTools.classList.add(
-    "arrow-de-rollover-tools",
-    "green",
-    "smallWidthElementHover",
-    "d-flex",
-    "flex-column"
-  );
+  greenArrowRolloverTools.classList.add("arrow-de-rollover-tools", "green", "smallWidthElementHover", "d-flex", "flex-column");
   greenArrowRolloverTools.style.display = "none";
 
   var greenPlusRolloverTools = document.createElement("div");
   greenPlusRolloverTools.setAttribute("id", `plus-container-${containerId}`);
-  greenPlusRolloverTools.classList.add(
-    "plus-de-rollover-tools",
-    "green",
-    "smallWidthElementHover",
-    "d-flex",
-    "flex-column"
-  );
+  greenPlusRolloverTools.classList.add("plus-de-rollover-tools", "green", "smallWidthElementHover", "d-flex", "flex-column");
   greenPlusRolloverTools.style.display = "none";
 
   var greenAddRowRolloverTools = document.createElement("div");
-  greenAddRowRolloverTools.classList.add(
-    "add-row-de-rollover-tools",
-    "green",
-    "smallWidthElementHover",
-    "d-flex"
-  );
+  greenAddRowRolloverTools.classList.add("add-row-de-rollover-tools", "green", "smallWidthElementHover", "d-flex");
   greenAddRowRolloverTools.style.display = "none";
 
   var greenAddRowPlusRolloverTools = document.createElement("div");
   greenAddRowPlusRolloverTools.style.position = "relative";
 
-  appendGreenButton(
-    greenRolloverTools,
-    "de-rollover-move",
-    "#37ca37",
-    "fa fa-arrows"
-  );
-  appendGreenButton(
-    greenRolloverTools,
-    "de-rollover-clone",
-    "#37ca37",
-    "fa fa-copy"
-  );
-  appendGreenButton(
-    greenRolloverTools,
-    "de-rollover-remove",
-    "#37ca37",
-    "fa fa-trash"
-  );
+  appendGreenButton(greenRolloverTools, "de-rollover-move", "#37ca37", "fa fa-arrows");
+  appendGreenButton(greenRolloverTools, "de-rollover-clone", "#37ca37", "fa fa-copy");
+  appendGreenButton(greenRolloverTools, "de-rollover-remove", "#37ca37", "fa fa-trash");
 
-  appendGreenButton(
-    greenArrowRolloverTools,
-    "de-rollover-arrow-up",
-    "#37ca37",
-    "fa fa-arrow-up"
-  );
-  appendGreenButton(
-    greenArrowRolloverTools,
-    "de-rollover-arrow-down",
-    "#37ca37",
-    "fa fa-arrow-down"
-  );
-  appendGreenButton(
-    greenArrowRolloverTools,
-    "de-rollover-advanced",
-    "#37ca37",
-    "fa fa-cog",
-    `green_advanced-${Date.now()}`
-  );
-  appendGreenButton(
-    greenPlusRolloverTools,
-    "de-rollover-plus-circle",
-    "#37ca37",
-    "fa fa-plus",
-    null,
-    "-50%"
-  );
-  appendGreenButton(
-    greenAddRowRolloverTools,
-    "container-fluid p-3 rounded",
-    null,
-    null,
-    null,
-    null,
-    '<button class="add-row btn fs-5 w-100 text-green bg-lightgreen" style="padding:20px 0 !important"> + Add Row</button>'
-  );
-  appendGreenButton(
-    greenAddRowPlusRolloverTools,
-    "add-row-plus-de-rollover-tools",
-    null,
-    "fa fa-plus",
-    null,
-    null,
-    null,
-    "fa-plus-custom-classes"
-  );
+  appendGreenButton(greenArrowRolloverTools, "de-rollover-arrow-up", "#37ca37", "fa fa-arrow-up");
+  appendGreenButton(greenArrowRolloverTools, "de-rollover-arrow-down", "#37ca37", "fa fa-arrow-down");
+  appendGreenButton(greenArrowRolloverTools, "de-rollover-advanced", "#37ca37", "fa fa-cog", `green_advanced-${Date.now()}`);
+  appendGreenButton(greenPlusRolloverTools, "de-rollover-plus-circle", "#37ca37", "fa fa-plus", null, "-50%");
+  appendGreenButton(greenAddRowRolloverTools, "container-fluid p-3 rounded", null, null, null, null, '<button class="add-row btn fs-5 w-100 text-green bg-lightgreen" style="padding:20px 0 !important"> + Add Row</button>');
+  appendGreenButton(greenAddRowPlusRolloverTools, "add-row-plus-de-rollover-tools", null, "fa fa-plus", null, null, null, "fa-plus-custom-classes");
 
   container.prepend(greenAddRowPlusRolloverTools);
   container.prepend(greenAddRowRolloverTools);
@@ -164,16 +100,7 @@ function addGreenTools(container) {
   sectionControl(container);
 }
 
-function appendGreenButton(
-  parent,
-  className,
-  backgroundColor,
-  iconClass,
-  id = null,
-  left = null,
-  customHTML = null,
-  innerElementClasses = ""
-) {
+function appendGreenButton(parent, className, backgroundColor, iconClass, id = null, left = null, customHTML = null, innerElementClasses = "") {
   var button = document.createElement("div");
   button.classList.add(...className.split(" ")); // Split className to support multiple classes
   button.style.display = "none"; // Default to hidden
@@ -270,14 +197,9 @@ function sectionControl(cont) {
 
   // another CLICK LISTENER??????? This is for the new items
   document.addEventListener("click", function (event) {
-    const isOutsideGreenPopup =
-      event.target !== setSectionPopup &&
-      !setSectionPopup.contains(event.target);
-    const isSetSectionPopup =
-      event.target === cont && cont.contains(event.target);
-    const isMarginPaddingPopup =
-      event.target !== marginPaddingPopup &&
-      !marginPaddingPopup.contains(event.target);
+    const isOutsideGreenPopup = event.target !== setSectionPopup && !setSectionPopup.contains(event.target);
+    const isSetSectionPopup = event.target === cont && cont.contains(event.target);
+    const isMarginPaddingPopup = event.target !== marginPaddingPopup && !marginPaddingPopup.contains(event.target);
     // console.log(`%c isSetSectionPopup:`+isSetSectionPopup)
     // console.log("isOutsideGreenPopup:"+isOutsideGreenPopup)
 
@@ -287,9 +209,6 @@ function sectionControl(cont) {
     // GreenGearElement(event.target.id);
     // console.log("temporarily turned off GreenGearElement ");
 
-    console.log("isSetSectionPopup" + isSetSectionPopup);
-    console.log("isOutsideGreenPopup" + isOutsideGreenPopup);
-    console.log("isMarginPaddingPopup" + isMarginPaddingPopup);
     // * close the green popup if...
     if (isSetSectionPopup) {
       GreenGearElement(event.target.id);
@@ -399,10 +318,7 @@ function greenClone(element) {
     pasteRow.addEventListener("mouseenter", function () {
       pasteColumns.forEach((pasteColumn) => {
         pasteColumn.style.borderRight = "3px dotted rgb(58, 133, 255)";
-        if (
-          pasteColumn.childNodes[1] &&
-          pasteColumn.childNodes[1].className === "div-boundary"
-        ) {
+        if (pasteColumn.childNodes[1] && pasteColumn.childNodes[1].className === "div-boundary") {
           pasteColumn.childNodes[1].style.display = "block";
         }
         if (!pasteColumn.querySelector("div.draggable")) {
@@ -420,10 +336,7 @@ function greenClone(element) {
     pasteRow.addEventListener("mouseleave", function () {
       pasteColumns.forEach((pasteColumn) => {
         pasteColumn.style.borderRight = "none";
-        if (
-          pasteColumn.childNodes[1] &&
-          pasteColumn.childNodes[1].className === "div-boundary"
-        ) {
+        if (pasteColumn.childNodes[1] && pasteColumn.childNodes[1].className === "div-boundary") {
           pasteColumn.childNodes[1].style.display = "none";
         }
         pasteColumn.childNodes[0].childNodes[0].style.display = "none";

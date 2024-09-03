@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  closeAllSidebars,
-  closeAllTextEditPopups,
-  anyOfTheSidebarsOpen,
-  getRandomColor,
-} from "../editor_functions";
+import { closeAllSidebars, closeAllTextEditPopups, anyOfTheSidebarsOpen, getRandomColor } from "../editor_functions";
 
 var setBlueMarginTop = document.getElementById("setBlueMarginTop");
+var setBlueMarginLeft = document.getElementById("setBlueMarginLeft");
+var setBlueMarginRight = document.getElementById("setBlueMarginRight");
 var setBlueMarginBottom = document.getElementById("setBlueMarginBottom");
 var setBluePaddingTop = document.getElementById("setBluePaddingTop");
 var setBluePaddingLeft = document.getElementById("setBluePaddingLeft");
@@ -26,6 +23,7 @@ function BlueGearElement(id) {
     setColumnPopup.classList.add("open");
   } else if (setColumnPopup.classList.contains("open")) {
     closeAllSidebars();
+    document.getElementById("marginPaddingPopup").style.display = "none";
   }
   // * THIS IS THE SLIDING SETTINGS PANEL FOR BLUE
   loadBlueSettings(id);
@@ -37,27 +35,114 @@ function loadBlueSettings(id) {
   const blueComponent = document.getElementById(id);
   //get margin padding value
   let editorComponentStyles = getComputedStyle(blueComponent);
-  setBlueMarginTop.innerText =
-    editorComponentStyles.getPropertyValue("margin-top");
-  setBlueMarginBottom.innerText =
-    editorComponentStyles.getPropertyValue("margin-bottom");
-  setBluePaddingTop.innerText =
-    editorComponentStyles.getPropertyValue("padding-top");
-  setBluePaddingLeft.innerText =
-    editorComponentStyles.getPropertyValue("padding-left");
-  setBluePaddingRight.innerText =
-    editorComponentStyles.getPropertyValue("padding-right");
-  setBluePaddingBottom.innerText =
-    editorComponentStyles.getPropertyValue("padding-bottom");
+  if (desktopBtn.classList.contains("active")) {
+    setBlueMarginTop.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-top");
+    setBlueMarginLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-left");
+    setBlueMarginRight.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-right");
+    setBlueMarginBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-bottom");
+    setBluePaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+    setBluePaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+    setBluePaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+    setBluePaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+  } else if (mobileBtn.classList.contains("active")) {
+    setBlueMarginTop.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-top");
+    setBlueMarginLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-left");
+    setBlueMarginRight.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-right");
+    setBlueMarginBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-bottom");
+    setBluePaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+    setBluePaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+    setBluePaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+    setBluePaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+  }
+  document.querySelectorAll(".device-select .option").forEach((option) => {
+    option.addEventListener("click", function () {
+      const blueComponent = document.getElementById(id);
+      const device = this.getAttribute("data-value");
+
+      // Update the font size based on device selection
+      if (device === "desktop") {
+        // blueComponent.classList.add("active");
+        // blueComponent.classList.remove("mobile-view");
+        // blueComponent.classList.add("desktop-view");
+        blueComponent.classList.add("active");
+        blueComponent.classList.remove("mp-mobile-view");
+        blueComponent.classList.add("mp-desktop-view");
+
+        // blueComponent.style.setProperty("--desktop-text-align", desktopTextAlign);
+        // document.querySelectorAll(".align-button").forEach((button) => {
+        //   button.classList.remove("selected-button");
+        //   if (button.querySelector("i").classList.contains(`bi-text-${desktopTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   } else if (button.querySelector("i").classList.contains(`bi-${desktopTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   }
+        // });
+        setBlueMarginTop.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-top");
+        setBlueMarginLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-left");
+        setBlueMarginRight.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-right");
+        setBlueMarginBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-bottom");
+        setBluePaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+        setBluePaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+        setBluePaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+        setBluePaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+      } else if (device === "mobile") {
+        // blueComponent.classList.remove("active");
+        // blueComponent.classList.add("mobile-view");
+        // blueComponent.classList.remove("desktop-view");
+        blueComponent.classList.remove("active");
+        blueComponent.classList.add("mp-mobile-view");
+        blueComponent.classList.remove("mp-desktop-view");
+
+        // blueComponent.style.setProperty("--mobile-text-align", mobileTextAlign);
+        // document.querySelectorAll(".align-button").forEach((button) => {
+        //   button.classList.remove("selected-button");
+        //   if (button.querySelector("i").classList.contains(`bi-text-${mobileTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   } else if (button.querySelector("i").classList.contains(`bi-${mobileTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   }
+        // });
+        setBlueMarginTop.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-top");
+        setBlueMarginLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-left");
+        setBlueMarginRight.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-right");
+        setBlueMarginBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-bottom");
+        setBluePaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+        setBluePaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+        setBluePaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+        setBluePaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+      }
+    });
+  });
+
   // Background color setting for Blue Section
   const blueBackColor = document.getElementById("blue-back-color");
   const blueBackColorIcon = document.getElementById("blue-back-color-icon");
-  blueBackColor.style.color = blueComponent.style.backgroundColor;
-  blueBackColorIcon.style.color = blueComponent.style.backgroundColor;
-  blueBackColor.addEventListener("input", function () {
-    blueBackColorIcon.style.color = blueBackColor.value;
+  const transparentButton = document.getElementById("blue-transparent-background");
+  blueBackColor.style.color = getComputedStyle(blueComponent).backgroundColor;
+  blueBackColorIcon.style.color = getComputedStyle(blueComponent).backgroundColor;
+  const updateBackgroundColor = () => {
     const blueComponent = document.getElementById(selectedBlueSection);
-    blueComponent.style.backgroundColor = blueBackColor.value;
+    if (blueComponent.dataset.transparent === "true") {
+      // Set the background color to transparent
+      blueComponent.style.backgroundColor = "transparent";
+    } else {
+      // Set the background color to the chosen color
+      blueComponent.style.backgroundColor = blueBackColor.value;
+    }
+  };
+  // Event listener for color input
+  blueBackColor.addEventListener("input", function () {
+    const blueComponent = document.getElementById(selectedBlueSection);
+    blueComponent.dataset.transparent = "false";
+    updateBackgroundColor();
+    blueBackColorIcon.style.color = blueBackColor.value;
+  });
+  // Event listener for the transparent button
+  transparentButton.addEventListener("click", function () {
+    const blueComponent = document.getElementById(selectedBlueSection);
+    blueComponent.dataset.transparent = "true";
+    updateBackgroundColor();
+    blueBackColorIcon.style.color = "white";
   });
 
   // Alginment for blue Section
@@ -136,12 +221,9 @@ function loadBlueSettings(id) {
   //Setting Background Image
   const backgroundImage = document.getElementById("input-blue-image");
   backgroundImage.addEventListener("input", function () {
-    blueComponent.style.backgroundImage =
-      'url("' + backgroundImage.value + '")';
+    blueComponent.style.backgroundImage = 'url("' + backgroundImage.value + '")';
   });
-  const imageRepeatOption = document.getElementById(
-    "select-blue-image-repeat-options"
-  );
+  const imageRepeatOption = document.getElementById("select-blue-image-repeat-options");
   imageRepeatOption.addEventListener("change", function () {
     if (imageRepeatOption.value == "No Repeat") {
       blueComponent.style.backgroundRepeat = "no-repeat";
@@ -153,9 +235,7 @@ function loadBlueSettings(id) {
       blueComponent.style.backgroundRepeat = "repeat-y";
     }
   });
-  const imageSizeOption = document.getElementById(
-    "select-blue-image-size-options"
-  );
+  const imageSizeOption = document.getElementById("select-blue-image-size-options");
   imageSizeOption.addEventListener("change", function () {
     if (imageSizeOption.value == "Full Center") {
       blueComponent.style.backgroundSize = "auto";
@@ -259,6 +339,34 @@ function loadBlueSettings(id) {
       blueComponent.style.borderRadius = `0 0 ${settedRadiusValue} ${settedRadiusValue}`;
     }
   });
+
+  const desktopVi = document.getElementById("row-desktop");
+  const mobileVi = document.getElementById("row-mobile");
+  const desktopDisplay = (section) => {
+    const blueComponent = document.getElementById(selectedBlueSection);
+    if (desktopBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        blueComponent.style.display = "block";
+      } else {
+        blueComponent.style.display = "none";
+      }
+    }
+  };
+  const mobileDisplay = (section) => {
+    const blueComponent = document.getElementById(selectedBlueSection);
+    if (mobileBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        blueComponent.style.display = "block";
+      } else {
+        blueComponent.style.display = "none";
+      }
+    }
+  };
+  if (desktopBtn.classList.contains("active")) {
+    desktopVi.addEventListener("click", () => desktopDisplay(desktopVi));
+  } else {
+    mobileVi.addEventListener("click", () => mobileDisplay(mobileVi));
+  }
 }
 
 // General and Advanced tab panel for Blue Section

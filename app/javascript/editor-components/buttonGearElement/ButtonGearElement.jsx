@@ -4,6 +4,8 @@ import ReactDOM from "react-dom/client";
 import { closeAllSidebars, closeAllTextEditPopups } from "../editor_functions";
 
 var setButtonMarginTop = document.getElementById("setButtonMarginTop");
+var setButtonMarginLeft = document.getElementById("setButtonMarginLeft");
+var setButtonMarginRight = document.getElementById("setButtonMarginRight");
 var setButtonMarginBottom = document.getElementById("setButtonMarginBottom");
 var setButtonPaddingTop = document.getElementById("setButtonPaddingTop");
 var setButtonPaddingLeft = document.getElementById("setButtonPaddingLeft");
@@ -34,10 +36,12 @@ elSettingsAnchors.forEach(function (elSettingsAnchor) {
 });
 
 function ButtonGearElement(element) {
-  selectedElSettings = element.id; // Store the clicked element's ID
+  selectedElSettings = element.id;
+  selectedButtonElement = element.parentNode.id;
 
   if (setButtonPopup.classList.contains("open")) {
     closeAllSidebars();
+    document.getElementById("marginPaddingPopup").style.display = "none";
   } else {
     closeAllSidebars();
     setButtonPopup.classList.add("open");
@@ -56,13 +60,9 @@ function loadPresetButtonSettings(element) {
   const actionText = document.getElementById(selectedElSettings);
   const urlInput = document.getElementById("url-input");
   const buttonGeneralTab = document.getElementById("button-general-tab");
-  const buttonGeneralContent = document.getElementById(
-    "button-general-content"
-  );
+  const buttonGeneralContent = document.getElementById("button-general-content");
   const buttonAdvancedTab = document.getElementById("button-advanced-tab");
-  const buttonAdvancedContent = document.getElementById(
-    "button-advanced-content"
-  );
+  const buttonAdvancedContent = document.getElementById("button-advanced-content");
   buttonGeneralTab.addEventListener("click", function () {
     buttonGeneralContent.classList.add("active");
     buttonGeneralTab.classList.add("active");
@@ -75,22 +75,32 @@ function loadPresetButtonSettings(element) {
     buttonAdvancedContent.classList.add("active");
     buttonAdvancedTab.classList.add("active");
   });
-  const selectText = document.getElementById(selectedElSettings); // Get the element by its ID
+  const selectText = document.getElementById(selectedElSettings);
+  const selectParentButton = document.getElementById(selectedButtonElement);
   //get margin padding value
   if (selectText) {
     var editorComponentStyles = getComputedStyle(selectText);
-    setButtonMarginTop.innerText =
-      editorComponentStyles.getPropertyValue("margin-top");
-    setButtonMarginBottom.innerText =
-      editorComponentStyles.getPropertyValue("margin-bottom");
-    setButtonPaddingTop.innerText =
-      editorComponentStyles.getPropertyValue("padding-top");
-    setButtonPaddingLeft.innerText =
-      editorComponentStyles.getPropertyValue("padding-left");
-    setButtonPaddingRight.innerText =
-      editorComponentStyles.getPropertyValue("padding-right");
-    setButtonPaddingBottom.innerText =
-      editorComponentStyles.getPropertyValue("padding-bottom");
+    var editorParentComponentStyles = getComputedStyle(selectParentButton);
+
+    if (desktopBtn.classList.contains("active")) {
+      setButtonMarginTop.innerText = editorParentComponentStyles.getPropertyValue("--desktop-margin-top");
+      setButtonMarginLeft.innerText = editorParentComponentStyles.getPropertyValue("--desktop-margin-left");
+      setButtonMarginRight.innerText = editorParentComponentStyles.getPropertyValue("--desktop-margin-right");
+      setButtonMarginBottom.innerText = editorParentComponentStyles.getPropertyValue("--desktop-margin-bottom");
+      setButtonPaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+      setButtonPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+      setButtonPaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+      setButtonPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+    } else if (mobileBtn.classList.contains("active")) {
+      setButtonMarginTop.innerText = editorParentComponentStyles.getPropertyValue("--mobile-margin-top");
+      setButtonMarginLeft.innerText = editorParentComponentStyles.getPropertyValue("--mobile-margin-left");
+      setButtonMarginRight.innerText = editorParentComponentStyles.getPropertyValue("--mobile-margin-right");
+      setButtonMarginBottom.innerText = editorParentComponentStyles.getPropertyValue("--mobile-margin-bottom");
+      setButtonPaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+      setButtonPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+      setButtonPaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+      setButtonPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+    }
   } else {
     console.error("Selected element not found:", selectedElSettings);
   }
@@ -98,11 +108,7 @@ function loadPresetButtonSettings(element) {
   // Initialize the dropdown with the current value of the href attribute
   if (actionText) {
     readHref = actionText.getAttribute("href");
-    if (
-      readHref === "#open-popup" ||
-      readHref === "#submit-form" ||
-      readHref === "#"
-    ) {
+    if (readHref === "#open-popup" || readHref === "#submit-form" || readHref === "#") {
       actionSelect.value = readHref;
     } else {
       actionSelect.value = "#";
@@ -145,18 +151,156 @@ function loadPresetButtonSettings(element) {
 
   // fontSizeSlider -----------------------------------------
   const fontSizeSlider = document.getElementById("font-size-slider");
-  // Get the initial font size from the selected element
-  const initialFontSize = window.getComputedStyle(element).fontSize;
-  // Set the slider value to the initial font size
-  fontSizeSlider.value = parseFloat(initialFontSize);
-  // Listen for changes in the slider value
+  const deviceSelected = document.getElementById("headline-fontsize-device");
+  const deviceOptions = document.querySelector(".device-select .options");
+  let desktopFontSize = parseFloat(getComputedStyle(selectParentButton).getPropertyValue("--desktop-font-size"));
+  let mobileFontSize = parseFloat(getComputedStyle(selectParentButton).getPropertyValue("--mobile-font-size"));
+
+  fontSizeSlider.value = desktopFontSize;
+  document.querySelectorAll(".device-select .option").forEach((option) => {
+    option.addEventListener("click", function () {
+      const selectParentButton = document.getElementById(selectedButtonElement);
+      const device = this.getAttribute("data-value");
+      if (device === "desktop") {
+        selectParentButton.classList.add("active");
+        selectParentButton.classList.remove("mobile-view");
+        selectParentButton.classList.add("desktop-view");
+        selectParentButton.style.setProperty("--desktop-font-size", `${desktopFontSize}px`);
+        fontSizeSlider.value = desktopFontSize;
+        selectParentButton.style.setProperty("--desktop-text-align", desktopTextAlign);
+        document.querySelectorAll(".align-button").forEach((button) => {
+          button.classList.remove("selected-button");
+          if (button.querySelector("i").classList.contains(`bi-text-${desktopTextAlign}`)) {
+            button.classList.add("selected-button");
+          } else if (button.querySelector("i").classList.contains(`bi-${desktopTextAlign}`)) {
+            button.classList.add("selected-button");
+          }
+        });
+        setButtonMarginTop.innerText = editorParentComponentStyles.getPropertyValue("--desktop-margin-top");
+        setButtonMarginLeft.innerText = editorParentComponentStyles.getPropertyValue("--desktop-margin-left");
+        setButtonMarginRight.innerText = editorParentComponentStyles.getPropertyValue("--desktop-margin-right");
+        setButtonMarginBottom.innerText = editorParentComponentStyles.getPropertyValue("--desktop-margin-bottom");
+        setButtonPaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+        setButtonPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+        setButtonPaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+        setButtonPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+      } else if (device === "mobile") {
+        selectParentButton.classList.remove("active");
+        selectParentButton.classList.add("mobile-view");
+        selectParentButton.classList.remove("desktop-view");
+        selectParentButton.style.setProperty("--mobile-font-size", `${mobileFontSize}px`);
+        fontSizeSlider.value = mobileFontSize;
+        selectParentButton.style.setProperty("--mobile-text-align", mobileTextAlign);
+        document.querySelectorAll(".align-button").forEach((button) => {
+          button.classList.remove("selected-button");
+          if (button.querySelector("i").classList.contains(`bi-text-${mobileTextAlign}`)) {
+            button.classList.add("selected-button");
+          } else if (button.querySelector("i").classList.contains(`bi-${mobileTextAlign}`)) {
+            button.classList.add("selected-button");
+          }
+        });
+        setButtonMarginTop.innerText = editorParentComponentStyles.getPropertyValue("--mobile-margin-top");
+        setButtonMarginLeft.innerText = editorParentComponentStyles.getPropertyValue("--mobile-margin-left");
+        setButtonMarginRight.innerText = editorParentComponentStyles.getPropertyValue("--mobile-margin-right");
+        setButtonMarginBottom.innerText = editorParentComponentStyles.getPropertyValue("--mobile-margin-bottom");
+        setButtonPaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+        setButtonPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+        setButtonPaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+        setButtonPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+      }
+    });
+  });
+
   fontSizeSlider.addEventListener("input", function () {
-    if (selectedElSettings) {
-      // Apply the font size to the selected .elSettings element
-      const targetElement = document.getElementById(selectedElSettings);
-      const fontSize = this.value;
-      targetElement.style.fontSize = fontSize + "px";
+    const selectParentButton = document.getElementById(selectedButtonElement);
+    const fontSize = this.value + "px";
+    const device = deviceSelected.getAttribute("data-value");
+
+    if (device === "desktop") {
+      desktopFontSize = this.value;
+      selectParentButton.style.setProperty("--desktop-font-size", fontSize);
+    } else if (device === "mobile") {
+      mobileFontSize = this.value;
+      selectParentButton.style.setProperty("--mobile-font-size", fontSize);
     }
+  });
+
+  let desktopTextAlign = getComputedStyle(selectParentButton).getPropertyValue("--desktop-text-align");
+  let mobileTextAlign = getComputedStyle(selectParentButton).getPropertyValue("--mobile-text-align");
+  const buttonAlignleftBtn = document.getElementById("button-align-left");
+  const buttonAligncenterBtn = document.getElementById("button-align-center");
+  const buttonAlignrightBtn = document.getElementById("button-align-right");
+  const buttonAlignjustifyBtn = document.getElementById("button-align-full");
+
+  console.log(desktopTextAlign, "desktopTextAlign", mobileTextAlign, "mobileTextAlign");
+
+  if (desktopBtn.classList.contains("active")) {
+    document.querySelectorAll(".align-button").forEach((button) => {
+      button.classList.remove("selected-button");
+      if (button.querySelector("i").classList.contains(`bi-text-${desktopTextAlign}`)) {
+        button.classList.add("selected-button");
+      } else if (button.querySelector("i").classList.contains(`bi-${desktopTextAlign}`)) {
+        button.classList.add("selected-button");
+      }
+    });
+  } else {
+    document.querySelectorAll(".align-button").forEach((button) => {
+      button.classList.remove("selected-button");
+      if (button.querySelector("i").classList.contains(`bi-text-${mobileTextAlign}`)) {
+        button.classList.add("selected-button");
+      } else if (button.querySelector("i").classList.contains(`bi-${mobileTextAlign}`)) {
+        button.classList.add("selected-button");
+      }
+    });
+  }
+
+  const headlineAlignButtons = document.querySelectorAll(".align-button");
+  headlineAlignButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const selectParentButton = document.getElementById(selectedButtonElement);
+      const device = deviceSelected.getAttribute("data-value");
+      headlineAlignButtons.forEach((button) => {
+        button.classList.remove("selected-button");
+      });
+
+      if (device === "desktop") {
+        if (this.querySelector("i").classList.contains("bi-text-left")) {
+          desktopTextAlign = "left";
+          selectParentButton.style.setProperty("--desktop-text-align", "left");
+          this.classList.add("selected-button");
+        } else if (this.querySelector("i").classList.contains("bi-text-center")) {
+          desktopTextAlign = "center";
+          selectParentButton.style.setProperty("--desktop-text-align", "center");
+          this.classList.add("selected-button");
+        } else if (this.querySelector("i").classList.contains("bi-text-right")) {
+          desktopTextAlign = "right";
+          selectParentButton.style.setProperty("--desktop-text-align", "right");
+          this.classList.add("selected-button");
+        } else if (this.querySelector("i").classList.contains("bi-justify")) {
+          desktopTextAlign = "justify";
+          selectParentButton.style.setProperty("--desktop-text-align", "justify");
+          this.classList.add("selected-button");
+        }
+      } else if (device === "mobile") {
+        if (this.querySelector("i").classList.contains("bi-text-left")) {
+          mobileTextAlign = "left";
+          selectParentButton.style.setProperty("--mobile-text-align", "left");
+          this.classList.add("selected-button");
+        } else if (this.querySelector("i").classList.contains("bi-text-center")) {
+          mobileTextAlign = "center";
+          selectParentButton.style.setProperty("--mobile-text-align", "center");
+          this.classList.add("selected-button");
+        } else if (this.querySelector("i").classList.contains("bi-text-right")) {
+          mobileTextAlign = "right";
+          selectParentButton.style.setProperty("--mobile-text-align", "right");
+          this.classList.add("selected-button");
+        } else if (this.querySelector("i").classList.contains("bi-justify")) {
+          mobileTextAlign = "justify";
+          selectParentButton.style.setProperty("--mobile-text-align", "justify");
+          this.classList.add("selected-button");
+        }
+      }
+    });
   });
 
   // buttonTextInput -----------------------------------------
@@ -175,18 +319,12 @@ function loadPresetButtonSettings(element) {
           if (targetElement) {
             targetElement.innerHTML = this.value;
           } else {
-            console.error(
-              "targetElement not found with ID:",
-              selectedElSettings
-            );
+            console.error("targetElement not found with ID:", selectedElSettings);
           }
         }
       });
     } else {
-      console.error(
-        "buttonText element not found with ID:",
-        selectedElSettings
-      );
+      console.error("buttonText element not found with ID:", selectedElSettings);
     }
   } else {
     console.error("buttonTextInput element not found");
@@ -201,9 +339,7 @@ function loadPresetButtonSettings(element) {
 
       // Listen for changes in fontFamilySelect
     } else {
-      console.error(
-        "selectText element not found, check if the ID in selectedElSettings is correct."
-      );
+      console.error("selectText element not found, check if the ID in selectedElSettings is correct.");
     }
   } else {
     console.error("fontFamilySelect element not found");
@@ -221,18 +357,35 @@ function loadPresetButtonSettings(element) {
   });
 
   // Background color setting
+  const targetElement = document.getElementById(selectedElSettings);
   const buttonBackColor = document.getElementById("button-back-color");
   const buttonBackColorIcon = document.getElementById("button-back-color-icon");
-  buttonBackColor.style.color = element.style.backgroundColor;
-  buttonBackColorIcon.style.color = element.style.backgroundColor;
-  buttonBackColor.addEventListener("input", function () {
-    buttonOpacitySelect.value = "1.0";
-    if (selectedElSettings) {
-      // Apply the font size to the selected .elSettings element
-      const targetElement = document.getElementById(selectedElSettings);
-      //  buttonBackColorIcon.style.color = buttonBackColor.value;
+  const transparentButton = document.getElementById("button-transparent-background");
+  buttonBackColor.style.color = targetElement.style.backgroundColor;
+  buttonBackColorIcon.style.color = buttonBackColor.style.color;
+  const updateBackgroundColor = () => {
+    const targetElement = document.getElementById(selectedElSettings);
+    if (targetElement.dataset.transparent === "true") {
+      // Set the background color to transparent
+      targetElement.style.backgroundColor = "transparent";
+    } else {
+      // Set the background color to the chosen color
       targetElement.style.backgroundColor = buttonBackColor.value;
     }
+  };
+  // Event listener for color input
+  buttonBackColor.addEventListener("input", function () {
+    const targetElement = document.getElementById(selectedElSettings);
+    targetElement.dataset.transparent = "false";
+    updateBackgroundColor();
+    buttonBackColorIcon.style.color = buttonBackColor.value;
+  });
+  // Event listener for the transparent button
+  transparentButton.addEventListener("click", function () {
+    const targetElement = document.getElementById(selectedElSettings);
+    targetElement.dataset.transparent = "true";
+    updateBackgroundColor();
+    buttonBackColorIcon.style.color = "white";
   });
 
   // Button Text color setting
@@ -256,49 +409,12 @@ function loadPresetButtonSettings(element) {
   buttonOpacitySelect.addEventListener("change", function () {
     let rgbColor = selectText.style.backgroundColor;
     if (selectText.style.backgroundColor.includes("rgba")) {
-      rgbColor =
-        selectText.style.backgroundColor.replace(/, [\d\.]+\)$/, "") + ")";
+      rgbColor = selectText.style.backgroundColor.replace(/, [\d\.]+\)$/, "") + ")";
     }
-    let convertedRGBA = rgbColor.replace(
-      ")",
-      `, ${buttonOpacitySelect.value})`
-    );
+    let convertedRGBA = rgbColor.replace(")", `, ${buttonOpacitySelect.value})`);
     selectText.style.backgroundColor = convertedRGBA;
   });
 
-  // Text Alignment for button Element
-  const buttonAlignLeft = document.getElementById("button-align-left");
-  const buttonAlignCenter = document.getElementById("button-align-center");
-  const buttonAlignRigth = document.getElementById("button-align-right");
-  const buttonAlignFull = document.getElementById("button-align-full");
-  buttonAlignLeft.addEventListener("click", function () {
-    selectText.parentNode.style.textAlign = "left";
-    buttonAlignLeft.classList.add("selected-button");
-    buttonAlignCenter.classList.remove("selected-button");
-    buttonAlignRigth.classList.remove("selected-button");
-    buttonAlignFull.classList.remove("selected-button");
-  });
-  buttonAlignCenter.addEventListener("click", function () {
-    selectText.parentNode.style.textAlign = "center";
-    buttonAlignLeft.classList.remove("selected-button");
-    buttonAlignCenter.classList.add("selected-button");
-    buttonAlignRigth.classList.remove("selected-button");
-    buttonAlignFull.classList.remove("selected-button");
-  });
-  buttonAlignRigth.addEventListener("click", function () {
-    selectText.parentNode.style.textAlign = "right";
-    buttonAlignLeft.classList.remove("selected-button");
-    buttonAlignCenter.classList.remove("selected-button");
-    buttonAlignRigth.classList.add("selected-button");
-    buttonAlignFull.classList.remove("selected-button");
-  });
-  buttonAlignFull.addEventListener("click", function () {
-    selectText.parentNode.style.textAlign = "justify";
-    buttonAlignLeft.classList.remove("selected-button");
-    buttonAlignCenter.classList.remove("selected-button");
-    buttonAlignRigth.classList.remove("selected-button");
-    buttonAlignFull.classList.add("selected-button");
-  });
   // Text Shadow
   const buttonTextShadow = document.getElementById("set-button-text-shadow");
   buttonTextShadow.addEventListener("change", function () {
@@ -313,9 +429,7 @@ function loadPresetButtonSettings(element) {
     }
   });
   // Letter Spacing
-  const buttonLetterSpacing = document.getElementById(
-    "set-button-letter-spacing"
-  );
+  const buttonLetterSpacing = document.getElementById("set-button-letter-spacing");
   buttonLetterSpacing.addEventListener("change", function () {
     if (buttonLetterSpacing.value == "Normal") {
       selectText.style.letterSpacing = "0";
@@ -357,9 +471,7 @@ function loadPresetButtonSettings(element) {
     }
   });
   // Typography Type
-  const buttonTypography = document.getElementById(
-    "set-button-typography-type"
-  );
+  const buttonTypography = document.getElementById("set-button-typography-type");
   buttonTypography.addEventListener("change", function () {
     if (buttonTypography.value == "Button Font") {
       selectText.style.fontFamily = "Inter, sans-serif";
@@ -454,9 +566,7 @@ function loadPresetButtonSettings(element) {
       console.error("borderColorIcon element not found");
     }
     if (!selectText) {
-      console.error(
-        "selectText element not found - check if selectedElSettings has a correct ID"
-      );
+      console.error("selectText element not found - check if selectedElSettings has a correct ID");
     }
   }
 
@@ -501,6 +611,34 @@ function loadPresetButtonSettings(element) {
     }
   });
   event.stopPropagation();
+
+  const desktopVi = document.getElementById("button-desktop");
+  const mobileVi = document.getElementById("button-mobile");
+  const desktopDisplay = (section) => {
+    const selectParentButton = document.getElementById(selectedButtonElement);
+    if (desktopBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        selectParentButton.style.display = "block";
+      } else {
+        selectParentButton.style.display = "none";
+      }
+    }
+  };
+  const mobileDisplay = (section) => {
+    const selectParentButton = document.getElementById(selectedButtonElement);
+    if (mobileBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        selectParentButton.style.display = "block";
+      } else {
+        selectParentButton.style.display = "none";
+      }
+    }
+  };
+  if (desktopBtn.classList.contains("active")) {
+    desktopVi.addEventListener("click", () => desktopDisplay(desktopVi));
+  } else {
+    mobileVi.addEventListener("click", () => mobileDisplay(mobileVi));
+  }
 }
 
 // Close Settings Panel
@@ -519,8 +657,4 @@ const currentSelectedButtonElement = (args) => {
   return selectedButtonElement;
 };
 
-export {
-  ButtonGearElement,
-  selectedButtonElement,
-  currentSelectedButtonElement,
-};
+export { ButtonGearElement, selectedButtonElement, currentSelectedButtonElement };

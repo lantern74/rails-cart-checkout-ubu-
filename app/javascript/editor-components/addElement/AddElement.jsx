@@ -1,13 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  closeAllSidebars,
-  closeAllTextEditPopups,
-  traverseAndSetUniqueId,
-  moveUp,
-  moveDown,
-  removeElement,
-} from "../editor_functions";
+import { closeAllSidebars, closeAllTextEditPopups, traverseAndSetUniqueId, moveUp, moveDown, removeElement } from "../editor_functions";
 import { OrangeGearElement } from "../orangeGearElement/OrangeGearElement";
 
 const daMainContainer = document.getElementById("da-main-container"); // Assuming there's only one such container
@@ -22,28 +15,15 @@ function addYellowElementButton() {
     .padStart(3, "0");
 
   var blueAddElementRolloverTools = document.createElement("div");
-  blueAddElementRolloverTools.classList.add(
-    "add-row-de-rollover-tools",
-    "smallWidthElementHover",
-    "d-flex"
-  );
+  blueAddElementRolloverTools.classList.add("add-row-de-rollover-tools", "smallWidthElementHover", "d-flex");
   var key = new Date().getTime();
-  blueAddElementRolloverTools.setAttribute(
-    "id",
-    "add-element-" + key + randomNum
-  );
+  blueAddElementRolloverTools.setAttribute("id", "add-element-" + key + randomNum);
 
   blueAddElementRolloverTools.style.display = "none";
 
   var blueAddElementButton = document.createElement("div");
-  blueAddElementButton.classList.add(
-    "container-fluid",
-    "p-3",
-    "rounded",
-    "text-orange"
-  );
-  blueAddElementButton.innerHTML =
-    '<button class="add-element btn fs-5  w-100  text-orange bg-lightorange" style="padding:20px 0 !important"> + Add Element</button>';
+  blueAddElementButton.classList.add("container-fluid", "p-3", "rounded", "text-orange");
+  blueAddElementButton.innerHTML = '<button class="add-element btn fs-5  w-100  text-orange bg-lightorange" style="padding:20px 0 !important"> + Add Element</button>';
 
   // blueAddElementButton.style.backgroundColor = "#ffd88f";
   // blueAddElementButton.style.borderRadius = "3px";
@@ -65,183 +45,29 @@ function orangeClone(element) {
   const copyElement = element.parentNode.parentNode;
   const pasteElement = copyElement.cloneNode(true);
   const copyElementId = copyElement.getAttribute("id");
+
   const idParts = copyElementId.split("-");
   var key = new Date().getTime();
-  pasteElement.setAttribute("id", idParts[0] + "-" + key);
+  if (copyElement.getAttribute("data-de-type") === "head-field" || copyElement.getAttribute("data-de-type") === "subhead-field" || copyElement.getAttribute("data-de-type") === "paragraph-field") {
+    pasteElement.setAttribute("id", idParts[0] + "-" + idParts[1] + "-" + key);
+  } else {
+    pasteElement.setAttribute("id", idParts[0] + "-" + key);
+  }
+
+  while (pasteElement.childNodes[1]) {
+    pasteElement.removeChild(pasteElement.childNodes[1]);
+  }
   traverseAndSetUniqueId(pasteElement);
   copyElement.insertAdjacentElement("afterend", pasteElement);
 
-  cloneElementControl(pasteElement);
-  cloneEditTextControl(pasteElement);
-}
-
-function cloneEditTextControl(element) {
-  var editTextRolloverTools = element.childNodes[4];
-  element.addEventListener("mouseup", () => {
-    const selectedText = window.getSelection().toString().trim();
-    if (selectedText) {
-      closeAllTextEditPopups();
-
-      const selection = window.getSelection();
-      const range = selection.getRangeAt(0);
-      const rect = range.getBoundingClientRect(); // Get the position of the selected text
-      // Calculate the position relative to the parent
-      const parentRect = element.getBoundingClientRect();
-      const relativeLeft = rect.x - parentRect.x;
-      // Get the width of the selected text in pixels
-      const selectedTextRect = range.getClientRects()[0];
-      const textWidth = selectedTextRect.width;
-
-      // Set the left position of editTextRolloverTools based on the position of the selected text
-      if (relativeLeft < 130) {
-        editTextRolloverTools.style.left = "0";
-      } else if (relativeLeft > parentRect.width - 140 - textWidth / 2) {
-        editTextRolloverTools.style.left = parentRect.width - 280 + "px";
-      } else {
-        editTextRolloverTools.style.left =
-          relativeLeft - 140 + textWidth / 2 + "px";
-      }
-
-      element.style.border = "3px solid #777";
-      for (let i = 0; i < 3; i++) {
-        element.childNodes[1].childNodes[i].style.display = "none";
-      }
-      for (let i = 0; i < 2; i++) {
-        element.childNodes[2].childNodes[i].style.display = "none";
-      }
-      element.childNodes[3].childNodes[0].style.display = "none";
-      editTextRolloverTools.style.display = "block";
-      for (let i = 0; i < 8; i++) {
-        editTextRolloverTools.childNodes[i].style.display = "block";
-      }
-    } else {
-      editTextRolloverTools.style.display = "none";
-      for (let i = 0; i < 8; i++) {
-        editTextRolloverTools.childNodes[i].style.display = "none";
-      }
-    }
-  });
-
-  //!!!!!!!!!!!!!!! I think this click stopped working
-  document.addEventListener("click", function (event) {
-    console.log("I think this click stopped working");
-    console.log("removing " + editTextRolloverTools);
-
-    if (!element.contains(event.target)) {
-      //? ***   close all text-de-rollover-tools
-      var editTextRolloverTools = document.querySelector(
-        ".text-de-rollover-tools"
-      );
-
-      // If the click is outside of the paragraphelement, hide the editTextRolloverTools
-      editTextRolloverTools.style.display = "none";
-      for (let i = 0; i < 8; i++) {
-        editTextRolloverTools.childNodes[i].style.display = "none";
-      }
-    }
-  });
-}
-
-function cloneElementControl(element) {
-  var orangeRolloverTools = element.childNodes[1];
-  var orangeArrowRolloverTools = element.childNodes[2];
-  var orangeAddRolloverTools = element.childNodes[3];
-  element.addEventListener("mouseenter", () => {
-    orangeRolloverTools.style.display = "block";
-    orangeArrowRolloverTools.style.display = "block";
-    orangeAddRolloverTools.style.display = "block";
-    orangeRolloverTools.childNodes[0].style.display = "block";
-    orangeRolloverTools.childNodes[1].style.display = "block";
-    orangeRolloverTools.childNodes[2].style.display = "block";
-    orangeArrowRolloverTools.childNodes[0].style.display = "block";
-    orangeArrowRolloverTools.childNodes[1].style.display = "block";
-    orangeArrowRolloverTools.childNodes[2].style.display = "block";
-    orangeAddRolloverTools.childNodes[0].style.display = "block";
-    element.style.border = "3px solid orange"; // Change border color on mouseover
-
-    element.parentNode.parentNode.style.border = "none";
-    for (let i = 0; i < 3; i++) {
-      element.parentNode.parentNode.childNodes[0].childNodes[i].style.display =
-        "none";
-    }
-    for (let i = 0; i < 3; i++) {
-      element.parentNode.parentNode.childNodes[1].childNodes[i].style.display =
-        "none";
-    }
-    element.parentNode.parentNode.childNodes[2].childNodes[0].style.display =
-      "none";
-    for (let i = 3; i < element.parentNode.parentNode.children.length; i++) {
-      element.parentNode.parentNode.childNodes[i].style.borderRight = "none";
-      if (
-        element.parentNode.parentNode.childNodes[i].childNodes[1].className ==
-        "div-boundary"
-      ) {
-        element.parentNode.parentNode.childNodes[
-          i
-        ].childNodes[1].style.display = "none";
-      }
-    }
-    addElementButtons = document.querySelectorAll("[id*='blue_add']");
-    addElementButtons.forEach((item) => {
-      item.style.display = "none";
-    });
-  });
-
-  element.addEventListener("mouseleave", () => {
-    orangeRolloverTools.style.display = "none";
-    orangeArrowRolloverTools.style.display = "none";
-    orangeAddRolloverTools.style.display = "none";
-    orangeRolloverTools.childNodes[0].style.display = "none";
-    orangeRolloverTools.childNodes[1].style.display = "none";
-    orangeRolloverTools.childNodes[2].style.display = "none";
-    orangeArrowRolloverTools.childNodes[0].style.display = "none";
-    orangeArrowRolloverTools.childNodes[1].style.display = "none";
-    orangeArrowRolloverTools.childNodes[2].style.display = "none";
-    orangeAddRolloverTools.childNodes[0].style.display = "none";
-    element.style.border = "none"; // Reset border color on mouseout
-
-    element.parentNode.parentNode.style.border = "3px solid rgb(58, 133, 255)";
-    for (let i = 0; i < 3; i++) {
-      element.parentNode.parentNode.childNodes[0].childNodes[i].style.display =
-        "block";
-    }
-    for (let i = 0; i < 3; i++) {
-      element.parentNode.parentNode.childNodes[1].childNodes[i].style.display =
-        "block";
-    }
-    element.parentNode.parentNode.childNodes[2].childNodes[0].style.display =
-      "block";
-    for (let i = 4; i < element.parentNode.parentNode.children.length; i++) {
-      element.parentNode.parentNode.childNodes[i - 1].style.borderRight =
-        "3px dotted rgb(58, 133, 255)";
-      if (
-        element.parentNode.parentNode.childNodes[i - 1].childNodes[0]
-          .className == "div-boundary"
-      ) {
-        element.parentNode.parentNode.childNodes[
-          i - 1
-        ].childNodes[0].style.display = "block";
-      }
-    }
-  });
-  document.addEventListener("click", function (event) {
-    const isSetRowPopup =
-      event.target.parentNode === element && element.contains(event.target);
-    if (isSetRowPopup) {
-      event.target.parentNode.childNodes[2].childNodes[2].click();
-    }
-  });
+  elementControl(pasteElement);
+  editTextControl(pasteElement);
 }
 
 function elementControl(element) {
-  console.log("add tools works");
   // create orange rollover
   var orangeRolloverTools = document.createElement("div");
-  orangeRolloverTools.classList.add(
-    "orange-de-rollover-tools",
-    "smallWidthElementHover",
-    "d-flex"
-  );
+  orangeRolloverTools.classList.add("orange-de-rollover-tools", "smallWidthElementHover", "d-flex");
   orangeRolloverTools.style.display = "none";
 
   var orangeMoveButton = document.createElement("div");
@@ -272,7 +98,6 @@ function elementControl(element) {
 
   orangeGearButton.addEventListener("click", function (e) {
     e.stopPropagation();
-    console.log("clicking only on the orange gear settings only!");
 
     OrangeGearElement(this.parentElement.parentElement); //this is where the problem is
   });
@@ -292,11 +117,7 @@ function elementControl(element) {
   orangeRolloverTools.appendChild(orangeRemoveButton);
   // create orange arrow rollover
   var orangeArrowRolloverTools = document.createElement("div");
-  orangeArrowRolloverTools.classList.add(
-    "orange-arrow-de-rollover-tools",
-    "smallWidthElementHover",
-    "d-flex"
-  );
+  orangeArrowRolloverTools.classList.add("orange-arrow-de-rollover-tools", "smallWidthElementHover", "d-flex");
   orangeArrowRolloverTools.style.display = "none";
   var orangeArrowUpButton = document.createElement("div");
   orangeArrowUpButton.classList.add("de-rollover-arrow-up");
@@ -327,11 +148,7 @@ function elementControl(element) {
 
   // create orange add circle rollover
   var orangeAddRolloverTools = document.createElement("div");
-  orangeAddRolloverTools.classList.add(
-    "plus-de-rollover-tools",
-    "smallWidthElementHover",
-    "d-flex"
-  );
+  orangeAddRolloverTools.classList.add("plus-de-rollover-tools", "smallWidthElementHover", "d-flex");
   orangeAddRolloverTools.style.display = "none";
 
   var orangeAddButton = document.createElement("div");
@@ -362,13 +179,7 @@ function elementControl(element) {
   // this is to click anywhere in the headline!! -- now I don't want to have this feature
 
   element.childNodes[0].addEventListener("click", function (e) {
-    if (
-      element.childNodes[0] &&
-      !element.childNodes[0].classList.contains("elHeadline") &&
-      !element.childNodes[0].classList.contains("elSubHeadline") &&
-      !element.childNodes[0].classList.contains("elText") &&
-      !element.childNodes[0].classList.contains("elBullet")
-    ) {
+    if (element.childNodes[0] && !element.childNodes[0].classList.contains("elHeadline") && !element.childNodes[0].classList.contains("elSubHeadline") && !element.childNodes[0].classList.contains("elText") && !element.childNodes[0].classList.contains("elBullet")) {
       e.stopPropagation();
       element.childNodes[2].childNodes[2].click();
     } else {
@@ -399,15 +210,12 @@ function elementControl(element) {
 
     element.parentNode.parentNode.style.border = "none";
     for (let i = 0; i < 3; i++) {
-      element.parentNode.parentNode.childNodes[0].childNodes[i].style.display =
-        "none";
+      element.parentNode.parentNode.childNodes[0].childNodes[i].style.display = "none";
     }
     for (let i = 0; i < 3; i++) {
-      element.parentNode.parentNode.childNodes[1].childNodes[i].style.display =
-        "none";
+      element.parentNode.parentNode.childNodes[1].childNodes[i].style.display = "none";
     }
-    element.parentNode.parentNode.childNodes[2].childNodes[0].style.display =
-      "none";
+    element.parentNode.parentNode.childNodes[2].childNodes[0].style.display = "none";
     for (let i = 3; i < element.parentNode.parentNode.children.length; i++) {
       // TODO: I turned it off -- there's an error somewhere here when you create a new item and then remove it... And try to roll over
       // element.parentNode.parentNode.childNodes[i].style.borderRight = "none";
@@ -436,15 +244,12 @@ function elementControl(element) {
 
     element.parentNode.parentNode.style.border = "3px solid rgb(58, 133, 255)";
     for (let i = 0; i < 3; i++) {
-      element.parentNode.parentNode.childNodes[0].childNodes[i].style.display =
-        "block";
+      element.parentNode.parentNode.childNodes[0].childNodes[i].style.display = "block";
     }
     for (let i = 0; i < 3; i++) {
-      element.parentNode.parentNode.childNodes[1].childNodes[i].style.display =
-        "block";
+      element.parentNode.parentNode.childNodes[1].childNodes[i].style.display = "block";
     }
-    element.parentNode.parentNode.childNodes[2].childNodes[0].style.display =
-      "block";
+    element.parentNode.parentNode.childNodes[2].childNodes[0].style.display = "block";
     for (let i = 4; i < element.parentNode.parentNode.children.length; i++) {
       // TODO: I turned it off -- there's an error somewhere here when you create a new item and then remove it... And try to roll over
       // element.parentNode.parentNode.childNodes[i - 1].style.borderRight = "3px dotted rgb(58, 133, 255)";
@@ -455,30 +260,234 @@ function elementControl(element) {
   });
 }
 
-function setFormat(command) {
+function setFormat(command, element) {
   document.execCommand(command, false, null);
+
+  let nodeType = "";
+  if (command == "bold") {
+    nodeType = "b";
+  } else if (command == "italic") {
+    nodeType = "i";
+  } else if (command == "underline") {
+    nodeType = "u";
+  } else if (command == "strikeThrough") {
+    nodeType = "strike";
+  }
+
+  let styleColor = "";
+  const commandElements = element.querySelectorAll(nodeType);
+
+  commandElements.forEach((commandElement) => {
+    if (commandElement.style.color !== "") {
+      styleColor = commandElement.style.color;
+    }
+  });
+  commandElements.forEach((commandElement) => {
+    commandElement.style.color = styleColor;
+  });
+
+  let childNodes = "";
+  if (element.getAttribute("data-de-type") === "Bullet List") {
+    childNodes = element.childNodes[0].childNodes[0].childNodes;
+  } else {
+    childNodes = element.childNodes[0].childNodes;
+  }
+
+  let firstSpan = null;
+
+  for (let i = 0; i < childNodes.length; i++) {
+    if (childNodes[i].nodeType === Node.ELEMENT_NODE && childNodes[i].tagName === "SPAN") {
+      firstSpan = childNodes[i];
+      if (firstSpan.innerText.includes("\u00A0")) {
+      }
+      break;
+    }
+  }
+
+  const normalTexts = element.querySelectorAll("span");
+  normalTexts.forEach((normalText) => {
+    if (firstSpan) {
+      normalText.style.color = getComputedStyle(firstSpan).color;
+    }
+  });
 }
+
 function setAlignment(align) {
   document.execCommand("justify" + align, false, null);
 }
 
-function setLink() {
+function setLink(element) {
   var url = prompt("Enter the URL:");
   document.execCommand("createLink", false, url);
+
+  // Access the created link
+  var selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    var range = selection.getRangeAt(0);
+    var startContainer = range.startContainer;
+    var endContainer = range.endContainer;
+
+    // Find the <a> tag within the selection range
+    var startNode = findAncestor(startContainer, "a");
+    var endNode = findAncestor(endContainer, "a");
+
+    if (startNode && endNode && startNode === endNode) {
+      startNode.setAttribute("target", "_blank");
+    }
+  }
+
+  let styleColor = "";
+  const commandElements = element.querySelectorAll("a");
+
+  commandElements.forEach((commandElement) => {
+    if (commandElement.style.color !== "") {
+      styleColor = commandElement.style.color;
+    }
+  });
+  commandElements.forEach((commandElement) => {
+    commandElement.style.color = styleColor;
+  });
 }
 
+// function removeLink() {
+//   document.execCommand("unlink", false, null);
+// }
+
 function removeLink() {
-  document.execCommand("unlink", false, null);
+  // Get the selected text range
+  const selection = window.getSelection();
+  const range = selection.getRangeAt(0);
+  const selectedNode = range.startContainer;
+
+  // Check if the selected node is an <a> tag
+  if (selectedNode.nodeType === Node.TEXT_NODE) {
+    // If the selected text is within a link, find the parent <a>
+    const parentLink = selectedNode.parentElement.closest("a");
+    if (parentLink) {
+      // Remove the link
+      const parentNode = parentLink.parentNode;
+
+      // Create a document fragment to hold the text nodes
+      const fragment = document.createDocumentFragment();
+
+      // Move all child nodes of the link to the fragment
+      while (parentLink.firstChild) {
+        fragment.appendChild(parentLink.firstChild);
+      }
+
+      // Insert the fragment back into the parent node
+      parentNode.insertBefore(fragment, parentLink);
+      parentNode.removeChild(parentLink); // Remove the <a> tag
+
+      // Clear styles on the selected text (if any)
+      const selectedText = range.cloneContents();
+      const textNodes = selectedText.querySelectorAll("*");
+
+      textNodes.forEach((node) => {
+        node.style = ""; // Clear inline styles
+      });
+    }
+  } else if (selectedNode.nodeType === Node.ELEMENT_NODE && selectedNode.tagName === "A") {
+    // If the selected node is directly an <a> tag
+    const parentNode = selectedNode.parentNode;
+
+    // Create a document fragment to hold the text nodes
+    const fragment = document.createDocumentFragment();
+
+    // Move all child nodes of the link to the fragment
+    while (selectedNode.firstChild) {
+      fragment.appendChild(selectedNode.firstChild);
+    }
+
+    // Insert the fragment back into the parent node
+    parentNode.insertBefore(fragment, selectedNode);
+    parentNode.removeChild(selectedNode); // Remove the <a> tag
+  }
+}
+
+function setLinkColor() {
+  var colorInput = document.getElementById("set-textlink");
+  var colorInputIcon = document.getElementById("set-textlink-icon");
+
+  if (colorInput && colorInputIcon) {
+    colorInput.addEventListener("input", function () {
+      var color = colorInput.value;
+      colorInputIcon.style.color = color;
+      handleColor(color);
+    });
+
+    // Initialize icon color based on the selected text
+    initializeIconColor();
+  } else {
+    console.error("Color input or color input icon element not found.");
+  }
+}
+
+function initializeIconColor() {
+  var selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    var range = selection.getRangeAt(0);
+    var startContainer = range.startContainer;
+    var endContainer = range.endContainer;
+
+    // Find the closest <a> tag for the start and end containers
+    var startNode = findAncestor(startContainer, "a");
+    var endNode = findAncestor(endContainer, "a");
+
+    if (startNode && endNode && startNode === endNode) {
+      var currentColor = window.getComputedStyle(startNode).color;
+      var colorInputIcon = document.getElementById("set-textlink-icon");
+      if (colorInputIcon) {
+        colorInputIcon.style.color = currentColor;
+        var colorInput = document.getElementById("set-textlink");
+        if (colorInput) {
+          colorInput.value = rgbToHex(currentColor);
+        }
+      }
+    }
+  }
+}
+
+function handleColor(color) {
+  var selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    var range = selection.getRangeAt(0);
+    var startContainer = range.startContainer;
+    var endContainer = range.endContainer;
+
+    // Find the closest <a> tag for the start and end containers
+    var startNode = findAncestor(startContainer, "a");
+    var endNode = findAncestor(endContainer, "a");
+
+    if (startNode && endNode && startNode === endNode) {
+      startNode.style.color = color;
+    }
+  }
+}
+
+// Helper function to find the nearest ancestor of a node with a specified tag name
+function findAncestor(node, tagName) {
+  while (node) {
+    if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === tagName.toLowerCase()) {
+      return node;
+    }
+    node = node.parentNode;
+  }
+  return null;
+}
+
+// Convert RGB color to HEX
+function rgbToHex(rgb) {
+  var rgbArray = rgb.match(/\d+/g);
+  if (rgbArray) {
+    return "#" + ((1 << 24) + (parseInt(rgbArray[0]) << 16) + (parseInt(rgbArray[1]) << 8) + parseInt(rgbArray[2])).toString(16).slice(1).toUpperCase();
+  }
+  return "#FFFFFF";
 }
 
 function editTextControl(element) {
-  console.log("edit text works");
   var editTextRolloverTools = document.createElement("div");
-  editTextRolloverTools.classList.add(
-    "text-de-rollover-tools",
-    "smallWidthElementHover",
-    "d-flex"
-  );
+  editTextRolloverTools.classList.add("text-de-rollover-tools", "smallWidthElementHover", "d-flex");
   editTextRolloverTools.style.display = "none";
   editTextRolloverTools.style.zIndex = "100";
 
@@ -487,28 +496,28 @@ function editTextControl(element) {
   editBoldButton.style.display = "none";
   editBoldButton.innerHTML = '<i class="fa fa-bold"></i>';
   editBoldButton.addEventListener("click", function () {
-    setFormat("bold");
+    setFormat("bold", element);
   });
   var editItalicButton = document.createElement("div");
   editItalicButton.classList.add("de-rollover-italic");
   editItalicButton.style.display = "none";
   editItalicButton.innerHTML = '<i class="fa fa-italic"></i>';
   editItalicButton.addEventListener("click", function () {
-    setFormat("italic");
+    setFormat("italic", element);
   });
   var editUnderlineButton = document.createElement("div");
   editUnderlineButton.classList.add("de-rollover-underline");
   editUnderlineButton.style.display = "none";
   editUnderlineButton.innerHTML = '<i class="fa fa-underline"></i>';
   editUnderlineButton.addEventListener("click", function () {
-    setFormat("underline");
+    setFormat("underline", element);
   });
   var editStrikeButton = document.createElement("div");
   editStrikeButton.classList.add("de-rollover-strike");
   editStrikeButton.style.display = "none";
   editStrikeButton.innerHTML = '<i class="fa fa-strikethrough"></i>';
   editStrikeButton.addEventListener("click", function () {
-    setFormat("strikeThrough");
+    setFormat("strikeThrough", element);
   });
   var editLeftButton = document.createElement("div");
   editLeftButton.classList.add("de-rollover-left");
@@ -536,7 +545,7 @@ function editTextControl(element) {
   editLinkButton.style.display = "none";
   editLinkButton.innerHTML = '<i class="fa fa-link"></i>';
   editLinkButton.addEventListener("click", function () {
-    setLink();
+    setLink(element);
   });
 
   var editRemoveLinkButton = document.createElement("div");
@@ -547,6 +556,14 @@ function editTextControl(element) {
     removeLink();
   });
 
+  var editLinkColor = document.createElement("div");
+  editLinkColor.classList.add("de-rollover-setlink");
+  editLinkColor.style.display = "none";
+  editLinkColor.innerHTML = `
+            <label for="set-textlink" style="margin-bottom:0"><i class="bi bi-square-fill color-icon fs-6" id="set-textlink-icon"></i></label>
+            <input type="color" class="form-control form-control-color" id="set-textlink" value="#0077dd"></input>
+  `;
+
   editTextRolloverTools.appendChild(editBoldButton);
   editTextRolloverTools.appendChild(editItalicButton);
   editTextRolloverTools.appendChild(editUnderlineButton);
@@ -556,11 +573,12 @@ function editTextControl(element) {
   editTextRolloverTools.appendChild(editRightButton);
   editTextRolloverTools.appendChild(editLinkButton);
   editTextRolloverTools.appendChild(editRemoveLinkButton);
+  editTextRolloverTools.appendChild(editLinkColor);
 
   element.appendChild(editTextRolloverTools);
 
   element.addEventListener("click", () => {
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 10; i++) {
       editTextRolloverTools.childNodes[i].style.display = "none";
     }
     const selectedText = window.getSelection().toString().trim();
@@ -592,8 +610,7 @@ function editTextControl(element) {
         } else if (relativeLeft > parentRect.width - 140 - textWidth / 2) {
           editTextRolloverTools.style.left = parentRect.width - 280 + "px";
         } else {
-          editTextRolloverTools.style.left =
-            relativeLeft - 140 + textWidth / 2 + "px";
+          editTextRolloverTools.style.left = relativeLeft - 140 + textWidth / 2 + "px";
         }
 
         element.style.border = "3px solid #777";
@@ -607,11 +624,8 @@ function editTextControl(element) {
         editTextRolloverTools.style.display = "block";
 
         // Check if selected text is a link
-        const anchorNode =
-          range.startContainer.nodeType === Node.ELEMENT_NODE
-            ? range.startContainer
-            : range.startContainer.parentNode;
-        const isLink = anchorNode.nodeName === "A";
+        const anchorNode = range.startContainer.nodeType === Node.ELEMENT_NODE ? range.startContainer : range.startContainer.parentNode;
+        const isLink = anchorNode.nodeName === "A" || anchorNode.parentElement.nodeName === "A" || anchorNode.parentElement.parentElement.nodeName === "A" || anchorNode.parentElement.parentElement.parentElement.nodeName === "A";
 
         if (isLink) {
           for (let i = 0; i < 7; i++) {
@@ -619,6 +633,8 @@ function editTextControl(element) {
           }
           editTextRolloverTools.childNodes[7].style.display = "none";
           editTextRolloverTools.childNodes[8].style.display = "block";
+          editTextRolloverTools.childNodes[9].style.display = "block";
+          setLinkColor();
         } else {
           for (let i = 0; i < 8; i++) {
             editTextRolloverTools.childNodes[i].style.display = "block";
@@ -626,7 +642,7 @@ function editTextControl(element) {
         }
       } else {
         editTextRolloverTools.style.display = "none";
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < 10; i++) {
           editTextRolloverTools.childNodes[i].style.display = "none";
         }
       }
@@ -637,9 +653,19 @@ function editTextControl(element) {
     if (!element.contains(event.target)) {
       var editTextRolloverTools = element.childNodes[4];
       editTextRolloverTools.style.display = "none";
-      for (let i = 0; i < 9; i++) {
+      for (let i = editTextRolloverTools.childNodes.length - 1; i >= 0; i--) {
         editTextRolloverTools.childNodes[i].style.display = "none";
       }
+    }
+  });
+  document.addEventListener("keydown", function (event) {
+    // Check if Ctrl (or Command on Mac) and B are pressed
+    if ((event.ctrlKey || event.metaKey) && event.key === "b") {
+      event.preventDefault(); // Prevent default browser action
+      setFormat("bold", element);
+    } else if ((event.ctrlKey || event.metaKey) && event.key === "u") {
+      event.preventDefault(); // Prevent default browser action
+      setFormat("underline", element);
     }
   });
 }
@@ -714,11 +740,4 @@ const currentChosenField = (args) => {
   return chosenField;
 };
 
-export {
-  addYellowElementButton,
-  elementControl,
-  openAddElementPopup,
-  closeElementsPanel,
-  currentChosenField,
-  editTextControl,
-};
+export { addYellowElementButton, elementControl, openAddElementPopup, closeElementsPanel, currentChosenField, editTextControl };

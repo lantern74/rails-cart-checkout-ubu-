@@ -2,7 +2,11 @@
   <%= stylesheet_link_tag 'editor', media: 'all', 'data-turbo-track': 'reload' %>
   <% end %>
 
-
+<style>
+body,#da-main-container{
+  background-color: <%= @step.background %>; /* This will set the background color from the database */
+}
+</style>
 
   <div id="editorFormWrapper">
 
@@ -26,6 +30,12 @@
 
         <a draggable="false" style="margin-top:1px !important" class="btn back-btn smaller-font ml-1"  href="#" id="open-popup">
            <i style="font-size: 14px; margin-top:2px ;margin-bottom:0px" class="fas fa-external-link-alt" ></i>  <div class="d-none d-md-inline-block">Pop Up</div></a>
+
+      </div>
+
+      <div class="view-switcher">
+          <button draggable="false" style="margin-top:1px !important" class="btn back-btn smaller-font ml-1 active" id="desktopBtn"><i class="bi bi-laptop"></i></button>
+          <button draggable="false" style="margin-top:1px !important" class="btn back-btn smaller-font ml-1" id="mobileBtn"><i class="bi bi-phone"></i></button>
       </div>
 
 
@@ -74,7 +84,7 @@
 
 
 
-  <div class="container-fluid">
+  <div class="container-fluid deviceview">
       <div class="row" style="background-color:#eee;">
         <!-- Sidebar with draggable elements -->
         <div class="sidebar hidden" id="leftSlidingPopup">

@@ -384,7 +384,7 @@ end
   end
 
   def settings_params
-    params.require(:step).permit(:workflow_id, :title, :step_path)
+    params.require(:step).permit(:workflow_id, :title, :step_path, :background)
   end
 
 

@@ -1,21 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  closeAllSidebars,
-  closeAllTextEditPopups,
-  traverseAndSetUniqueId,
-} from "../editor_functions";
+import { closeAllSidebars, closeAllTextEditPopups, traverseAndSetUniqueId } from "../editor_functions";
 import { BlueGearElement } from "../blueGearElement/BlueGearElement";
 
-import {
-  OrangeGearElement,
-  addOrangeDraggingPoints,
-} from "../orangeGearElement/OrangeGearElement";
-import {
-  addYellowElementButton,
-  elementControl,
-  editTextControl,
-} from "../addElement/AddElement";
+import { OrangeGearElement, addOrangeDraggingPoints } from "../orangeGearElement/OrangeGearElement";
+import { addYellowElementButton, elementControl, editTextControl } from "../addElement/AddElement";
 
 var settingRow1 = document.getElementById("setting-row1");
 var settingRow2 = document.getElementById("setting-row2");
@@ -28,90 +17,55 @@ function createRowSection() {
   const rowSection = document.createElement("div");
   rowSection.id = `row-${new Date().getTime()}`;
   rowSection.className = "row-section";
-  rowSection.style.cssText =
-    "margin: 10px auto; width: 90%; display: flex; justify-content: center;";
+  if (desktopBtn.classList.contains("active")) {
+    rowSection.classList.add("mp-desktop-view");
+  } else {
+    rowSection.classList.add("mp-mobile-view");
+  }
+  rowSection.style.cssText = "margin:auto; width: 90%; display: flex; justify-content: center;";
+  rowSection.style.setProperty("--desktop-margin-top", "10px");
+  rowSection.style.setProperty("--desktop-margin-left", "0px");
+  rowSection.style.setProperty("--desktop-margin-right", "0px");
+  rowSection.style.setProperty("--desktop-margin-bottom", "10px");
+  rowSection.style.setProperty("--desktop-padding-top", "0px");
+  rowSection.style.setProperty("--desktop-padding-left", "0px");
+  rowSection.style.setProperty("--desktop-padding-right", "0px");
+  rowSection.style.setProperty("--desktop-padding-bottom", "0px");
+  rowSection.style.setProperty("--mobile-margin-top", "10px");
+  rowSection.style.setProperty("--mobile-margin-left", "0px");
+  rowSection.style.setProperty("--mobile-margin-right", "0px");
+  rowSection.style.setProperty("--mobile-margin-bottom", "10px");
+  rowSection.style.setProperty("--mobile-padding-top", "0px");
+  rowSection.style.setProperty("--mobile-padding-left", "0px");
+  rowSection.style.setProperty("--mobile-padding-right", "0px");
+  rowSection.style.setProperty("--mobile-padding-bottom", "0px");
   addBlueTools(rowSection);
   return rowSection;
 }
 
 function addBlueTools(rowSection) {
   var rowId = rowSection.getAttribute("id");
-  console.log(rowId, "addBluetools");
   var blueRolloverTools = document.createElement("div");
-  blueRolloverTools.classList.add(
-    "de-rollover-tools",
-    "blue",
-    "smallWidthElementHover",
-    "d-flex",
-    "flex-column"
-  );
+  blueRolloverTools.classList.add("de-rollover-tools", "blue", "smallWidthElementHover", "d-flex", "flex-column");
   blueRolloverTools.style.display = "none";
 
   var blueArrowRolloverTools = document.createElement("div");
-  blueArrowRolloverTools.classList.add(
-    "arrow-de-rollover-tools",
-    "smallWidthElementHover",
-    "d-flex",
-    "flex-column"
-  );
+  blueArrowRolloverTools.classList.add("arrow-de-rollover-tools", "smallWidthElementHover", "d-flex", "flex-column");
   blueArrowRolloverTools.style.display = "none";
 
   var bluePlusRolloverTools = document.createElement("div");
   bluePlusRolloverTools.setAttribute("id", `plus-${rowId}`);
-  bluePlusRolloverTools.classList.add(
-    "plus-de-rollover-tools",
-    "smallWidthElementHover",
-    "d-flex",
-    "flex-column"
-  );
+  bluePlusRolloverTools.classList.add("plus-de-rollover-tools", "smallWidthElementHover", "d-flex", "flex-column");
   bluePlusRolloverTools.style.display = "none";
 
   // Create and configure buttons
-  appendBlueButton(
-    blueRolloverTools,
-    "de-rollover-move",
-    "#3a85ff",
-    "fa fa-arrows"
-  );
-  appendBlueButton(
-    blueRolloverTools,
-    "de-rollover-clone",
-    "#3a85ff",
-    "fa fa-copy"
-  );
-  appendBlueButton(
-    blueRolloverTools,
-    "de-rollover-remove",
-    "#3a85ff",
-    "fa fa-trash"
-  );
-  appendBlueButton(
-    blueArrowRolloverTools,
-    "de-rollover-arrow-up",
-    "#3a85ff",
-    "fa fa-arrow-up"
-  );
-  appendBlueButton(
-    blueArrowRolloverTools,
-    "de-rollover-arrow-down",
-    "#3a85ff",
-    "fa fa-arrow-down"
-  );
-  appendBlueButton(
-    blueArrowRolloverTools,
-    "de-rollover-settings",
-    "#3a85ff",
-    "fa fa-cog",
-    `blue_gear-${Date.now()}`
-  );
-  appendBlueButton(
-    bluePlusRolloverTools,
-    "de-rollover-plus-circle",
-    "#3a85ff",
-    "fa fa-plus",
-    null,
-    "-50%"
-  );
+  appendBlueButton(blueRolloverTools, "de-rollover-move", "#3a85ff", "fa fa-arrows");
+  appendBlueButton(blueRolloverTools, "de-rollover-clone", "#3a85ff", "fa fa-copy");
+  appendBlueButton(blueRolloverTools, "de-rollover-remove", "#3a85ff", "fa fa-trash");
+  appendBlueButton(blueArrowRolloverTools, "de-rollover-arrow-up", "#3a85ff", "fa fa-arrow-up");
+  appendBlueButton(blueArrowRolloverTools, "de-rollover-arrow-down", "#3a85ff", "fa fa-arrow-down");
+  appendBlueButton(blueArrowRolloverTools, "de-rollover-settings", "#3a85ff", "fa fa-cog", `blue_gear-${Date.now()}`);
+  appendBlueButton(bluePlusRolloverTools, "de-rollover-plus-circle", "#3a85ff", "fa fa-plus", null, "-50%");
 
   // Prepend tools to rowSection
   rowSection.prepend(bluePlusRolloverTools);
@@ -121,14 +75,7 @@ function addBlueTools(rowSection) {
   rowControl(rowSection);
 }
 
-function appendBlueButton(
-  parent,
-  className,
-  backgroundColor,
-  iconClass,
-  id = null,
-  left = null
-) {
+function appendBlueButton(parent, className, backgroundColor, iconClass, id = null, left = null) {
   var button = document.createElement("div");
   button.classList.add(...className.split(" "));
   button.style.backgroundColor = backgroundColor;
@@ -159,7 +106,6 @@ function rowControl(rowSection) {
   // ## add the roll over tools for the blue container
 
   blueGearButton.addEventListener("click", function (e) {
-    console.log("clicking only on the blue gear button");
     BlueGearElement(this.parentElement.parentElement.id);
     e.stopPropagation();
   });
@@ -190,9 +136,7 @@ function rowControl(rowSection) {
 
   // ## make the blue div clickable
   rowSection.addEventListener("click", function (event) {
-    const isSetRowPopup =
-      event.target.parentNode === rowSection &&
-      rowSection.contains(event.target);
+    const isSetRowPopup = event.target.parentNode === rowSection && rowSection.contains(event.target);
     if (isSetRowPopup) {
       BlueGearElement(rowSection.id);
       event.stopPropagation();
@@ -302,10 +246,7 @@ function blueClone(element) {
   pasteRow.addEventListener("mouseenter", function () {
     pasteColumns.forEach((pasteColumn, index) => {
       pasteColumn.style.borderRight = "3px dotted rgb(58, 133, 255)";
-      if (
-        pasteColumn.childNodes[1] &&
-        pasteColumn.childNodes[1].className === "div-boundary"
-      ) {
+      if (pasteColumn.childNodes[1] && pasteColumn.childNodes[1].className === "div-boundary") {
         pasteColumn.childNodes[1].style.display = "block";
       }
       if (!pasteColumn.querySelector("div.draggable")) {
@@ -323,10 +264,7 @@ function blueClone(element) {
   pasteRow.addEventListener("mouseleave", function () {
     pasteColumns.forEach((pasteColumn) => {
       pasteColumn.style.borderRight = "none";
-      if (
-        pasteColumn.childNodes[1] &&
-        pasteColumn.childNodes[1].className === "div-boundary"
-      ) {
+      if (pasteColumn.childNodes[1] && pasteColumn.childNodes[1].className === "div-boundary") {
         pasteColumn.childNodes[1].style.display = "none";
       }
       pasteColumn.childNodes[0].childNodes[0].style.display = "none";
@@ -347,10 +285,7 @@ function rowMoveUp(element) {
 
 function rowMoveDown(element) {
   if (element.nextElementSibling) {
-    element.parentNode.insertBefore(
-      element,
-      element.nextElementSibling.nextElementSibling
-    );
+    element.parentNode.insertBefore(element, element.nextElementSibling.nextElementSibling);
   }
 }
 
@@ -405,11 +340,8 @@ function setupMouseInteractions(rowSection, columns, boundaries) {
 }
 
 function handleMouseEnter(columns, boundaries) {
-  console.log(columns, "columns");
-  console.log(boundaries, "boundaries");
   columns.forEach((column, index) => {
-    column.style.borderRight =
-      index !== columns.length - 1 ? "3px dotted #3a85ff" : "none";
+    column.style.borderRight = index !== columns.length - 1 ? "3px dotted #3a85ff" : "none";
 
     // Determine the correct child node index to check based on whether it's the last column
     let checkIndex = index === columns.length - 1 ? 1 : 2; // Use 1 for the last column, 2 for others
@@ -508,8 +440,7 @@ function setupResizingBehavior(columns, boundaries) {
 
 function getNumericClassName(element) {
   // Get all class names from the element
-  const classNames =
-    element.parentElement?.parentElement?.parentElement.classList;
+  const classNames = element.parentElement?.parentElement?.parentElement.classList;
   // Iterate through class names and return the numeric one
   for (let className of classNames) {
     // Check if the class name is numeric
@@ -533,12 +464,7 @@ settingRow1.addEventListener("click", function (e) {
     currentContainerId = numberClass;
   }
 
-  var { rowSection, columns } = createAndAppendRowSection(
-    e,
-    currentContainerId,
-    CurrentRow,
-    [createDivCol1]
-  );
+  var { rowSection, columns } = createAndAppendRowSection(e, currentContainerId, CurrentRow, [createDivCol1]);
   let boundaries = createAndAppendBoundaries(columns);
   setupResizingBehavior(columns, boundaries);
   setupMouseInteractions(rowSection, columns, boundaries); // Mouse overs
@@ -555,12 +481,7 @@ settingRow2.addEventListener("click", function (e) {
   } else {
     currentContainerId = numberClass;
   }
-  var { rowSection, columns } = createAndAppendRowSection(
-    e,
-    currentContainerId,
-    CurrentRow,
-    [createDivCol2, createDivCol2]
-  );
+  var { rowSection, columns } = createAndAppendRowSection(e, currentContainerId, CurrentRow, [createDivCol2, createDivCol2]);
   // Create and append boundaries for resizing columns
   let boundaries = createAndAppendBoundaries(columns);
   setupResizingBehavior(columns, boundaries);
@@ -578,12 +499,7 @@ settingRow3.addEventListener("click", function (e) {
   } else {
     currentContainerId = numberClass;
   }
-  var { rowSection, columns } = createAndAppendRowSection(
-    e,
-    currentContainerId,
-    CurrentRow,
-    [createDivCol3, createDivCol3, createDivCol3]
-  );
+  var { rowSection, columns } = createAndAppendRowSection(e, currentContainerId, CurrentRow, [createDivCol3, createDivCol3, createDivCol3]);
   // Create and append boundaries for resizing columns
   let boundaries = createAndAppendBoundaries(columns);
   setupResizingBehavior(columns, boundaries);
@@ -601,12 +517,7 @@ settingRow4.addEventListener("click", function (e) {
   } else {
     currentContainerId = numberClass;
   }
-  var { rowSection, columns } = createAndAppendRowSection(
-    e,
-    currentContainerId,
-    CurrentRow,
-    [createDivCol4, createDivCol4, createDivCol4, createDivCol4]
-  );
+  var { rowSection, columns } = createAndAppendRowSection(e, currentContainerId, CurrentRow, [createDivCol4, createDivCol4, createDivCol4, createDivCol4]);
   // Create and append boundaries for resizing columns
   let boundaries = createAndAppendBoundaries(columns);
   setupResizingBehavior(columns, boundaries);
@@ -624,12 +535,7 @@ settingRow5.addEventListener("click", function (e) {
   } else {
     currentContainerId = numberClass;
   }
-  var { rowSection, columns } = createAndAppendRowSection(
-    e,
-    currentContainerId,
-    CurrentRow,
-    [createDivCol5, createDivCol5, createDivCol5, createDivCol5, createDivCol5]
-  );
+  var { rowSection, columns } = createAndAppendRowSection(e, currentContainerId, CurrentRow, [createDivCol5, createDivCol5, createDivCol5, createDivCol5, createDivCol5]);
   // Create and append boundaries for resizing columns
   let boundaries = createAndAppendBoundaries(columns);
   setupResizingBehavior(columns, boundaries);
@@ -647,19 +553,7 @@ settingRow6.addEventListener("click", function (e) {
   } else {
     currentContainerId = numberClass;
   }
-  var { rowSection, columns } = createAndAppendRowSection(
-    e,
-    currentContainerId,
-    CurrentRow,
-    [
-      createDivCol6,
-      createDivCol6,
-      createDivCol6,
-      createDivCol6,
-      createDivCol6,
-      createDivCol6,
-    ]
-  );
+  var { rowSection, columns } = createAndAppendRowSection(e, currentContainerId, CurrentRow, [createDivCol6, createDivCol6, createDivCol6, createDivCol6, createDivCol6, createDivCol6]);
   // Create and append boundaries for resizing columns
   let boundaries = createAndAppendBoundaries(columns);
   setupResizingBehavior(columns, boundaries);
@@ -711,13 +605,4 @@ rowClose.addEventListener("click", function () {
   setColumnNumberPopup.classList.remove("open");
 });
 
-export {
-  createRowSection,
-  addBlueTools,
-  rowControl,
-  handleMouseEnter,
-  handleMouseLeave,
-  setupMouseInteractions,
-  setupResizingBehavior,
-  createDivCol1,
-};
+export { createRowSection, addBlueTools, rowControl, handleMouseEnter, handleMouseLeave, setupMouseInteractions, setupResizingBehavior, createDivCol1 };

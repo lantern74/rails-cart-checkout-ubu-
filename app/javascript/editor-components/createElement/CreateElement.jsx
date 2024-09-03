@@ -1,21 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  closeAllSidebars,
-  closeAllTextEditPopups,
-  moveUp,
-  moveDown,
-  removeElement,
-} from "../editor_functions";
+import { closeAllSidebars, closeAllTextEditPopups, moveUp, moveDown, removeElement } from "../editor_functions";
 import { OrangeGearElement } from "../orangeGearElement/OrangeGearElement";
-import {
-  addYellowElementButton,
-  elementControl,
-  editTextControl,
-  openAddElementPopup,
-  closeElementsPanel,
-  currentChosenField,
-} from "../addElement/AddElement";
+import { addYellowElementButton, elementControl, editTextControl, openAddElementPopup, closeElementsPanel, currentChosenField } from "../addElement/AddElement";
+
+const desktopBtn = document.getElementById("desktopBtn");
+const mobileBtn = document.getElementById("mobileBtn");
 
 function createTextElement(type) {
   const wrapper = document.createElement("div");
@@ -30,38 +20,56 @@ function createTextElement(type) {
   wrapper.setAttribute("data-delay", "500");
   wrapper.style.outline = "none";
   wrapper.style.cursor = "pointer";
-  wrapper.style.padding = "0";
   wrapper.style.backgroundColor = "transparent";
+  wrapper.style.setProperty("--desktop-margin-top", "0px");
+  wrapper.style.setProperty("--desktop-margin-left", "0px");
+  wrapper.style.setProperty("--desktop-margin-right", "0px");
+  wrapper.style.setProperty("--desktop-margin-bottom", "0px");
+  wrapper.style.setProperty("--desktop-padding-top", "0px");
+  wrapper.style.setProperty("--desktop-padding-left", "0px");
+  wrapper.style.setProperty("--desktop-padding-right", "0px");
+  wrapper.style.setProperty("--desktop-padding-bottom", "0px");
+  wrapper.style.setProperty("--mobile-margin-top", "0px");
+  wrapper.style.setProperty("--mobile-margin-left", "0px");
+  wrapper.style.setProperty("--mobile-margin-right", "0px");
+  wrapper.style.setProperty("--mobile-margin-bottom", "0px");
+  wrapper.style.setProperty("--mobile-padding-top", "0px");
+  wrapper.style.setProperty("--mobile-padding-left", "0px");
+  wrapper.style.setProperty("--mobile-padding-right", "0px");
+  wrapper.style.setProperty("--mobile-padding-bottom", "0px");
+
   wrapper.setAttribute("aria-disabled", "false");
   wrapper.setAttribute("draggable", true);
+  if (desktopBtn.classList.contains("active")) {
+    wrapper.classList.add("mp-desktop-view");
+  } else {
+    wrapper.classList.add("mp-mobile-view");
+  }
 
-  const contentElement = document.createElement(
-    type === "paragraph-field" ? "p" : type === "subhead-field" ? "h3" : "h1"
-  );
+  const contentElement = document.createElement(type === "paragraph-field" ? "p" : type === "subhead-field" ? "h3" : "h1");
 
-  contentElement.classList.add(
-    "ne",
-    type === "headline-field"
-      ? "elHeadline"
-      : type === "subhead-field"
-      ? "elSubHeadline"
-      : "elText",
-    "lh4",
-    "elMargin0",
-    "elBGStyle0",
-    "hsTextShadow0"
-  );
-
-  contentElement.style.fontSize = {
+  contentElement.classList.add("ne", type === "headline-field" ? "elHeadline" : type === "subhead-field" ? "elSubHeadline" : "elText", "lh4", "elMargin0", "elBGStyle0", "hsTextShadow0");
+  if (desktopBtn.classList.contains("active")) {
+    contentElement.classList.add("desktop-view");
+  } else {
+    contentElement.classList.add("mobile-view");
+  }
+  const fontSizeMap = {
     "headline-field": "36px",
     "subhead-field": "28px",
     "paragraph-field": "20px",
-  }[type];
+  };
 
-  contentElement.style.textAlign =
-    type === "headline-field" || type === "subhead-field" ? "center" : "";
+  contentElement.style.setProperty("--desktop-font-size", fontSizeMap[type]);
+  contentElement.style.setProperty("--mobile-font-size", fontSizeMap[type]);
 
-  //contentElement.style.fontWeight = type === "headline-field" ? "bold" : "";
+  const textAlignMap = {
+    "headline-field": "center",
+    "subhead-field": "center",
+    "paragraph-field": "left",
+  };
+  contentElement.style.setProperty("--desktop-text-align", textAlignMap[type]);
+  contentElement.style.setProperty("--mobile-text-align", textAlignMap[type]);
 
   contentElement.dataset.gramm = "false";
   let textContent = {
@@ -71,7 +79,7 @@ function createTextElement(type) {
   }[type];
 
   // If type is 'headline-field', wrap the textContent inside <b> tags
-  if (type === "headline-field") {
+  if (type === "headline-field" || type === "subhead-field") {
     const boldElement = document.createElement("b");
     boldElement.innerHTML = textContent; // Use innerHTML as it can interpret the string as HTML
     contentElement.appendChild(boldElement);
@@ -90,16 +98,14 @@ function createTextElement(type) {
 
   return wrapper;
 }
-
 function createImageElement() {
   const imageWrapper = document.createElement("div");
-  imageWrapper.classList.add(
-    "draggable",
-    "de",
-    "elSubHeadlineWrapper",
-    "ui-droppable",
-    "de-editable"
-  );
+  imageWrapper.classList.add("draggable", "de", "elSubHeadlineWrapper", "ui-droppable", "de-editable");
+  if (desktopBtn.classList.contains("active")) {
+    imageWrapper.classList.add("mp-desktop-view");
+  } else {
+    imageWrapper.classList.add("mp-mobile-view");
+  }
   imageWrapper.setAttribute("id", `image-${Date.now()}`);
   imageWrapper.setAttribute("data-de-type", "image");
   imageWrapper.setAttribute("data-de-editing", "false");
@@ -111,21 +117,57 @@ function createImageElement() {
   imageWrapper.style.outline = "none";
   imageWrapper.style.cursor = "pointer";
   imageWrapper.style.textAlign = "center";
+  imageWrapper.style.width = "100%";
+  imageWrapper.style.setProperty("--desktop-margin-top", "0px");
+  imageWrapper.style.setProperty("--desktop-margin-left", "0px");
+  imageWrapper.style.setProperty("--desktop-margin-right", "0px");
+  imageWrapper.style.setProperty("--desktop-margin-bottom", "0px");
+  imageWrapper.style.setProperty("--desktop-padding-top", "0px");
+  imageWrapper.style.setProperty("--desktop-padding-left", "0px");
+  imageWrapper.style.setProperty("--desktop-padding-right", "0px");
+  imageWrapper.style.setProperty("--desktop-padding-bottom", "0px");
+  imageWrapper.style.setProperty("--mobile-margin-top", "0px");
+  imageWrapper.style.setProperty("--mobile-margin-left", "0px");
+  imageWrapper.style.setProperty("--mobile-margin-right", "0px");
+  imageWrapper.style.setProperty("--mobile-margin-bottom", "0px");
+  imageWrapper.style.setProperty("--mobile-padding-top", "0px");
+  imageWrapper.style.setProperty("--mobile-padding-left", "0px");
+  imageWrapper.style.setProperty("--mobile-padding-right", "0px");
+  imageWrapper.style.setProperty("--mobile-padding-bottom", "0px");
+  imageWrapper.style.setProperty("--desktop-text-align", "center");
+  imageWrapper.style.setProperty("--mobile-text-align", "center");
+
   imageWrapper.setAttribute("aria-disabled", "false");
   imageWrapper.setAttribute("draggable", true);
-  imageWrapper.innerHTML = `<img data-v-21a2eb52="" src="https://storage.googleapis.com/preview-production-assets/funnel/img/img_400x300.png" alt="broken image..." class="img-none img-border-none img-shadow-none img-effects-none" style = "width:100%">`;
+
+  const img = document.createElement("img");
+  img.setAttribute("data-v-21a2eb52", "");
+  img.src = "https://storage.googleapis.com/preview-production-assets/funnel/img/img_400x300.png";
+  img.alt = "broken image...";
+  img.className = "img-none img-border-none img-shadow-none img-effects-none";
+  if (desktopBtn.classList.contains("active")) {
+    img.classList.add("desktop-view");
+  } else {
+    img.classList.add("mobile-view");
+  }
+  img.style.setProperty("--desktop-width", "100%");
+  img.style.setProperty("--mobile-width", "100%");
+  img.style.objectFit = "contain";
+
+  // Append the img element to the imageWrapper
+  imageWrapper.appendChild(img);
+
   elementControl(imageWrapper);
   return imageWrapper;
 }
 function createVideoElement() {
   const videoWrapper = document.createElement("div");
-  videoWrapper.classList.add(
-    "draggable",
-    "de",
-    "elSubHeadlineWrapper",
-    "ui-droppable",
-    "de-editable"
-  );
+  videoWrapper.classList.add("draggable", "de", "elSubHeadlineWrapper", "ui-droppable", "de-editable");
+  if (desktopBtn.classList.contains("active")) {
+    videoWrapper.classList.add("mp-desktop-view");
+  } else {
+    videoWrapper.classList.add("mp-mobile-view");
+  }
   videoWrapper.setAttribute("id", `video-${Date.now()}`);
   videoWrapper.setAttribute("data-de-type", "video");
   videoWrapper.setAttribute("data-de-editing", "false");
@@ -136,16 +178,61 @@ function createVideoElement() {
   videoWrapper.setAttribute("data-delay", "500");
   videoWrapper.style.outline = "none";
   videoWrapper.style.cursor = "upset";
-  videoWrapper.style.margin = "auto";
+  videoWrapper.style.width = "100%";
+  videoWrapper.style.setProperty("--desktop-margin-top", "0px");
+  videoWrapper.style.setProperty("--desktop-margin-left", "0px");
+  videoWrapper.style.setProperty("--desktop-margin-right", "0px");
+  videoWrapper.style.setProperty("--desktop-margin-bottom", "0px");
+  videoWrapper.style.setProperty("--desktop-padding-top", "0px");
+  videoWrapper.style.setProperty("--desktop-padding-left", "0px");
+  videoWrapper.style.setProperty("--desktop-padding-right", "0px");
+  videoWrapper.style.setProperty("--desktop-padding-bottom", "0px");
+  videoWrapper.style.setProperty("--mobile-margin-top", "0px");
+  videoWrapper.style.setProperty("--mobile-margin-left", "0px");
+  videoWrapper.style.setProperty("--mobile-margin-right", "0px");
+  videoWrapper.style.setProperty("--mobile-margin-bottom", "0px");
+  videoWrapper.style.setProperty("--mobile-padding-top", "0px");
+  videoWrapper.style.setProperty("--mobile-padding-left", "0px");
+  videoWrapper.style.setProperty("--mobile-padding-right", "0px");
+  videoWrapper.style.setProperty("--mobile-padding-bottom", "0px");
+
   videoWrapper.setAttribute("aria-disabled", "false");
   videoWrapper.setAttribute("draggable", true);
 
-  videoWrapper.innerHTML = `
-  <div class="video-container">
-  <iframe class="video-frame" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
-  <div class="video-overlay"></div>
-  </div>
-  `;
+  const videoContainer = document.createElement("div");
+  videoContainer.className = "video-container";
+  if (desktopBtn.classList.contains("active")) {
+    videoContainer.classList.add("desktop-view");
+  } else {
+    videoContainer.classList.add("mobile-view");
+  }
+  videoContainer.style.setProperty("--desktop-width", "100%");
+  videoContainer.style.setProperty("--mobile-width", "100%");
+  videoContainer.style.margin = "auto";
+
+  // Create the iframe element
+  const iframe = document.createElement("iframe");
+  iframe.className = "video-frame";
+  iframe.setAttribute("frameborder", "0");
+  iframe.setAttribute("allow", "encrypted-media");
+  iframe.setAttribute("allowfullscreen", "");
+
+  // Create the overlay div
+  const videoOverlay = document.createElement("div");
+  videoOverlay.className = "video-overlay";
+
+  // Append the iframe and overlay to the video container
+  videoContainer.appendChild(iframe);
+  videoContainer.appendChild(videoOverlay);
+
+  // Finally, append the video container to the videoWrapper
+  videoWrapper.appendChild(videoContainer);
+  // videoWrapper.innerHTML = `
+  // <div class="video-container">
+  // <iframe class="video-frame" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+  // <div class="video-overlay"></div>
+  // </div>
+  // `;
 
   elementControl(videoWrapper);
   return videoWrapper;
@@ -153,13 +240,12 @@ function createVideoElement() {
 
 function createListElement() {
   const listWrapper = document.createElement("div");
-  listWrapper.classList.add(
-    "draggable",
-    "de",
-    "elSubHeadlineWrapper",
-    "ui-droppable",
-    "de-editable"
-  );
+  listWrapper.classList.add("draggable", "de", "elSubHeadlineWrapper", "ui-droppable", "de-editable");
+  if (desktopBtn.classList.contains("active")) {
+    listWrapper.classList.add("mp-desktop-view");
+  } else {
+    listWrapper.classList.add("mp-mobile-view");
+  }
   listWrapper.setAttribute("id", `list-${Date.now()}`);
   listWrapper.setAttribute("data-de-type", "Bullet List");
   listWrapper.setAttribute("data-de-editing", "false");
@@ -172,29 +258,69 @@ function createListElement() {
   listWrapper.style.cursor = "pointer";
   listWrapper.setAttribute("aria-disabled", "false");
   listWrapper.setAttribute("draggable", true);
+  listWrapper.style.setProperty("--desktop-margin-top", "0px");
+  listWrapper.style.setProperty("--desktop-margin-left", "0px");
+  listWrapper.style.setProperty("--desktop-margin-right", "0px");
+  listWrapper.style.setProperty("--desktop-margin-bottom", "0px");
+  listWrapper.style.setProperty("--desktop-padding-top", "0px");
+  listWrapper.style.setProperty("--desktop-padding-left", "0px");
+  listWrapper.style.setProperty("--desktop-padding-right", "0px");
+  listWrapper.style.setProperty("--desktop-padding-bottom", "0px");
+  listWrapper.style.setProperty("--mobile-margin-top", "0px");
+  listWrapper.style.setProperty("--mobile-margin-left", "0px");
+  listWrapper.style.setProperty("--mobile-margin-right", "0px");
+  listWrapper.style.setProperty("--mobile-margin-bottom", "0px");
+  listWrapper.style.setProperty("--mobile-padding-top", "0px");
+  listWrapper.style.setProperty("--mobile-padding-left", "0px");
+  listWrapper.style.setProperty("--mobile-padding-right", "0px");
+  listWrapper.style.setProperty("--mobile-padding-bottom", "0px");
 
   const listWrapperElement = document.createElement("ul");
   listWrapperElement.setAttribute("id", `listUL-${Date.now()}`);
   listWrapperElement.classList.add("elBullet");
+  if (desktopBtn.classList.contains("active")) {
+    listWrapperElement.classList.add("desktop-view");
+  } else {
+    listWrapperElement.classList.add("mobile-view");
+  }
   listWrapperElement.style.listStyleType = "none";
   listWrapperElement.style.paddingLeft = "0";
-  listWrapperElement.style.fontSize = "20px";
+  listWrapperElement.style.display = "flex";
+  listWrapperElement.style.flexDirection = "column";
+  listWrapperElement.style.gap = "0";
+  listWrapperElement.style.setProperty("--desktop-font-size", "20px");
+  listWrapperElement.style.setProperty("--mobile-font-size", "20px");
+  listWrapperElement.style.setProperty("--desktop-text-align", "left");
+  listWrapperElement.style.setProperty("--mobile-text-align", "left");
 
   // Create and append the initial list item
-  const listWrapperElementLi = createListItem("Bullet List");
+  const listWrapperElementLi = createListItem("Bullet List", "bi bi-check");
   listWrapperElement.appendChild(listWrapperElementLi);
   listWrapper.appendChild(listWrapperElement);
 
   // Attach event listener to handle Enter and Backspace keys
   listWrapperElement.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && event.shiftKey) {
       event.preventDefault();
-
-      // Create and insert a new list item after the currently focused one
       const activeElement = document.activeElement;
       if (activeElement.tagName === "LI") {
+        const newItem = handleNextLine();
+        listWrapperElement.insertBefore(newItem, activeElement.nextSibling);
+        moveCursorAfterIcon(newItem);
+        newItem.focus();
+      }
+    } else if (event.key === "Enter") {
+      event.preventDefault();
+      const activeElement = document.activeElement;
+      console.log(activeElement, "activeElement");
+      if (activeElement.tagName === "LI") {
         const iconClass = activeElement.querySelector("i").className; // Get the icon class
-        const newItem = createListItem("", iconClass); // Pass the icon class to createListItem
+        const currentFontSize = getComputedStyle(activeElement).fontSize;
+        const iconColor = getComputedStyle(activeElement.childNodes[0]).color;
+        const textColor = getComputedStyle(activeElement.childNodes[1]).color;
+
+        const newItem = createListItem("", iconClass, currentFontSize, iconColor, textColor); // Pass the icon class to createListItem
+        newItem.childNodes[0].style.backgroundColor = getComputedStyle(activeElement.childNodes[0]).backgroundColor;
         listWrapperElement.insertBefore(newItem, activeElement.nextSibling);
 
         // Move the cursor to the position after the icon in the new item
@@ -205,10 +331,7 @@ function createListElement() {
       }
     } else if (event.key === "Backspace") {
       const activeElement = document.activeElement;
-      if (
-        activeElement.tagName === "LI" &&
-        activeElement.innerText.trim() === ""
-      ) {
+      if (activeElement.tagName === "LI" && activeElement.innerText.trim() === "") {
         event.preventDefault();
         const prevElement = activeElement.previousElementSibling;
         if (prevElement) {
@@ -218,6 +341,8 @@ function createListElement() {
           activeElement.remove();
         }
       }
+    } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+      handleArrowKeys(event);
     }
   });
 
@@ -226,26 +351,58 @@ function createListElement() {
   return listWrapper;
 }
 
-// Helper function to create a list item
-function createListItem(text, iconClass = "bi bi-check") {
-  // Default icon class
+function createListItem(text, iconClass = "bi bi-check", currentFontSize = "20px", iconColor = "rgb(92, 87, 118)", textColor = "rgb(92, 87, 118)") {
   const listItem = document.createElement("li");
-  listItem.classList.add(
-    "ne",
-    "elText",
-    "hsSize3",
-    "lh4",
-    "elMargin0",
-    "elBGStyle0",
-    "hsTextShadow0"
-  );
+  listItem.classList.add("ne", "elText", "hsSize3", "lh4", "elMargin0", "elBGStyle0", "hsTextShadow0");
+
   listItem.dataset.bold = "inherit";
   listItem.dataset.gramm = "false";
-  listItem.innerHTML = `<i class='${iconClass}' style="padding-right: 10px"></i>${text} &nbsp;`; // Use the passed icon class
+  listItem.innerHTML = `<i class='${iconClass}' style="position:absolute; left:0; padding:0 5px;"></i><span>${text}<span> &nbsp;`; // Use the passed icon class
   listItem.setAttribute("contenteditable", "true");
-  listItem.style.display = "flex";
+  listItem.style.fontWeight = "100";
+  listItem.style.position = "relative";
+  listItem.style.paddingLeft = `${parseInt(currentFontSize) + 20}px`;
+  listItem.style.cursor = "text";
+  listItem.childNodes[0].style.color = `${iconColor}`;
+  listItem.childNodes[1].style.color = `${textColor}`;
 
   return listItem;
+}
+
+function handleNextLine() {
+  const nextItem = document.createElement("li");
+  nextItem.classList.add("ne", "elText", "hsSize3", "lh4", "elMargin0", "elBGStyle0", "hsTextShadow0");
+  nextItem.dataset.bold = "inherit";
+  nextItem.dataset.gramm = "false";
+  nextItem.innerHTML = `<i class='bi bi-check' style="display:none;"></i><br>`;
+  nextItem.setAttribute("contenteditable", "true");
+  nextItem.style.display = "flex";
+  nextItem.style.fontWeight = "100";
+  nextItem.style.paddingLeft = "40px";
+  return nextItem;
+}
+
+function handleArrowKeys(event) {
+  const activeElement = document.activeElement;
+
+  if (activeElement.tagName === "LI") {
+    const textNode = activeElement.firstChild; // Assuming text is the first child of <li>
+
+    if (!textNode) return;
+    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+      let newElement;
+      if (event.key === "ArrowUp") {
+        newElement = activeElement.previousElementSibling;
+      } else {
+        newElement = activeElement.nextElementSibling;
+      }
+      if (newElement) {
+        event.preventDefault();
+        newElement.focus();
+        moveCursorAfterIcon(newElement);
+      }
+    }
+  }
 }
 
 // Helper function to move the cursor after the check icon
@@ -269,14 +426,14 @@ function moveCursorAfterIcon(listItem) {
 function createButtonElement() {
   // Create the outer container
   const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add(
-    "draggable",
-    "de",
-    "elBTN",
-    "de-editable",
-    "elAlign_center",
-    "elMargin0"
-  );
+  buttonContainer.classList.add("draggable", "de", "elBTN", "de-editable", "elAlign_center", "elMargin0");
+  if (desktopBtn.classList.contains("active")) {
+    buttonContainer.classList.add("desktop-view");
+    buttonContainer.classList.add("mp-desktop-view");
+  } else {
+    buttonContainer.classList.add("mobile-view");
+    buttonContainer.classList.add("mp-mobile-view");
+  }
   buttonContainer.id = `tmp_button-${Date.now()}`;
   buttonContainer.dataset.deType = "button";
   buttonContainer.dataset.deEditing = "false";
@@ -286,35 +443,48 @@ function createButtonElement() {
   buttonContainer.dataset.animate = "fade";
   buttonContainer.dataset.delay = "500";
   buttonContainer.style.outline = "none";
-  buttonContainer.style.textAlign = "center";
-  buttonContainer.addEventListener("click", function (event) {
-    getButtonContainerId(this);
-  });
+  buttonContainer.style.padding = "13px";
+  buttonContainer.style.setProperty("--desktop-font-size", "20px");
+  buttonContainer.style.setProperty("--mobile-font-size", "20px");
+  buttonContainer.style.setProperty("--desktop-text-align", "center");
+  buttonContainer.style.setProperty("--mobile-text-align", "center");
+  buttonContainer.style.setProperty("--desktop-margin-top", "0px");
+  buttonContainer.style.setProperty("--desktop-margin-left", "0px");
+  buttonContainer.style.setProperty("--desktop-margin-right", "0px");
+  buttonContainer.style.setProperty("--desktop-margin-bottom", "0px");
+
+  buttonContainer.style.setProperty("--mobile-margin-top", "0px");
+  buttonContainer.style.setProperty("--mobile-margin-left", "0px");
+  buttonContainer.style.setProperty("--mobile-margin-right", "0px");
+  buttonContainer.style.setProperty("--mobile-margin-bottom", "0px");
+
+  // buttonContainer.addEventListener("click", function (event) {
+  //   getButtonContainerId(this);
+  // });
   // buttonContainer.style.margin = '20px 30px';
 
   // Create the <a> element
   const linkElement = document.createElement("a");
   linkElement.href = "#submit-form";
   linkElement.id = `the_button-${Date.now()}`;
-  linkElement.classList.add(
-    "elSettings",
-    "elButton",
-    "elButtonSize1",
-    "elButtonColor1",
-    "elButtonRounded",
-    "elButtonPadding2",
-    "elBtnVP_10",
-    "elButtonCorner3",
-    "elButtonFluid",
-    "elBtnHP_25",
-    "elBTN_b_1",
-    "elButtonShadowN1",
-    "elButtonTxtColor1"
-  );
+  linkElement.classList.add("elSettings", "elButton", "elButtonSize1", "elButtonColor1", "elButtonRounded", "elButtonPadding2", "elBtnVP_10", "elButtonCorner3", "elButtonFluid", "elBtnHP_25", "elBTN_b_1", "elButtonShadowN1", "elButtonTxtColor1");
+  if (desktopBtn.classList.contains("active")) {
+    linkElement.classList.add("mp-desktop-view");
+  } else {
+    linkElement.classList.add("mp-mobile-view");
+  }
   linkElement.style.color = "rgb(255, 255, 255)";
   linkElement.style.fontWeight = "600";
   linkElement.style.backgroundColor = "#ff0000";
-  linkElement.style.fontSize = "20px";
+  linkElement.style.setProperty("--desktop-padding-top", "13px");
+  linkElement.style.setProperty("--desktop-padding-left", "35px");
+  linkElement.style.setProperty("--desktop-padding-right", "35px");
+  linkElement.style.setProperty("--desktop-padding-bottom", "13px");
+  linkElement.style.setProperty("--mobile-padding-top", "13px");
+  linkElement.style.setProperty("--mobile-padding-left", "35px");
+  linkElement.style.setProperty("--mobile-padding-right", "35px");
+  linkElement.style.setProperty("--mobile-padding-bottom", "13px");
+
   linkElement.rel = "noopener noreferrer";
 
   // Create the main and sub spans
@@ -348,33 +518,16 @@ function createCountdownElement() {
   futureDate.setHours(currentDate.getHours() + 12); // Add 11 hours
 
   // Construct the targetDateStr with the desired format, including hours, minutes, and seconds
-  const targetDateStr = `${futureDate.getFullYear()}-${(
-    futureDate.getMonth() + 1
-  )
+  const targetDateStr = `${futureDate.getFullYear()}-${(futureDate.getMonth() + 1).toString().padStart(2, "0")}-${futureDate.getDate().toString().padStart(2, "0")}T${futureDate.getHours().toString().padStart(2, "0")}:${futureDate.getMinutes().toString().padStart(2, "0")}:${futureDate
+    .getSeconds()
     .toString()
-    .padStart(2, "0")}-${futureDate
-    .getDate()
-    .toString()
-    .padStart(2, "0")}T${futureDate
-    .getHours()
-    .toString()
-    .padStart(2, "0")}:${futureDate
-    .getMinutes()
-    .toString()
-    .padStart(2, "0")}:${futureDate.getSeconds().toString().padStart(2, "0")}`;
+    .padStart(2, "0")}`;
 
   const targetDate = new Date(targetDateStr);
   const targetStamp = targetDate.getTime();
 
   const containercountdownWrapper = document.createElement("div");
-  containercountdownWrapper.classList.add(
-    "container-fluid",
-    "draggable",
-    "de",
-    "elCountdownWrapper",
-    "ui-droppable",
-    "de-editable"
-  );
+  containercountdownWrapper.classList.add("container-fluid", "draggable", "de", "elCountdownWrapper", "ui-droppable", "de-editable");
   containercountdownWrapper.setAttribute("data-de-type", "CountDown");
 
   const countdownWrapper = document.createElement("div");
@@ -413,9 +566,7 @@ function createCountdownElement() {
   heading.style.letterSpacing = "letter-spacing: -0.5px;"; // Set letter spacing
   heading.style.fontFamily = "Nunito Sans, sans-serif"; // Set font family
   heading.style.paddingLeft = "20px";
-  const formattedTargetDateMessage = `Hurry! This special offer is available until ${getFormattedDate(
-    currentDate
-  )}`;
+  const formattedTargetDateMessage = `Hurry! This special offer is available until ${getFormattedDate(currentDate)}`;
   heading.textContent = formattedTargetDateMessage;
 
   textLeft.appendChild(heading);
@@ -427,13 +578,7 @@ function createCountdownElement() {
   rightColumn.classList.add("col-12", "col-md-4"); // Span full width on small screens, and col-3 on medium and larger screens
 
   const countdownDiv = document.createElement("div");
-  countdownDiv.classList.add(
-    "de",
-    "elCountdown",
-    "de-editable",
-    "elAlign_center",
-    "elMargin0"
-  );
+  countdownDiv.classList.add("de", "elCountdown", "de-editable", "elAlign_center", "elMargin0");
   countdownDiv.setAttribute("id", `countdown-${Date.now()}`);
   countdownDiv.setAttribute("data-de-type", "countdown");
   countdownDiv.setAttribute("data-de-editing", "false");
@@ -448,14 +593,7 @@ function createCountdownElement() {
   countdownDiv.style.border = "0px none";
 
   const countdownElement = document.createElement("div");
-  countdownElement.classList.add(
-    "realcountdown",
-    "wideCountdownSize2",
-    "cdBlack",
-    "cdStyleTextOnly",
-    "clearfix",
-    "hide"
-  );
+  countdownElement.classList.add("realcountdown", "wideCountdownSize2", "cdBlack", "cdStyleTextOnly", "clearfix", "hide");
 
   countdownElement.setAttribute("data-date", targetDateStr);
   countdownElement.setAttribute("data-time", targetStamp);
@@ -466,15 +604,7 @@ function createCountdownElement() {
   countdownElement.textContent = "";
 
   const countdownDemo = document.createElement("div");
-  countdownDemo.classList.add(
-    "wideCountdown",
-    "wideCountdownSize2",
-    "cdBlack",
-    "cdStyleTextOnly",
-    "wideCountdown-demo",
-    "is-countdown",
-    "clearfix"
-  );
+  countdownDemo.classList.add("wideCountdown", "wideCountdownSize2", "cdBlack", "cdStyleTextOnly", "wideCountdown-demo", "is-countdown", "clearfix");
 
   const timerDiv = document.createElement("div");
   timerDiv.classList.add("timer");
@@ -538,14 +668,7 @@ function createCountdownElement() {
 
 function createInputField(type) {
   const wrapper = document.createElement("div");
-  wrapper.classList.add(
-    "draggable",
-    "de",
-    "de-editable",
-    "de-input-block",
-    "elAlign_center",
-    "elMargin0"
-  );
+  wrapper.classList.add("draggable", "de", "de-editable", "de-input-block", "elAlign_center", "elMargin0");
   wrapper.setAttribute("id", `${type}-${Date.now()}`);
   wrapper.setAttribute("data-de-type", type);
   wrapper.setAttribute("data-de-editing", "false");
@@ -560,20 +683,7 @@ function createInputField(type) {
   const inputElement = document.createElement("input");
   inputElement.type = "text";
   inputElement.setAttribute("id", `field-${Date.now()}`);
-  inputElement.classList.add(
-    "elInput",
-    "elInput100",
-    "elAlign_left",
-    "elInputMid",
-    "elInputStyl0",
-    "elInputBG1",
-    "elInputBR5",
-    "elInputI0",
-    "elInputIBlack",
-    "elInputIRight",
-    "required0",
-    "ceoinput"
-  );
+  inputElement.classList.add("elInput", "elInput100", "elAlign_left", "elInputMid", "elInputStyl0", "elInputBG1", "elInputBR5", "elInputI0", "elInputIBlack", "elInputIRight", "required0", "ceoinput");
   inputElement.dataset.type = "extra";
   inputElement.style.width = "100%";
 
@@ -611,14 +721,29 @@ function createPhoneElement() {
 
 function createCombElement() {
   const comboWrapper = document.createElement("div");
-  comboWrapper.classList.add(
-    "draggable",
-    "de",
-    "de-editable",
-    "elAlign_center",
-    "elMargin0",
-    "container-fluid"
-  );
+  comboWrapper.classList.add("draggable", "de", "de-editable", "elAlign_center", "elMargin0", "container-fluid");
+  if (desktopBtn.classList.contains("active")) {
+    comboWrapper.classList.add("mp-desktop-view");
+  } else {
+    comboWrapper.classList.add("mp-mobile-view");
+  }
+
+  comboWrapper.style.setProperty("--desktop-margin-top", "0px");
+  comboWrapper.style.setProperty("--desktop-margin-left", "0px");
+  comboWrapper.style.setProperty("--desktop-margin-right", "0px");
+  comboWrapper.style.setProperty("--desktop-margin-bottom", "0px");
+  comboWrapper.style.setProperty("--desktop-padding-top", "0px");
+  comboWrapper.style.setProperty("--desktop-padding-left", "0px");
+  comboWrapper.style.setProperty("--desktop-padding-right", "0px");
+  comboWrapper.style.setProperty("--desktop-padding-bottom", "0px");
+  comboWrapper.style.setProperty("--mobile-margin-top", "0px");
+  comboWrapper.style.setProperty("--mobile-margin-left", "0px");
+  comboWrapper.style.setProperty("--mobile-margin-right", "0px");
+  comboWrapper.style.setProperty("--mobile-margin-bottom", "0px");
+  comboWrapper.style.setProperty("--mobile-padding-top", "0px");
+  comboWrapper.style.setProperty("--mobile-padding-left", "0px");
+  comboWrapper.style.setProperty("--mobile-padding-right", "0px");
+  comboWrapper.style.setProperty("--mobile-padding-bottom", "0px");
 
   comboWrapper.setAttribute("data-de-type", "combo");
   comboWrapper.setAttribute("id", `combo-${Date.now()}`);
@@ -641,10 +766,7 @@ function createCombElement() {
   row.classList.add("row");
 
   const colMd6Step1 = createFormStep("Your profile", "Contact details");
-  const colMd6Step2 = createFormStep(
-    "Normally $297. Use coupon code FAP to get 90% OFF",
-    "Billing details"
-  );
+  const colMd6Step2 = createFormStep("Normally $297. Use coupon code FAP to get 90% OFF", "Billing details");
 
   row.appendChild(colMd6Step1);
   row.appendChild(colMd6Step2);
@@ -662,18 +784,10 @@ function createCombElement() {
   const sectionInfo = document.createElement("section");
   sectionInfo.classList.add("info");
 
-  const inputs1 = [
-    "Company Name...",
-    "Full Name...",
-    "Email Address...",
-    "Phone Number...",
-  ];
+  const inputs1 = ["Company Name...", "Full Name...", "Email Address...", "Phone Number..."];
   inputs1.forEach((placeholder) => {
     const input = createInput("text", placeholder);
-    if (
-      placeholder === "Company Name..." ||
-      placeholder === "Phone Number..."
-    ) {
+    if (placeholder === "Company Name..." || placeholder === "Phone Number...") {
       input.style.display = "none";
     }
     sectionInfo.appendChild(input);
@@ -683,12 +797,7 @@ function createCombElement() {
   sectionShipping.classList.add("shipping");
   sectionShipping.style.display = "none";
 
-  const inputs2 = [
-    "Full Address...",
-    "City Name...",
-    "State / Province...",
-    "Zip Code...",
-  ];
+  const inputs2 = ["Full Address...", "City Name...", "State / Province...", "Zip Code..."];
   inputs2.forEach((placeholder) => {
     const input = createInput("text", placeholder);
     sectionShipping.appendChild(input);
@@ -731,8 +840,7 @@ function createCombElement() {
 
   const orderFormFooter = document.createElement("section");
   orderFormFooter.classList.add("order-form-footer");
-  orderFormFooter.innerHTML =
-    "<span>We Respect Your Privacy &amp; Information.</span>";
+  orderFormFooter.innerHTML = "<span>We Respect Your Privacy &amp; Information.</span>";
 
   formBody.appendChild(sectionInfo);
   formBody.appendChild(sectionShipping);
@@ -899,10 +1007,7 @@ function createCombElement() {
   const expirationInput = document.createElement("input");
   expirationInput.setAttribute("type", "text");
   expirationInput.setAttribute("name", "card-expiration");
-  expirationInput.setAttribute(
-    "id",
-    "card-expiration-ctwo-setp-order-payment-element"
-  );
+  expirationInput.setAttribute("id", "card-expiration-ctwo-setp-order-payment-element");
   expirationInput.setAttribute("maxlength", "5");
   expirationInput.setAttribute("placeholder", "MM / YY");
   expirationInput.classList.add("card-input");
@@ -1036,16 +1141,4 @@ function createInput(type, placeholder) {
 //   return chosenField;
 // };
 
-export {
-  createTextElement,
-  createImageElement,
-  createVideoElement,
-  createListElement,
-  createButtonElement,
-  createCountdownElement,
-  createInputField,
-  createInputElement,
-  createEmailElement,
-  createPhoneElement,
-  createCombElement,
-};
+export { createTextElement, createImageElement, createVideoElement, createListElement, createButtonElement, createCountdownElement, createInputField, createInputElement, createEmailElement, createPhoneElement, createCombElement };

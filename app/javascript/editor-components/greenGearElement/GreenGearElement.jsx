@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  closeAllSidebars,
-  closeAllTextEditPopups,
-  anyOfTheSidebarsOpen,
-  getRandomColor,
-} from "../editor_functions";
+import { closeAllSidebars, closeAllTextEditPopups, anyOfTheSidebarsOpen, getRandomColor } from "../editor_functions";
 
 var setGreenMarginTop = document.getElementById("setGreenMarginTop");
+var setGreenMarginLeft = document.getElementById("setGreenMarginLeft");
+var setGreenMarginRight = document.getElementById("setGreenMarginRight");
 var setGreenMarginBottom = document.getElementById("setGreenMarginBottom");
 var setGreenPaddingTop = document.getElementById("setGreenPaddingTop");
 var setGreenPaddingLeft = document.getElementById("setGreenPaddingLeft");
@@ -22,6 +19,7 @@ function GreenGearElement(id) {
   if (setSectionPopup.classList.contains("open")) {
     // setSectionPopup.classList.remove("open"); // Remove "open" class
     closeAllSidebars();
+    document.getElementById("marginPaddingPopup").style.display = "none";
   } else {
     closeAllSidebars();
     setSectionPopup.classList.add("open"); // Add "open" class
@@ -33,27 +31,115 @@ function loadPresetGreenSettings(id) {
   const editorComponent = document.getElementById(id);
   //get margin padding value
   let editorComponentStyles = getComputedStyle(editorComponent);
-  setGreenMarginTop.innerText =
-    editorComponentStyles.getPropertyValue("margin-top");
-  setGreenMarginBottom.innerText =
-    editorComponentStyles.getPropertyValue("margin-bottom");
-  setGreenPaddingTop.innerText =
-    editorComponentStyles.getPropertyValue("padding-top");
-  setGreenPaddingLeft.innerText =
-    editorComponentStyles.getPropertyValue("padding-left");
-  setGreenPaddingRight.innerText =
-    editorComponentStyles.getPropertyValue("padding-right");
-  setGreenPaddingBottom.innerText =
-    editorComponentStyles.getPropertyValue("padding-bottom");
+  if (desktopBtn.classList.contains("active")) {
+    setGreenMarginTop.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-top");
+    setGreenMarginLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-left");
+    setGreenMarginRight.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-right");
+    setGreenMarginBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-bottom");
+    setGreenPaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+    setGreenPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+    setGreenPaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+    setGreenPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+  } else if (mobileBtn.classList.contains("active")) {
+    setGreenMarginTop.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-top");
+    setGreenMarginLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-left");
+    setGreenMarginRight.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-right");
+    setGreenMarginBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-bottom");
+    setGreenPaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+    setGreenPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+    setGreenPaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+    setGreenPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+  }
+  document.querySelectorAll(".device-select .option").forEach((option) => {
+    option.addEventListener("click", function () {
+      const editorComponent = document.getElementById(id);
+      const device = this.getAttribute("data-value");
+
+      // Update the font size based on device selection
+      if (device === "desktop") {
+        // editorComponent.classList.add("active");
+        // editorComponent.classList.remove("mobile-view");
+        // editorComponent.classList.add("desktop-view");
+        editorComponent.classList.add("active");
+        editorComponent.classList.remove("mp-mobile-view");
+        editorComponent.classList.add("mp-desktop-view");
+
+        // editorComponent.style.setProperty("--desktop-text-align", desktopTextAlign);
+        // document.querySelectorAll(".align-button").forEach((button) => {
+        //   button.classList.remove("selected-button");
+        //   if (button.querySelector("i").classList.contains(`bi-text-${desktopTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   } else if (button.querySelector("i").classList.contains(`bi-${desktopTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   }
+        // });
+        setGreenMarginTop.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-top");
+        setGreenMarginLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-left");
+        setGreenMarginRight.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-right");
+        setGreenMarginBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-bottom");
+        setGreenPaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+        setGreenPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+        setGreenPaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+        setGreenPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+      } else if (device === "mobile") {
+        // editorComponent.classList.remove("active");
+        // editorComponent.classList.add("mobile-view");
+        // editorComponent.classList.remove("desktop-view");
+        editorComponent.classList.remove("active");
+        editorComponent.classList.add("mp-mobile-view");
+        editorComponent.classList.remove("mp-desktop-view");
+
+        // editorComponent.style.setProperty("--mobile-text-align", mobileTextAlign);
+        // document.querySelectorAll(".align-button").forEach((button) => {
+        //   button.classList.remove("selected-button");
+        //   if (button.querySelector("i").classList.contains(`bi-text-${mobileTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   } else if (button.querySelector("i").classList.contains(`bi-${mobileTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   }
+        // });
+        setGreenMarginTop.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-top");
+        setGreenMarginLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-left");
+        setGreenMarginRight.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-right");
+        setGreenMarginBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-bottom");
+        setGreenPaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+        setGreenPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+        setGreenPaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+        setGreenPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+      }
+    });
+  });
+
   // Background color setting for Green Section
   const greenBackColor = document.getElementById("green-back-color");
   const greenBackColorIcon = document.getElementById("green-back-color-icon");
-  greenBackColor.style.color = editorComponent.style.backgroundColor;
-  greenBackColorIcon.style.color = editorComponent.style.backgroundColor;
-  greenBackColor.addEventListener("input", function () {
-    greenBackColorIcon.style.color = greenBackColor.value;
+  const transparentButton = document.getElementById("green-transparent-background");
+  console.log(getComputedStyle(editorComponent).backgroundColor, "////////");
+  greenBackColor.style.color = getComputedStyle(editorComponent).backgroundColor;
+  greenBackColorIcon.style.color = getComputedStyle(editorComponent).backgroundColor;
+  const updateBackgroundColor = () => {
     const editorComponent = document.getElementById(selectedGreenSection);
-    editorComponent.style.backgroundColor = greenBackColor.value;
+    if (editorComponent.dataset.transparent === "true") {
+      // Set the background color to transparent
+      editorComponent.style.backgroundColor = "transparent";
+    } else {
+      // Set the background color to the chosen color
+      editorComponent.style.backgroundColor = greenBackColor.value;
+    }
+  };
+  // Event listener for color input
+  greenBackColor.addEventListener("input", function () {
+    const editorComponent = document.getElementById(selectedGreenSection);
+    editorComponent.dataset.transparent = "false";
+    updateBackgroundColor();
+    greenBackColorIcon.style.color = greenBackColor.value;
+  });
+  // Event listener for the transparent button
+  transparentButton.addEventListener("click", function () {
+    const editorComponent = document.getElementById(selectedGreenSection);
+    editorComponent.dataset.transparent = "true";
+    updateBackgroundColor();
+    greenBackColorIcon.style.color = "white";
   });
 
   //Setting Background Image
@@ -62,9 +148,7 @@ function loadPresetGreenSettings(id) {
     const editorComponent = document.getElementById(selectedGreenSection);
     editorComponent.style.background = 'url("' + backgroundImage.value + '")';
   });
-  const imageRepeatOption = document.getElementById(
-    "select-green-image-repeat-options"
-  );
+  const imageRepeatOption = document.getElementById("select-green-image-repeat-options");
   imageRepeatOption.addEventListener("change", function () {
     if (imageRepeatOption.value == "No Repeat") {
       editorComponent.style.backgroundRepeat = "no-repeat";
@@ -76,9 +160,7 @@ function loadPresetGreenSettings(id) {
       editorComponent.style.backgroundRepeat = "repeat-y";
     }
   });
-  const imageSizeOption = document.getElementById(
-    "select-green-image-size-options"
-  );
+  const imageSizeOption = document.getElementById("select-green-image-size-options");
   imageSizeOption.addEventListener("change", function () {
     if (imageSizeOption.value == "Full Center") {
       editorComponent.style.backgroundSize = "auto";
@@ -222,6 +304,34 @@ function loadPresetGreenSettings(id) {
       editorComponent.style.width = "50%";
     }
   });
+
+  const desktopVi = document.getElementById("section-desktop");
+  const mobileVi = document.getElementById("section-mobile");
+  const desktopDisplay = (section) => {
+    const editorComponent = document.getElementById(selectedGreenSection);
+    if (desktopBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        editorComponent.style.display = "block";
+      } else {
+        editorComponent.style.display = "none";
+      }
+    }
+  };
+  const mobileDisplay = (section) => {
+    const editorComponent = document.getElementById(selectedGreenSection);
+    if (mobileBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        editorComponent.style.display = "block";
+      } else {
+        editorComponent.style.display = "none";
+      }
+    }
+  };
+  if (desktopBtn.classList.contains("active")) {
+    desktopVi.addEventListener("click", () => desktopDisplay(desktopVi));
+  } else {
+    mobileVi.addEventListener("click", () => mobileDisplay(mobileVi));
+  }
 }
 
 // General and Advanced tab panel for Green Section

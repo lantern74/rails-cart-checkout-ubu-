@@ -144,7 +144,8 @@
 
     <div class="tab-content mt-3">
       <div class="tab-pane fade show active" id="green-general-content">
-
+        <div>Element name</div>
+        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Section">
 
         <div class="row my-3 align-items-center">
           <div class="col-6">Background Color</div>
@@ -156,33 +157,9 @@
           </div>
         </div>
 
-        <div class="my-2">Width</div>
-        <select class="form-select py-2 input-panel" id="setting-section-width">
-          <option value="full">Full</option>
-          <option value="wide">Wide</option>
-          <option value="mid-wide">Mid Wide</option>
-          <option value="small">Small</option>
-        </select>
-
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
-            <div style="display:flex; align-items:center">
-              <span>Margin & Padding</span>
-              <div class="device-select">
-                <div class="selected" id="section-marginpadding-device">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </div>
+            <strong>Margin & Padding</strong>
           </div>
 
           <div class="p-3">
@@ -192,111 +169,29 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setGreenMarginTop"></button></div>
               </div>
-
-              <div style="display:flex; align-items:center;">
-                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass" id="setGreenMarginLeft"></button></div>
-                <div class="padding-border margin-padding">
-                  <div>
-                    <div style="font-size:12px; position:absolute;">PADDING</div>
-                    <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
-                        id="setGreenPaddingTop"></button></div>
-                  </div>
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setGreenPaddingLeft"
-                        ></button></div>
-                      <div class="col-4 element-border"></div>
-                      <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setGreenPaddingRight"
-                        ></button></div>
-                    </div>
-                  </div>
+              <div class="padding-border margin-padding">
+                <div>
+                  <div style="font-size:12px; position:absolute;">PADDING</div>
                   <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
-                      id="setGreenPaddingBottom"></button></div>
+                      id="setGreenPaddingTop"></button></div>
                 </div>
-                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass" id="setGreenMarginRight"></button></div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setGreenPaddingLeft"
+                      ></button></div>
+                    <div class="col-4 element-border"></div>
+                    <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setGreenPaddingRight"
+                      ></button></div>
+                  </div>
+                </div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setGreenPaddingBottom"></button></div>
               </div>
-
               <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                   id="setGreenMarginBottom"></button></div>
             </div>
           </div>
         </div>
-
-        <div>Element name</div>
-        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Section">
-
-      </div>
-
-      <div class="tab-pane fade show" id="green-advanced-content">
-        <div class="border-options">
-          <div class="py-2 pl-2 subtitle-panel">
-            <strong>Border Options</strong>
-          </div>
-          <div class="p-3">
-            <div>Border</div>
-            <select class="form-select py-2 mt-2 input-panel" id="setting-section-border-select">
-              <option value="No Border">No Border</option>
-              <option value="full">Full Border</option>
-              <option value="bottom">Bottom Border</option>
-              <option value="top">Top Border</option>
-              <option value="top&bototm">Top & Bottom Border</option>
-            </select>
-
-            <div class="hidden" id="green-border-setting">
-              <div class="my-2">Border Style</div>
-              <select class="form-select py-2 input-panel" id="setting-section-border-style">
-                <option value="solid">Solid</option>
-                <option value="dashed">Dashed</option>
-                <option value="dotted">Dotted</option>
-              </select>
-
-              <div class="my-2">Border Width</div>
-              <select class="form-select py-2 input-panel" id="setting-section-border-width">
-                <option value="1px">1px</option>
-                <option value="2px">2px</option>
-                <option value="3px">3px</option>
-                <option value="5px">5px</option>
-                <option value="10px">10px</option>
-              </select>
-
-              <div class="row my-3 align-items-center">
-                <div class="col-10">Border Color</div>
-                <div class="col-2 align-items-center">
-                  <label for="section-border-color" class="form-label"><i class="bi bi-circle-fill color-icon"
-                      id="section-border-color-icon"></i></label>
-                  <input type="color" class="form-control form-control-color" id="section-border-color" value="#000000">
-                </div>
-              </div>
-
-              <div class="my-2">Border Radius</div>
-              <select class="form-select py-2 input-panel" id="setting-section-border-radius">
-                <option value="0px">0px</option>
-                <option value="1px">1px</option>
-                <option value="2px">2px</option>
-                <option value="3px">3px</option>
-                <option value="4px">4px</option>
-                <option value="5px">5px</option>
-                <option value="10px">10px</option>
-                <option value="15px">15px</option>
-                <option value="20px">20px</option>
-                <option value="30px">30px</option>
-                <option value="40px">40px</option>
-                <option value="50px">50px</option>
-                <option value="75px">75px</option>
-                <option value="100px">100px</option>
-              </select>
-
-              <div class="my-2">Radius Edge</div>
-              <select class="form-select py-2 input-panel" id="setting-section-edge">
-                <option value="All Edges">All Edges</option>
-                <option value="Top Only Edges">Top Only Edges</option>
-                <option value="Bottom Only Edges">Bottom Only Edges</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-
 
         <div class="my-3 align-items-center">
           <div>Box Shadow</div>
@@ -361,19 +256,85 @@
             </select>
           </div>
         </div>
+      </div>
 
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            Visibility
+      <div class="tab-pane fade show" id="green-advanced-content">
+        <div class="border-options">
+          <div class="py-2 pl-2 subtitle-panel">
+            <strong>Border Options</strong>
           </div>
-          <div class="col-7 align-items-center">
-            <div class="view-visibility">
-                <button draggable="false" class="btn back-btn smaller-font ml-1 desktop active" id="section-desktop" ><i class="bi bi-laptop"></i></button>
-                <button draggable="false" class="btn back-btn smaller-font ml-1 mobile active" id="section-mobile" ><i class="bi bi-phone"></i></button>
+
+          <div class="p-3">
+            <div>Border</div>
+            <select class="form-select py-2 mt-2 input-panel" id="setting-section-border-select">
+              <option value="No Border">No Border</option>
+              <option value="full">Full Border</option>
+              <option value="bottom">Bottom Border</option>
+              <option value="top">Top Border</option>
+              <option value="top&bototm">Top & Bottom Border</option>
+            </select>
+
+            <div class="hidden" id="green-border-setting">
+              <div class="my-2">Border Style</div>
+              <select class="form-select py-2 input-panel" id="setting-section-border-style">
+                <option value="solid">Solid</option>
+                <option value="dashed">Dashed</option>
+                <option value="dotted">Dotted</option>
+              </select>
+
+              <div class="my-2">Border Width</div>
+              <select class="form-select py-2 input-panel" id="setting-section-border-width">
+                <option value="1px">1px</option>
+                <option value="2px">2px</option>
+                <option value="3px">3px</option>
+                <option value="5px">5px</option>
+                <option value="10px">10px</option>
+              </select>
+
+              <div class="row my-3 align-items-center">
+                <div class="col-10">Border Color</div>
+                <div class="col-2 align-items-center">
+                  <label for="section-border-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                      id="section-border-color-icon"></i></label>
+                  <input type="color" class="form-control form-control-color" id="section-border-color" value="#000000">
+                </div>
+              </div>
+
+              <div class="my-2">Border Radius</div>
+              <select class="form-select py-2 input-panel" id="setting-section-border-radius">
+                <option value="0px">0px</option>
+                <option value="1px">1px</option>
+                <option value="2px">2px</option>
+                <option value="3px">3px</option>
+                <option value="4px">4px</option>
+                <option value="5px">5px</option>
+                <option value="10px">10px</option>
+                <option value="15px">15px</option>
+                <option value="20px">20px</option>
+                <option value="30px">30px</option>
+                <option value="40px">40px</option>
+                <option value="50px">50px</option>
+                <option value="75px">75px</option>
+                <option value="100px">100px</option>
+              </select>
+
+              <div class="my-2">Radius Edge</div>
+              <select class="form-select py-2 input-panel" id="setting-section-edge">
+                <option value="All Edges">All Edges</option>
+                <option value="Top Only Edges">Top Only Edges</option>
+                <option value="Bottom Only Edges">Bottom Only Edges</option>
+              </select>
             </div>
           </div>
         </div>
 
+        <div class="my-2">Width</div>
+        <select class="form-select py-2 input-panel" id="setting-section-width">
+          <option value="full">Full</option>
+          <option value="wide">Wide</option>
+          <option value="mid-wide">Mid Wide</option>
+          <option value="small">Small</option>
+        </select>
 
       </div>
     </div>
@@ -388,7 +349,6 @@
       <div style="width: 40%;">
         <div class="inputs">
           <input class="input-number" type="number" id="setValueWithNumber" value="0">
-          <input class="input-number" type="number" id="setValueWithNumberMobile" value="0" style="display:none">
           <!-- <button class="set-unit-button" style="width: 40%;">px</button> -->
           <select name="select-unit" id="select-unit">
             <option value="px">px</option>
@@ -438,7 +398,8 @@
 
     <div class="tab-content mt-3">
       <div class="tab-pane fade show active" id="blue-general-content">
-
+        <div>Element name</div>
+        <input type="text" name="element-name" class="form-control my-2 input-panel" value="1 Column Row">
 
         <div class="row my-3 align-items-center">
           <div class="col-6">BACKGROUND<br> COLOR</div>
@@ -457,33 +418,9 @@
           <option value="right">Right</option>
         </select>
 
-        <div>Width</div>
-        <div class="input-group" style="display: flex; align-items:center;">
-          <input class="form-input width-slider mr-2" type="range" id="blue-width-slider" min="10" max="100" step="1"
-            value="100" style="width: 70%;">
-          <input type="number" min="10" max="100" name="element-name" id="blue-width-value"
-            class="form-control my-2 input-panel" value="100">
-        </div>
-
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
-            <div style="display:flex; align-items:center">
-              <span>Margin & Padding</span>
-              <div class="device-select">
-                <div class="selected" id="blue-marginpadding-device">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </div>
+            <strong>Margin & Padding</strong>
           </div>
 
           <div class="p-3">
@@ -493,10 +430,7 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setBlueMarginTop"></button></div>
               </div>
-
-              <div style="display:flex; align-items:center;">
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setBlueMarginLeft"></button></div>
-                <div class="padding-border margin-padding">
+              <div class="padding-border margin-padding">
                 <div>
                   <div style="font-size:12px; position:absolute;">PADDING</div>
                   <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
@@ -511,16 +445,84 @@
                 </div>
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass" id="setBluePaddingBottom"></button></div>
               </div>
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setBlueMarginRight"></button></div>
-              </div>
-
               <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass" id="setBlueMarginBottom"></button></div>
             </div>
           </div>
         </div>
 
-        <div>Element name</div>
-        <input type="text" name="element-name" class="form-control my-2 input-panel" value="1 Column Row">
+
+
+        <div class="my-3 align-items-center">
+          <div>Box Shadow</div>
+          <select class="form-select py-2 input-panel" id="set-blue-box-shadow">
+            <option value="No Shadow">No Shadow</option>
+            <option value="5% Drop Shadow">5% Drop Shadow</option>
+            <option value="10% Drop Shadow">10% Drop Shadow</option>
+            <option value="20% Drop Shadow">20% Drop Shadow</option>
+            <option value="30% Drop Shadow">30% Drop Shadow</option>
+            <option value="40% Drop Shadow">40% Drop Shadow</option>
+            <option value="5% Inner Shadow">5% Inner Shadow</option>
+            <option value="10% Inner Shadow">10% Inner Shadow</option>
+            <option value="20% Inner Shadow">20% Inner Shadow</option>
+            <option value="30% Inner Shadow">30% Inner Shadow</option>
+            <option value="40% Inner Shadow">40% Inner Shadow</option>
+          </select>
+        </div>
+
+        <div class="my-3 align-items-center">
+          <div>BG Media Type</div>
+          <div class="row">
+            <div class="col-5 ml-3 form-check">
+              <input type="radio" class="form-check-input" id="radio-image-1" name="optradio-1" value="image"
+                checked>Image
+              <label class="form-check-label" for="radio-image-1"></label>
+            </div>
+            <div class="col-5 form-check">
+              <input type="radio" class="form-check-input" id="radio-video-1" name="optradio-1" value="video">Video
+              <label class="form-check-label" for="radio-video-1"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-3 align-items-center">
+          <div>BG Media</div>
+          <div class="input-group">
+            <input type="text" class="form-control input-panel" placeholder="Media URL" id="input-blue-image">
+            <span class="input-group-text"><i class="bi bi-image setting-icon"></i></span>
+          </div>
+        </div>
+
+        <div class="my-3 align-items-center">
+          <div>Iamge Repeat Options</div>
+          <div class="input-group">
+            <select class="form-select py-2 mt-2 input-panel" id="select-blue-image-repeat-options">
+              <option value="Repeat">Repeat</option>
+              <option value="No Repeat">No Repeat</option>
+              <option value="Repeat Horizontally">Repeat Horizontally</option>
+              <option value="Repeat Vertically">Repeat Vertically</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="my-3 align-items-center">
+          <div>Iamge size Options</div>
+          <div class="input-group">
+            <select class="form-select py-2 mt-2 input-panel" id="select-blue-image-size-options">
+              <option value="Full Center">Full Center</option>
+              <option value="Full 100% Width">Full 100% Width</option>
+              <option value="Full 100% Width & Height">Full 100% Width & Height</option>
+              <option value="Contain">Contain</option>
+            </select>
+          </div>
+        </div>
+
+        <div>Width</div>
+        <div class="input-group" style="display: flex; align-items:center;">
+          <input class="form-input width-slider mr-2" type="range" id="blue-width-slider" min="10" max="100" step="1"
+            value="100" style="width: 70%;">
+          <input type="number" min="10" max="100" name="element-name" id="blue-width-value"
+            class="form-control my-2 input-panel" value="100">
+        </div>
 
       </div>
 
@@ -591,83 +593,6 @@
                 <option value="Bottom Only Edges">Bottom Only Edges</option>
               </select>
             </div>
-
-            <div class="my-3 align-items-center">
-          <div>Box Shadow</div>
-          <select class="form-select py-2 input-panel" id="set-blue-box-shadow">
-            <option value="No Shadow">No Shadow</option>
-            <option value="5% Drop Shadow">5% Drop Shadow</option>
-            <option value="10% Drop Shadow">10% Drop Shadow</option>
-            <option value="20% Drop Shadow">20% Drop Shadow</option>
-            <option value="30% Drop Shadow">30% Drop Shadow</option>
-            <option value="40% Drop Shadow">40% Drop Shadow</option>
-            <option value="5% Inner Shadow">5% Inner Shadow</option>
-            <option value="10% Inner Shadow">10% Inner Shadow</option>
-            <option value="20% Inner Shadow">20% Inner Shadow</option>
-            <option value="30% Inner Shadow">30% Inner Shadow</option>
-            <option value="40% Inner Shadow">40% Inner Shadow</option>
-          </select>
-        </div>
-
-        <div class="my-3 align-items-center">
-          <div>BG Media Type</div>
-          <div class="row">
-            <div class="col-5 ml-3 form-check">
-              <input type="radio" class="form-check-input" id="radio-image-1" name="optradio-1" value="image"
-                checked>Image
-              <label class="form-check-label" for="radio-image-1"></label>
-            </div>
-            <div class="col-5 form-check">
-              <input type="radio" class="form-check-input" id="radio-video-1" name="optradio-1" value="video">Video
-              <label class="form-check-label" for="radio-video-1"></label>
-            </div>
-          </div>
-        </div>
-
-        <div class="my-3 align-items-center">
-          <div>BG Media</div>
-          <div class="input-group">
-            <input type="text" class="form-control input-panel" placeholder="Media URL" id="input-blue-image">
-            <span class="input-group-text"><i class="bi bi-image setting-icon"></i></span>
-          </div>
-        </div>
-
-        <div class="my-3 align-items-center">
-          <div>Iamge Repeat Options</div>
-          <div class="input-group">
-            <select class="form-select py-2 mt-2 input-panel" id="select-blue-image-repeat-options">
-              <option value="Repeat">Repeat</option>
-              <option value="No Repeat">No Repeat</option>
-              <option value="Repeat Horizontally">Repeat Horizontally</option>
-              <option value="Repeat Vertically">Repeat Vertically</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="my-3 align-items-center">
-          <div>Iamge size Options</div>
-          <div class="input-group">
-            <select class="form-select py-2 mt-2 input-panel" id="select-blue-image-size-options">
-              <option value="Full Center">Full Center</option>
-              <option value="Full 100% Width">Full 100% Width</option>
-              <option value="Full 100% Width & Height">Full 100% Width & Height</option>
-              <option value="Contain">Contain</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            Visibility
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="view-visibility">
-                <button draggable="false" class="btn back-btn smaller-font ml-1 desktop active" id="row-desktop" ><i class="bi bi-laptop"></i></button>
-                <button draggable="false" class="btn back-btn smaller-font ml-1 mobile active" id="row-mobile" ><i class="bi bi-phone"></i></button>
-            </div>
-          </div>
-        </div>
-
           </div>
         </div>
 
@@ -705,75 +630,20 @@
 
     <div class="tab-content mt-3">
       <div class="tab-pane fade show active" id="orange-general-content">
-
-
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            <div>
-              <label for="headline-font-family-select">Font Family</label>
-            </div>
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="form-element">
-              <select class="form-select" id="headline-font-family-select">
-                <option value="Fira Sans">Fira Sans</option>
-                <option value="Fjalla One">Fjalla One</option>
-                <option value="Open Sans">Open Sans</option>
-                <option value="Roboto">Roboto</option>
-                <option value="Roboto Slab">Roboto Slab</option>
-                <option value="Montserrat" selected="">Montserrat</option>
-                <option value="Merriweather">Merriweather</option>
-              </select>
-            </div>
-          </div>
-        </div>
+        <div>Element name</div>
+        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Headline">
 
         <div class="row my-3 align-items-center">
-          <div class="col-5">
-            <div>
-              <label for="headline-font-slider" style="display:flex; align-items:center">
-                <span>Font Size</span>
-                <div class="device-select">
-                  <div class="selected" id="headline-fontsize-device" data-value="desktop">
-                      <i class="bi bi-laptop"></i>
-                      <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                  </div>
-                  <div class="options">
-                      <div class="option" data-value="desktop">
-                          <i class="bi bi-laptop"></i>
-                      </div>
-                      <div class="option" data-value="mobile">
-                          <i class="bi bi-phone"></i>
-                      </div>
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="form-element">
-              <input class="form-input" type="range" id="headline-font-slider" min="12" max="100" step="2">
-            </div>
+          <div class="col-6">Background Color</div>
+          <div class="col-6 align-items-center" style="display:flex">
+            <label for="headline-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                id="headline-back-color-icon"></i></label>
+            <input type="color" class="form-control form-control-color" id="headline-back-color" value="transparent">
+            <button id="headline-transparent-background" class="btn btn-outline-secondary custom-btn-small">Transparent</button>
           </div>
         </div>
 
-        <div class="mt-3" style="display:flex; align-items:center">
-          <span>Text Align</span>
-          <div class="device-select">
-            <div class="selected" id="headline-textalign-device">
-                <i class="bi bi-laptop"></i>
-                <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-            </div>
-            <div class="options">
-                <div class="option" data-value="desktop">
-                    <i class="bi bi-laptop"></i>
-                </div>
-                <div class="option" data-value="mobile">
-                    <i class="bi bi-phone"></i>
-                </div>
-            </div>
-          </div>
-        </div>
+        <div class="mt-3">Text Align</div>
         <div class="row my-2">
           <div class="col-3">
             <button class="align-button"><i class="bi bi-text-left align-button-icon"></i></button>
@@ -788,7 +658,6 @@
             <button class="align-button"><i class="bi bi-justify align-button-icon"></i></button>
           </div>
         </div>
-
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
             <strong>Color Options</strong>
@@ -839,232 +708,46 @@
                 <input type="color" class="form-control form-control-color" id="headline-link-color" value="#FFFFFF">
               </div>
             </div>
+          </div>
+        </div>
 
-            <div id="set-bullet-icon" style="display:none">
-            <div class="row align-items-center">
-              <div class="col-10">Icon Background Color</div>
-              <div class="col-2 align-items-center">
-                <label for="bullet-icon-color" class="form-label"><i class="bi bi-circle-fill color-icon"
-                    id="bullet-icon-color-icon"></i></label>
-                <input type="color" class="form-control form-control-color" id="bullet-icon-color" value="#FFFFFF">
-              </div>
+        <div class="row my-3 align-items-center">
+          <div class="col-5">
+            <div>
+              <label for="headline-font-family-select">Font Family</label>
             </div>
+          </div>
+          <div class="col-7 align-items-center">
+            <div class="form-element">
+              <select class="form-select" id="headline-font-family-select">
+                <option value="Fira Sans">Fira Sans</option>
+                <option value="Fjalla One">Fjalla One</option>
+                <option value="Open Sans">Open Sans</option>
+                <option value="Roboto">Roboto</option>
+                <option value="Roboto Slab">Roboto Slab</option>
+                <option value="Montserrat" selected="">Montserrat</option>
+                <option value="Merriweather">Merriweather</option>
+              </select>
             </div>
           </div>
         </div>
 
         <div class="row my-3 align-items-center">
-          <div class="col-6">Background Color</div>
-          <div class="col-6 align-items-center" style="display:flex">
-            <label for="headline-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
-                id="headline-back-color-icon"></i></label>
-            <input type="color" class="form-control form-control-color" id="headline-back-color" value="transparent">
-            <button id="headline-transparent-background" class="btn btn-outline-secondary custom-btn-small">Transparent</button>
+          <div class="col-5">
+            <div>
+              <label for="headline-font-slider">Font Size</label>
+            </div>
           </div>
-        </div>
-
-        <div class="my-3 align-items-center" id="icon-field">
-          <div>Icon</div>
-          <div id="icon-div" class="icon-container">
-            <button class="icon-button" id="bi-dot"><i class="bi bi-dot"></i></button>
-            <button class="icon-button" id="bi-circle-fill"><i class="bi bi-circle-fill"></i></button>
-            <button class="icon-button" id="bi-record-circle"><i class="bi bi-record-circle"></i></button>
-            <button class="icon-button" id="bi-brightness-high"><i class="bi bi-brightness-high"></i></button>
-            <button class="icon-button" id="bi-check-circle"><i class="bi bi-check-circle"></i></button>
-            <button class="icon-button" id="bi-record2"><i class="bi bi-record2"></i></button>
-            <button class="icon-button" id="bi-record"><i class="bi bi-record"></i></button>
-            <button class="icon-button" id="bi-check2-circle"><i class="bi bi-check2-circle"></i></button>
-            <button class="icon-button" id="bi-check"><i class="bi bi-check"></i></button>
-            <button class="icon-button" id="bi-check-circle"><i class="bi bi-check-circle"></i></button>
-            <button class="icon-button" id="bi-check-square"><i class="bi bi-check-square"></i></button>
-            <button class="icon-button" id="bi-check2"><i class="bi bi-check2"></i></button>
-            <button class="icon-button" id="bi-check2-all"><i class="bi bi-check2-all"></i></button>
-            <button class="icon-button" id="bi-check2-circle"><i class="bi bi-check2-circle"></i></button>
-            <button class="icon-button" id="bi-check2-square"><i class="bi bi-check2-square"></i></button>
-            <button class="icon-button" id="bi-check-lg"><i class="bi bi-check-lg"></i></button>
-            <button class="icon-button" id="bi-list-ul"><i class="bi bi-list-ul"></i></button>
-            <button class="icon-button" id="bi-list-ol"><i class="bi bi-list-ol"></i></button>
-            <button class="icon-button" id="bi-list-check"><i class="bi bi-list-check"></i></button>
-            <button class="icon-button" id="bi-list-task"><i class="bi bi-list-task"></i></button>
-            <button class="icon-button" id="bi-list"><i class="bi bi-list"></i></button>
-            <button class="icon-button" id="bi-list-nested"><i class="bi bi-list-nested"></i></button>
-            <button class="icon-button" id="bi-list-stars"><i class="bi bi-list-stars"></i></button>
-            <button class="icon-button" id="bi-arrows-expand"><i class="bi bi-arrows-expand"></i></button>
-            <button class="icon-button" id="bi-arrow-up-left-square"><i class="bi bi-arrow-up-left-square"></i></button>
-            <button class="icon-button" id="bi-arrow-down-right-square"><i class="bi bi-arrow-down-right-square"></i></button>
-            <button class="icon-button" id="bi-arrow-clockwise"><i class="bi bi-arrow-clockwise"></i></button>
-            <button class="icon-button" id="bi-arrow-counterclockwise"><i class="bi bi-arrow-counterclockwise"></i></button>
-            <button class="icon-button" id="bi-arrow-return-left"><i class="bi bi-arrow-return-left"></i></button>
-            <button class="icon-button" id="bi-arrow-return-right"><i class="bi bi-arrow-return-right"></i></button>
-            <button class="icon-button" id="bi-arrow-repeat"><i class="bi bi-arrow-repeat"></i></button>
-            <button class="icon-button" id="bi-arrow-bar-up"><i class="bi bi-arrow-bar-up"></i></button>
-            <button class="icon-button" id="bi-arrow-bar-down"><i class="bi bi-arrow-bar-down"></i></button>
-            <button class="icon-button" id="bi-arrow-up-left"><i class="bi bi-arrow-up-left"></i></button>
-            <button class="icon-button" id="bi-arrow-up-right"><i class="bi bi-arrow-up-right"></i></button>
-            <button class="icon-button" id="bi-arrow-down-left"><i class="bi bi-arrow-down-left"></i></button>
-            <button class="icon-button" id="bi-arrow-down-right"><i class="bi bi-arrow-down-right"></i></button>
-            <button class="icon-button" id="bi-arrow-left-right"><i class="bi bi-arrow-left-right"></i></button>
-            <button class="icon-button" id="bi-arrow-bar-right"><i class="bi bi-arrow-bar-right"></i></button>
-            <button class="icon-button" id="bi-arrow-bar-left"><i class="bi bi-arrow-bar-left"></i></button>
-            <button class="icon-button" id="bi-arrow-90deg-up"><i class="bi bi-arrow-90deg-up"></i></button>
-            <button class="icon-button" id="bi-arrow-90deg-down"><i class="bi bi-arrow-90deg-down"></i></button>
-            <button class="icon-button" id="bi-arrow-90deg-left"><i class="bi bi-arrow-90deg-left"></i></button>
-            <button class="icon-button" id="bi-arrow-90deg-right"><i class="bi bi-arrow-90deg-right"></i></button>
-            <button class="icon-button" id="bi-caret-up-fill"><i class="bi bi-caret-up-fill"></i></button>
-            <button class="icon-button" id="bi-caret-down-fill"><i class="bi bi-caret-down-fill"></i></button>
-            <button class="icon-button" id="bi-caret-left-fill"><i class="bi bi-caret-left-fill"></i></button>
-            <button class="icon-button" id="bi-caret-right-fill"><i class="bi bi-caret-right-fill"></i></button>
-            <button class="icon-button" id="bi-caret-up-square-fill"><i class="bi bi-caret-up-square-fill"></i></button>
-            <button class="icon-button" id="bi-caret-down-square-fill"><i class="bi bi-caret-down-square-fill"></i></button>
-            <button class="icon-button" id="bi-caret-left-square-fill"><i class="bi bi-caret-left-square-fill"></i></button>
-            <button class="icon-button" id="bi-caret-right-square-fill"><i class="bi bi-caret-right-square-fill"></i></button>
-            <button class="icon-button" id="bi-alarm"><i class="bi bi-alarm"></i></button>
-            <button class="icon-button" id="bi-bell"><i class="bi bi-bell"></i></button>
-            <button class="icon-button" id="bi-bookmark"><i class="bi bi-bookmark"></i></button>
-            <button class="icon-button" id="bi-camera"><i class="bi bi-camera"></i></button>
-            <button class="icon-button" id="bi-chat-left"><i class="bi bi-chat-left"></i></button>
-            <button class="icon-button" id="bi-credit-card"><i class="bi bi-credit-card"></i></button>
-            <button class="icon-button" id="bi-envelope"><i class="bi bi-envelope"></i></button>
-            <button class="icon-button" id="bi-file-earmark-text"><i class="bi bi-file-earmark-text"></i></button>
-            <button class="icon-button" id="bi-globe"><i class="bi bi-globe"></i></button>
-            <button class="icon-button" id="bi-heart"><i class="bi bi-heart"></i></button>
-            <button class="icon-button" id="bi-house"><i class="bi bi-house"></i></button>
-            <button class="icon-button" id="bi-lightning"><i class="bi bi-lightning"></i></button>
-            <button class="icon-button" id="bi-megaphone"><i class="bi bi-megaphone"></i></button>
-            <button class="icon-button" id="bi-music-note"><i class="bi bi-music-note"></i></button>
-            <button class="icon-button" id="bi-patch-check-fill"><i class="bi bi-patch-check-fill"></i></button>
-            <button class="icon-button" id="bi-pen"><i class="bi bi-pen"></i></button>
-            <button class="icon-button" id="bi-person"><i class="bi bi-person"></i></button>
-            <button class="icon-button" id="bi-phone"><i class="bi bi-phone"></i></button>
-            <button class="icon-button" id="bi-printer"><i class="bi bi-printer"></i></button>
-            <button class="icon-button" id="bi-shield-check"><i class="bi bi-shield-check"></i></button>
-            <button class="icon-button" id="bi-star"><i class="bi bi-star"></i></button>
-            <button class="icon-button" id="bi-sun"><i class="bi bi-sun"></i></button>
-            <button class="icon-button" id="bi-tablet"><i class="bi bi-tablet"></i></button>
-            <button class="icon-button" id="bi-telephone"><i class="bi bi-telephone"></i></button>
-            <button class="icon-button" id="bi-tools"><i class="bi bi-tools"></i></button>
-            <button class="icon-button" id="bi-tv"><i class="bi bi-tv"></i></button>
-            <button class="icon-button" id="bi-watch"><i class="bi bi-watch"></i></button>
-            <button class="icon-button" id="bi-wifi"><i class="bi bi-wifi"></i></button>
-            <button class="icon-button" id="bi-window"><i class="bi bi-window"></i></button>
-            <button class="icon-button" id="bi-zoom-in"><i class="bi bi-zoom-in"></i></button>
-            <button class="icon-button" id="bi-briefcase"><i class="bi bi-briefcase"></i></button>
-            <button class="icon-button" id="bi-calendar"><i class="bi bi-calendar"></i></button>
-            <button class="icon-button" id="bi-clipboard"><i class="bi bi-clipboard"></i></button>
-            <button class="icon-button" id="bi-cloud"><i class="bi bi-cloud"></i></button>
-            <button class="icon-button" id="bi-currency-dollar"><i class="bi bi-currency-dollar"></i></button>
-            <button class="icon-button" id="bi-droplet"><i class="bi bi-droplet"></i></button>
-            <button class="icon-button" id="bi-eye"><i class="bi bi-eye"></i></button>
-            <button class="icon-button" id="bi-film"><i class="bi bi-film"></i></button>
-            <button class="icon-button" id="bi-gear"><i class="bi bi-gear"></i></button>
-            <button class="icon-button" id="bi-gift"><i class="bi bi-gift"></i></button>
-            <button class="icon-button" id="bi-graph-up"><i class="bi bi-graph-up"></i></button>
-            <button class="icon-button" id="bi-headset"><i class="bi bi-headset"></i></button>
-            <button class="icon-button" id="bi-house-door"><i class="bi bi-house-door"></i></button>
-            <button class="icon-button" id="bi-laptop"><i class="bi bi-laptop"></i></button>
-            <button class="icon-button" id="bi-list-check"><i class="bi bi-list-check"></i></button>
-            <button class="icon-button" id="bi-megaphone-fill"><i class="bi bi-megaphone-fill"></i></button>
-            <button class="icon-button" id="bi-mic"><i class="bi bi-mic"></i></button>
-            <button class="icon-button" id="bi-moon"><i class="bi bi-moon"></i></button>
-            <button class="icon-button" id="bi-palette"><i class="bi bi-palette"></i></button>
-            <button class="icon-button" id="bi-patch-plus-fill"><i class="bi bi-patch-plus-fill"></i></button>
-            <button class="icon-button" id="bi-pen-fill"><i class="bi bi-pen-fill"></i></button>
-            <button class="icon-button" id="bi-phone-vibrate"><i class="bi bi-phone-vibrate"></i></button>
-            <button class="icon-button" id="bi-reply-all-fill"><i class="bi bi-reply-all-fill"></i></button>
-            <button class="icon-button" id="bi-shield-fill-check"><i class="bi bi-shield-fill-check"></i></button>
-            <button class="icon-button" id="bi-soundwave"><i class="bi bi-soundwave"></i></button>
-            <button class="icon-button" id="bi-suit-club-fill"><i class="bi bi-suit-club-fill"></i></button>
-            <button class="icon-button" id="bi-tablet-fill"><i class="bi bi-tablet-fill"></i></button>
-            <button class="icon-button" id="bi-tools"><i class="bi bi-tools"></i></button>
-            <button class="icon-button" id="bi-tv-fill"><i class="bi bi-tv-fill"></i></button>
-            <button class="icon-button" id="bi-watch"><i class="bi bi-watch"></i></button>
-            <button class="icon-button" id="bi-award"><i class="bi bi-award"></i></button>
-            <button class="icon-button" id="bi-basket"><i class="bi bi-basket"></i></button>
-            <button class="icon-button" id="bi-bezier"><i class="bi bi-bezier"></i></button>
-            <button class="icon-button" id="bi-brightness-high"><i class="bi bi-brightness-high"></i></button>
-            <button class="icon-button" id="bi-cash-stack"><i class="bi bi-cash-stack"></i></button>
-            <button class="icon-button" id="bi-chat-right"><i class="bi bi-chat-right"></i></button>
-            <button class="icon-button" id="bi-clock"><i class="bi bi-clock"></i></button>
-            <button class="icon-button" id="bi-compass"><i class="bi bi-compass"></i></button>
-            <button class="icon-button" id="bi-cup"><i class="bi bi-cup"></i></button>
-            <button class="icon-button" id="bi-dice-5"><i class="bi bi-dice-5"></i></button>
-            <button class="icon-button" id="bi-door-closed"><i class="bi bi-door-closed"></i></button>
-            <button class="icon-button" id="bi-earbuds"><i class="bi bi-earbuds"></i></button>
-            <button class="icon-button" id="bi-flag-fill"><i class="bi bi-flag-fill"></i></button>
-            <button class="icon-button" id="bi-gear-wide-connected"><i class="bi bi-gear-wide-connected"></i></button>
-            <button class="icon-button" id="bi-gift-fill"><i class="bi bi-gift-fill"></i></button>
-            <button class="icon-button" id="bi-grip-vertical"><i class="bi bi-grip-vertical"></i></button>
-            <button class="icon-button" id="bi-headphones"><i class="bi bi-headphones"></i></button>
-            <button class="icon-button" id="bi-house-fill"><i class="bi bi-house-fill"></i></button>
-            <button class="icon-button" id="bi-journal-text"><i class="bi bi-journal-text"></i></button>
-            <button class="icon-button" id="bi-layers-fill"><i class="bi bi-layers-fill"></i></button>
-            <button class="icon-button" id="bi-lightbulb-fill"><i class="bi bi-lightbulb-fill"></i></button>
-            <button class="icon-button" id="bi-mic-fill"><i class="bi bi-mic-fill"></i></button>
-            <button class="icon-button" id="bi-moon-stars"><i class="bi bi-moon-stars"></i></button>
-            <button class="icon-button" id="bi-paint-bucket"><i class="bi bi-paint-bucket"></i></button>
-            <button class="icon-button" id="bi-pause-fill"><i class="bi bi-pause-fill"></i></button>
-            <button class="icon-button" id="bi-peace-fill"><i class="bi bi-peace-fill"></i></button>
-            <button class="icon-button" id="bi-pencil-square"><i class="bi bi-pencil-square"></i></button>
-            <button class="icon-button" id="bi-pentagon-fill"><i class="bi bi-pentagon-fill"></i></button>
-            <button class="icon-button" id="bi-play-fill"><i class="bi bi-play-fill"></i></button>
-            <button class="icon-button" id="bi-reply-all"><i class="bi bi-reply-all"></i></button>
-            <button class="icon-button" id="bi-rss-fill"><i class="bi bi-rss-fill"></i></button>
-            <button class="icon-button" id="bi-search"><i class="bi bi-search"></i></button>
-            <button class="icon-button" id="bi-shop-window"><i class="bi bi-shop-window"></i></button>
-            <button class="icon-button" id="bi-speedometer2"><i class="bi bi-speedometer2"></i></button>
-            <button class="icon-button" id="bi-star-fill"><i class="bi bi-star-fill"></i></button>
-            <button class="icon-button" id="bi-suit-heart-fill"><i class="bi bi-suit-heart-fill"></i></button>
-            <button class="icon-button" id="bi-sun-fill"><i class="bi bi-sun-fill"></i></button>
-            <button class="icon-button" id="bi-tablet-landscape"><i class="bi bi-tablet-landscape"></i></button>
-            <button class="icon-button" id="bi-telephone-fill"><i class="bi bi-telephone-fill"></i></button>
-            <button class="icon-button" id="bi-telephone-outbound"><i class="bi bi-telephone-outbound"></i></button>
-            <button class="icon-button" id="bi-telephone-inbound"><i class="bi bi-telephone-inbound"></i></button>
-            <button class="icon-button" id="bi-toggles"><i class="bi bi-toggles"></i></button>
-            <button class="icon-button" id="bi-toggles2"><i class="bi bi-toggles2"></i></button>
-            <button class="icon-button" id="bi-trash"><i class="bi bi-trash"></i></button>
-            <button class="icon-button" id="bi-truck-flatbed"><i class="bi bi-truck-flatbed"></i></button>
-            <button class="icon-button" id="bi-upload"><i class="bi bi-upload"></i></button>
-            <button class="icon-button" id="bi-view-list"><i class="bi bi-view-list"></i></button>
-            <button class="icon-button" id="bi-volume-down"><i class="bi bi-volume-down"></i></button>
-            <button class="icon-button" id="bi-volume-mute"><i class="bi bi-volume-mute"></i></button>
-            <button class="icon-button" id="bi-volume-up"><i class="bi bi-volume-up"></i></button>
-            <button class="icon-button" id="bi bi-wallet"><i class="bi bi-wallet"></i></button>
-            <button class="icon-button" id="bi-wifi-1"><i class="bi bi-wifi-1"></i></button>
-            <button class="icon-button" id="bi-wifi-2"><i class="bi bi-wifi-2"></i></button>
-            <button class="icon-button" id="bi-wifi-off"><i class="bi bi-wifi-off"></i></button>
-            <button class="icon-button" id="bi-window-dock"><i class="bi bi-window-dock"></i></button>
-            <button class="icon-button" id="bi-window-sidebar"><i class="bi bi-window-sidebar"></i></button>
-            <button class="icon-button" id="bi-wrench"><i class="bi bi-wrench"></i></button>
-            <button class="icon-button" id="bi bi-x"><i class="bi bi-x"></i></button>
-            <button class="icon-button" id="bi-zoom-in"><i class="bi bi-zoom-in"></i></button>
-            <button class="icon-button" id="bi-zoom-out"><i class="bi bi-zoom-out"></i></button>
-            <button class="icon-button" id="bi-alarm-fill"><i class="bi bi-alarm-fill"></i></button>
-            <button class="icon-button" id="bi-bell-fill"><i class="bi bi-bell-fill"></i></button>
-            <button class="icon-button" id="bi-bookmark-fill"><i class="bi bi-bookmark-fill"></i></button>
-            <button class="icon-button" id="bi-camera-fill"><i class="bi bi-camera-fill"></i></button>
-            <button class="icon-button" id="bi-chat-left-fill"><i class="bi bi-chat-left-fill"></i></button>
+          <div class="col-7 align-items-center">
+            <div class="form-element">
+              <input class="form-input" type="range" id="headline-font-slider" min="12" max="100" step="2">
+            </div>
           </div>
         </div>
 
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
-            <div style="display:flex; align-items:center">
-              <span>Margin & Padding</span>
-              <div class="device-select">
-                <div class="selected" id="headline-marginpadding-device">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </div>
+            <strong>Margin & Padding</strong>
           </div>
 
           <div class="p-3">
@@ -1074,10 +757,7 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setOrangeMarginTop"></button></div>
               </div>
-
-              <div style="display:flex; align-items:center;">
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setOrangeMarginLeft"></button></div>
-                <div class="padding-border margin-padding">
+              <div class="padding-border margin-padding">
                 <div>
                   <div style="font-size:12px; position:absolute;">PADDING</div>
                   <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
@@ -1095,65 +775,10 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setOrangePaddingBottom"></button></div>
               </div>
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setOrangeMarginRight"></button></div>
-              </div>
               <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                   id="setOrangeMarginBottom"></button></div>
             </div>
           </div>
-        </div>
-
-        <div>Element name</div>
-        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Headline">
-
-      </div>
-
-      <div class="tab-pane fade show" id="orange-advanced-content">
-
-        <div id="set-bullet-space" style="diplay:none;">
-          <div class="row my-3 align-items-center">
-            <div class="col-5">
-              <div>
-                <label for="bullet-space">Bullet Space</label>
-              </div>
-            </div>
-            <div class="col-7 align-items-center">
-              <div class="form-element">
-                <input class="form-input" type="range" id="bullet-space" min="0" max="100" step="2">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            <div>
-              <label for="headline-line-heigh">Line Height</label>
-            </div>
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="form-element">
-              <select class="form-select" id="headline-line-heigh">
-                <option value="Auto">Auto</option>
-                <option value="0.7em">0.7em</option>
-                <option value="1em">1em</option>
-                <option value="1.3em">1.3em</option>
-                <option value="1.4em">1.4em</option>
-                <option value="1.5em">1.5em</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="my-3 align-items-center">
-          <div>Letter Spacing</div>
-          <select class="form-select py-2 input-panel" id="set-headline-letter-spacing">
-            <option value="Normal">Normal</option>
-            <option value="1px">1px</option>
-            <option value="2px">2px</option>
-            <option value="3px">3px</option>
-            <option value="-1px">-1px</option>
-          </select>
         </div>
 
         <div class="my-3 align-items-center">
@@ -1178,6 +803,225 @@
           </select>
         </div>
 
+        <div class="my-3 align-items-center">
+          <div>Letter Spacing</div>
+          <select class="form-select py-2 input-panel" id="set-headline-letter-spacing">
+            <option value="Normal">Normal</option>
+            <option value="1px">1px</option>
+            <option value="2px">2px</option>
+            <option value="3px">3px</option>
+            <option value="-1px">-1px</option>
+          </select>
+        </div>
+
+
+
+        <div class="my-3 align-items-center">
+          <div>Box Shadow</div>
+          <select class="form-select py-2 input-panel" id="set-headline-box-shadow">
+            <option value="No Shadow">No Shadow</option>
+            <option value="5% Drop Shadow">5% Drop Shadow</option>
+            <option value="10% Drop Shadow">10% Drop Shadow</option>
+            <option value="20% Drop Shadow">20% Drop Shadow</option>
+            <option value="30% Drop Shadow">30% Drop Shadow</option>
+            <option value="40% Drop Shadow">40% Drop Shadow</option>
+            <option value="5% Inner Shadow">5% Inner Shadow</option>
+            <option value="10% Inner Shadow">10% Inner Shadow</option>
+            <option value="20% Inner Shadow">20% Inner Shadow</option>
+            <option value="30% Inner Shadow">30% Inner Shadow</option>
+            <option value="40% Inner Shadow">40% Inner Shadow</option>
+          </select>
+        </div>
+
+
+        <div class="my-3 align-items-center" id="icon-field">
+        <div>Icon</div>
+        <div id="icon-div" class="icon-container">
+          <button class="icon-button" id="bi-dot"><i class="bi bi-dot"></i></button>
+          <button class="icon-button" id="bi-circle-fill"><i class="bi bi-circle-fill"></i></button>
+          <button class="icon-button" id="bi-record-circle"><i class="bi bi-record-circle"></i></button>
+          <button class="icon-button" id="bi-brightness-high"><i class="bi bi-brightness-high"></i></button>
+          <button class="icon-button" id="bi-check-circle"><i class="bi bi-check-circle"></i></button>
+          <button class="icon-button" id="bi-record2"><i class="bi bi-record2"></i></button>
+          <button class="icon-button" id="bi-record"><i class="bi bi-record"></i></button>
+          <button class="icon-button" id="bi-check2-circle"><i class="bi bi-check2-circle"></i></button>
+          <button class="icon-button" id="bi-check"><i class="bi bi-check"></i></button>
+          <button class="icon-button" id="bi-check-circle"><i class="bi bi-check-circle"></i></button>
+          <button class="icon-button" id="bi-check-square"><i class="bi bi-check-square"></i></button>
+          <button class="icon-button" id="bi-check2"><i class="bi bi-check2"></i></button>
+          <button class="icon-button" id="bi-check2-all"><i class="bi bi-check2-all"></i></button>
+          <button class="icon-button" id="bi-check2-circle"><i class="bi bi-check2-circle"></i></button>
+          <button class="icon-button" id="bi-check2-square"><i class="bi bi-check2-square"></i></button>
+          <button class="icon-button" id="bi-check-lg"><i class="bi bi-check-lg"></i></button>
+          <button class="icon-button" id="bi-list-ul"><i class="bi bi-list-ul"></i></button>
+          <button class="icon-button" id="bi-list-ol"><i class="bi bi-list-ol"></i></button>
+          <button class="icon-button" id="bi-list-check"><i class="bi bi-list-check"></i></button>
+          <button class="icon-button" id="bi-list-task"><i class="bi bi-list-task"></i></button>
+          <button class="icon-button" id="bi-list"><i class="bi bi-list"></i></button>
+          <button class="icon-button" id="bi-list-nested"><i class="bi bi-list-nested"></i></button>
+          <button class="icon-button" id="bi-list-stars"><i class="bi bi-list-stars"></i></button>
+          <button class="icon-button" id="bi-arrows-expand"><i class="bi bi-arrows-expand"></i></button>
+          <button class="icon-button" id="bi-arrow-up-left-square"><i class="bi bi-arrow-up-left-square"></i></button>
+          <button class="icon-button" id="bi-arrow-down-right-square"><i class="bi bi-arrow-down-right-square"></i></button>
+          <button class="icon-button" id="bi-arrow-clockwise"><i class="bi bi-arrow-clockwise"></i></button>
+          <button class="icon-button" id="bi-arrow-counterclockwise"><i class="bi bi-arrow-counterclockwise"></i></button>
+          <button class="icon-button" id="bi-arrow-return-left"><i class="bi bi-arrow-return-left"></i></button>
+          <button class="icon-button" id="bi-arrow-return-right"><i class="bi bi-arrow-return-right"></i></button>
+          <button class="icon-button" id="bi-arrow-repeat"><i class="bi bi-arrow-repeat"></i></button>
+          <button class="icon-button" id="bi-arrow-bar-up"><i class="bi bi-arrow-bar-up"></i></button>
+          <button class="icon-button" id="bi-arrow-bar-down"><i class="bi bi-arrow-bar-down"></i></button>
+          <button class="icon-button" id="bi-arrow-up-left"><i class="bi bi-arrow-up-left"></i></button>
+          <button class="icon-button" id="bi-arrow-up-right"><i class="bi bi-arrow-up-right"></i></button>
+          <button class="icon-button" id="bi-arrow-down-left"><i class="bi bi-arrow-down-left"></i></button>
+          <button class="icon-button" id="bi-arrow-down-right"><i class="bi bi-arrow-down-right"></i></button>
+          <button class="icon-button" id="bi-arrow-left-right"><i class="bi bi-arrow-left-right"></i></button>
+          <button class="icon-button" id="bi-arrow-bar-right"><i class="bi bi-arrow-bar-right"></i></button>
+          <button class="icon-button" id="bi-arrow-bar-left"><i class="bi bi-arrow-bar-left"></i></button>
+          <button class="icon-button" id="bi-arrow-90deg-up"><i class="bi bi-arrow-90deg-up"></i></button>
+          <button class="icon-button" id="bi-arrow-90deg-down"><i class="bi bi-arrow-90deg-down"></i></button>
+          <button class="icon-button" id="bi-arrow-90deg-left"><i class="bi bi-arrow-90deg-left"></i></button>
+          <button class="icon-button" id="bi-arrow-90deg-right"><i class="bi bi-arrow-90deg-right"></i></button>
+          <button class="icon-button" id="bi-caret-up-fill"><i class="bi bi-caret-up-fill"></i></button>
+          <button class="icon-button" id="bi-caret-down-fill"><i class="bi bi-caret-down-fill"></i></button>
+          <button class="icon-button" id="bi-caret-left-fill"><i class="bi bi-caret-left-fill"></i></button>
+          <button class="icon-button" id="bi-caret-right-fill"><i class="bi bi-caret-right-fill"></i></button>
+          <button class="icon-button" id="bi-caret-up-square-fill"><i class="bi bi-caret-up-square-fill"></i></button>
+          <button class="icon-button" id="bi-caret-down-square-fill"><i class="bi bi-caret-down-square-fill"></i></button>
+          <button class="icon-button" id="bi-caret-left-square-fill"><i class="bi bi-caret-left-square-fill"></i></button>
+          <button class="icon-button" id="bi-caret-right-square-fill"><i class="bi bi-caret-right-square-fill"></i></button>
+          <button class="icon-button" id="bi-alarm"><i class="bi bi-alarm"></i></button>
+          <button class="icon-button" id="bi-bell"><i class="bi bi-bell"></i></button>
+          <button class="icon-button" id="bi-bookmark"><i class="bi bi-bookmark"></i></button>
+          <button class="icon-button" id="bi-camera"><i class="bi bi-camera"></i></button>
+          <button class="icon-button" id="bi-chat-left"><i class="bi bi-chat-left"></i></button>
+          <button class="icon-button" id="bi-credit-card"><i class="bi bi-credit-card"></i></button>
+          <button class="icon-button" id="bi-envelope"><i class="bi bi-envelope"></i></button>
+          <button class="icon-button" id="bi-file-earmark-text"><i class="bi bi-file-earmark-text"></i></button>
+          <button class="icon-button" id="bi-globe"><i class="bi bi-globe"></i></button>
+          <button class="icon-button" id="bi-heart"><i class="bi bi-heart"></i></button>
+          <button class="icon-button" id="bi-house"><i class="bi bi-house"></i></button>
+          <button class="icon-button" id="bi-lightning"><i class="bi bi-lightning"></i></button>
+          <button class="icon-button" id="bi-megaphone"><i class="bi bi-megaphone"></i></button>
+          <button class="icon-button" id="bi-music-note"><i class="bi bi-music-note"></i></button>
+          <button class="icon-button" id="bi-patch-check-fill"><i class="bi bi-patch-check-fill"></i></button>
+          <button class="icon-button" id="bi-pen"><i class="bi bi-pen"></i></button>
+          <button class="icon-button" id="bi-person"><i class="bi bi-person"></i></button>
+          <button class="icon-button" id="bi-phone"><i class="bi bi-phone"></i></button>
+          <button class="icon-button" id="bi-printer"><i class="bi bi-printer"></i></button>
+          <button class="icon-button" id="bi-shield-check"><i class="bi bi-shield-check"></i></button>
+          <button class="icon-button" id="bi-star"><i class="bi bi-star"></i></button>
+          <button class="icon-button" id="bi-sun"><i class="bi bi-sun"></i></button>
+          <button class="icon-button" id="bi-tablet"><i class="bi bi-tablet"></i></button>
+          <button class="icon-button" id="bi-telephone"><i class="bi bi-telephone"></i></button>
+          <button class="icon-button" id="bi-tools"><i class="bi bi-tools"></i></button>
+          <button class="icon-button" id="bi-tv"><i class="bi bi-tv"></i></button>
+          <button class="icon-button" id="bi-watch"><i class="bi bi-watch"></i></button>
+          <button class="icon-button" id="bi-wifi"><i class="bi bi-wifi"></i></button>
+          <button class="icon-button" id="bi-window"><i class="bi bi-window"></i></button>
+          <button class="icon-button" id="bi-zoom-in"><i class="bi bi-zoom-in"></i></button>
+          <button class="icon-button" id="bi-briefcase"><i class="bi bi-briefcase"></i></button>
+          <button class="icon-button" id="bi-calendar"><i class="bi bi-calendar"></i></button>
+          <button class="icon-button" id="bi-clipboard"><i class="bi bi-clipboard"></i></button>
+          <button class="icon-button" id="bi-cloud"><i class="bi bi-cloud"></i></button>
+          <button class="icon-button" id="bi-currency-dollar"><i class="bi bi-currency-dollar"></i></button>
+          <button class="icon-button" id="bi-droplet"><i class="bi bi-droplet"></i></button>
+          <button class="icon-button" id="bi-eye"><i class="bi bi-eye"></i></button>
+          <button class="icon-button" id="bi-film"><i class="bi bi-film"></i></button>
+          <button class="icon-button" id="bi-gear"><i class="bi bi-gear"></i></button>
+          <button class="icon-button" id="bi-gift"><i class="bi bi-gift"></i></button>
+          <button class="icon-button" id="bi-graph-up"><i class="bi bi-graph-up"></i></button>
+          <button class="icon-button" id="bi-headset"><i class="bi bi-headset"></i></button>
+          <button class="icon-button" id="bi-house-door"><i class="bi bi-house-door"></i></button>
+          <button class="icon-button" id="bi-laptop"><i class="bi bi-laptop"></i></button>
+          <button class="icon-button" id="bi-list-check"><i class="bi bi-list-check"></i></button>
+          <button class="icon-button" id="bi-megaphone-fill"><i class="bi bi-megaphone-fill"></i></button>
+          <button class="icon-button" id="bi-mic"><i class="bi bi-mic"></i></button>
+          <button class="icon-button" id="bi-moon"><i class="bi bi-moon"></i></button>
+          <button class="icon-button" id="bi-palette"><i class="bi bi-palette"></i></button>
+          <button class="icon-button" id="bi-patch-plus-fill"><i class="bi bi-patch-plus-fill"></i></button>
+          <button class="icon-button" id="bi-pen-fill"><i class="bi bi-pen-fill"></i></button>
+          <button class="icon-button" id="bi-phone-vibrate"><i class="bi bi-phone-vibrate"></i></button>
+          <button class="icon-button" id="bi-reply-all-fill"><i class="bi bi-reply-all-fill"></i></button>
+          <button class="icon-button" id="bi-shield-fill-check"><i class="bi bi-shield-fill-check"></i></button>
+          <button class="icon-button" id="bi-soundwave"><i class="bi bi-soundwave"></i></button>
+          <button class="icon-button" id="bi-suit-club-fill"><i class="bi bi-suit-club-fill"></i></button>
+          <button class="icon-button" id="bi-tablet-fill"><i class="bi bi-tablet-fill"></i></button>
+          <button class="icon-button" id="bi-tools"><i class="bi bi-tools"></i></button>
+          <button class="icon-button" id="bi-tv-fill"><i class="bi bi-tv-fill"></i></button>
+          <button class="icon-button" id="bi-watch"><i class="bi bi-watch"></i></button>
+          <button class="icon-button" id="bi-award"><i class="bi bi-award"></i></button>
+          <button class="icon-button" id="bi-basket"><i class="bi bi-basket"></i></button>
+          <button class="icon-button" id="bi-bezier"><i class="bi bi-bezier"></i></button>
+          <button class="icon-button" id="bi-brightness-high"><i class="bi bi-brightness-high"></i></button>
+          <button class="icon-button" id="bi-cash-stack"><i class="bi bi-cash-stack"></i></button>
+          <button class="icon-button" id="bi-chat-right"><i class="bi bi-chat-right"></i></button>
+          <button class="icon-button" id="bi-clock"><i class="bi bi-clock"></i></button>
+          <button class="icon-button" id="bi-compass"><i class="bi bi-compass"></i></button>
+          <button class="icon-button" id="bi-cup"><i class="bi bi-cup"></i></button>
+          <button class="icon-button" id="bi-dice-5"><i class="bi bi-dice-5"></i></button>
+          <button class="icon-button" id="bi-door-closed"><i class="bi bi-door-closed"></i></button>
+          <button class="icon-button" id="bi-earbuds"><i class="bi bi-earbuds"></i></button>
+          <button class="icon-button" id="bi-flag-fill"><i class="bi bi-flag-fill"></i></button>
+          <button class="icon-button" id="bi-gear-wide-connected"><i class="bi bi-gear-wide-connected"></i></button>
+          <button class="icon-button" id="bi-gift-fill"><i class="bi bi-gift-fill"></i></button>
+          <button class="icon-button" id="bi-grip-vertical"><i class="bi bi-grip-vertical"></i></button>
+          <button class="icon-button" id="bi-headphones"><i class="bi bi-headphones"></i></button>
+          <button class="icon-button" id="bi-house-fill"><i class="bi bi-house-fill"></i></button>
+          <button class="icon-button" id="bi-journal-text"><i class="bi bi-journal-text"></i></button>
+          <button class="icon-button" id="bi-layers-fill"><i class="bi bi-layers-fill"></i></button>
+          <button class="icon-button" id="bi-lightbulb-fill"><i class="bi bi-lightbulb-fill"></i></button>
+          <button class="icon-button" id="bi-mic-fill"><i class="bi bi-mic-fill"></i></button>
+          <button class="icon-button" id="bi-moon-stars"><i class="bi bi-moon-stars"></i></button>
+          <button class="icon-button" id="bi-paint-bucket"><i class="bi bi-paint-bucket"></i></button>
+          <button class="icon-button" id="bi-pause-fill"><i class="bi bi-pause-fill"></i></button>
+          <button class="icon-button" id="bi-peace-fill"><i class="bi bi-peace-fill"></i></button>
+          <button class="icon-button" id="bi-pencil-square"><i class="bi bi-pencil-square"></i></button>
+          <button class="icon-button" id="bi-pentagon-fill"><i class="bi bi-pentagon-fill"></i></button>
+          <button class="icon-button" id="bi-play-fill"><i class="bi bi-play-fill"></i></button>
+          <button class="icon-button" id="bi-reply-all"><i class="bi bi-reply-all"></i></button>
+          <button class="icon-button" id="bi-rss-fill"><i class="bi bi-rss-fill"></i></button>
+          <button class="icon-button" id="bi-search"><i class="bi bi-search"></i></button>
+          <button class="icon-button" id="bi-shop-window"><i class="bi bi-shop-window"></i></button>
+          <button class="icon-button" id="bi-speedometer2"><i class="bi bi-speedometer2"></i></button>
+          <button class="icon-button" id="bi-star-fill"><i class="bi bi-star-fill"></i></button>
+          <button class="icon-button" id="bi-suit-heart-fill"><i class="bi bi-suit-heart-fill"></i></button>
+          <button class="icon-button" id="bi-sun-fill"><i class="bi bi-sun-fill"></i></button>
+          <button class="icon-button" id="bi-tablet-landscape"><i class="bi bi-tablet-landscape"></i></button>
+          <button class="icon-button" id="bi-telephone-fill"><i class="bi bi-telephone-fill"></i></button>
+          <button class="icon-button" id="bi-telephone-outbound"><i class="bi bi-telephone-outbound"></i></button>
+          <button class="icon-button" id="bi-telephone-inbound"><i class="bi bi-telephone-inbound"></i></button>
+          <button class="icon-button" id="bi-toggles"><i class="bi bi-toggles"></i></button>
+          <button class="icon-button" id="bi-toggles2"><i class="bi bi-toggles2"></i></button>
+          <button class="icon-button" id="bi-trash"><i class="bi bi-trash"></i></button>
+          <button class="icon-button" id="bi-truck-flatbed"><i class="bi bi-truck-flatbed"></i></button>
+          <button class="icon-button" id="bi-upload"><i class="bi bi-upload"></i></button>
+          <button class="icon-button" id="bi-view-list"><i class="bi bi-view-list"></i></button>
+          <button class="icon-button" id="bi-volume-down"><i class="bi bi-volume-down"></i></button>
+          <button class="icon-button" id="bi-volume-mute"><i class="bi bi-volume-mute"></i></button>
+          <button class="icon-button" id="bi-volume-up"><i class="bi bi-volume-up"></i></button>
+          <button class="icon-button" id="bi bi-wallet"><i class="bi bi-wallet"></i></button>
+          <button class="icon-button" id="bi-wifi-1"><i class="bi bi-wifi-1"></i></button>
+          <button class="icon-button" id="bi-wifi-2"><i class="bi bi-wifi-2"></i></button>
+          <button class="icon-button" id="bi-wifi-off"><i class="bi bi-wifi-off"></i></button>
+          <button class="icon-button" id="bi-window-dock"><i class="bi bi-window-dock"></i></button>
+          <button class="icon-button" id="bi-window-sidebar"><i class="bi bi-window-sidebar"></i></button>
+          <button class="icon-button" id="bi-wrench"><i class="bi bi-wrench"></i></button>
+          <button class="icon-button" id="bi bi-x"><i class="bi bi-x"></i></button>
+          <button class="icon-button" id="bi-zoom-in"><i class="bi bi-zoom-in"></i></button>
+          <button class="icon-button" id="bi-zoom-out"><i class="bi bi-zoom-out"></i></button>
+          <button class="icon-button" id="bi-alarm-fill"><i class="bi bi-alarm-fill"></i></button>
+          <button class="icon-button" id="bi-bell-fill"><i class="bi bi-bell-fill"></i></button>
+          <button class="icon-button" id="bi-bookmark-fill"><i class="bi bi-bookmark-fill"></i></button>
+          <button class="icon-button" id="bi-camera-fill"><i class="bi bi-camera-fill"></i></button>
+          <button class="icon-button" id="bi-chat-left-fill"><i class="bi bi-chat-left-fill"></i></button>
+        </div>
+      </div>
+
+
+
+      </div>
+
+      <div class="tab-pane fade show" id="orange-advanced-content">
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
             <strong>Border Options</strong>
@@ -1246,41 +1090,11 @@
             </div>
           </div>
         </div>
-
-        <div class="my-3 align-items-center">
-          <div>Box Shadow</div>
-          <select class="form-select py-2 input-panel" id="set-headline-box-shadow">
-            <option value="No Shadow">No Shadow</option>
-            <option value="5% Drop Shadow">5% Drop Shadow</option>
-            <option value="10% Drop Shadow">10% Drop Shadow</option>
-            <option value="20% Drop Shadow">20% Drop Shadow</option>
-            <option value="30% Drop Shadow">30% Drop Shadow</option>
-            <option value="40% Drop Shadow">40% Drop Shadow</option>
-            <option value="5% Inner Shadow">5% Inner Shadow</option>
-            <option value="10% Inner Shadow">10% Inner Shadow</option>
-            <option value="20% Inner Shadow">20% Inner Shadow</option>
-            <option value="30% Inner Shadow">30% Inner Shadow</option>
-            <option value="40% Inner Shadow">40% Inner Shadow</option>
-          </select>
-        </div>
-
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            Visibility
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="view-visibility">
-                <button draggable="false" class="btn back-btn smaller-font ml-1 desktop active" id="headline-desktop" ><i class="bi bi-laptop"></i></button>
-                <button draggable="false" class="btn back-btn smaller-font ml-1 mobile active" id="headline-mobile" ><i class="bi bi-phone"></i></button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
 
-  <div id="setTwoStepOrderPopup" class="settingsSidebar" >
+<div id="setTwoStepOrderPopup" class="settingsSidebar" >
     <div class="row">
       <div class="col-11 mb-1">
         <h3>Two Step Order</h3>
@@ -1308,7 +1122,7 @@
             <div class="col-6 align-items-center  mt-1" style="display:flex">
               <label for="comb-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
                   id="comb-back-color-icon"></i></label>
-              <input type="color" class="form-control form-control-color" id="comb-back-color" value="#FFFFFF">
+              <input type="color" class="form-control form-control-color" id="comb-back-color" value="transparent">
               <button id="comb-transparent-background" class="btn btn-outline-secondary custom-btn-small">Transparent</button>
             </div>
             <div class="col-10">Button Color</div>
@@ -1334,23 +1148,7 @@
 
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
-            <div style="display:flex; align-items:center">
-              <span>Margin & Padding</span>
-              <div class="device-select">
-                <div class="selected" id="comb-marginpadding-device">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </div>
+            <strong>Margin & Padding</strong>
           </div>
 
           <div class="p-3">
@@ -1360,31 +1158,24 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setCombMarginTop"></button></div>
               </div>
-              <div style="display:flex; align-items:center;">
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setCombMarginLeft"></button></div>
-                <div class="padding-border margin-padding">
-                  <div>
-                    <div style="font-size:12px; position:absolute;">PADDING</div>
-                    <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
-                        id="setCombPaddingTop"></button></div>
-                  </div>
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setCombPaddingLeft"
-                        ></button></div>
-                      <div class="col-4 element-border"></div>
-                      <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setCombPaddingRight"
-                        ></button>
-                        </div>
+              <div class="padding-border margin-padding">
+                <div>
+                  <div style="font-size:12px; position:absolute;">PADDING</div>
+                  <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                      id="setCombPaddingTop"></button></div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setCombPaddingLeft"
+                       ></button></div>
+                    <div class="col-4 element-border"></div>
+                    <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setCombPaddingRight"
+                       ></button></div>
                   </div>
                 </div>
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setCombPaddingBottom"></button></div>
               </div>
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setCombMarginRight"></button></div>
-              </div>
-
-
               <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                   id="setCombMarginBottom"></button></div>
             </div>
@@ -1625,24 +1416,9 @@
                 <option value="Top Only Edges">Top Only Edges</option>
                 <option value="Bottom Only Edges">Bottom Only Edges</option>
               </select>
-
-
             </div>
           </div>
         </div>
-
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            Visibility
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="view-visibility">
-                <button draggable="false" class="btn back-btn smaller-font ml-1 desktop active" id="comb-desktop" ><i class="bi bi-laptop"></i></button>
-                <button draggable="false" class="btn back-btn smaller-font ml-1 mobile active" id="comb-mobile" ><i class="bi bi-phone"></i></button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 
@@ -1690,61 +1466,14 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-6 my-3 align-items-center">
-            <label for="set-image-width" style="display:flex; align-items:center">
-              <span>Width</span>
-              <div class="device-select">
-                <div class="selected" id="image-width-device" data-value="desktop">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </label>
-            <input type="text" placeholder="PX" class="form-control input-panel" id="set-image-width" value="">
-          </div>
-          <div class="col-6 my-3 align-items-center">
-            <label for="set-image-height" style="display:flex; align-items:center">
-              <span>Height</span>
-              <div class="device-select">
-                <div class="selected" id="image-height-device" data-value="desktop">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </label>
-            <input type="text" placeholder="PX" class="form-control input-panel" id="set-image-height" value="">
-          </div>
-        </div>
-
-
-
         <div>Image URL</div>
         <div id="react-image-drag-and-drop"></div>
-
-        <div style="margin-top: 20px;">Element name</div>
-        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Image">
-
       </div>
 
       <div class="tab-pane fade show" id="image-advanced-content">
         <div class="my-3 align-items-center">
+        <div style="margin-top: 20px;">Element name</div>
+        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Image">
 
 
         <div class="row my-3 align-items-center">
@@ -1757,27 +1486,9 @@
           </div>
         </div>
 
-
-
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
-            <div style="display:flex; align-items:center">
-              <span>Margin & Padding</span>
-              <div class="device-select">
-                <div class="selected" id="image-marginpadding-device">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </div>
+            <strong>Margin & Padding</strong>
           </div>
 
           <div class="p-3">
@@ -1787,10 +1498,7 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setImageMarginTop"></button></div>
               </div>
-
-              <div style="display:flex; align-items:center;">
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setImageMarginLeft"></button></div>
-                <div class="padding-border margin-padding">
+              <div class="padding-border margin-padding">
                 <div>
                   <div style="font-size:12px; position:absolute;">PADDING</div>
                   <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
@@ -1808,8 +1516,6 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setImagePaddingBottom"></button></div>
               </div>
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setImageMarginRight"></button></div>
-              </div>
               <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                   id="setImageMarginBottom"></button></div>
             </div>
@@ -1817,9 +1523,19 @@
         </div>
 
         <div class="my-3 align-items-center">
-          <div>Alt Text(For SEO)</div>
+          <div>Width</div>
+          <input type="text" placeholder="PX" class="form-control input-panel" id="set-image-width" value="">
+        </div>
+        <div class="my-3 align-items-center">
+          <div>Height</div>
+          <input type="text" placeholder="PX" class="form-control input-panel" id="set-image-height" value="">
+        </div>
+        <div class="my-3 align-items-center">
+          <div>Alt Text(For SEO!)</div>
           <input type="text" class="form-control input-panel" value="Image" id="set-image-alt">
         </div>
+
+
 
         <div class="my-3 align-items-center">
           <div>Opacity</div>
@@ -1864,19 +1580,6 @@
             <option value="Bottom Dark Shadow">Bottom Dark Shadow</option>
           </select>
         </div>
-
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            Visibility
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="view-visibility">
-                <button draggable="false" class="btn back-btn smaller-font ml-1 desktop active" id="image-desktop" ><i class="bi bi-laptop"></i></button>
-                <button draggable="false" class="btn back-btn smaller-font ml-1 mobile active" id="image-mobile" ><i class="bi bi-phone"></i></button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -1902,8 +1605,71 @@
 
     <div class="tab-content mt-3">
       <div class="tab-pane fade show active" id="video-general-content">
+        <div style="margin-top: 20px;">Element name</div>
+        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Video">
+
+        <div class="row my-3 align-items-center">
+          <div class="col-6">Background Color</div>
+          <div class="col-6 align-items-center" style="display:flex">
+            <label for="video-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
+                id="video-back-color-icon"></i></label>
+            <input type="color" class="form-control form-control-color" id="video-back-color" value="transparent">
+            <button id="video-transparent-background" class="btn btn-outline-secondary custom-btn-small">Transparent</button>
+          </div>
+        </div>
+
+        <div class="border-options">
+          <div class="py-2 pl-2 subtitle-panel">
+            <strong>Margin & Padding</strong>
+          </div>
+          <div class="p-3">
+            <div class="margin-padding settingMarginPaddingValue">
+              <div>
+                <div style="font-size:12px; position:absolute;">MARGIN</div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setVideoMarginTop"></button></div>
+              </div>
+              <div class="padding-border margin-padding">
+                <div>
+                  <div style="font-size:12px; position:absolute;">PADDING</div>
+                  <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                      id="setVideoPaddingTop"></button></div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setVideoPaddingLeft"
+                       ></button></div>
+                    <div class="col-4 element-border"></div>
+                    <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setVideoPaddingRight"
+                       ></button></div>
+                  </div>
+                </div>
+                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                    id="setVideoPaddingBottom"></button></div>
+              </div>
+              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
+                  id="setVideoMarginBottom"></button></div>
+            </div>
+          </div>
+        </div>
 
 
+        <div class="my-3 align-items-center">
+          <div>Box Shadow</div>
+          <select class="form-select py-2 input-panel" id="set-video-box-shadow">
+            <option value="No Shadow">No Shadow</option>
+            <option value="5% Drop Shadow">5% Drop Shadow</option>
+            <option value="10% Drop Shadow">10% Drop Shadow</option>
+            <option value="20% Drop Shadow">20% Drop Shadow</option>
+            <option value="30% Drop Shadow">30% Drop Shadow</option>
+            <option value="40% Drop Shadow">40% Drop Shadow</option>
+            <option value="5% Inner Shadow">5% Inner Shadow</option>
+            <option value="10% Inner Shadow">10% Inner Shadow</option>
+            <option value="20% Inner Shadow">20% Inner Shadow</option>
+            <option value="30% Inner Shadow">30% Inner Shadow</option>
+            <option value="40% Inner Shadow">40% Inner Shadow</option>
+          </select>
+        </div>
         <div class="my-3 align-items-center">
           <div>Video Type</div>
           <select class="form-select py-2 input-panel" id="set-video-type">
@@ -1922,104 +1688,16 @@
           </div>
         </div>
         <div class="my-3 align-items-center">
-          <label for="set-video-width" style="display:flex; align-items:center">
-            <span>Width</span>
-            <div class="device-select">
-              <div class="selected" id="video-width-device" data-value="desktop">
-                  <i class="bi bi-laptop"></i>
-                  <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-              </div>
-              <div class="options">
-                  <div class="option" data-value="desktop">
-                      <i class="bi bi-laptop"></i>
-                  </div>
-                  <div class="option" data-value="mobile">
-                      <i class="bi bi-phone"></i>
-                  </div>
-              </div>
-            </div>
-          </label>
+          <div>Width</div>
           <select class="form-select py-2 input-panel" id="set-video-width">
             <option value="Full Width">Full Width</option>
             <option value="3/4 Width">3/4 Width</option>
             <option value="Half Width">Half Width</option>
           </select>
         </div>
-
-        <div class="border-options">
-          <div class="py-2 pl-2 subtitle-panel">
-            <div style="display:flex; align-items:center">
-              <span>Margin & Padding</span>
-              <div class="device-select">
-                <div class="selected" id="video-marginpadding-device">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="p-3">
-            <div class="margin-padding settingMarginPaddingValue">
-              <div>
-                <div style="font-size:12px; position:absolute;">MARGIN</div>
-                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
-                    id="setVideoMarginTop"></button></div>
-              </div>
-
-              <div style="display:flex; align-items:center;">
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setVideoMarginLeft"></button></div>
-                <div class="padding-border margin-padding">
-                <div>
-                  <div style="font-size:12px; position:absolute;">PADDING</div>
-                  <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
-                      id="setVideoPaddingTop"></button></div>
-                </div>
-                <div class="container">
-                  <div class="row">
-                    <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setVideoPaddingLeft"
-                       ></button></div>
-                    <div class="col-4 element-border"></div>
-                    <div class="col-4"><button class="set-px-button setMarginPaddingValueClass" id="setVideoPaddingRight"
-                       ></button></div>
-                  </div>
-                </div>
-                <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
-                    id="setVideoPaddingBottom"></button></div>
-              </div>
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setVideoMarginRight"></button></div>
-              </div>
-              <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
-                  id="setVideoMarginBottom"></button></div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 20px;">Element name</div>
-        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Video">
-
       </div>
 
       <div class="tab-pane fade show" id="video-advanced-content">
-
-        <div class="row my-3 align-items-center">
-          <div class="col-6">Background Color</div>
-          <div class="col-6 align-items-center" style="display:flex">
-            <label for="video-back-color" class="form-label"><i class="bi bi-circle-fill color-icon"
-                id="video-back-color-icon"></i></label>
-            <input type="color" class="form-control form-control-color" id="video-back-color" value="transparent">
-            <button id="video-transparent-background" class="btn btn-outline-secondary custom-btn-small">Transparent</button>
-          </div>
-        </div>
-
-
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
             <strong>Border Options</strong>
@@ -2088,35 +1766,6 @@
             </div>
           </div>
         </div>
-
-        <div class="my-3 align-items-center">
-          <div>Box Shadow</div>
-          <select class="form-select py-2 input-panel" id="set-video-box-shadow">
-            <option value="No Shadow">No Shadow</option>
-            <option value="5% Drop Shadow">5% Drop Shadow</option>
-            <option value="10% Drop Shadow">10% Drop Shadow</option>
-            <option value="20% Drop Shadow">20% Drop Shadow</option>
-            <option value="30% Drop Shadow">30% Drop Shadow</option>
-            <option value="40% Drop Shadow">40% Drop Shadow</option>
-            <option value="5% Inner Shadow">5% Inner Shadow</option>
-            <option value="10% Inner Shadow">10% Inner Shadow</option>
-            <option value="20% Inner Shadow">20% Inner Shadow</option>
-            <option value="30% Inner Shadow">30% Inner Shadow</option>
-            <option value="40% Inner Shadow">40% Inner Shadow</option>
-          </select>
-        </div>
-
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            Visibility
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="view-visibility">
-                <button draggable="false" class="btn back-btn smaller-font ml-1 desktop active" id="video-desktop" ><i class="bi bi-laptop"></i></button>
-                <button draggable="false" class="btn back-btn smaller-font ml-1 mobile active" id="video-mobile" ><i class="bi bi-phone"></i></button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -2143,88 +1792,9 @@
     <div class="tab-content mt-3">
       <div class="tab-pane fade show active" id="button-general-content">
 
-      <div class="row my-3 align-items-center">
-      <div class="col-5">
-        <div>
-          <label for="font-family-select">Font Family</label>
-        </div>
-      </div>
-      <div class="col-7 align-items-center">
-        <div class="form-element">
-          <select class="form-select" id="font-family-select">
-            <option value="Fira Sans">Fira Sans</option>
-            <option value="Fjalla One">Fjalla One</option>
-            <option value="Open Sans">Open Sans</option>
-            <option value="Roboto">Roboto</option>
-            <option value="Roboto Slab">Roboto Slab</option>
-            <option value="Montserrat" selected="">Montserrat</option>
-            <option value="Merriweather">Merriweather</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row my-3 align-items-center">
-      <div class="col-5">
-        <div>
-          <label for="font-size-slider" style="display:flex; align-items:center">
-                <span>Font Size</span>
-                <div class="device-select">
-                  <div class="selected" id="button-fontsize-device">
-                      <i class="bi bi-laptop"></i>
-                      <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                  </div>
-                  <div class="options">
-                      <div class="option" data-value="desktop">
-                          <i class="bi bi-laptop"></i>
-                      </div>
-                      <div class="option" data-value="mobile">
-                          <i class="bi bi-phone"></i>
-                      </div>
-                  </div>
-                </div>
-              </label>
-        </div>
-      </div>
-      <div class="col-7 align-items-center">
-        <div class="form-element">
-          <input class="form-input" type="range" id="font-size-slider" min="12" max="100" step="2">
-        </div>
-      </div>
-    </div>
+      <div style="margin-top: 20px;">Element name</div>
+      <input type="text" name="element-name" class="form-control my-2 input-panel" value="Button">
 
-    <div class="mt-3" style="display:flex; align-items:center">
-          <span>Button Align</span>
-          <div class="device-select">
-            <div class="selected" id="bullon-textalign-device">
-                <i class="bi bi-laptop"></i>
-                <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-            </div>
-            <div class="options">
-                <div class="option" data-value="desktop">
-                    <i class="bi bi-laptop"></i>
-                </div>
-                <div class="option" data-value="mobile">
-                    <i class="bi bi-phone"></i>
-                </div>
-            </div>
-          </div>
-        </div>
-    <div class="row my-2">
-      <div class="col-3">
-        <button class="align-button" id="button-align-left"><i class="bi bi-text-left align-button-icon"></i></button>
-      </div>
-      <div class="col-3">
-        <button class="align-button selected-button" id="button-align-center"><i
-            class="bi bi-text-center align-button-icon"></i></button>
-      </div>
-      <div class="col-3">
-        <button class="align-button" id="button-align-right"><i
-            class="bi bi-text-right align-button-icon"></i></button>
-      </div>
-      <div class="col-3">
-        <button class="align-button" id="button-align-full"><i class="bi bi-justify align-button-icon"></i></button>
-      </div>
-    </div>
 
         <div class="row my-3 align-items-center">
           <div class="col-10">Text Color</div>
@@ -2244,38 +1814,29 @@
           </div>
         </div>
 
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            <div>
-              <label for="button-text-input">Button Text</label>
-            </div>
+        <div class="mt-3">Button Align</div>
+        <div class="row my-2">
+          <div class="col-3">
+            <button class="align-button" id="button-align-left"><i class="bi bi-text-left align-button-icon"></i></button>
           </div>
-          <div class="col-7 align-items-center">
-            <div class="form-element">
-              <input class="form-input" type="text" id="button-text-input">
-            </div>
+          <div class="col-3">
+            <button class="align-button selected-button" id="button-align-center"><i
+                class="bi bi-text-center align-button-icon"></i></button>
+          </div>
+          <div class="col-3">
+            <button class="align-button" id="button-align-right"><i
+                class="bi bi-text-right align-button-icon"></i></button>
+          </div>
+          <div class="col-3">
+            <button class="align-button" id="button-align-full"><i class="bi bi-justify align-button-icon"></i></button>
           </div>
         </div>
 
+
+
         <div class="border-options">
           <div class="py-2 pl-2 subtitle-panel">
-            <div style="display:flex; align-items:center">
-              <span>Margin & Padding</span>
-              <div class="device-select">
-                <div class="selected" id="button-marginpadding-device">
-                    <i class="bi bi-laptop"></i>
-                    <i class="bi bi-chevron-down" style="font-size: 0.5rem; margin-left: 5px;"></i>
-                </div>
-                <div class="options">
-                    <div class="option" data-value="desktop">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="option" data-value="mobile">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                </div>
-              </div>
-            </div>
+            <strong>Margin & Padding</strong>
           </div>
 
           <div class="p-3">
@@ -2285,10 +1846,7 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setButtonMarginTop"></button></div>
               </div>
-
-              <div style="display:flex; align-items:center;">
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setButtonMarginLeft"></button></div>
-                <div class="padding-border margin-padding">
+              <div class="padding-border margin-padding">
                 <div>
                   <div style="font-size:12px; position:absolute;">PADDING</div>
                   <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
@@ -2306,14 +1864,11 @@
                 <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                     id="setButtonPaddingBottom"></button></div>
               </div>
-                <div><button class="set-px-button setMarginPaddingValueClass" id="setButtonMarginRight"></button></div>
-              </div>
               <div style="text-align:center;"><button class="set-px-button setMarginPaddingValueClass"
                   id="setButtonMarginBottom"></button></div>
             </div>
           </div>
         </div>
-
         <div class="row my-3 align-items-center">
           <div class="col-5">
             <label for="action-select">Action</label>
@@ -2342,53 +1897,129 @@
           </div>
         </div>
 
-        <div style="margin-top: 20px;">Element name</div>
-        <input type="text" name="element-name" class="form-control my-2 input-panel" value="Button">
+        <div class="row my-3 align-items-center">
+          <div class="col-5">
+            <div>
+              <label for="button-text-input">Button Text</label>
+            </div>
+          </div>
+          <div class="col-7 align-items-center">
+            <div class="form-element">
+              <input class="form-input" type="text" id="button-text-input">
+            </div>
+          </div>
+        </div>
 
+        <div class="row my-3 align-items-center">
+          <div class="col-5">
+            <div>
+              <label for="font-family-select">Font Family</label>
+            </div>
+          </div>
+          <div class="col-7 align-items-center">
+            <div class="form-element">
+              <select class="form-select" id="font-family-select">
+                <option value="Fira Sans">Fira Sans</option>
+                <option value="Fjalla One">Fjalla One</option>
+                <option value="Open Sans">Open Sans</option>
+                <option value="Roboto">Roboto</option>
+                <option value="Roboto Slab">Roboto Slab</option>
+                <option value="Montserrat" selected="">Montserrat</option>
+                <option value="Merriweather">Merriweather</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row my-3 align-items-center">
+          <div class="col-5">
+            <div>
+              <label for="font-size-slider">Font Size</label>
+            </div>
+          </div>
+          <div class="col-7 align-items-center">
+            <div class="form-element">
+              <input class="form-input" type="range" id="font-size-slider" min="12" max="100" step="2">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="my-3 align-items-center">
+          <div>Opacity</div>
+          <select class="form-select py-2 input-panel" id="button-opacity-select">
+            <option value="1.0">None</option>
+            <option value="1.0">1</option>
+            <option value="0.8">0.8</option>
+            <option value="0.5">0.5</option>
+            <option value="0.3">0.3</option>
+            <option value="0.0">0</option>
+          </select>
+        </div>
+
+        <div class="my-3 align-items-center">
+          <div>Text Shadow</div>
+          <select class="form-select py-2 input-panel" id="set-button-text-shadow">
+            <option value="No Shadow">No Shadow</option>
+            <option value="Light Fade">Light Fade</option>
+            <option value="Mid Shadow">Mid Shadow</option>
+            <option value="Strong Shadow">Strong Shadow</option>
+          </select>
+        </div>
+
+        <div class="my-3 align-items-center">
+          <div>Letter Spacing</div>
+          <select class="form-select py-2 input-panel" id="set-button-letter-spacing">
+            <option value="Normal">Normal</option>
+            <option value="1px">1px</option>
+            <option value="2px">2px</option>
+            <option value="3px">3px</option>
+            <option value="-1px">-1px</option>
+          </select>
+        </div>
+
+
+        <div class="my-3 align-items-center">
+          <div>Box Shadow</div>
+          <select class="form-select py-2 input-panel" id="set-button-box-shadow">
+            <option value="No Shadow">No Shadow</option>
+            <option value="5% Drop Shadow">5% Drop Shadow</option>
+            <option value="10% Drop Shadow">10% Drop Shadow</option>
+            <option value="20% Drop Shadow">20% Drop Shadow</option>
+            <option value="30% Drop Shadow">30% Drop Shadow</option>
+            <option value="40% Drop Shadow">40% Drop Shadow</option>
+            <option value="5% Inner Shadow">5% Inner Shadow</option>
+            <option value="10% Inner Shadow">10% Inner Shadow</option>
+            <option value="20% Inner Shadow">20% Inner Shadow</option>
+            <option value="30% Inner Shadow">30% Inner Shadow</option>
+            <option value="40% Inner Shadow">40% Inner Shadow</option>
+          </select>
+        </div>
+
+        <div class="my-3 align-items-center">
+          <div>Typography Type</div>
+          <select class="form-select py-2 input-panel" id="set-button-typography-type">
+            <option value="Headline Font">Headline Font</option>
+            <option value="Content Font">Content Font</option>
+          </select>
+        </div>
       </div>
 
       <div class="tab-pane fade show" id="button-advanced-content">
-
-      <div class="my-3 align-items-center">
-      <div>Letter Spacing</div>
-      <select class="form-select py-2 input-panel" id="set-button-letter-spacing">
-        <option value="Normal">Normal</option>
-        <option value="1px">1px</option>
-        <option value="2px">2px</option>
-        <option value="3px">3px</option>
-        <option value="-1px">-1px</option>
-      </select>
-    </div>
-
-      <div class="my-3 align-items-center">
-      <div>Opacity</div>
-      <select class="form-select py-2 input-panel" id="button-opacity-select">
-        <option value="1.0">None</option>
-        <option value="1.0">1</option>
-        <option value="0.8">0.8</option>
-        <option value="0.5">0.5</option>
-        <option value="0.3">0.3</option>
-        <option value="0.0">0</option>
-      </select>
-    </div>
-
-    <div class="my-3 align-items-center">
-      <div>Text Shadow</div>
-      <select class="form-select py-2 input-panel" id="set-button-text-shadow">
-        <option value="No Shadow">No Shadow</option>
-        <option value="Light Fade">Light Fade</option>
-        <option value="Mid Shadow">Mid Shadow</option>
-        <option value="Strong Shadow">Strong Shadow</option>
-      </select>
-    </div>
-
-    <div class="my-3 align-items-center">
+        <div class="my-3 align-items-center">
           <div>Text Transform</div>
           <select class="form-select py-2 input-panel" id="set-button-text-transform">
             <option value="Normal">Normal</option>
             <option value="Uppercase">Uppercase</option>
             <option value="Lowercase">Lowercase</option>
             <option value="Capitalize">Capitalize</option>
+          </select>
+        </div>
+
+        <div class="my-3 align-items-center">
+          <div>Text Width</div>
+          <select class="form-select py-2 input-panel" id="set-button-text-width">
+            <option value="Fluid">Fluid</option>
+            <option value="Full Width">Full Width</option>
           </select>
         </div>
 
@@ -2460,56 +2091,11 @@
             </div>
           </div>
         </div>
-
-        <div class="my-3 align-items-center">
-      <div>Box Shadow</div>
-      <select class="form-select py-2 input-panel" id="set-button-box-shadow">
-        <option value="No Shadow">No Shadow</option>
-        <option value="5% Drop Shadow">5% Drop Shadow</option>
-        <option value="10% Drop Shadow">10% Drop Shadow</option>
-        <option value="20% Drop Shadow">20% Drop Shadow</option>
-        <option value="30% Drop Shadow">30% Drop Shadow</option>
-        <option value="40% Drop Shadow">40% Drop Shadow</option>
-        <option value="5% Inner Shadow">5% Inner Shadow</option>
-        <option value="10% Inner Shadow">10% Inner Shadow</option>
-        <option value="20% Inner Shadow">20% Inner Shadow</option>
-        <option value="30% Inner Shadow">30% Inner Shadow</option>
-        <option value="40% Inner Shadow">40% Inner Shadow</option>
-      </select>
-    </div>
-
-    <div class="my-3 align-items-center">
-      <div>Typography Type</div>
-      <select class="form-select py-2 input-panel" id="set-button-typography-type">
-        <option value="Headline Font">Headline Font</option>
-        <option value="Content Font">Content Font</option>
-      </select>
-    </div>
-
-
-        <div class="my-3 align-items-center">
-          <div>Text Width</div>
-          <select class="form-select py-2 input-panel" id="set-button-text-width">
-            <option value="Fluid">Fluid</option>
-            <option value="Full Width">Full Width</option>
-          </select>
-        </div>
-
-        <div class="row my-3 align-items-center">
-          <div class="col-5">
-            Visibility
-          </div>
-          <div class="col-7 align-items-center">
-            <div class="view-visibility">
-                <button draggable="false" class="btn back-btn smaller-font ml-1 desktop active" id="button-desktop" ><i class="bi bi-laptop"></i></button>
-                <button draggable="false" class="btn back-btn smaller-font ml-1 mobile active" id="button-mobile" ><i class="bi bi-phone"></i></button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
+
+
 
    <!-- All siderbars --->
   <!--   end of -- POPUPS, Sliding Panels                           	 --->

@@ -1,15 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 // import { VideoDragAndDrop } from "./VideoDragAndDrop";
-import {closeAllSidebars,closeAllTextEditPopups} from "../editor_functions";
+import { closeAllSidebars, closeAllTextEditPopups } from "../editor_functions";
 
 var setCombMarginTop = document.getElementById("setCombMarginTop");
+var setCombMarginLeft = document.getElementById("setCombMarginLeft");
+var setCombMarginRight = document.getElementById("setCombMarginRight");
 var setCombMarginBottom = document.getElementById("setCombMarginBottom");
 var setCombPaddingTop = document.getElementById("setCombPaddingTop");
 var setCombPaddingLeft = document.getElementById("setCombPaddingLeft");
 var setCombPaddingRight = document.getElementById("setCombPaddingRight");
 var setCombPaddingBottom = document.getElementById("setCombPaddingBottom");
-
 
 // --------------------------------------------------------------
 
@@ -29,23 +30,94 @@ function TwoStepGearElement(parentWrapper) {
   // }
 
   loadPresetComboSettings(parentWrapper.firstChild.firstChild);
-
 }
 
 function loadPresetComboSettings(parentContainer) {
   const firstForm = parentContainer.firstChild.childNodes[2];
   const secondForm = parentContainer.firstChild.childNodes[3];
   const combContainer = document.getElementById(selectedComboElement);
-
   //get margin padding value
   var editorComponentStyles = getComputedStyle(combContainer);
-  setCombMarginTop.innerText = editorComponentStyles.getPropertyValue("margin-top");
-  setCombMarginBottom.innerText = editorComponentStyles.getPropertyValue("margin-bottom");
-  setCombPaddingTop.innerText = editorComponentStyles.getPropertyValue("padding-top");
-  setCombPaddingLeft.innerText = editorComponentStyles.getPropertyValue("padding-left");
-  setCombPaddingRight.innerText = editorComponentStyles.getPropertyValue("padding-right");
-  setCombPaddingBottom.innerText = editorComponentStyles.getPropertyValue("padding-bottom");
 
+  if (desktopBtn.classList.contains("active")) {
+    setCombMarginTop.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-top");
+    setCombMarginLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-left");
+    setCombMarginRight.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-right");
+    setCombMarginBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-bottom");
+    setCombPaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+    setCombPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+    setCombPaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+    setCombPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+  } else if (mobileBtn.classList.contains("active")) {
+    setCombMarginTop.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-top");
+    setCombMarginLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-left");
+    setCombMarginRight.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-right");
+    setCombMarginBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-bottom");
+    setCombPaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+    setCombPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+    setCombPaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+    setCombPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+  }
+
+  document.querySelectorAll(".device-select .option").forEach((option) => {
+    option.addEventListener("click", function () {
+      const combContainer = document.getElementById(selectedComboElement);
+      const device = this.getAttribute("data-value");
+
+      // Update the font size based on device selection
+      if (device === "desktop") {
+        // combContainer.classList.add("active");
+        // combContainer.classList.remove("mobile-view");
+        // combContainer.classList.add("desktop-view");
+        combContainer.classList.add("active");
+        combContainer.classList.remove("mp-mobile-view");
+        combContainer.classList.add("mp-desktop-view");
+
+        // combContainer.style.setProperty("--desktop-text-align", desktopTextAlign);
+        // document.querySelectorAll(".align-button").forEach((button) => {
+        //   button.classList.remove("selected-button");
+        //   if (button.querySelector("i").classList.contains(`bi-text-${desktopTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   } else if (button.querySelector("i").classList.contains(`bi-${desktopTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   }
+        // });
+        setCombMarginTop.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-top");
+        setCombMarginLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-left");
+        setCombMarginRight.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-right");
+        setCombMarginBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-bottom");
+        setCombPaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+        setCombPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+        setCombPaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+        setCombPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+      } else if (device === "mobile") {
+        // combContainer.classList.remove("active");
+        // combContainer.classList.add("mobile-view");
+        // combContainer.classList.remove("desktop-view");
+        combContainer.classList.remove("active");
+        combContainer.classList.add("mp-mobile-view");
+        combContainer.classList.remove("mp-desktop-view");
+
+        // combContainer.style.setProperty("--mobile-text-align", mobileTextAlign);
+        // document.querySelectorAll(".align-button").forEach((button) => {
+        //   button.classList.remove("selected-button");
+        //   if (button.querySelector("i").classList.contains(`bi-text-${mobileTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   } else if (button.querySelector("i").classList.contains(`bi-${mobileTextAlign}`)) {
+        //     button.classList.add("selected-button");
+        //   }
+        // });
+        setCombMarginTop.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-top");
+        setCombMarginLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-left");
+        setCombMarginRight.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-right");
+        setCombMarginBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-bottom");
+        setCombPaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+        setCombPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+        setCombPaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+        setCombPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+      }
+    });
+  });
   // Add event listener for 2-step advanced setting tabs
   const step1Tab = document.getElementById("step1-tab");
   const step2Tab = document.getElementById("step2-tab");
@@ -68,7 +140,6 @@ function loadPresetComboSettings(parentContainer) {
     eyeIcon2.classList.remove("bi-eye");
     eyeIcon2.classList.add("bi-eye-slash");
   }
-
   step1Tab.addEventListener("click", function () {
     step1Tab.classList.add("step-active");
     step2Tab.classList.remove("step-active");
@@ -92,7 +163,7 @@ function loadPresetComboSettings(parentContainer) {
     step2Content.classList.add("active");
   });
   // set step1 container text
-   //TODO:to change/add new one here #1 - page 1  - this is the input in the SIDEBAR  that'll change the form field
+  //TODO:to change/add new one here #1 - page 1  - this is the input in the SIDEBAR  that'll change the form field
   const step1headline = document.getElementById("step1-headline");
   const step1subheadline = document.getElementById("step1-subheadline");
   const step1ToggleCompany = document.getElementById("toggle-company");
@@ -107,8 +178,7 @@ function loadPresetComboSettings(parentContainer) {
   const step1Zip = document.getElementById("step1-zip");
   const step1Button = document.getElementById("step1-button");
   const step1ButtonSub = document.getElementById("step1-button-sub");
-
-   //TODO:to change/add new one here #2 - page 1 - this is the input in the FORM on the show page
+  //TODO:to change/add new one here #2 - page 1 - this is the input in the FORM on the show page
   const formComboStep1Headline = document.getElementsByClassName("form-heading")[0];
   const formComboStep1Subheadline = document.getElementsByClassName("form-sub-heading")[0];
   const formComboCompany = document.getElementsByName("companyname...")[0];
@@ -122,12 +192,8 @@ function loadPresetComboSettings(parentContainer) {
   const formComboZip = document.getElementsByName("zipcode...")[0];
   const formComboButton = document.getElementsByClassName("main-text")[0];
   const formComboButtonSub = document.getElementsByClassName("sub-text")[0];
-
-   //TODO:to change/add new one here #3 - page 1 - this is where the functions happen
-
-
+  //TODO:to change/add new one here #3 - page 1 - this is where the functions happen
   //^ hide feilds
-
   const step1ToggleCompanyName = document.getElementById("step1-toggle-company-name");
   step1ToggleCompanyName.addEventListener("change", function () {
     if (step1ToggleCompanyName.value === "Hide Company Name") {
@@ -138,7 +204,6 @@ function loadPresetComboSettings(parentContainer) {
       step1ToggleCompany.style.display = "block";
     }
   });
-
   const step1TogglePhoneNumber = document.getElementById("step1-toggle-phone");
   step1TogglePhoneNumber.addEventListener("change", function () {
     if (step1TogglePhoneNumber.value === "Hide Phone Number") {
@@ -149,12 +214,11 @@ function loadPresetComboSettings(parentContainer) {
       step1TogglePhone.style.display = "block";
     }
   });
-
   const step1ToggleShippingControl = document.getElementById("step1-toggle-shipping");
   if (formComboShipping.style.display === "none") {
     step1ToggleShippingControl.value = "Hide Shipping";
   } else {
-      step1ToggleShippingControl.value = "Show Shipping";
+    step1ToggleShippingControl.value = "Show Shipping";
   }
   step1ToggleShippingControl.addEventListener("change", function () {
     if (step1ToggleShippingControl.value === "Hide Shipping") {
@@ -163,10 +227,7 @@ function loadPresetComboSettings(parentContainer) {
       formComboShipping.style.display = "block";
     }
   });
-
-
-
-   step1headline.value = formComboStep1Headline.innerText;
+  step1headline.value = formComboStep1Headline.innerText;
   step1headline.addEventListener("input", function () {
     formComboStep1Headline.innerText = step1headline.value;
   });
@@ -190,8 +251,6 @@ function loadPresetComboSettings(parentContainer) {
   step1Phone.addEventListener("input", function () {
     formComboPhone.value = step1Phone.value;
   });
-
-
   step1Address.value = formComboAddress.value;
   step1Address.addEventListener("input", function () {
     formComboAddress.value = step1Address.value;
@@ -216,9 +275,6 @@ function loadPresetComboSettings(parentContainer) {
   step1ButtonSub.addEventListener("input", function () {
     formComboButtonSub.innerText = step1ButtonSub.value;
   });
-
-
-
   // set step2 container text
   //TODO: to change/add new one here #1 - page 2
   const step2headline = document.getElementById("step2-headline");
@@ -229,19 +285,15 @@ function loadPresetComboSettings(parentContainer) {
   const step2SummaryPrice = document.getElementById("step2-summary-price");
   const step2Button = document.getElementById("step2-button");
   const step2ButtonSub = document.getElementById("step2-button-sub");
-
-
   //TODO: to change/add new one here #2 - page 2
   const combstep2headline = document.getElementsByClassName("form-heading")[1];
   const combstep2Subheadline = document.getElementsByClassName("form-sub-heading")[1];
   const combselectItem = document.getElementsByClassName("product-detail")[0].childNodes[0].firstElementChild;
   const combselectPrice = combselectItem.nextElementSibling.nextElementSibling;
-
   const combsummaryItem = document.getElementsByClassName("product-cost-total")[0].firstElementChild.firstElementChild;
   const combsummarytPrice = combsummaryItem.nextElementSibling.nextElementSibling;
   const combstep2Button = document.getElementsByClassName("main-text")[1];
   const combstep2ButtonSub = document.getElementsByClassName("sub-text")[1];
-
   //TODO: to change/add new one here #3 - page 2
   step2headline.value = combstep2headline.innerText;
   step2headline.addEventListener("input", function () {
@@ -275,44 +327,58 @@ function loadPresetComboSettings(parentContainer) {
   step2ButtonSub.addEventListener("input", function () {
     combstep2ButtonSub.innerText = step2ButtonSub.value;
   });
-
   //^ Color pickers & Button Text & Input Background
-   //* Button background color
+  //* Button background color
   const btnBackColor = document.getElementById("comb-btn-back-color"); // this is @ sidebar
   const btnBackColorIcon = document.getElementById("comb-btn-back-color-icon"); // this is a color circle @ sidebar
   const formComboButtonBg = document.getElementsByClassName("main-text")[0].parentNode; // this is @ the HTML edited file
   const formComboButtonBg2 = document.getElementsByClassName("main-text")[1].parentNode; // this is @ the HTML edited file
-
   btnBackColorIcon.style.color = formComboButtonBg.style.backgroundColor; // load the text color from the edited file to the sidebar
   btnBackColor.addEventListener("input", function () {
     btnBackColorIcon.style.color = btnBackColor.value;
     formComboButtonBg.style.backgroundColor = btnBackColor.value; //btn #1 @ edited HTML file
     formComboButtonBg2.style.backgroundColor = btnBackColor.value; //btn #2 @ edited HTML file
   });
-
-
-   //* Button text color
-  const btnTxtColor = document.getElementById("comb-btn-txt-color");  // this is @ sidebar
+  //* Button text color
+  const btnTxtColor = document.getElementById("comb-btn-txt-color"); // this is @ sidebar
   const btnTxtColorIcon = document.getElementById("comb-btn-txt-color-icon"); // this is a color circle @ sidebar
-
   btnTxtColorIcon.style.color = formComboButtonBg.style.color; // load the text color from the edited file to the sidebar
   btnTxtColor.addEventListener("input", function () {
     btnTxtColorIcon.style.color = btnTxtColor.value; // this is @ the HTML edited file
     formComboButtonBg.style.color = btnTxtColor.value; // this is @ the HTML edited file
     formComboButtonBg2.style.color = btnTxtColor.value; // this is @ the HTML edited file
   });
-
-   //* background color
+  //* background color
   const combBackColor = document.getElementById("comb-back-color");
   const combBackColorIcon = document.getElementById("comb-back-color-icon");
-  const formElement = document.getElementById("two-step-order-form").parentNode.parentNode;
-
-  combBackColorIcon.style.color = formElement.style.backgroundColor; // load the text color from the edited file to the sidebar
+  const transparentButton = document.getElementById("comb-transparent-background");
+  const combField = combContainer.childNodes[0];
+  combBackColor.style.color = combField.style.backgroundColor;
+  combBackColorIcon.style.color = combBackColor.style.color;
+  const updateBackgroundColor = () => {
+    const combField = document.getElementById(selectedComboElement).childNodes[0];
+    if (combField.dataset.transparent === "true") {
+      // Set the background color to transparent
+      combField.style.backgroundColor = "transparent";
+    } else {
+      // Set the background color to the chosen color
+      combField.style.backgroundColor = combBackColor.value;
+    }
+  };
+  // Event listener for color input
   combBackColor.addEventListener("input", function () {
+    const combField = document.getElementById(selectedComboElement).childNodes[0];
+    combField.dataset.transparent = "false";
+    updateBackgroundColor();
     combBackColorIcon.style.color = combBackColor.value;
-    formElement.style.backgroundColor = combBackColor.value;
   });
-
+  // Event listener for the transparent button
+  transparentButton.addEventListener("click", function () {
+    const combField = document.getElementById(selectedComboElement).childNodes[0];
+    combField.dataset.transparent = "true";
+    updateBackgroundColor();
+    combBackColorIcon.style.color = "white";
+  });
   function settingCombBorderMouseLeave() {
     if (settedCombeBorderType == "No Border") {
       combContainer.style.border = "none";
@@ -403,8 +469,35 @@ function loadPresetComboSettings(parentContainer) {
       combContainer.style.borderRadius = `0 0 ${settedRadiusValue} ${settedRadiusValue}`;
     }
   });
-}
 
+  const desktopVi = document.getElementById("comb-desktop");
+  const mobileVi = document.getElementById("comb-mobile");
+  const desktopDisplay = (section) => {
+    const combContainer = document.getElementById(selectedComboElement);
+    if (desktopBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        combContainer.style.display = "block";
+      } else {
+        combContainer.style.display = "none";
+      }
+    }
+  };
+  const mobileDisplay = (section) => {
+    const combContainer = document.getElementById(selectedComboElement);
+    if (mobileBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        combContainer.style.display = "block";
+      } else {
+        combContainer.style.display = "none";
+      }
+    }
+  };
+  if (desktopBtn.classList.contains("active")) {
+    desktopVi.addEventListener("click", () => desktopDisplay(desktopVi));
+  } else {
+    mobileVi.addEventListener("click", () => mobileDisplay(mobileVi));
+  }
+}
 
 function showForm(form, formId) {
   document.getElementById(form.childNodes[2].id).classList.add("hidden");
@@ -414,8 +507,6 @@ function showForm(form, formId) {
     currentForm.classList.remove("hidden");
   }
 }
-
-
 
 // Add event listener for 2-step combo setting tabs
 const generalTab = document.getElementById("general-tab");
@@ -436,14 +527,11 @@ advancedTab.addEventListener("click", function () {
 });
 // Close popups when click close button
 
-
 const comboSettingClose = document.getElementById("combo-close");
 comboSettingClose.addEventListener("click", function () {
   selectedComboElement = null;
   setTwoStepOrderPopup.classList.remove("open");
 });
-
-
 
 // export the currentSelectedComboElement that has the right value
 

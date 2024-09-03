@@ -8,7 +8,7 @@ var { createRowSection, addBlueTools, rowControl, handleMouseEnter, handleMouseL
 var { addYellowElementButton, elementControl, editTextControl, openAddElementPopup, closeElementsPanel, currentChosenField } = require("./editor-components");
 
 
-var { currentSelectedHeadlineElement } = require("./editor-components");
+var { currentSelectedHeadlineElement, currentSelectedHeadlineContainer } = require("./editor-components");
 var { currentSelectedImageElement } = require("./editor-components");
 var { currentSelectedVideoElement } = require("./editor-components");
 var { currentSelectedComboElement } = require("./editor-components");
@@ -32,6 +32,7 @@ var settingWide = document.getElementById("setting-wide");
 var settingMedium = document.getElementById("setting-medium");
 var settingSmall = document.getElementById("setting-small");
 var setValueWithNumber = document.getElementById("setValueWithNumber");
+var setValueWithNumberMobile = document.getElementById("setValueWithNumberMobile");
 var setValueWithRange = document.getElementById("setValueWithRange");
 var setUnit = document.getElementById("select-unit");
 var settingGreenMarginPaddingValue = document.getElementsByClassName("settingMarginPaddingValue")[0];
@@ -49,6 +50,130 @@ var elementToInsert = "";
 var settingMarginPadding;
 var buttonContainerId;
 
+
+// view device
+const desktopBtn = document.getElementById('desktopBtn');
+const mobileBtn = document.getElementById('mobileBtn');
+const container = document.querySelector(".deviceview");
+
+function showDesktopView() {
+  desktopBtn.classList.add('active');
+  mobileBtn.classList.remove('active');
+  container.style.width = "100%";
+  document.querySelectorAll(".mobile-view").forEach((view) => {
+    view.classList.replace("mobile-view", "desktop-view");
+  })
+  document.querySelectorAll(".mp-mobile-view").forEach((view) => {
+    view.classList.replace("mp-mobile-view", "mp-desktop-view");
+  })
+  document.querySelectorAll('.device-select .selected').forEach((options) => {
+    options.setAttribute("data-value", "desktop");
+    if (options.querySelector("i").classList.contains("bi-phone")) {
+      options.querySelector("i").classList.replace("bi-phone", "bi-laptop");
+    }
+  })
+  setValueWithNumber.style.display = "block";
+  setValueWithNumberMobile.style.display = "none";
+}
+
+function showMobileView() {
+  desktopBtn.classList.remove('active');
+  mobileBtn.classList.add('active');
+  container.style.width = "400px";
+  document.querySelector(".steps-edit").style.backgroundColor = "#eee";
+  document.getElementById('da-main-container').style.backgroundColor = "#eee";
+  document.querySelectorAll(".desktop-view").forEach((view) => {
+    view.classList.replace("desktop-view", "mobile-view");
+  })
+  document.querySelectorAll(".mp-desktop-view").forEach((view) => {
+    view.classList.replace("mp-desktop-view", "mp-mobile-view");
+  })
+  document.querySelectorAll('.device-select .selected').forEach((options) => {
+    options.setAttribute("data-value", "mobile");
+    if (options.querySelector("i").classList.contains("bi-laptop")) {
+      options.querySelector("i").classList.replace("bi-laptop", "bi-phone");
+    }
+  })
+  setValueWithNumber.style.display = "none";
+  setValueWithNumberMobile.style.display = "block";
+}
+
+desktopBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  showDesktopView();
+});
+mobileBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  showMobileView();
+});
+
+// Setting Device
+document.querySelectorAll('.device-select').forEach(dropdown => {
+  const selected = dropdown.querySelector('.selected');
+  const options = dropdown.querySelector('.options');
+
+  // Toggle options display on click
+  selected.addEventListener('click', function () {
+    options.style.display = options.style.display === 'block' ? 'none' : 'block';
+  });
+
+  const icon = document.createElement("i");
+  icon.className = "bi bi-chevron-down";
+  icon.style.fontSize = "0.5rem";
+  icon.style.marginLeft = "5px";
+
+  // Set selected value and hide options on option click
+  dropdown.querySelectorAll('.option').forEach(option => {
+    option.addEventListener('click', function () {
+      selected.innerHTML = this.innerHTML;
+      selected.setAttribute('data-value', this.getAttribute('data-value'));
+      options.style.display = 'none';
+      if (selected.getAttribute('data-value') === "desktop") {
+        showDesktopView();
+        document.querySelectorAll('.device-select .selected').forEach((selectElement) => {
+          selectElement.setAttribute("data-value", "desktop");
+          selectElement.querySelector("i").classList.replace("bi-phone", "bi-laptop");
+        })
+        selected.appendChild(icon);
+      } else {
+        showMobileView();
+        document.querySelectorAll('.device-select .selected').forEach((selectElement) => {
+          selectElement.setAttribute("data-value", "mobile");
+          selectElement.querySelector("i").classList.replace("bi-laptop", "bi-phone");
+        })
+        selected.appendChild(icon);
+      }
+    });
+  });
+
+  // Hide options if clicking outside the dropdown
+  window.addEventListener('click', function (event) {
+    if (!dropdown.contains(event.target)) {
+      if (options.style.display === 'block') {
+        options.style.display = 'none';
+      }
+    }
+  });
+});
+
+document.querySelectorAll(".view-visibility").forEach((selected) => {
+  selected.querySelector(".desktop").addEventListener('click', function (event) {
+    event.stopPropagation();
+    console.log(event.target.value, 'value')
+    if (this.classList.contains("active")) {
+      this.classList.remove("active");
+    } else {
+      this.classList.add("active");
+    }
+  })
+  selected.querySelector(".mobile").addEventListener('click', function () {
+    if (this.classList.contains("active")) {
+      this.classList.remove("active");
+    } else {
+      this.classList.add("active");
+    }
+  })
+})
 
 // SAVE button saving da-main-container and da-popup-container
 document.addEventListener("DOMContentLoaded", function () {
@@ -224,12 +349,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
           addEventListenersForContainer(coldiv);
         }
 
-        let allButtons = container.querySelectorAll(".elBTN");
-        allButtons.forEach((buttonContainer) => {
-          buttonContainer.addEventListener("click", function (event) {
-            getButtonContainerId(this);
-          });
-        }); // allButtons
+        // let allButtons = container.querySelectorAll(".elBTN");
+        // allButtons.forEach((buttonContainer) => {
+        //   buttonContainer.addEventListener("click", function (event) {
+        //     getButtonContainerId(this);
+        //   });
+        // }); // allButtons
 
 
 
@@ -364,6 +489,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
       draggable.addEventListener("click", (e) => addElementWithClick(e, draggable, currentChosenField()), false);
     });
   }
+
+
 });
 
 // Function to extract numeric class name from an element
@@ -720,7 +847,6 @@ document.querySelectorAll(".editor-container").forEach(element => {
 
 document.addEventListener("click", function (event) {
   // ** GREEN STUFF **
-  console.log("new green stuff"); //old stuff is in custom_drag_cut
 
   const greenGearButtons = document.querySelectorAll("[id*='green_advanced']");
   const isMarginPaddingPopup = event.target !== marginPaddingPopup && !marginPaddingPopup.contains(event.target);
@@ -728,7 +854,6 @@ document.addEventListener("click", function (event) {
 
 
   // ** BLUE STUFF **
-  console.log("blue stuff");
   const blueGearButtons = document.querySelectorAll("[id*='blue_gear']");
   const isOutsideBluePopup = event.target !== setColumnPopup && !setColumnPopup.contains(event.target);
 
@@ -756,14 +881,12 @@ document.addEventListener("click", function (event) {
 
   //Close the TwoStep Sidebar
   const isOutsideComboPopup = event.target !== setTwoStepOrderPopup && !setTwoStepOrderPopup.contains(event.target);
-  if (isOutsideComboPopup && !isOrangeGearButton && isMarginPaddingPopup) {
+  if (isOutsideGreenPopup && isOutsideComboPopup && !isOrangeGearButton && isMarginPaddingPopup) {
     if (currentSelectedComboElement()) {
       currentSelectedComboElement(null);
       setTwoStepOrderPopup.classList.remove("open");
     }
   }
-
-
 
 
   const isOutsideImagePopup = event.target !== setImagePopup && !setImagePopup.contains(event.target);
@@ -826,48 +949,67 @@ document.addEventListener("click", function (event) {
 function openMarginPaddingPopup(button) {
   marginPaddingPopup.style.display = "block";
   const regex = /-?\d*\.?\d+/g;
-  setValueWithNumber.value = button.innerText.match(regex);
+  if (desktopBtn.classList.contains("active")) {
+    setValueWithNumber.value = button.innerText.match(regex);
+  } else if (mobileBtn.classList.contains("active")) {
+    setValueWithNumberMobile.value = button.innerText.match(regex);
+  }
+
   setValueWithRange.value = button.innerText.match(regex);
   settingMarginPadding = button;
 }
 const marginPaddingIds = [
   "setButtonMarginTop",
+  "setButtonMarginLeft",
+  "setButtonMarginRight",
   "setButtonMarginBottom",
   "setButtonPaddingTop",
   "setButtonPaddingLeft",
   "setButtonPaddingRight",
   "setButtonPaddingBottom",
   "setVideoMarginTop",
+  "setVideoMarginLeft",
+  "setVideoMarginRight",
   "setVideoMarginBottom",
   "setVideoPaddingTop",
   "setVideoPaddingLeft",
   "setVideoPaddingRight",
   "setVideoPaddingBottom",
   "setCombMarginTop",
+  "setCombMarginLeft",
+  "setCombMarginRight",
   "setCombMarginBottom",
   "setCombPaddingTop",
   "setCombPaddingLeft",
   "setCombPaddingRight",
   "setCombPaddingBottom",
   "setGreenMarginTop",
+  "setGreenMarginLeft",
+  "setGreenMarginRight",
   "setGreenMarginBottom",
   "setGreenPaddingTop",
   "setGreenPaddingLeft",
   "setGreenPaddingRight",
   "setGreenPaddingBottom",
   "setOrangeMarginTop",
+  "setOrangeMarginLeft",
+  "setOrangeMarginRight",
   "setOrangeMarginBottom",
   "setOrangePaddingTop",
   "setOrangePaddingLeft",
   "setOrangePaddingRight",
   "setOrangePaddingBottom",
   "setBlueMarginTop",
+  "setBlueMarginLeft",
+  "setBlueMarginRight",
   "setBlueMarginBottom",
   "setBluePaddingTop",
   "setBluePaddingLeft",
   "setBluePaddingRight",
   "setBluePaddingBottom",
   "setImageMarginTop",
+  "setImageMarginLeft",
+  "setImageMarginRight",
   "setImageMarginBottom",
   "setImagePaddingTop",
   "setImagePaddingLeft",
@@ -886,6 +1028,13 @@ marginPaddingIds.map((id) => {
 
 setValueWithNumber.addEventListener("input", function () {
   setValueWithRange.value = setValueWithNumber.value;
+  settingMarginPadding.innerText = setValueWithNumber.value + setUnit.value;
+  setMarginPaddingWithInput();
+});
+
+setValueWithNumberMobile.addEventListener("input", function () {
+  setValueWithRange.value = setValueWithNumberMobile.value;
+  settingMarginPadding.innerText = setValueWithNumberMobile.value + setUnit.value;
   setMarginPaddingWithInput();
 });
 
@@ -894,14 +1043,26 @@ setValueWithRange.addEventListener("input", function () {
 });
 
 function updateNumber() {
-  setValueWithNumber.value = setValueWithRange.value;
-  settingMarginPadding.innerText = setValueWithNumber.value + setUnit.value;
-  setMarginPaddingWithInput();
-  // Event listener for handling further changes
-  setUnit.addEventListener("change", function () {
+  if (desktopBtn.classList.contains("active")) {
+    setValueWithNumber.value = setValueWithRange.value;
     settingMarginPadding.innerText = setValueWithNumber.value + setUnit.value;
     setMarginPaddingWithInput();
-  });
+    // Event listener for handling further changes
+    setUnit.addEventListener("change", function () {
+      settingMarginPadding.innerText = setValueWithNumber.value + setUnit.value;
+      setMarginPaddingWithInput();
+    });
+  } else if (mobileBtn.classList.contains("active")) {
+    setValueWithNumberMobile.value = setValueWithRange.value;
+    settingMarginPadding.innerText = setValueWithNumberMobile.value + setUnit.value;
+    setMarginPaddingWithInput();
+    // Event listener for handling further changes
+    setUnit.addEventListener("change", function () {
+      settingMarginPadding.innerText = setValueWithNumberMobile.value + setUnit.value;
+      setMarginPaddingWithInput();
+    });
+  }
+
 }
 const marginPaddingBtnIds = [
   "set-margin-padding-auto-value",
@@ -921,88 +1082,190 @@ marginPaddingBtnIds.map((id) => {
 });
 
 function setValue(div) {
+  setValueWithNumber.value = 0;
+  setValueWithNumberMobile.value = 0;
   const valueToSet = div.innerText === "AUTO" ? 0 : div.innerText;
-  setValueWithNumber.value = valueToSet;
-  setValueWithRange.value = valueToSet;
-  settingMarginPadding.innerText = div.innerText === "AUTO" ? "AUTO" : valueToSet + setUnit.value;
-  setMarginPaddingWithInput();
-  setUnit.addEventListener("change", function () {
+  if (desktopBtn.classList.contains("active")) {
     setValueWithNumber.value = valueToSet;
     setValueWithRange.value = valueToSet;
     settingMarginPadding.innerText = div.innerText === "AUTO" ? "AUTO" : valueToSet + setUnit.value;
     setMarginPaddingWithInput();
-  });
+    setUnit.addEventListener("change", function () {
+      setValueWithNumber.value = valueToSet;
+      setValueWithRange.value = valueToSet;
+      settingMarginPadding.innerText = div.innerText === "AUTO" ? "AUTO" : valueToSet + setUnit.value;
+      setMarginPaddingWithInput();
+    });
+  } else if (mobileBtn.classList.contains("active")) {
+    setValueWithNumberMobile.value = valueToSet;
+    setValueWithRange.value = valueToSet;
+    settingMarginPadding.innerText = div.innerText === "AUTO" ? "AUTO" : valueToSet + setUnit.value;
+    setMarginPaddingWithInput();
+    setUnit.addEventListener("change", function () {
+      setValueWithNumberMobile.value = valueToSet;
+      setValueWithRange.value = valueToSet;
+      settingMarginPadding.innerText = div.innerText === "AUTO" ? "AUTO" : valueToSet + setUnit.value;
+      setMarginPaddingWithInput();
+    });
+  }
 }
 
 function setMarginPaddingWithInput() {
 
-
   const elements = {
     setSectionMarginPadding: document.getElementById(currentSelectedGreenElement()),
     setRowColumnMarginPadding: document.getElementById(currentSelectedBlueElement()),
-    setElementMarginPadding: document.getElementById(currentSelectedHeadlineElement()), // *DONE
+    setElementMarginPadding: document.getElementById(currentSelectedHeadlineContainer()),
     setCombMarginPadding: document.getElementById(currentSelectedComboElement()),
-    // setCombMarginPadding: document.getElementById(currentSelectedComboElement),
-    // setButtonMarginPadding: document.getElementById(buttonContainerId),
     setButtonMarginPadding: document.getElementById(currentSelectedButtonElement()),
     imageContainer: document.getElementById(currentSelectedImageElement()),
     videoContainer: document.getElementById(currentSelectedVideoElement()),
   };
 
   const idActionMap = {
-    setGreenMarginTop: () => applyStyle("setSectionMarginPadding", "marginTop"),
-    setGreenPaddingTop: () => applyStyle("setSectionMarginPadding", "paddingTop"),
-    setGreenPaddingLeft: () => applyStyle("setSectionMarginPadding", "paddingLeft"),
-    setGreenPaddingRight: () => applyStyle("setSectionMarginPadding", "paddingRight"),
-    setGreenPaddingBottom: () => applyStyle("setSectionMarginPadding", "paddingBottom"),
-    setGreenMarginBottom: () => applyStyle("setSectionMarginPadding", "marginBottom"),
-    setBlueMarginTop: () => applyStyle("setRowColumnMarginPadding", "marginTop"),
-    setBluePaddingTop: () => applyStyle("setRowColumnMarginPadding", "paddingTop"),
-    setBluePaddingLeft: () => applyStyle("setRowColumnMarginPadding", "paddingLeft"),
-    setBluePaddingRight: () => applyStyle("setRowColumnMarginPadding", "paddingRight"),
-    setBluePaddingBottom: () => applyStyle("setRowColumnMarginPadding", "paddingBottom"),
-    setBlueMarginBottom: () => applyStyle("setRowColumnMarginPadding", "marginBottom"),
-    setOrangeMarginTop: () => applyStyle("setElementMarginPadding", "marginTop"),
-    setOrangePaddingTop: () => applyStyle("setElementMarginPadding", "paddingTop"),
-    setOrangePaddingLeft: () => applyStyle("setElementMarginPadding", "paddingLeft"),
-    setOrangePaddingRight: () => applyStyle("setElementMarginPadding", "paddingRight"),
-    setOrangePaddingBottom: () => applyStyle("setElementMarginPadding", "paddingBottom"),
-    setOrangeMarginBottom: () => applyStyle("setElementMarginPadding", "marginBottom"),
-    setCombMarginTop: () => applyStyle("setCombMarginPadding", "marginTop"),
-    setCombPaddingTop: () => applyStyle("setCombMarginPadding", "paddingTop"),
-    setCombPaddingLeft: () => applyStyle("setCombMarginPadding", "paddingLeft"),
-    setCombPaddingRight: () => applyStyle("setCombMarginPadding", "paddingRight"),
-    setCombPaddingBottom: () => applyStyle("setCombMarginPadding", "paddingBottom"),
-    setCombMarginBottom: () => applyStyle("setCombMarginPadding", "marginBottom"),
-    setButtonMarginTop: () => applyStyle("setButtonMarginPadding", "marginTop"),
-    setButtonPaddingTop: () => applyStyle("setButtonMarginPadding", "paddingTop", true),
-    setButtonPaddingLeft: () => applyStyle("setButtonMarginPadding", "paddingLeft", true),
-    setButtonPaddingRight: () => applyStyle("setButtonMarginPadding", "paddingRight", true),
-    setButtonPaddingBottom: () => applyStyle("setButtonMarginPadding", "paddingBottom", true),
-    setButtonMarginBottom: () => applyStyle("setButtonMarginPadding", "marginBottom"),
-    setImageMarginTop: () => applyStyle("imageContainer", "marginTop"),
-    setImagePaddingTop: () => applyStyle("imageContainer", "paddingTop"),
-    setImagePaddingLeft: () => applyStyle("imageContainer", "paddingLeft"),
-    setImagePaddingRight: () => applyStyle("imageContainer", "paddingRight"),
-    setImagePaddingBottom: () => applyStyle("imageContainer", "paddingBottom"),
-    setImageMarginBottom: () => applyStyle("imageContainer", "marginBottom"),
-    setVideoMarginTop: () => applyStyle("videoContainer", "marginTop"),
-    setVideoPaddingTop: () => applyStyle("videoContainer", "paddingTop"),
-    setVideoPaddingLeft: () => applyStyle("videoContainer", "paddingLeft"),
-    setVideoPaddingRight: () => applyStyle("videoContainer", "paddingRight"),
-    setVideoPaddingBottom: () => applyStyle("videoContainer", "paddingBottom"),
-    setVideoMarginBottom: () => applyStyle("videoContainer", "marginBottom"),
+    setGreenMarginTop: () => applyStyle("setSectionMarginPadding", "--desktop-margin-top"),
+    setGreenMarginLeft: () => applyStyle("setSectionMarginPadding", "--desktop-margin-left"),
+    setGreenMarginRight: () => applyStyle("setSectionMarginPadding", "--desktop-margin-right"),
+    setGreenPaddingTop: () => applyStyle("setSectionMarginPadding", "--desktop-padding-top"),
+    setGreenPaddingLeft: () => applyStyle("setSectionMarginPadding", "--desktop-padding-left"),
+    setGreenPaddingRight: () => applyStyle("setSectionMarginPadding", "--desktop-padding-right"),
+    setGreenPaddingBottom: () => applyStyle("setSectionMarginPadding", "--desktop-padding-bottom"),
+    setGreenMarginBottom: () => applyStyle("setSectionMarginPadding", "--desktop-margin-bottom"),
+    setBlueMarginTop: () => applyStyle("setRowColumnMarginPadding", "--desktop-margin-top"),
+    setBlueMarginLeft: () => applyStyle("setRowColumnMarginPadding", "--desktop-margin-left"),
+    setBlueMarginRight: () => applyStyle("setRowColumnMarginPadding", "--desktop-margin-right"),
+    setBluePaddingTop: () => applyStyle("setRowColumnMarginPadding", "--desktop-padding-top"),
+    setBluePaddingLeft: () => applyStyle("setRowColumnMarginPadding", "--desktop-padding-left"),
+    setBluePaddingRight: () => applyStyle("setRowColumnMarginPadding", "--desktop-padding-right"),
+    setBluePaddingBottom: () => applyStyle("setRowColumnMarginPadding", "--desktop-padding-bottom"),
+    setBlueMarginBottom: () => applyStyle("setRowColumnMarginPadding", "--desktop-margin-bottom"),
+    setOrangeMarginTop: () => applyStyle("setElementMarginPadding", "--desktop-margin-top"),
+    setOrangeMarginLeft: () => applyStyle("setElementMarginPadding", "--desktop-margin-left"),
+    setOrangeMarginRight: () => applyStyle("setElementMarginPadding", "--desktop-margin-right"),
+    setOrangePaddingTop: () => applyStyle("setElementMarginPadding", "--desktop-padding-top"),
+    setOrangePaddingLeft: () => applyStyle("setElementMarginPadding", "--desktop-padding-left"),
+    setOrangePaddingRight: () => applyStyle("setElementMarginPadding", "--desktop-padding-right"),
+    setOrangePaddingBottom: () => applyStyle("setElementMarginPadding", "--desktop-padding-bottom"),
+    setOrangeMarginBottom: () => applyStyle("setElementMarginPadding", "--desktop-margin-bottom"),
+    setCombMarginTop: () => applyStyle("setCombMarginPadding", "--desktop-margin-top"),
+    setCombMarginLeft: () => applyStyle("setCombMarginPadding", "--desktop-margin-left"),
+    setCombMarginRight: () => applyStyle("setCombMarginPadding", "--desktop-margin-right"),
+    setCombPaddingTop: () => applyStyle("setCombMarginPadding", "--desktop-padding-top"),
+    setCombPaddingLeft: () => applyStyle("setCombMarginPadding", "--desktop-padding-left"),
+    setCombPaddingRight: () => applyStyle("setCombMarginPadding", "--desktop-padding-right"),
+    setCombPaddingBottom: () => applyStyle("setCombMarginPadding", "--desktop-padding-bottom"),
+    setCombMarginBottom: () => applyStyle("setCombMarginPadding", "--desktop-margin-bottom"),
+    setButtonMarginTop: () => applyStyle("setButtonMarginPadding", "--desktop-margin-top"),
+    setButtonMarginLeft: () => applyStyle("setButtonMarginPadding", "--desktop-margin-left"),
+    setButtonMarginRight: () => applyStyle("setButtonMarginPadding", "--desktop-margin-right"),
+    setButtonPaddingTop: () => applyStyle("setButtonMarginPadding", "--desktop-padding-top", true),
+    setButtonPaddingLeft: () => applyStyle("setButtonMarginPadding", "--desktop-padding-left", true),
+    setButtonPaddingRight: () => applyStyle("setButtonMarginPadding", "--desktop-padding-right", true),
+    setButtonPaddingBottom: () => applyStyle("setButtonMarginPadding", "--desktop-padding-bottom", true),
+    setButtonMarginBottom: () => applyStyle("setButtonMarginPadding", "--desktop-margin-bottom"),
+    setImageMarginTop: () => applyStyle("imageContainer", "--desktop-margin-top"),
+    setImageMarginLeft: () => applyStyle("imageContainer", "--desktop-margin-left"),
+    setImageMarginRight: () => applyStyle("imageContainer", "--desktop-margin-right"),
+    setImagePaddingTop: () => applyStyle("imageContainer", "--desktop-padding-top"),
+    setImagePaddingLeft: () => applyStyle("imageContainer", "--desktop-padding-left"),
+    setImagePaddingRight: () => applyStyle("imageContainer", "--desktop-padding-right"),
+    setImagePaddingBottom: () => applyStyle("imageContainer", "--desktop-padding-bottom"),
+    setImageMarginBottom: () => applyStyle("imageContainer", "--desktop-margin-bottom"),
+    setVideoMarginTop: () => applyStyle("videoContainer", "--desktop-margin-top"),
+    setVideoMarginLeft: () => applyStyle("videoContainer", "--desktop-margin-left"),
+    setVideoMarginRight: () => applyStyle("videoContainer", "--desktop-margin-right"),
+    setVideoPaddingTop: () => applyStyle("videoContainer", "--desktop-padding-top"),
+    setVideoPaddingLeft: () => applyStyle("videoContainer", "--desktop-padding-left"),
+    setVideoPaddingRight: () => applyStyle("videoContainer", "--desktop-padding-right"),
+    setVideoPaddingBottom: () => applyStyle("videoContainer", "--desktop-padding-bottom"),
+    setVideoMarginBottom: () => applyStyle("videoContainer", "--desktop-margin-bottom"),
   };
+
+  const idActionMapMobile = {
+    setGreenMarginTop: () => applyStyleMobile("setSectionMarginPadding", "--mobile-margin-top"),
+    setGreenMarginLeft: () => applyStyleMobile("setSectionMarginPadding", "--mobile-margin-left"),
+    setGreenMarginRight: () => applyStyleMobile("setSectionMarginPadding", "--mobile-margin-right"),
+    setGreenPaddingTop: () => applyStyleMobile("setSectionMarginPadding", "--mobile-padding-top"),
+    setGreenPaddingLeft: () => applyStyleMobile("setSectionMarginPadding", "--mobile-padding-left"),
+    setGreenPaddingRight: () => applyStyleMobile("setSectionMarginPadding", "--mobile-padding-right"),
+    setGreenPaddingBottom: () => applyStyleMobile("setSectionMarginPadding", "--mobile-padding-bottom"),
+    setGreenMarginBottom: () => applyStyleMobile("setSectionMarginPadding", "--mobile-margin-bottom"),
+    setBlueMarginTop: () => applyStyleMobile("setRowColumnMarginPadding", "--mobile-margin-top"),
+    setBlueMarginLeft: () => applyStyleMobile("setRowColumnMarginPadding", "--mobile-margin-left"),
+    setBlueMarginRight: () => applyStyleMobile("setRowColumnMarginPadding", "--mobile-margin-right"),
+    setBluePaddingTop: () => applyStyleMobile("setRowColumnMarginPadding", "--mobile-padding-top"),
+    setBluePaddingLeft: () => applyStyleMobile("setRowColumnMarginPadding", "--mobile-padding-left"),
+    setBluePaddingRight: () => applyStyleMobile("setRowColumnMarginPadding", "--mobile-padding-right"),
+    setBluePaddingBottom: () => applyStyleMobile("setRowColumnMarginPadding", "--mobile-padding-bottom"),
+    setBlueMarginBottom: () => applyStyleMobile("setRowColumnMarginPadding", "--mobile-margin-bottom"),
+    setOrangeMarginTop: () => applyStyleMobile("setElementMarginPadding", "--mobile-margin-top"),
+    setOrangeMarginLeft: () => applyStyleMobile("setElementMarginPadding", "--mobile-margin-left"),
+    setOrangeMarginRight: () => applyStyleMobile("setElementMarginPadding", "--mobile-margin-right"),
+    setOrangePaddingTop: () => applyStyleMobile("setElementMarginPadding", "--mobile-padding-top"),
+    setOrangePaddingLeft: () => applyStyleMobile("setElementMarginPadding", "--mobile-padding-left"),
+    setOrangePaddingRight: () => applyStyleMobile("setElementMarginPadding", "--mobile-padding-right"),
+    setOrangePaddingBottom: () => applyStyleMobile("setElementMarginPadding", "--mobile-padding-bottom"),
+    setOrangeMarginBottom: () => applyStyleMobile("setElementMarginPadding", "--mobile-margin-bottom"),
+    setCombMarginTop: () => applyStyleMobile("setCombMarginPadding", "--mobile-margin-top"),
+    setCombMarginLeft: () => applyStyleMobile("setCombMarginPadding", "--mobile-margin-left"),
+    setCombMarginRight: () => applyStyleMobile("setCombMarginPadding", "--mobile-margin-right"),
+    setCombPaddingTop: () => applyStyleMobile("setCombMarginPadding", "--mobile-padding-top"),
+    setCombPaddingLeft: () => applyStyleMobile("setCombMarginPadding", "--mobile-padding-left"),
+    setCombPaddingRight: () => applyStyleMobile("setCombMarginPadding", "--mobile-padding-right"),
+    setCombPaddingBottom: () => applyStyleMobile("setCombMarginPadding", "--mobile-padding-bottom"),
+    setCombMarginBottom: () => applyStyleMobile("setCombMarginPadding", "--mobile-margin-bottom"),
+    setButtonMarginTop: () => applyStyleMobile("setButtonMarginPadding", "--mobile-margin-top"),
+    setButtonMarginLeft: () => applyStyleMobile("setButtonMarginPadding", "--mobile-margin-left"),
+    setButtonMarginRight: () => applyStyleMobile("setButtonMarginPadding", "--mobile-margin-right"),
+    setButtonPaddingTop: () => applyStyleMobile("setButtonMarginPadding", "--mobile-padding-top", true),
+    setButtonPaddingLeft: () => applyStyleMobile("setButtonMarginPadding", "--mobile-padding-left", true),
+    setButtonPaddingRight: () => applyStyleMobile("setButtonMarginPadding", "--mobile-padding-right", true),
+    setButtonPaddingBottom: () => applyStyleMobile("setButtonMarginPadding", "--mobile-padding-bottom", true),
+    setButtonMarginBottom: () => applyStyleMobile("setButtonMarginPadding", "--mobile-margin-bottom"),
+    setImageMarginTop: () => applyStyleMobile("imageContainer", "--mobile-margin-top"),
+    setImageMarginLeft: () => applyStyleMobile("imageContainer", "--mobile-margin-left"),
+    setImageMarginRight: () => applyStyleMobile("imageContainer", "--mobile-margin-right"),
+    setImagePaddingTop: () => applyStyleMobile("imageContainer", "--mobile-padding-top"),
+    setImagePaddingLeft: () => applyStyleMobile("imageContainer", "--mobile-padding-left"),
+    setImagePaddingRight: () => applyStyleMobile("imageContainer", "--mobile-padding-right"),
+    setImagePaddingBottom: () => applyStyleMobile("imageContainer", "--mobile-padding-bottom"),
+    setImageMarginBottom: () => applyStyleMobile("imageContainer", "--mobile-margin-bottom"),
+    setVideoMarginTop: () => applyStyleMobile("videoContainer", "--mobile-margin-top"),
+    setVideoMarginLeft: () => applyStyleMobile("videoContainer", "--mobile-margin-left"),
+    setVideoMarginRight: () => applyStyleMobile("videoContainer", "--mobile-margin-right"),
+    setVideoPaddingTop: () => applyStyleMobile("videoContainer", "--mobile-padding-top"),
+    setVideoPaddingLeft: () => applyStyleMobile("videoContainer", "--mobile-padding-left"),
+    setVideoPaddingRight: () => applyStyleMobile("videoContainer", "--mobile-padding-right"),
+    setVideoPaddingBottom: () => applyStyleMobile("videoContainer", "--mobile-padding-bottom"),
+    setVideoMarginBottom: () => applyStyleMobile("videoContainer", "--mobile-margin-bottom"),
+  };
+
 
   function applyStyle(elementKey, styleProperty, isChild = false) {
     const element = isChild ? elements[elementKey].childNodes[0] : elements[elementKey];
     if (element) {
-      element.style[styleProperty] = `${setValueWithNumber.value}${setUnit.value}`;
+      console.log(setValueWithNumber.value, 'setValueWithNumber');
+      element.style.setProperty(styleProperty, `${setValueWithNumber.value}${setUnit.value}`);
     }
   }
 
-  const action = idActionMap[settingMarginPadding.getAttribute("id")];
-  if (action) action();
+  function applyStyleMobile(elementKey, styleProperty, isChild = false) {
+    const element = isChild ? elements[elementKey].childNodes[0] : elements[elementKey];
+    if (element) {
+      console.log(setValueWithNumberMobile.value, 'setValueWithNumberMobile');
+      element.style.setProperty(styleProperty, `${setValueWithNumberMobile.value}${setUnit.value}`);
+    }
+  }
+
+
+  if (desktopBtn.classList.contains("active")) {
+    const action = idActionMap[settingMarginPadding.getAttribute("id")];
+    if (action) action();
+  } else if (mobileBtn.classList.contains("active")) {
+    const actionMobile = idActionMapMobile[settingMarginPadding.getAttribute("id")];
+    if (actionMobile) actionMobile();
+  }
+
 }
 
 // Event listener for reset button
@@ -1011,9 +1274,16 @@ document.getElementById("set-value-reset").addEventListener("click", function ()
 });
 
 function setValueReset() {
-  setValueWithNumber.value = "0";
-  setValueWithRange.value = 0;
-  settingMarginPadding.innerText = setValueWithNumber.value + setUnit.value;
+  if (desktopBtn.classList.contains("active")) {
+    setValueWithNumber.value = "0";
+    setValueWithRange.value = 0;
+    settingMarginPadding.innerText = setValueWithNumber.value + setUnit.value;
+  } else if (mobileBtn.classList.contains("active")) {
+    setValueWithNumberMobile.value = "0";
+    setValueWithRange.value = 0;
+    settingMarginPadding.innerText = setValueWithNumberMobile.value + setUnit.value;
+  }
+
   setMarginPaddingWithInput();
 }
 

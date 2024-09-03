@@ -4,6 +4,8 @@ import ReactDOM from "react-dom/client";
 import { closeAllSidebars, closeAllTextEditPopups } from "../editor_functions";
 
 var setVideoMarginTop = document.getElementById("setVideoMarginTop");
+var setVideoMarginLeft = document.getElementById("setVideoMarginLeft");
+var setVideoMarginRight = document.getElementById("setVideoMarginRight");
 var setVideoMarginBottom = document.getElementById("setVideoMarginBottom");
 var setVideoPaddingTop = document.getElementById("setVideoPaddingTop");
 var setVideoPaddingLeft = document.getElementById("setVideoPaddingLeft");
@@ -12,12 +14,15 @@ var setVideoPaddingBottom = document.getElementById("setVideoPaddingBottom");
 
 // Settings for Video Element
 let selectedVideoElement = null;
+// let selectedVideoComponent = null;
 function VideoGearElement(parentWrapper) {
   selectedVideoElement = parentWrapper.id;
+  // selectedVideoComponent = parentWrapper.firstChild.id;
 
   if (setVideoPopup.classList.contains("open")) {
     closeAllSidebars();
     setVideoPopup.classList.remove("open");
+    document.getElementById("marginPaddingPopup").style.display = "none";
   } else {
     closeAllSidebars();
     setVideoPopup.classList.add("open");
@@ -27,15 +32,12 @@ function VideoGearElement(parentWrapper) {
 }
 
 function loadPresetVideoSettings(parentWrapper) {
-  const videoContainer = document.getElementById(parentWrapper.id);
-  const videoComponent = document.getElementById(parentWrapper.firstChild.id);
-
+  const videoContainer = document.getElementById(selectedVideoElement);
+  const videoComponent = videoContainer.firstChild;
   const videoGeneralTab = document.getElementById("video-general-tab");
   const videoGeneralContent = document.getElementById("video-general-content");
   const videoAdvancedTab = document.getElementById("video-advanced-tab");
-  const videoAdvancedContent = document.getElementById(
-    "video-advanced-content"
-  );
+  const videoAdvancedContent = document.getElementById("video-advanced-content");
   videoGeneralTab.addEventListener("click", function () {
     videoGeneralContent.classList.add("active");
     videoGeneralTab.classList.add("active");
@@ -51,28 +53,143 @@ function loadPresetVideoSettings(parentWrapper) {
 
   //get margin padding value
   var editorComponentStyles = getComputedStyle(videoContainer);
-  setVideoMarginTop.innerText =
-    editorComponentStyles.getPropertyValue("margin-top");
-  setVideoMarginBottom.innerText =
-    editorComponentStyles.getPropertyValue("margin-bottom");
-  setVideoPaddingTop.innerText =
-    editorComponentStyles.getPropertyValue("padding-top");
-  setVideoPaddingLeft.innerText =
-    editorComponentStyles.getPropertyValue("padding-left");
-  setVideoPaddingRight.innerText =
-    editorComponentStyles.getPropertyValue("padding-right");
-  setVideoPaddingBottom.innerText =
-    editorComponentStyles.getPropertyValue("padding-bottom");
+  if (desktopBtn.classList.contains("active")) {
+    setVideoMarginTop.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-top");
+    setVideoMarginLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-left");
+    setVideoMarginRight.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-right");
+    setVideoMarginBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-bottom");
+    setVideoPaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+    setVideoPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+    setVideoPaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+    setVideoPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+  } else if (mobileBtn.classList.contains("active")) {
+    setVideoMarginTop.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-top");
+    setVideoMarginLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-left");
+    setVideoMarginRight.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-right");
+    setVideoMarginBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-bottom");
+    setVideoPaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+    setVideoPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+    setVideoPaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+    setVideoPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+  }
+  const deviceSelected = document.getElementById("headline-fontsize-device");
+  document.querySelectorAll(".device-select .option").forEach((option) => {
+    option.addEventListener("click", function () {
+      const videoContainer = document.getElementById(selectedVideoElement);
+      const videoComponent = videoContainer.firstChild;
+      const device = this.getAttribute("data-value");
+
+      // Update the font size based on device selection
+      if (device === "desktop") {
+        videoComponent.classList.add("active");
+        videoComponent.classList.remove("mobile-view");
+        videoComponent.classList.add("desktop-view");
+        videoContainer.classList.add("active");
+        videoContainer.classList.remove("mp-mobile-view");
+        videoContainer.classList.add("mp-desktop-view");
+
+        if (desktopWidth === "100%") {
+          setVideoWidth.value = "Full Width";
+        } else if (desktopWidth === "75%") {
+          setVideoWidth.value = "3/4 Width";
+        } else if (desktopWidth === "50%") {
+          setVideoWidth.value = "Half Width";
+        }
+        setVideoMarginTop.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-top");
+        setVideoMarginLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-left");
+        setVideoMarginRight.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-right");
+        setVideoMarginBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-margin-bottom");
+        setVideoPaddingTop.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-top");
+        setVideoPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-left");
+        setVideoPaddingRight.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-right");
+        setVideoPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--desktop-padding-bottom");
+      } else if (device === "mobile") {
+        videoComponent.classList.remove("active");
+        videoComponent.classList.add("mobile-view");
+        videoComponent.classList.remove("desktop-view");
+        videoContainer.classList.remove("active");
+        videoContainer.classList.add("mp-mobile-view");
+        videoContainer.classList.remove("mp-desktop-view");
+
+        if (mobileWidth === "100%") {
+          setVideoWidth.value = "Full Width";
+        } else if (mobileWidth === "75%") {
+          setVideoWidth.value = "3/4 Width";
+        } else if (mobileWidth === "50%") {
+          setVideoWidth.value = "Half Width";
+        }
+        setVideoMarginTop.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-top");
+        setVideoMarginLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-left");
+        setVideoMarginRight.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-right");
+        setVideoMarginBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-margin-bottom");
+        setVideoPaddingTop.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-top");
+        setVideoPaddingLeft.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-left");
+        setVideoPaddingRight.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-right");
+        setVideoPaddingBottom.innerText = editorComponentStyles.getPropertyValue("--mobile-padding-bottom");
+      }
+    });
+  });
+
+  let desktopWidth = getComputedStyle(videoComponent).getPropertyValue("--desktop-width");
+  let mobileWidth = getComputedStyle(videoComponent).getPropertyValue("--mobile-width");
+  const setVideoWidth = document.getElementById("set-video-width");
+  setVideoWidth.addEventListener("change", function () {
+    const videoContainer = document.getElementById(selectedVideoElement);
+    const videoComponent = videoContainer.firstChild;
+
+    const device = deviceSelected.getAttribute("data-value");
+    if (device === "desktop") {
+      if (setVideoWidth.value == "Full Width") {
+        desktopWidth = "100%";
+        videoComponent.style.setProperty("--desktop-width", "100%");
+      } else if (setVideoWidth.value == "3/4 Width") {
+        desktopWidth = "75%";
+        videoComponent.style.setProperty("--desktop-width", "75%");
+      } else if (setVideoWidth.value == "Half Width") {
+        desktopWidth = "50%";
+        videoComponent.style.setProperty("--desktop-width", "50%");
+      }
+    } else if (device === "mobile") {
+      if (setVideoWidth.value == "Full Width") {
+        mobileWidth = "100%";
+        videoComponent.style.setProperty("--mobile-width", "100%");
+      } else if (setVideoWidth.value == "3/4 Width") {
+        mobileWidth = "75%";
+        videoComponent.style.setProperty("--mobile-width", "75%");
+      } else if (setVideoWidth.value == "Half Width") {
+        mobileWidth = "50%";
+        videoComponent.style.setProperty("--mobile-width", "50%");
+      }
+    }
+  });
+
   // Background color setting for Image Element
   const videoBackColor = document.getElementById("video-back-color");
   const videoBackColorIcon = document.getElementById("video-back-color-icon");
+  const transparentButton = document.getElementById("video-transparent-background");
   videoBackColor.style.color = videoContainer.style.backgroundColor;
-  videoBackColorIcon.style.color = videoContainer.style.backgroundColor;
+  videoBackColorIcon.style.color = videoBackColor.style.color;
+  const updateBackgroundColor = () => {
+    const videoContainer = document.getElementById(selectedVideoElement);
+    if (videoContainer.dataset.transparent === "true") {
+      videoContainer.style.backgroundColor = "transparent";
+    } else {
+      videoContainer.style.backgroundColor = videoBackColor.value;
+    }
+  };
   videoBackColor.addEventListener("input", function () {
+    const videoContainer = document.getElementById(selectedVideoElement);
+    videoContainer.dataset.transparent = "false";
+    updateBackgroundColor();
     videoBackColorIcon.style.color = videoBackColor.value;
-    document.getElementById(selectedVideoElement).style.backgroundColor =
-      videoBackColor.value;
   });
+  transparentButton.addEventListener("click", function () {
+    const videoContainer = document.getElementById(selectedVideoElement);
+    videoContainer.dataset.transparent = "true";
+    updateBackgroundColor();
+    videoBackColorIcon.style.color = "white";
+  });
+
   //Setting import Image
   const videoPath = document.getElementById("input-video-path");
   const videoElement = videoContainer.childNodes[1].childNodes[1];
@@ -96,11 +213,10 @@ function loadPresetVideoSettings(parentWrapper) {
     } else {
       embedUrl = videoPath.value;
     }
+    console.log(embedUrl, "embe");
 
     // Set the new source URL for the video
-    document
-      .getElementById(selectedVideoElement)
-      .childNodes[1].childNodes[1].setAttribute("src", embedUrl);
+    document.getElementById(selectedVideoElement).querySelector("iframe").setAttribute("src", embedUrl);
 
     // var videoOverlay = document.querySelector(".video-overlay");
     // videoOverlay.style.display = "none";
@@ -112,102 +228,61 @@ function loadPresetVideoSettings(parentWrapper) {
     if (setBoxShadow.value == "No Shadow") {
       document.getElementById(selectedVideoElement).style.boxShadow = "none";
     } else if (setBoxShadow.value == "5% Drop Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 1px 3px #0000000d";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 1px 3px #0000000d";
     } else if (setBoxShadow.value == "10% Drop Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 1px 5px #0000001a";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 1px 5px #0000001a";
     } else if (setBoxShadow.value == "20% Drop Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 1px 5px #0003";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 1px 5px #0003";
     } else if (setBoxShadow.value == "30% Drop Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 2px 5px 2px #0000004d";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 2px 5px 2px #0000004d";
     } else if (setBoxShadow.value == "40% Drop Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 2px 5px 2px #0006";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 2px 5px 2px #0006";
     } else if (setBoxShadow.value == "5% Inner Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 1px 3px #0000000d inset";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 1px 3px #0000000d inset";
     } else if (setBoxShadow.value == "10% Inner Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 1px 5px #0000001a inset";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 1px 5px #0000001a inset";
     } else if (setBoxShadow.value == "20% Inner Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 1px 5px #0003 inset";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 1px 5px #0003 inset";
     } else if (setBoxShadow.value == "30% Inner Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 2px 5px 2px #0000004d inset";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 2px 5px 2px #0000004d inset";
     } else if (setBoxShadow.value == "40% Inner Shadow") {
-      document.getElementById(selectedVideoElement).style.boxShadow =
-        "0 2px 5px 2px #0006 inset";
+      document.getElementById(selectedVideoElement).style.boxShadow = "0 2px 5px 2px #0006 inset";
     }
   });
 
-  const setVideoWidth = document.getElementById("set-video-width");
-  setVideoWidth.addEventListener("change", function () {
-    if (setVideoWidth.value == "Full Width") {
-      document.getElementById(selectedVideoElement).style.width = "100%";
-    } else if (setVideoWidth.value == "3/4 Width") {
-      document.getElementById(selectedVideoElement).style.width = "75%";
-    } else if (setVideoWidth.value == "Half Width") {
-      document.getElementById(selectedVideoElement).style.width = "50%";
-    }
-  });
   //Border select
   function settingVideoBorderMouseLeave() {
     if (settedVideoBorderType == "No Border") {
       document.getElementById(selectedVideoElement).style.border = "none";
     } else if (settedVideoBorderType == "full") {
-      document.getElementById(
-        selectedVideoElement
-      ).style.border = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+      document.getElementById(selectedVideoElement).style.border = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
     } else if (settedVideoBorderType == "bottom") {
       document.getElementById(selectedVideoElement).style.border = "none";
-      document.getElementById(
-        selectedVideoElement
-      ).style.borderBottom = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+      document.getElementById(selectedVideoElement).style.borderBottom = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
     } else if (settedVideoBorderType == "top") {
       document.getElementById(selectedVideoElement).style.border = "none";
-      document.getElementById(
-        selectedVideoElement
-      ).style.borderTop = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+      document.getElementById(selectedVideoElement).style.borderTop = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
     } else if (settedVideoBorderType == "top&bototm") {
       document.getElementById(selectedVideoElement).style.border = "none";
-      document.getElementById(
-        selectedVideoElement
-      ).style.borderBottom = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
-      document.getElementById(
-        selectedVideoElement
-      ).style.borderTop = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+      document.getElementById(selectedVideoElement).style.borderBottom = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+      document.getElementById(selectedVideoElement).style.borderTop = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
     }
-    document.getElementById(selectedVideoElement).style.borderRadius =
-      settedRadiusValue;
+    document.getElementById(selectedVideoElement).style.borderRadius = settedRadiusValue;
     videoContainer.addEventListener("mouseleave", function () {
       if (settedVideoBorderType == "No Border") {
         document.getElementById(selectedVideoElement).style.border = "none";
       } else if (settedVideoBorderType == "full") {
-        document.getElementById(
-          selectedVideoElement
-        ).style.border = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+        document.getElementById(selectedVideoElement).style.border = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
       } else if (settedVideoBorderType == "bottom") {
         document.getElementById(selectedVideoElement).style.border = "none";
-        document.getElementById(
-          selectedVideoElement
-        ).style.borderBottom = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+        document.getElementById(selectedVideoElement).style.borderBottom = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
       } else if (settedVideoBorderType == "top") {
         document.getElementById(selectedVideoElement).style.border = "none";
-        document.getElementById(
-          selectedVideoElement
-        ).style.borderTop = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+        document.getElementById(selectedVideoElement).style.borderTop = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
       } else if (settedVideoBorderType == "top&bototm") {
         document.getElementById(selectedVideoElement).style.border = "none";
-        document.getElementById(
-          selectedVideoElement
-        ).style.borderBottom = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
-        document.getElementById(
-          selectedVideoElement
-        ).style.borderTop = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+        document.getElementById(selectedVideoElement).style.borderBottom = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
+        document.getElementById(selectedVideoElement).style.borderTop = `${settedVideoBorderWidth} ${settedVideoBorderStyle} ${settedVideoBorderColor}`;
       }
     });
   }
@@ -244,8 +319,7 @@ function loadPresetVideoSettings(parentWrapper) {
   borderColorIcon.style.color = videoContainer.style.borderColor;
   borderColor.addEventListener("input", function () {
     borderColorIcon.style.color = borderColor.value;
-    document.getElementById(selectedVideoElement).style.borderColor =
-      borderColor.value;
+    document.getElementById(selectedVideoElement).style.borderColor = borderColor.value;
     settedVideoBorderColor = borderColor.value;
   });
   //set border radius
@@ -259,18 +333,41 @@ function loadPresetVideoSettings(parentWrapper) {
   const borderEdge = document.getElementById("setting-video-edge");
   borderEdge.addEventListener("change", function () {
     if (borderEdge.value == "All Edges") {
-      document.getElementById(selectedVideoElement).style.borderRadius =
-        settedRadiusValue;
+      document.getElementById(selectedVideoElement).style.borderRadius = settedRadiusValue;
     } else if (borderEdge.value == "Top Only Edges") {
-      document.getElementById(
-        selectedVideoElement
-      ).style.borderRadius = `${settedRadiusValue} ${settedRadiusValue} 0 0`;
+      document.getElementById(selectedVideoElement).style.borderRadius = `${settedRadiusValue} ${settedRadiusValue} 0 0`;
     } else if (borderEdge.value == "Bottom Only Edges") {
-      document.getElementById(
-        selectedVideoElement
-      ).style.borderRadius = `0 0 ${settedRadiusValue} ${settedRadiusValue}`;
+      document.getElementById(selectedVideoElement).style.borderRadius = `0 0 ${settedRadiusValue} ${settedRadiusValue}`;
     }
   });
+
+  const desktopVi = document.getElementById("video-desktop");
+  const mobileVi = document.getElementById("video-mobile");
+  const desktopDisplay = (section) => {
+    const videoContainer = document.getElementById(selectedVideoElement);
+    if (desktopBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        videoContainer.style.display = "block";
+      } else {
+        videoContainer.style.display = "none";
+      }
+    }
+  };
+  const mobileDisplay = (section) => {
+    const videoContainer = document.getElementById(selectedVideoElement);
+    if (mobileBtn.classList.contains("active")) {
+      if (section.classList.contains("active")) {
+        videoContainer.style.display = "block";
+      } else {
+        videoContainer.style.display = "none";
+      }
+    }
+  };
+  if (desktopBtn.classList.contains("active")) {
+    desktopVi.addEventListener("click", () => desktopDisplay(desktopVi));
+  } else {
+    mobileVi.addEventListener("click", () => mobileDisplay(mobileVi));
+  }
 }
 
 const videoSettingClose = document.getElementById("video-setting-close");

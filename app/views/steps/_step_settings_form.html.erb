@@ -9,6 +9,20 @@
 
   <div class="form-group">
 
+    <!-- Background color picker with vertically aligned inline preview box -->
+    <div class="pb-3">
+
+    <div class="d-flex justify-content-center align-items-center">
+<%= form.label :background, "Choose Background Color:  ".force_encoding("UTF-8"), class: "mb-0" %>
+
+      <div id="color_preview" style="width: 20px; height: 20px; margin-left: 10px; background-color: <%= @step.background %>; border: 1px solid #ccc; cursor: pointer;"></div>
+    </div>
+
+
+      <%= form.color_field :background, value: @step.background, class: "form-control", id: "background_color_picker", style: "display: none;" %>
+    </div>
+
+
   <div class="pb-3">When a user submits the form on the page, it will start the email/bot workflow below.</div>
   <br>
     <div class="text-left pl-1" style="color:#888; font-size:15px;"><%= form.label "Choose the workflow sequence"  %></div>
@@ -21,6 +35,7 @@
                 { class: 'form-select' } %>
 
   </div>
+
 
   <%= form.submit 'Save Changes', class: 'btn btn-primary' %>
 <% end %>
@@ -40,6 +55,26 @@ function remote(event) {
     });
   $(".popup-settings-edit-funnel").magnificPopup("close");
 }
+const desktopBtn = document.getElementById('desktopBtn');
+const mobileBtn = document.getElementById('mobileBtn');
+// Update color preview box when the color picker value changes
+document.addEventListener('turbo:load', function() {
+  const colorPicker = document.getElementById('background_color_picker');
+  const colorPreview = document.getElementById('color_preview');
 
+  // Show the color picker when the color preview box is clicked
+  colorPreview.addEventListener('click', function() {
+    colorPicker.click();
+  });
+
+  // Update the color preview when the color picker changes
+  colorPicker.addEventListener('input', function() {
+    if(desktopBtn.classList.contains("active")) {
+      colorPreview.style.backgroundColor = colorPicker.value;
+    } else if(mobileBtn.classList.contains("active")) {
+      document.querySelector(".steps-edit").style.backgroundColor = "#eee";
+      document.getElementById('da-main-container').style.backgroundColor = "#eee";
+    }
+  });
+});
 </script>
-

@@ -83,6 +83,17 @@ function DropArea({ onSetImage }) {
   };
 
   const onDrop = async (acceptedFiles) => {
+    const divs = document.querySelectorAll("div");
+
+    // Filter to find the <div> with height of 5px
+    const targetDiv = Array.from(divs).find((div) => {
+      return getComputedStyle(div).height === "5px";
+    });
+
+    if (targetDiv) {
+      targetDiv.remove();
+    }
+
     // show error if file size is more than 5MB
     if (acceptedFiles[0].size > 5242880) {
       alert("File size should be less than 5MB");
@@ -157,7 +168,8 @@ function DropArea({ onSetImage }) {
         }}
         maxFiles={1}
         multiple={false}
-        disabled={isUploading}>
+        disabled={isUploading}
+      >
         {({ getRootProps, getInputProps }) => (
           <section>
             <div {...getRootProps()} style={dropzoneStyle}>
@@ -181,7 +193,8 @@ function DropArea({ onSetImage }) {
           gridTemplateColumns: "repeat(2, 1fr)",
           gap: "20px",
           padding: "20px 0",
-        }}>
+        }}
+      >
         {[...data, ...uploadedImages].map((image, index) => (
           <div
             onClick={() => selectImage(image)}
@@ -193,7 +206,8 @@ function DropArea({ onSetImage }) {
               borderRadius: "10px",
               overflow: "hidden",
               border: `5px solid ${isSelected(image) ? "#3DC831" : "white"}`,
-            }}>
+            }}
+          >
             {isSelected(image) && (
               <div
                 style={{
@@ -206,7 +220,8 @@ function DropArea({ onSetImage }) {
                   fontSize: "1em",
                   fontWeight: "bold",
                   borderRadius: "0 0 0 10px",
-                }}>
+                }}
+              >
                 <FaCheck />
               </div>
             )}

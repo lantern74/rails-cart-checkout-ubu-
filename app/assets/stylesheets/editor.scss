@@ -1,3 +1,96 @@
+// view device
+.view-switcher button.active {
+  background-color: #eee;
+}
+.view-visibility button {
+  padding: 5px 30px !important;
+  border: 1px solid #eee;
+}
+.view-visibility button.active {
+  color: #2e91fc;
+  border: 1px solid #2e91fc;
+}
+.view-visibility {
+  display: flex;
+}
+.device-select {
+  position: relative;
+  display: inline-block;
+}
+
+.selected {
+  padding: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  margin-left: 5px;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 1;
+  width: 100%;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.option i {
+  margin: auto;
+}
+
+.option:hover {
+  background-color: #f1f1f1;
+}
+
+.desktop-view,
+.desktop-view.active {
+  font-size: var(--desktop-font-size);
+  text-align: var(--desktop-text-align);
+  width: var(--desktop-width);
+  height: var(--desktop-height);
+}
+.mp-desktop-view,
+.mp-desktop-view.active {
+  margin-top: var(--desktop-margin-top);
+  margin-right: var(--desktop-margin-right);
+  margin-bottom: var(--desktop-margin-bottom);
+  margin-left: var(--desktop-margin-left);
+  padding-top: var(--desktop-padding-top);
+  padding-right: var(--desktop-padding-right);
+  padding-bottom: var(--desktop-padding-bottom);
+  padding-left: var(--desktop-padding-left);
+}
+
+.mobile-view,
+.mobile-view.active {
+  font-size: var(--mobile-font-size);
+  text-align: var(--mobile-text-align);
+  width: var(--mobile-width);
+  height: var(--mobile-height);
+}
+.mp-mobile-view,
+.mp-mobile-view.active {
+  margin-top: var(--mobile-margin-top);
+  margin-right: var(--mobile-margin-right);
+  margin-bottom: var(--mobile-margin-bottom);
+  margin-left: var(--mobile-margin-left);
+  padding-top: var(--mobile-padding-top);
+  padding-right: var(--mobile-padding-right);
+  padding-bottom: var(--mobile-padding-bottom);
+  padding-left: var(--mobile-padding-left);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 .big-editor-container {
   background-color: #f5f4f8;
   /* color:blue; */
@@ -11,7 +104,7 @@
 }
 
 .draggable {
-  padding: 1rem;
+  // padding: 1rem;
   background-color: transparent;
   /* border: 1px solid #f0f0f0; */
   cursor: move;
@@ -59,7 +152,6 @@
 }
 
 .elButton {
-  padding: 13px 35px;
   text-decoration: none;
   /* Remove underline by default */
 }
@@ -110,8 +202,7 @@
   border: 1px solid #b4becd;
   border-top-color: #b0baca;
   border-bottom-color: #d3d9e2;
-  box-shadow: inset 0 1px 2px rgba(130, 137, 150, 0.23),
-    0 1px 0 rgba(255, 255, 255, 0.95) !important;
+  box-shadow: inset 0 1px 2px rgba(130, 137, 150, 0.23), 0 1px 0 rgba(255, 255, 255, 0.95) !important;
   border-radius: 3px !important;
 }
 
@@ -251,12 +342,10 @@
 
 .color-icon {
   font-size: 28px;
-  color: #ffffff;
-}
-
-.color-icon::before {
+  // color: #0077dd;
+  border: 1px solid #ccc;
   border-radius: 50%;
-  border: 1px solid #a9a9a9;
+  display: flex;
 }
 
 #btn-color-icon {
@@ -309,6 +398,7 @@
 
 .border-options {
   border: 1px solid grey;
+  margin-bottom: 10px;
 }
 
 .settingsSidebar,
@@ -570,10 +660,10 @@
 }
 
 .new-container {
-  margin: auto;
+  // margin: auto;
   min-height: 250px;
   position: relative;
-  padding: 20px 0;
+  // padding: 20px 0;
   background-color: #fff;
   overflow-y: hidden;
 }
@@ -656,7 +746,8 @@
 .de-rollover-center,
 .de-rollover-right,
 .de-rollover-link,
-.de-rollover-romovelink {
+.de-rollover-romovelink,
+.de-rollover-setlink {
   background-color: #777;
   color: white;
   padding: 4px 12px;
@@ -733,7 +824,9 @@ u {
   font-weight: 700;
   font-size: 1.2rem;
 }
-
+a {
+  cursor: pointer;
+}
 .address-title,
 .payment-title {
   position: absolute;
@@ -1095,6 +1188,10 @@ svg:not(:root).svg-inline--fa {
   display: none;
 }
 
+.settingWidthIcon1 {
+  scale: 0.8;
+}
+
 #select-unit {
   border: none;
   appearance: none;
@@ -1125,6 +1222,7 @@ p {
   margin-top: 0;
   margin-bottom: 0;
   cursor: text;
+  font-weight: normal;
 }
 /* .container-fluid {
     padding-left: 0;
@@ -1152,7 +1250,7 @@ input[type="color"] {
 
 .video-container {
   position: relative;
-  width: 100%;
+  // width: 100%;
   height: 0;
   padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
 }
@@ -1177,11 +1275,16 @@ input[type="color"] {
 }
 
 .fixed-top {
-  z-index: 10;
+  z-index: 100;
 }
 
 u {
   padding-left: 0 !important;
+}
+
+.custom-btn-small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
 }
 
 @media (max-width: 930px) {
